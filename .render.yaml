@@ -1,11 +1,10 @@
 services:
   - type: web
     name: symfony-app
-    env: php
+    env: docker
     plan: free
-    buildCommand: composer install --no-dev --optimize-autoloader
-    startCommand: php -S 0.0.0.0:10000 -t public
+    dockerfilePath: Dockerfile
+    startCommand: "" # Dockerfile s'occupe de démarrer le serveur
     envVars:
       - key: APP_ENV
         value: prod
-    phpVersion: "8.1"
