@@ -1,0 +1,112 @@
+<section id="contact" class="section bg-gradient-dark">
+    <div class="container">
+        <div class="section-content">
+            <!-- Section Header -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="text-primary">Contact</span> & Localisation
+                </h2>
+                <p class="section-description">
+                    N'hésitez pas à nous contacter pour toute question sur nos activités, 
+                    nos tarifs ou pour organiser une visite de nos installations.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-cards">
+                        {% for info in contactInfo %}
+                            <div class="contact-card">
+                                <div class="contact-card-content">
+                                    <div class="contact-card-icon">
+                                        <i data-lucide="{{ info.icon }}" class="icon"></i>
+                                    </div>
+                                    <div class="contact-card-text">
+                                        <h4 class="contact-card-title">{{ info.title }}</h4>
+                                        {% for detail in info.details %}
+                                            <p class="contact-card-detail">{{ detail }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Map Placeholder -->
+                    <div class="map-card">
+                        <div class="map-content">
+                            <div class="map-placeholder">
+                                <div class="map-icon">
+                                    <i data-lucide="map-pin" class="icon"></i>
+                                </div>
+                                <div class="map-text">
+                                    <p class="map-title">CHM Saleux</p>
+                                    <p class="map-address">8 rue Marx Dormoy, 80480 Saleux</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-card">
+                    <div class="contact-form-header">
+                        <h3 class="contact-form-title">Nous Contacter</h3>
+                    </div>
+                    <div class="contact-form-content">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        
+                        <form action="{{ path('contact_form') }}" method="POST" class="contact-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Prénom</label>
+                                    <input type="text" name="firstname" class="form-input" placeholder="Votre prénom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nom</label>
+                                    <input type="text" name="lastname" class="form-input" placeholder="Votre nom" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Téléphone</label>
+                                <input type="tel" name="phone" class="form-input" placeholder="Votre numéro de téléphone">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Sujet</label>
+                                <input type="text" name="subject" class="form-input" placeholder="Objet de votre message" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea name="message" class="form-textarea" placeholder="Votre message..." rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-hero btn-lg btn-full">
+                                Envoyer le Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="contact-footer">
+                <p class="footer-text">
+                    © 2024 CHM Saleux - Club d'Haltérophilie et de Musculation de Saleux - Tous droits réservés
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

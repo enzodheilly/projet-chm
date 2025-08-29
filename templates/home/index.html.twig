@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'partials/hero.html.twig' with {'stats': stats} %}
+    {% include 'partials/club.html.twig' with {'values': values} %}
+    {% include 'partials/school.html.twig' with {'programs': programs, 'schedules': schedules} %}
+    {% include 'partials/competitions.html.twig' with {'competitions': competitions, 'achievements': achievements} %}
+    {% include 'partials/info.html.twig' with {'pricing': pricing, 'schedules': schedules} %}
+    {% include 'partials/contact.html.twig' with {'contactInfo': contactInfo} %}
+{% endblock %}

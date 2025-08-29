@@ -1,0 +1,54 @@
+<section id="accueil" class="hero-section">
+    <!-- Background Image with Overlay -->
+    <div class="hero-bg">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="hero-content">
+        <div class="container">
+            <div class="hero-inner">
+                <!-- Main Heading -->
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="text-foreground">CHM</span>
+                        <span class="text-gradient">SALEUX</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Club d'Haltérophilie et de Musculation de Saleux
+                    </p>
+                    <p class="hero-description">
+                        Depuis plus de 25 ans, nous formons des champions et accompagnons 
+                        tous les sportifs dans leur quête d'excellence physique et mentale.
+                    </p>
+                </div>
+
+                <!-- Call to Action Buttons -->
+                <div class="hero-actions">
+                    <a href="#club" class="btn btn-hero btn-xl">
+                        Découvrir le Club 
+                        <i data-lucide="arrow-right" class="btn-icon-right"></i>
+                    </a>
+                    <a href="#ecole" class="btn btn-athletic btn-xl">
+                        École d'Haltérophilie
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="hero-stats">
+                    {% for stat in stats %}
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i data-lucide="{{ stat.icon }}" class="icon"></i>
+                            </div>
+                            <div class="stat-content">
+                                <p class="stat-value">{{ stat.value }}</p>
+                                <p class="stat-label">{{ stat.label }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

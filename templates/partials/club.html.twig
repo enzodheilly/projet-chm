@@ -1,0 +1,62 @@
+<section id="club" class="section bg-gradient-dark">
+    <div class="container">
+        <div class="section-content">
+            <!-- Section Header -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    Le <span class="text-primary">Club</span>
+                </h2>
+                <p class="section-description">
+                    Le CHM Saleux est bien plus qu'un club de sport : c'est un lieu de formation, 
+                    d'excellence et de dépassement de soi où chaque athlète trouve sa voie.
+                </p>
+            </div>
+
+            <div class="club-grid">
+                <!-- Content -->
+                <div class="club-content">
+                    <div class="club-text">
+                        <h3 class="club-subtitle">Notre Histoire</h3>
+                        <p class="text-muted">
+                            Fondé il y a plus de 25 ans, le Club d'Haltérophilie et de Musculation de Saleux 
+                            s'est imposé comme une référence dans la région. Nous avons formé de nombreux 
+                            champions et continuons d'accueillir des sportifs de tous niveaux.
+                        </p>
+                        <p class="text-muted">
+                            Notre approche combine tradition et modernité, avec des équipements de pointe 
+                            et une pédagogie éprouvée pour révéler le potentiel de chaque athlète.
+                        </p>
+                    </div>
+
+                    <div class="club-actions">
+                        <a href="#infos" class="btn btn-hero btn-lg">Nous Rejoindre</a>
+                        <a href="#competitions" class="btn btn-outline btn-lg">Voir nos Résultats</a>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="club-image">
+                    <div class="image-container">
+                        <img src="{{ asset('images/weightlifter-action.jpg') }}" alt="Haltérophile en action" class="club-img">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values Grid -->
+            <div class="values-grid">
+                {% for value in values %}
+                    <div class="value-card">
+                        <div class="value-content">
+                            <div class="value-icon">
+                                <i data-lucide="{{ value.icon }}" class="icon"></i>
+                            </div>
+                            <h4 class="value-title">{{ value.title }}</h4>
+                            <p class="value-description">{{ value.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
