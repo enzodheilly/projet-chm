@@ -4,8 +4,10 @@ services:
     env: php
     plan: free
     buildCommand: |
-      composer install --no-dev --optimize-autoloader
+      curl -sS https://getcomposer.org/installer | php
+      php composer.phar install --no-dev --optimize-autoloader
     startCommand: php -S 0.0.0.0:10000 -t public
     envVars:
       - key: APP_ENV
         value: prod
+    phpVersion: "8.1"
