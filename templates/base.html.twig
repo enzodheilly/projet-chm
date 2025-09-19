@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CHM Saleux - Club d'Haltérophilie et de Musculation{% endblock %}</title>
+    <meta name="description" content="{% block description %}Club d'Haltérophilie et de Musculation de Saleux. École d'haltérophilie, formations tous niveaux, compétitions. Plus de 25 ans d'expérience dans la formation d'athlètes.{% endblock %}">
+    <meta name="keywords" content="haltérophilie, musculation, Saleux, club sportif, compétition, école haltérophilie, entraînement">
+    <meta name="author" content="CHM Saleux">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}CHM Saleux - Club d'Haltérophilie et de Musculation{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Rejoignez le CHM Saleux, club d'excellence en haltérophilie et musculation. École reconnue, entraîneurs diplômés, 25 ans d'expérience.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ app.request.uri }}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons (Lucide via CDN) -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- CSS -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body class="bg-background text-foreground">
+    {% include 'partials/navigation.html.twig' %}
+
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    <!-- JavaScript -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+
+</html>

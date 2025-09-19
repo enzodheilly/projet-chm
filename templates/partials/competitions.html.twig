@@ -1,0 +1,69 @@
+<section id="competitions" class="section bg-gradient-dark">
+    <div class="container">
+        <div class="section-content">
+            <!-- Section Header -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="text-primary">Compétitions</span> & Résultats
+                </h2>
+                <p class="section-description">
+                    Nos athlètes participent régulièrement aux compétitions régionales et nationales, 
+                    obtenant d'excellents résultats qui témoignent de la qualité de notre formation.
+                </p>
+            </div>
+
+            <!-- Achievements -->
+            <div class="achievements-grid">
+                {% for achievement in achievements %}
+                    <div class="achievement-card">
+                        <div class="achievement-content">
+                            <div class="achievement-icon">
+                                <i data-lucide="{{ achievement.icon }}" class="icon"></i>
+                            </div>
+                            <h3 class="achievement-value">{{ achievement.title }}</h3>
+                            <h4 class="achievement-subtitle">{{ achievement.subtitle }}</h4>
+                            <p class="achievement-description">{{ achievement.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Upcoming Competitions -->
+            <div class="competitions-card">
+                <div class="competitions-header">
+                    <div class="competitions-icon">
+                        <i data-lucide="calendar" class="icon"></i>
+                    </div>
+                    <h3 class="competitions-title">Prochaines Compétitions</h3>
+                </div>
+                <div class="competitions-content">
+                    <div class="competitions-list">
+                        {% for comp in competitions %}
+                            <div class="competition-item">
+                                <div class="competition-info">
+                                    <h4 class="competition-title">{{ comp.title }}</h4>
+                                    <div class="competition-details">
+                                        <span class="competition-detail">
+                                            <i data-lucide="calendar" class="detail-icon"></i>
+                                            {{ comp.date }}
+                                        </span>
+                                        <span class="competition-detail">{{ comp.location }}</span>
+                                        <span class="competition-detail">{{ comp.category }}</span>
+                                    </div>
+                                </div>
+                                <div class="competition-actions">
+                                    <span class="competition-status">{{ comp.status }}</span>
+                                    <button class="btn btn-outline btn-sm">En savoir plus</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="competitions-action">
+                        <button class="btn btn-hero btn-lg">Voir toutes les compétitions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,174 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <style>
+    :root {
+      --primary: hsl(25, 90%, 50%); /* orange vif du club */
+      --secondary: hsl(220, 13%, 18%); /* gris anthracite */
+      --background: hsl(220, 13%, 7%); /* presque noir */
+      --foreground: hsl(210, 40%, 98%); /* texte clair */
+    }
+    
+    /* ===== Contenu principal ===== */
+    main.section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 20px 60px 20px;
+      background: var(--background);
+      color: var(--foreground);
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--foreground);
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    main p {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 80px;
+    }
+    
+    /* ===== Nouveautés flex ===== */
+    .news-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      margin-bottom: 120px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .news-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .news-item img {
+      width: 48%;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease;
+    }
+    
+    .news-item img:hover {
+      transform: scale(1.05);
+    }
+    
+    .news-text {
+      width: 48%;
+      text-align: center;
+    }
+    
+    .news-text h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary); /* titre en orange */
+      margin-bottom: 20px;
+    }
+    
+    .news-text p {
+      font-size: 1.1rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    
+    .news-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .news-item {
+        gap: 40px;
+      }
+      .news-item img,
+      .news-text {
+        width: 50%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .news-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      .news-item img,
+      .news-text {
+        width: 100%;
+      }
+      .news-item:nth-child(even) {
+        flex-direction: column;
+      }
+      .news-text h3 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 2rem;
+      }
+      .news-text h3 {
+        font-size: 1.5rem;
+      }
+      main p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <main class="section">
+    <h2>Nouveautés du CHM Saleux</h2>
+    <p>Découvrez les dernières machines et équipements présents dans notre club, pour des entraînements toujours plus complets et performants.</p>
+
+    <div class="news-item">
+      <img src="{{ asset('images/nouveaute1.jpg') }}" alt="Presse convergente inclinée" />
+      <div class="news-text">
+        <h3>Presse convergente inclinée</h3>
+        <p>Cette machine chest press inclinée permet de cibler efficacement le haut des pectoraux tout en réduisant la tension sur les épaules. Idéale pour renforcer la poitrine et améliorer la posture, elle offre un mouvement fluide et naturel pour un entraînement sûr et performant.</p>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <img src="{{ asset('images/nouveaute2.jpg') }}" alt="Poulie vis-à-vis" />
+      <div class="news-text">
+        <h3>Poulie vis-à-vis</h3>
+        <p>La poulie vis-à-vis est parfaite pour travailler tous les angles de la poitrine et du dos. Elle permet une grande variété d’exercices fonctionnels avec résistance constante, favorisant la coordination, la stabilité et le renforcement musculaire global.</p>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <img src="{{ asset('images/nouveaute3.jpg') }}" alt="Machine 4 poulies" />
+      <div class="news-text">
+        <h3>Machine 4 poulies</h3>
+        <p>Cette machine à 4 poulies offre une polyvalence maximale pour les exercices de tirage et de poussée. Elle permet de travailler l’ensemble du corps, en particulier les épaules, le dos et les bras, tout en gardant un contrôle optimal de la charge et de la trajectoire du mouvement.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Animation d'apparition au scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+    
+    document.querySelectorAll('.news-item').forEach((item) => {
+      observer.observe(item)
+    })
+  </script>
+{% endblock %}

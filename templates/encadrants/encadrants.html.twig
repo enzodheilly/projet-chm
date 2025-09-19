@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <style>
+    :root {
+      /* Couleurs du club */
+      --primary: hsl(25, 90%, 50%); /* orange intense */
+      --secondary: hsl(220, 13%, 18%); /* gris anthracite */
+      --background: hsl(220, 13%, 7%); /* presque noir */
+      --foreground: hsl(210, 40%, 98%);
+    }
+    
+    /* ===== Contenu principal ===== */
+    main.section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--background);
+      color: var(--foreground);
+    }
+    
+    h2.section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--foreground);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    p.section-subtitle {
+      font-size: 0.95rem;
+      color: #ccc;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    /* Grille horizontale pour coachs */
+    .team-grid {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    
+    .team-member-card {
+      background: hsl(220, 13%, 12%);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      padding: 12px;
+      width: 180px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .team-member-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+    }
+    
+    .team-member-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      border: 2px solid var(--primary);
+    }
+    
+    .team-member-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    
+    .team-member-card .role {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    
+    .team-member-card .description {
+      font-size: 0.75rem;
+      color: #ccc;
+      line-height: 1.4;
+    }
+    
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .team-member-card {
+        width: 140px;
+      }
+      .team-member-card img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h2.section-title {
+        font-size: 1.6rem;
+      }
+      .team-member-card h3 {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+  <main class="section comite-section">
+    <h2 class="section-title">L’équipe encadrante haltéro et musculation</h2>
+    <p class="section-subtitle">Découvrez nos coachs et encadrants, leur parcours et leur engagement au CHM Saleux.</p>
+
+    <div class="team-grid">
+      {% for member in [{ name: 'Florian', role: 'Président et coach', photo: 'membre1.jpg', description: 'Président du club depuis 2019 et entraîneur pour tous les niveaux.' }, { name: 'Brice Baticle', role: 'Membre du bureau et coach', photo: 'membre6.jpg', description: "Membre du comité directeur depuis 2020. Assure l'initiation et le coaching en compétition." }, { name: 'Laurent Longuepee', role: 'Trésorier et coach', photo: 'membre2.jpg', description: 'Trésorier du club depuis 2019 et entraîneur en haltérophilie et musculation.' }] %}
+        <div class="team-member-card">
+          <img src="{{ asset('images/' ~ member.photo) }}" alt="{{ member.name }}" />
+          <h3>{{ member.name }}</h3>
+          <p class="role">{{ member.role }}</p>
+          <p class="description">{{ member.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}
