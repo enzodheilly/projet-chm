@@ -22,6 +22,8 @@
 
     <!-- Icons (Lucide via CDN) -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css">
+
 
     <!-- CSS -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -30,7 +32,7 @@
 </head>
 
 <body class="bg-background text-foreground">
-    {% include 'partials/navigation.html.twig' %}
+     {# {% include 'accueil/navigation.html.twig' %} #} <!-- commentée temporairement -->
 
     <main>
         {% block body %}{% endblock %}

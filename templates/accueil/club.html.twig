@@ -1,0 +1,478 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		/* Reset & base */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			font-family: 'Inter', sans-serif;
+			background-color: #FDF7FF !important;
+			color: #111827;
+		}
+
+		/* Section tarifs */
+		.pricing-section {
+			padding: 5rem 5%;
+			background: #fef7f5;
+			text-align: center;
+		}
+		.pricing-title {
+			font-size: 2.2rem;
+			font-weight: 800;
+			margin-bottom: 1rem;
+			color: #111827;
+		}
+		.pricing-title .highlight {
+			color: #f97316;
+		}
+		.pricing-subtitle {
+			font-size: 1.1rem;
+			color: #374151;
+			margin-bottom: 2rem;
+		}
+
+		/* Bannière promo */
+		.promo-banner {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(90deg, #f97316, #ec4899);
+			color: white;
+			padding: 0.8rem;
+			border-radius: 1rem;
+			margin-bottom: 3rem;
+			overflow: hidden;
+		}
+
+		header {
+			height: 3em;
+			overflow: hidden;
+			width: 100%;
+			text-align: center;
+		}
+		ul.t,
+		.t li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.t li {
+			font-size: 2rem;
+			font-weight: 800;
+			color: white;
+			text-transform: uppercase;
+		}
+		.t {
+			animation: titleflip 5s ease-in-out infinite;
+		}
+		@keyframes titleflip {
+			0,
+			20% {
+				transform: translateY(-100%);
+			}
+			20%,
+			40% {
+				transform: translateY(-75%);
+			}
+			40%,
+			60% {
+				transform: translateY(-50%);
+			}
+			60%,
+			80% {
+				transform: translateY(-25%);
+			}
+			80%,
+			100% {
+				transform: translateY(0%);
+			}
+		}
+
+		/* Cartes de tarifs */
+		.pricing-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* adapts to screen */
+			gap: 1.5rem;
+			max-width: 95%; /* 80% de la largeur de l’écran */
+			margin: 0 auto;
+		}
+
+		@keyframes slideInRight {
+			from {
+				opacity: 0;
+				transform: translateX(80px); /* démarre à droite */
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0); /* finit en place */
+			}
+		}
+		.pricing-card.animate {
+			animation: slideInRight 0.8s ease forwards;
+		}
+
+		.pricing-card:nth-child(2).animate {
+			animation-delay: 0.4s;
+		}
+		.pricing-card:nth-child(3).animate {
+			animation-delay: 0.8s;
+		}
+		.pricing-card:nth-child(4).animate {
+			animation-delay: 1.2s;
+		}
+
+		.pricing-card {
+			background: white;
+			border-radius: 1rem;
+			padding: 1rem;
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			position: relative;
+			width: 100%;
+			opacity: 0;
+			transform: translateY(80px);
+		}
+		.pricing-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+		}
+
+		.price-period {
+			font-size: 1rem;
+			color: #6b7280;
+			font-weight: 500;
+			vertical-align: super;
+		}
+		.card-title {
+			font-size: 1.5em;
+			font-weight: 600;
+			color: #f97316;
+			margin-bottom: 0.5rem;
+			position: relative;
+			text-transform: uppercase;
+		}
+
+		.card-title::after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			width: 50px;
+			height: 3px;
+			background-color: #b91c1c;
+			border-radius: 2px;
+		}
+
+		.card-price {
+			font-size: 2rem;
+			font-weight: 900;
+			color: black;
+			margin-bottom: 0.25rem;
+			display: flex;
+			align-items: baseline;
+			justify-content: center;
+			gap: 0.25rem; /* espace entre le prix et la période */
+		}
+
+		.card-price sup {
+			font-size: 1rem;
+			vertical-align: super;
+		}
+
+		.card-subprice {
+			color: #6b7280;
+			font-size: 0.9rem;
+			margin-bottom: 1rem;
+		}
+
+		.card-subprice::after {
+			content: " • soit " attr(data-monthly) "/mois";
+			font-style: italic;
+			color: #6b7280;
+		}
+
+		/* Liste d’avantages */
+		.card-features {
+			text-align: left;
+			width: 100%;
+			margin: 1rem 0 1.5rem;
+		}
+		.card-features li {
+			list-style: none;
+			margin-bottom: 0.5rem;
+			padding-left: 1.8rem;
+			position: relative;
+			color: #374151;
+			font-size: 0.85rem;
+			line-height: 1.5;
+		}
+		.card-features li::before {
+			content: "✔";
+			position: absolute;
+			left: 0;
+			color: #16a34a;
+			font-weight: bold;
+		}
+
+		/* Bouton */
+		.card-button {
+			display: inline-block;
+			background: #0d0d0d; /* noir */
+			color: #fff;
+			padding: 0.5rem 1rem;
+			border-radius: 0.5rem; /* coins légèrement arrondis pour rectangulaire */
+			font-weight: 700;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+			font-size: 0.85rem;
+			transition: 0.3s;
+		}
+		.card-button:hover {
+			background: #f97316;
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+		}
+
+		@media(max-width:768px) {
+			.pricing-grid {
+				grid-template-columns: 1fr;
+				gap: 1.5rem;
+			}
+			.card-title {
+				font-size: 1.5rem;
+			}
+			.card-price {
+				font-size: 2rem;
+			}
+			.card-features li {
+				font-size: 0.95rem;
+			}
+		}
+
+		/* Section Modalités alignée */
+		.requirements-section {
+			margin-top: 3rem;
+			display: flex;
+			justify-content: center;
+			gap: 2rem;
+			flex-wrap: wrap; /* reste responsive */
+		}
+		.requirement-card {
+			background: #fff;
+			padding: 1.5rem;
+			border-radius: 1rem;
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+			text-align: center;
+			width: 250px;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+		.requirement-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+		}
+		.requirement-icon {
+			font-size: 2rem;
+			color: #f97316;
+			margin-bottom: 0.5rem;
+		}
+		.requirement-title {
+			font-size: 1.1rem;
+			font-weight: 700;
+			color: #111827;
+			margin-bottom: 0.3rem;
+		}
+		.requirement-description {
+			color: #374151;
+			font-size: 0.9rem;
+		}
+		.requirements-action {
+			width: 100%;
+			text-align: center;
+			margin-top: 2rem;
+		}
+		.requirements-action .btn {
+			background: #0d0d0d;
+			color: #fff;
+			padding: 0.8rem 1.5rem;
+			border-radius: 0.5rem;
+			font-weight: 700;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		}
+		.requirements-action .btn:hover {
+			background: #f97316;
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<section class="pricing-section">
+		<h1 class="pricing-title">
+			SELECTIONNE
+			<span class="highlight">L'ABONNEMENT</span>
+			QUI TE CORRESPOND
+		</h1>
+		<p class="pricing-subtitle">
+			Rejoins notre club et profite d’un espace complet pour tous tes entraînements :
+			<strong>Haltérophilie, Musculation, Cardio, Cours Collectifs, Coaching Personnalisé</strong>. 
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										Choisis parmi nos forfaits annuels adaptés à tous les âges et niveaux, à partir de 50€ par an ! 💪
+		</p>
+
+		<div class="promo-banner">
+			<header>
+				<ul class="t">
+					<li>Train.</li>
+					<li>Lift.</li>
+					<li>Push.</li>
+					<li>Grow.</li>
+					<li>Repeat.</li>
+				</ul>
+			</header>
+		</div>
+
+		<div
+			class="pricing-grid">
+			<!-- Compétition +21 -->
+			<div class="pricing-card">
+				<h3 class="card-title">Compétition Haltérophilie</h3>
+				<div class="card-price">
+					90€<sup>00</sup>
+					<span class="price-period">/ an</span>
+				</div>
+
+				<div class="card-subprice" data-monthly="10€">+21 ans</div>
+				<ul class="card-features">
+					<li>Licence compétition officielle</li>
+					<li>Accès complet à la salle</li>
+					<li>Encadrement par coachs diplômés</li>
+					<li>Participation aux compétitions</li>
+				</ul>
+				<a href="#inscription" class="card-button">Choisir</a>
+			</div>
+
+			<!-- Compétition jeunes -->
+			<div class="pricing-card">
+				<h3 class="card-title">Compétition Haltérophilie</h3>
+				<div class="card-price">
+					70€<sup>00</sup>
+					<span class="price-period">/ an</span>
+				</div>
+				<div class="card-subprice" data-monthly="5.83€">14 - 20 ans</div>
+				<ul class="card-features">
+					<li>Licence compétition jeune</li>
+					<li>Encadrement adapté</li>
+					<li>Accès à toutes les installations</li>
+					<li>Accompagnement en compétitions</li>
+				</ul>
+				<a href="#inscription" class="card-button">Choisir</a>
+			</div>
+
+			<!-- Compétition enfants -->
+			<div class="pricing-card">
+				<h3 class="card-title">Compétition Haltérophilie</h3>
+				<div class="card-price">
+					50€<sup>00</sup>
+					<span class="price-period">/ an</span>
+				</div>
+				<div class="card-subprice" data-monthly="4.17€">8 - 13 ans</div>
+				<ul class="card-features">
+					<li>Licence compétition enfant</li>
+					<li>Initiation & apprentissage sécurisé</li>
+					<li>Accès aux séances dédiées</li>
+					<li>Accompagnement en compétitions</li>
+				</ul>
+				<a href="#inscription" class="card-button">Choisir</a>
+			</div>
+
+			<!-- Loisir -->
+			<div class="pricing-card">
+				<h3 class="card-title">Loisir Musculation Haltérophilie</h3>
+				<div class="card-price">
+					200€<sup>00</sup>
+					<span class="price-period">/ an</span>
+				</div>
+				<div class="card-subprice" data-monthly="17€">Tout âge</div>
+				<ul class="card-features">
+					<li>Accès libre salle musculation</li>
+					<li>Haltérophilie loisir encadrée</li>
+					<li>Cardio & cours collectifs inclus</li>
+					<li>Ambiance conviviale</li>
+				</ul>
+				<a href="#inscription" class="card-button">Choisir</a>
+			</div>
+		</div>
+
+		<!-- Modalités alignées -->
+		<div class="requirements-section" id="inscription">
+			<div class="requirement-card">
+				<div class="requirement-icon">
+					<i data-lucide="user-check"></i>
+				</div>
+				<h4 class="requirement-title">Certificat médical</h4>
+				<p class="requirement-description">Obligatoire pour la pratique sportive</p>
+			</div>
+			<div class="requirement-card">
+				<div class="requirement-icon">
+					<i data-lucide="credit-card"></i>
+				</div>
+				<h4 class="requirement-title">Licence FFH</h4>
+				<p class="requirement-description">Incluse dans la cotisation annuelle</p>
+			</div>
+			<div class="requirement-card">
+				<div class="requirement-icon">
+					<i data-lucide="dumbbell"></i>
+				</div>
+				<h4 class="requirement-title">Équipement</h4>
+				<p class="requirement-description">Tenue de sport, chaussures adaptées</p>
+			</div>
+		</div>
+
+		<div class="requirements-action">
+			<a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@chmsaleux.fr" target="_blank" class="btn btn-hero btn-lg">
+				Contactez-nous pour plus d'infos
+			</a>
+		</div>
+	</section>
+
+	 <script>
+																																																																																																																			document.addEventListener("DOMContentLoaded", () => {
+																																																																																																																			  const cards = document.querySelectorAll(".pricing-card");
+																																																																																																																			  const section = document.querySelector(".pricing-section");
+																																																																																																																			
+																																																																																																																			  const observer = new IntersectionObserver((entries, observer) => {
+																																																																																																																			    entries.forEach(entry => {
+																																																																																																																			      if (entry.isIntersecting) {
+																																																																																																																			        // Première carte : affichée directement
+																																																																																																																			        cards[0].style.opacity = "1";
+																																																																																																																			        cards[0].style.transform = "translateY(0)";
+																																																																																																																			
+																																																																																																																			        // Les autres : déclenchent leur animation
+																																																																																																																			        for (let i = 1; i < cards.length; i++) {
+																																																																																																																			          cards[i].classList.add("animate");
+																																																																																																																			        }
+																																																																																																																			
+																																																																																																																			        // Stoppe l’observer après déclenchement
+																																																																																																																			        observer.unobserve(section);
+																																																																																																																			      }
+																																																																																																																			    });
+																																																																																																																			  }, { threshold: 0.2 }); // déclenche quand 20% de la section est visible
+																																																																																																																			
+																																																																																																																			  observer.observe(section);
+																																																																																																																			});
+																																																																																																																			</script>
+
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/club/nouveautes/nouveautes.css') }}">
+{% endblock %}
+
+{% block body %}
+
+  <main class="section">
+    <h2>Nouveautés du CHM Saleux</h2>
+    <p>Découvrez les dernières machines et équipements présents dans notre club, pour des entraînements toujours plus complets et performants.</p>
+
+    <div class="news-item">
+      <img src="{{ asset('images/nouveaute1.jpg') }}" alt="Presse convergente inclinée" />
+      <div class="news-text">
+        <h3>Presse convergente inclinée</h3>
+        <p>Cette machine chest press inclinée permet de cibler efficacement le haut des pectoraux tout en réduisant la tension sur les épaules. Idéale pour renforcer la poitrine et améliorer la posture, elle offre un mouvement fluide et naturel pour un entraînement sûr et performant.</p>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <img src="{{ asset('images/nouveaute2.jpg') }}" alt="Poulie vis-à-vis" />
+      <div class="news-text">
+        <h3>Poulie vis-à-vis</h3>
+        <p>La poulie vis-à-vis est parfaite pour travailler tous les angles de la poitrine et du dos. Elle permet une grande variété d’exercices fonctionnels avec résistance constante, favorisant la coordination, la stabilité et le renforcement musculaire global.</p>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <img src="{{ asset('images/nouveaute3.jpg') }}" alt="Machine 4 poulies" />
+      <div class="news-text">
+        <h3>Machine 4 poulies</h3>
+        <p>Cette machine à 4 poulies offre une polyvalence maximale pour les exercices de tirage et de poussée. Elle permet de travailler l’ensemble du corps, en particulier les épaules, le dos et les bras, tout en gardant un contrôle optimal de la charge et de la trajectoire du mouvement.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Animation d'apparition au scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+    
+    document.querySelectorAll('.news-item').forEach((item) => {
+      observer.observe(item)
+    })
+  </script>
+{% endblock %}

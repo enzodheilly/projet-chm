@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/halterophilie/definitions/definitions.css') }}">
+{% endblock %}
+
+{% block body %}
+
+  <section class="container">
+    <!-- Hero -->
+    <div class="hero">
+      <div>
+        <h1>📖 Découvrir l’haltérophilie</h1>
+        <p>Un guide simple pour comprendre les mouvements olympiques</p>
+      </div>
+    </div>
+
+    <!-- Définition -->
+    <div class="card">
+      <h2>🏋️‍♂️ Qu’est-ce que l’haltérophilie ?</h2>
+      <p>
+        L’haltérophilie est un sport de force où l’objectif est de soulever une barre chargée de poids. Mais ce n’est pas seulement une question de puissance : il faut aussi <strong>vitesse, souplesse, coordination et équilibre</strong>.
+      </p>
+      <p>En compétition, deux mouvements sont jugés :</p>
+      <ul>
+        <li>
+          <strong>l’arraché</strong> → la barre est soulevée directement au-dessus de la tête en un seul geste,
+        </li>
+        <li>
+          <strong>l’épaulé-jeté</strong> → la barre est d’abord placée aux épaules, puis projetée au-dessus de la tête.
+        </li>
+      </ul>
+      <p>
+        Chaque athlète dispose de <strong>3 essais par mouvement</strong>. Le meilleur arraché + le meilleur épaulé-jeté donnent le <strong>total olympique</strong>. Le vainqueur est celui qui a le plus grand total dans sa catégorie de poids.
+      </p>
+      <p class="mb-0">
+        Aujourd’hui, c’est le seul sport de force présent aux <strong>Jeux Olympiques</strong>. Très pratiqué dans des pays comme la <strong>Grèce, Arménie, Turquie, Bulgarie, Russie, Iran, Chine</strong> ou encore en Europe de l’Est, il est reconnu mondialement pour son exigence et son spectacle.
+      </p>
+    </div>
+
+    <!-- Mouvements -->
+    <div class="section-title">
+      <h2>⚡ Les deux mouvements olympiques</h2>
+    </div>
+
+    <!-- Arraché -->
+    <div class="card">
+      <h3>1️⃣ L’arraché</h3>
+      <p>
+        L’objectif est de lever la barre <strong>du sol jusqu’au-dessus de la tête</strong>
+        <u>en un seul mouvement</u>.
+      </p>
+      <ul>
+        <li>Les mains saisissent la barre en pronation (paumes vers soi).</li>
+        <li>La barre monte en longeant le corps.</li>
+        <li>L’athlète se place sous la barre (en flexion ou en fente) puis se redresse.</li>
+        <li>
+          Bras et jambes doivent être <strong>tendus et immobiles</strong> avant le signal final.
+        </li>
+      </ul>
+      <div class="image-center">
+        <img src="{{ asset('images/arache.jpg') }}" alt="Arraché en haltérophilie" />
+      </div>
+    </div>
+
+    <!-- Épaulé-jeté -->
+    <div class="card">
+      <h3>2️⃣ L’épaulé-jeté</h3>
+      <p>
+        Ce mouvement se fait en <strong>deux étapes</strong> :
+      </p>
+
+      <!-- Épaulé -->
+      <h4>👉 A) L’épaulé</h4>
+      <ul>
+        <li>La barre est saisie et tirée du sol jusqu’aux épaules.</li>
+        <li>Elle repose sur les clavicules ou les bras repliés.</li>
+        <li>L’athlète se redresse, pieds alignés et stables.</li>
+      </ul>
+      <div class="image-center">
+        <img src="{{ asset('images/epaule.jpg') }}" alt="Épaulé en haltérophilie" />
+      </div>
+
+      <!-- Jeté -->
+      <h4>👉 B) Le jeté</h4>
+      <ul>
+        <li>L’athlète fléchit les jambes et pousse la barre vers le haut.</li>
+        <li>
+          La barre est maintenue <strong>au-dessus de la tête, bras tendus</strong>.
+        </li>
+        <li>Il faut rester immobile jusqu’au signal des arbitres.</li>
+      </ul>
+      <div class="image-center">
+        <img src="{{ asset('images/jete.jpg') }}" alt="Jeté en haltérophilie" />
+      </div>
+    </div>
+  </section>
+{% endblock %}

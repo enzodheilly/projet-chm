@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Navbar</title>
+    <style>
+        body { margin:0; height:2000px; font-family: 'Inter', sans-serif; background:hsl(220,13%,7%); color:#fff; }
+        .nav-fixed {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            background: hsl(220 13% 9% / 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 1rem;
+            border-bottom: 1px solid hsl(220,13%,25%);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            height: 4rem;
+            transition: all 0.4s ease;
+        }
+        .nav-fixed.scrolled {
+            top: 0;
+            left: 0;
+            transform: none;
+            width: 100%;
+            border-radius: 0;
+        }
+        .nav-logo { display:flex; align-items:center; gap:0.5rem; }
+        .logo-img { width:3rem; height:3rem; transition: all 0.4s ease; }
+        .nav-fixed.scrolled .logo-img { width:2rem; height:2rem; }
+        .logo-title { font-size:1.25rem; transition: all 0.4s ease; }
+        .nav-fixed.scrolled .logo-title { font-size:1rem; }
+        .nav-desktop { display:flex; gap:1rem; }
+        .nav-link { color:#fff; text-decoration:none; padding:0.5rem 1rem; border-radius:0.25rem; transition: all 0.4s ease; }
+        .nav-link:hover { background: hsl(14 100% 57% / 0.1); color:hsl(25,90%,50%); }
+    </style>
+</head>
+<body>
+
+<nav class="nav-fixed">
+    <div class="nav-logo">
+        <img src="{{ asset('images/chm-logo.png') }}" alt="CHM Logo" class="logo-img">
+        <div class="logo-title">CHM SALEUX</div>
+    </div>
+    <div class="nav-desktop">
+        <a href="#home" class="nav-link">Accueil</a>
+        <a href="#club" class="nav-link">Le Club</a>
+        <a href="#haltero" class="nav-link">Haltérophilie</a>
+        <a href="#competitions" class="nav-link">Compétitions</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('.nav-fixed');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 50) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+});
+</script>
+
+</body>
+</html>

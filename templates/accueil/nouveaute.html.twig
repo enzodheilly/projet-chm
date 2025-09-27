@@ -1,0 +1,197 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		body {
+			background-color: #0d0d0d;
+			color: #fff;
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+
+		/* Bloc vertical à gauche */
+		.sidebar {
+			position: absolute;
+			left: 0;
+			width: 120px;
+			height: 70%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			border-right: 2px solid white;
+		}
+
+		.sidebar-title {
+			transform: rotate(-90deg);
+			font-size: 1rem;
+			letter-spacing: 2px;
+			color: #fff;
+			text-transform: uppercase;
+			white-space: nowrap;
+		}
+
+		/* Conteneur principal */
+		.slider-container {
+			position: relative;
+			width: 100%;
+			height: 80vh;
+			display: flex;
+			align-items: center;
+			overflow: hidden;
+			background: #0d0d0d;
+			padding: 0 5%; /* espace pour la sidebar */
+		}
+
+		.slider {
+			display: flex;
+			transition: transform 0.5s ease;
+			width: calc(100% - 120px);
+		}
+
+		.slide {
+			flex: 0 0 33.333%; /* 3 slides visibles */
+			opacity: 0.8;
+			margin: 0 10px;
+			text-align: center;
+			transition: all 0.4s ease;
+			border-radius: 1rem;
+			overflow: hidden;
+		}
+
+		.slide.active {
+			opacity: 1;
+		}
+
+		.slide img {
+			width: 100%;
+			height: auto;
+			max-height: 500px;
+			object-fit: contain;
+			border-radius: 1rem;
+		}
+
+		.slide p {
+			margin-top: 10px;
+			font-size: 1rem;
+			color: #fff;
+			text-transform: uppercase;
+		}
+
+		/* Flèches */
+		.nav-button {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background: #0d0d0d;
+			color: white;
+			border: none;
+			cursor: pointer;
+			padding: 0.5rem 1rem;
+			font-size: 1.5rem;
+			z-index: 10;
+			border-radius: 0.5rem;
+			transition: background 0.3s;
+		}
+
+		.nav-button.left {
+			left: 155px;
+		}
+
+		.nav-button.left:hover {
+			color: #fff;
+		}
+
+		.nav-button.right {
+			right: 110px;
+		}
+
+		.nav-button.right:hover {
+			color: #fff;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="slider-container">
+		<div class="sidebar">
+			<div class="sidebar-title">Nos nouvelles machines</div>
+		</div>
+
+		<button class="nav-button left">&#10094;</button>
+		<div class="slider">
+			<div class="slide active">
+				<img src="/images/machine1.jpg" alt="Nouvelle machine 1">
+				<p>Chest press inclinée</p>
+			</div>
+			<div class="slide">
+				<img src="/images/machine2.jpg" alt="Nouvelle machine 2">
+				<p>Poulie vis à vis</p>
+			</div>
+			<div class="slide">
+				<img src="/images/machine3.jpg" alt="Nouvelle machine 3">
+				<p>Cross-over 4 postes</p>
+			</div>
+			<div class="slide">
+				<img src="/images/machine4.jpg" alt="Nouvelle machine 4">
+				<p>Hip thrust machine</p>
+			</div>
+			<div class="slide">
+				<img src="/images/machine5.jpg" alt="Nouvelle machine 5">
+				<p>Banc inclinable</p>
+			</div>
+		</div>
+		<button class="nav-button right">&#10095;</button>
+	</div>
+
+	 <script>
+																    const slider = document.querySelector('.slider');
+																    const slides = document.querySelectorAll('.slide');
+																    const leftBtn = document.querySelector('.nav-button.left');
+																    const rightBtn = document.querySelector('.nav-button.right');
+																
+																    let currentIndex = 0; // index du premier slide visible
+																    const slidesToShow = 3;
+																
+																    function updateSlider() {
+																        const slideWidth = slides[0].offsetWidth + 10; // largeur + margin
+																        // Limite currentIndex pour ne pas dépasser la dernière slide
+																        if(currentIndex > slides.length - slidesToShow) {
+																            currentIndex = slides.length - slidesToShow;
+																        }
+																        slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+																        slides.forEach((slide, i) => {
+																            slide.classList.remove('active');
+																            if (i >= currentIndex && i < currentIndex + slidesToShow) {
+																                slide.classList.add('active');
+																            }
+																        });
+																    }
+																
+																    rightBtn.addEventListener('click', () => {
+																        if (currentIndex < slides.length - slidesToShow) {
+																            currentIndex++;
+																            updateSlider();
+																        } else {
+																            // On est déjà à la fin : affiche la dernière slide correctement
+																            currentIndex = slides.length - slidesToShow;
+																            updateSlider();
+																        }
+																    });
+																
+																    leftBtn.addEventListener('click', () => {
+																        if (currentIndex > 0) {
+																            currentIndex--;
+																            updateSlider();
+																        }
+																    });
+																
+																    window.addEventListener('resize', updateSlider);
+																
+																    // Initialisation
+																    updateSlider();
+																</script>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/halterophilie/ecole/ecole.css') }}">
+{% endblock %}
+
+{% block body %}
+
+  <section class="container">
+    <!-- Hero -->
+    <div class="hero">
+      <h1>🏋️‍♂️ L'école d'haltérophilie</h1>
+    </div>
+
+    <!-- Présentation -->
+    <div class="intro">
+      <div class="intro-text">
+        <p>Bienvenue à l’école d’haltérophilie ! Ici, nous formons des sportifs de tous niveaux, du débutant à l’athlète confirmé. Notre objectif est de transmettre la passion de l’haltérophilie à travers un encadrement professionnel et une ambiance conviviale.</p>
+        <ul>
+          <li>Apprentissage des mouvements olympiques (arraché, épaulé-jeté)</li>
+          <li>Encadrement par des coachs diplômés</li>
+          <li>Séances adaptées aux enfants, ados et adultes</li>
+          <li>Suivi personnalisé pour la progression et la performance</li>
+        </ul>
+      </div>
+      <div class="intro-img">
+        <img src="{{ asset('images/halterophilie1.jpg') }}" alt="Salle d'haltérophilie" />
+      </div>
+    </div>
+
+    <!-- Card fonctionnement -->
+    <div class="card">
+      <h2>ℹ️ Comment fonctionne l’école ?</h2>
+      <p>
+        Pour l’apprentissage de la pratique de l’haltérophilie et l’éducation posturale, une école est mise en place le <strong>lundi, mercredi et vendredi de 17h00 à 19h00</strong> afin d’initier dès l’âge de 8 ans aux mouvements de base de ce sport. Vous apprendrez la posture, la gestuelle et un plan d’entraînement adapté à votre initiation.
+      </p>
+      <p>
+        <strong>Pour les plus jeunes (8 à 13 ans)</strong>, des journées d’activités dites « challenges benj/minime » se dérouleront le samedi au cours de l’année. Ces journées comprennent des activités interclubs ludiques (triple saut, lancé de médecine-ball, saut en hauteur, course, …) ainsi qu’une épreuve d’haltérophilie (arraché et épaulé-jeté).
+      </p>
+      <p>
+        Ces challenges ne privilégient pas la charge maximale mais mettent l’accent sur l’aspect ludique et collectif du sport. C’est aussi l’occasion pour les jeunes de <strong>partager et s’amuser avec d’autres clubs de la région</strong>.
+      </p>
+      <p>
+        Le CHM insiste sur la <strong>qualité du geste et non sur la performance</strong>, puisqu’à cet âge, la technique est la priorité absolue. 👉
+        <a href="{{ path('halterophilie') }}">En savoir plus sur l’haltérophilie</a>.
+      </p>
+    </div>
+  </section>
+{% endblock %}

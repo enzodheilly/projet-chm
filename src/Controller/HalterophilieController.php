@@ -12,13 +12,13 @@ class HalterophilieController extends AbstractController
     public function ecole(): Response
     {
         // On indique le chemin relatif depuis templates/
-        return $this->render('ecole/index.html.twig');
+        return $this->render('halterophilie/ecole/index.html.twig');
     }
 
     #[Route('/halterophilie', name: 'halterophilie')]
     public function halterophilie(): Response
     {
         // On indique le chemin relatif depuis templates/
-        return $this->render('halterophilie/index.html.twig');
+        return $this->render('halterophilie/definitions/index.html.twig');
     }
 }

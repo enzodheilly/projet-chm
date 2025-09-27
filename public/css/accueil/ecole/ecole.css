@@ -1,0 +1,242 @@
+/* School Section */
+.school-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+    .school-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.school-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.school-subtitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.school-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.order-1 {
+    order: 1;
+}
+
+.order-2 {
+    order: 2;
+}
+
+@media (min-width: 1024px) {
+    .lg-order-1 {
+        order: 1;
+    }
+
+    .lg-order-2 {
+        order: 2;
+    }
+}
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+    .programs-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.program-card {
+    background: var(--gradient-card);
+    border: 1px solid hsl(220 13% 20% / 0.5);
+    border-radius: var(--radius);
+    transition: var(--transition-smooth);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.program-card:hover {
+    border-color: hsl(14 100% 57% / 0.3);
+}
+
+.program-header {
+    text-align: center;
+    padding: 1.5rem 1.5rem 1rem;
+}
+
+.program-icon {
+    width: 4rem;
+    height: 4rem;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    transition: var(--transition-smooth);
+}
+
+.program-card:hover .program-icon {
+    transform: scale(1.1);
+}
+
+.program-icon .icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--primary-foreground);
+}
+
+.program-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.program-age {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.program-content {
+    padding: 0 1.5rem 1.5rem;
+    flex: 1;
+}
+
+.program-description {
+    color: var(--muted-foreground);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.program-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.program-feature {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.feature-bullet {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--primary);
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+.schedule-card {
+    background: var(--gradient-card);
+    border: 1px solid hsl(220 13% 20% / 0.5);
+    border-radius: var(--radius);
+}
+
+.schedule-header {
+    text-align: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.schedule-icon {
+    width: 4rem;
+    height: 4rem;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.schedule-icon .icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--primary-foreground);
+}
+
+.schedule-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.schedule-content {
+    padding: 1.5rem;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .schedule-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .schedule-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.schedule-day {
+    background: hsl(220 13% 9% / 0.5);
+    border-radius: var(--radius);
+    padding: 1rem;
+    border: 1px solid hsl(220 13% 20% / 0.3);
+}
+
+.day-name {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.session-info {
+    border-left: 2px solid hsl(14 100% 57% / 0.3);
+    padding-left: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.session-info:last-child {
+    margin-bottom: 0;
+}
+
+.session-time {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.session-type {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.25rem;
+}
+
+.session-level {
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+}

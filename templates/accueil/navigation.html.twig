@@ -1,0 +1,415 @@
+{# navigation.html.twig #}
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+	<style>
+
+		.info-banner {
+			width: 100%;
+			background: linear-gradient(90deg, #f97316, #ec4899);
+			color: white;
+			text-align: center;
+			font-weight: 600;
+			padding: 0.5rem 0;
+			font-size: 0.9rem;
+		}
+
+		/* Navigation */
+		.nav-fixed {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 1000;
+			background: #fff;
+			color: black;
+			backdrop-filter: blur(8px);
+			border-bottom: 1px solid #e5e7eb;
+			display: flex;
+			flex-direction: column;
+			transition: none;
+		}
+
+		.nav-content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 2rem;
+			height: 5rem;
+		}
+
+		.nav-fixed.scrolled .nav-link {
+			padding: 0.5rem 1rem;
+		}
+
+		.nav-logo {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-start;
+			margin-right: 1.5rem;
+			gap: -2rem;
+		}
+
+		.logo-title {
+			font-size: 120px;
+			transform: scaleX(1) scaleY(1.7);
+			line-height: 1;
+			font-weight: 600;
+			color: black;
+		}
+
+		.logo-subtitle {
+			font-size: 0.875rem;
+			color: var(--muted-foreground);
+		}
+
+		.logo-rectangle {
+			width: auto;
+			height: 4rem;
+			background: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			border-radius: 0.5rem;
+			margin-bottom: 0.15rem;
+			padding: 0 1rem; /* ajoute un peu d'air autour */
+			margin-right: 0.5rem;
+		}
+
+		.logo-rectangle img.logo-title {
+			height: 190%; /* prend toute la hauteur du conteneur */
+			width: auto; /* garde le ratio */
+			object-fit: contain;
+			display: block;
+			transform: scaleX(1.2); /* ✅ étire un peu en largeur */
+			margin-left: -110px;
+		}
+
+		.nav-desktop {
+			display: none;
+			align-items: center;
+			gap: 0.25rem;
+		}
+
+		@media(min-width: 768px) {
+			.nav-desktop {
+				display: flex;
+			}
+		}
+
+		.nav-link {
+			padding: 0.5rem 0.75rem;
+			font-size: 0.875rem;
+			color: black;
+			text-decoration: none;
+			border-radius: var(--radius);
+			transition: var(--transition-smooth);
+		}
+
+		.nav-link:hover {
+			color: #f97316;
+		}
+
+		.section a.nav-link:hover {
+			background: none;
+			color: black;
+		}
+
+		.nav-desktop {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+
+		/* Bloc gauche et droit */
+		.nav-links-right {
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+		}
+
+		.nav-links-left {
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+			margin-right: 2rem; /* ✅ décale tout le bloc gauche */
+		}
+
+		/* Bouton Connexion */
+		.btn-connexion {
+			background-color: #0d0d0d;
+			color: white;
+			padding: 0.5rem 1rem;
+			border-radius: 0.5rem;
+			position: relative;
+			overflow: hidden;
+			transition: 0.3s;
+			text-decoration: none;
+		}
+
+		.btn-connexion::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: -75%;
+			width: 50%;
+			height: 100%;
+			background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+			transform: skewX(-25deg);
+			animation: shine 3s infinite; /* animation continue */
+		}
+
+		.btn-connexion:hover::before {
+			animation: shine 1s forwards;
+		}
+
+		.btn-connexion:hover {
+			background-color: #f97316;
+			color: white;
+		}
+
+		@keyframes shine {
+			0% {
+				left: -75%;
+			}
+			100% {
+				left: 125%;
+			}
+		}
+		.divider {
+			width: 2px;
+			height: 2.3rem;
+			background-color: black; /* ou var(--foreground) si tu veux garder la couleur de ton thème */
+			margin: 0 0.75rem;
+		}
+
+		/* Logos réseaux sociaux */
+		.social-icon {
+			width: 1.5rem;
+			height: 1.5rem;
+			object-fit: contain;
+		}
+
+		.nav-link {
+			position: relative;
+			padding: 0.5rem 1rem;
+			color: black;
+			text-decoration: none;
+			border-radius: var(--radius);
+			transition: var(--transition-smooth);
+		}
+
+		/* Dropdown structure */
+		.dropdown {
+			position: relative;
+		}
+
+		.dropdown-toggle::after {
+			content: '▾';
+			margin-left: 0.25rem;
+			font-size: 0.75rem;
+			display: inline-block;
+			transition: transform 0.3s ease;
+			color: orange;
+		}
+
+		.dropdown:hover > .dropdown-toggle::after {
+			transform: rotate(180deg);
+		}
+
+		.dropdown-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: white;
+			padding: 0.5rem 0;
+			border-radius: var(--radius);
+			min-width: 220px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			z-index: 100;
+		}
+
+		.dropdown:hover > .dropdown-menu {
+			display: block;
+		}
+
+		.dropdown-item {
+			display: block;
+			padding: 0.5rem 1rem;
+			color: var(--foreground);
+			text-decoration: none;
+			transition: var(--transition-smooth);
+			border-radius: var(--radius);
+		}
+
+		.dropdown-item:hover {
+			color: #f97316;
+		}
+		.dropdown-toggle.active::after {
+			transform: rotate(180deg);
+		}
+
+		/* Mobile */
+		.nav-mobile-toggle {
+			display: block;
+		}
+
+		@media(min-width: 768px) {
+			.nav-mobile-toggle {
+				display: none;
+			}
+		}
+
+		.nav-mobile {
+			padding-bottom: 1rem;
+		}
+
+		.nav-mobile-content {
+			padding: 0.5rem;
+			background: hsl(220 13% 12% / 0.95);
+			backdrop-filter: blur(8px);
+			border-radius: var(--radius);
+			margin-bottom: 1rem;
+		}
+
+		.nav-mobile-link {
+			display: block;
+			width: 100%;
+			padding: 0.75rem;
+			color: var(--foreground);
+			text-decoration: none;
+			border-radius: var(--radius);
+			transition: var(--transition-smooth);
+		}
+
+		.nav-mobile-link:hover {
+			color: var(--primary);
+			background: hsl(14 100% 57% / 0.1);
+		}
+
+		@media(max-width: 767px) {
+			.nav-desktop {
+				display: none;
+			}
+		}
+
+		/* Cacher complètement le dropdown sur mobile */
+		@media(max-width: 767px) {
+			.dropdown {
+				display: none !important;
+			}
+		}
+	</style>
+
+{% endblock %}
+
+{% block body %}
+
+	<nav
+		class="nav-fixed">
+		<!-- Bannière défilante -->
+		<div class="info-banner">
+			🏋️‍♂️ Circuit training exceptionnel le jeudi 25 septembre de 18h à 19h ! Venez nombreux !
+		</div>
+		<div class="container">
+			<div
+				class="nav-content">
+				<!-- Logo -->
+				<div
+					class="nav-logo">
+					<!-- Rectangle Logo -->
+					<div class="logo-rectangle">
+						<img src="{{ asset('images/logo-chm-saleux.png') }}" alt="CHM Saleux" class="logo-title"/>
+					</div>
+				</div>
+
+				<!-- Desktop Navigation -->
+				<!-- Desktop Navigation -->
+				<div
+					class="nav-desktop">
+					<!-- Liens à gauche -->
+					<div class="nav-links-left">
+						<a href="{{ path('home') }}" class="nav-link">ACCUEIL</a>
+						<!-- Dropdown Le Club -->
+						<div class="dropdown">
+							<a href="#" class="nav-link dropdown-toggle">LE CLUB</a>
+							<div class="dropdown-menu">
+								<a href="{{ path('comite') }}" class="dropdown-item">Comité Directeur et Bureau</a>
+								<a href="{{ path('encadrants') }}" class="dropdown-item">L’équipe encadrante haltéro et musculation</a>
+							</div>
+						</div>
+						<!-- Dropdown Haltérophilie -->
+						<div class="dropdown">
+							<a href="#halterophilie" class="nav-link dropdown-toggle">HALTEROPHILIE</a>
+							<div class="dropdown-menu">
+								<a href="{{ path('halterophilie') }}" class="dropdown-item">Définitions</a>
+								<a href="{{ path('ecole') }}" class="dropdown-item">École d'haltérophilie</a>
+								<a href="#" class="dropdown-item">Les athlètes</a>
+							</div>
+						</div>
+						<!-- Dropdown Compétitions -->
+						<div class="dropdown">
+							<a href="#" class="nav-link dropdown-toggle">COMPETITIONS</a>
+							<div class="dropdown-menu">
+								<a href="#resultats" class="dropdown-item">Résultats</a>
+								<a href="#photos" class="dropdown-item">Photos</a>
+							</div>
+						</div>
+						<a href="#footer" class="nav-link">CONTACT</a>
+					</div>
+
+					<!-- Bloc de droite : Connexion + logos -->
+					<!-- Bloc de droite : Connexion + logos -->
+					<div class="nav-links-right">
+						<a href="#" class="btn-connexion">Connexion</a>
+						<!-- Séparateur vertical -->
+						<div class="divider"></div>
+						<div class="social-links">
+							<a href="https://instagram.com/chmsaleux" target="_blank" class="instagram">
+								<i class="fa-brands fa-instagram"></i>
+							</a>
+							<a href="https://facebook.com/chmsaleux1" target="_blank" class="facebook">
+								<i class="fa-brands fa-facebook"></i>
+							</a>
+							<a href="#" target="_blank" class="instagram">
+								<i class="fa-brands fa-tiktok"></i>
+							</a>
+							<a href="https://youtube.com/@chmsaleux4431" target="_blank" class="instagram">
+								<i class="fa-brands fa-youtube"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Mobile menu button -->
+					<div class="nav-mobile-toggle">
+						<button id="mobile-menu-btn" class="btn-icon" aria-label="Menu">
+							<i data-lucide="menu" class="menu-icon"></i>
+							<i data-lucide="x" class="close-icon hidden"></i>
+						</button>
+					</div>
+				</div>
+				<!-- Mobile Navigation -->
+				<div id="mobile-menu" class="nav-mobile hidden">
+					<div class="nav-mobile-content">
+						<a href="#accueil" class="nav-mobile-link">Accueil</a>
+						<!-- Dropdown mobile -->
+						<div class="mobile-dropdown">
+							<button class="mobile-dropdown-btn">Le Club</button>
+							<div class="mobile-dropdown-menu hidden">
+								<a href="#comite" class="nav-mobile-link">Comité Directeur et Bureau</a>
+								<a href="#encadrants" class="nav-mobile-link">L’équipe encadrante haltéro et musculation</a>
+							</div>
+						</div>
+						<a href="#ecole" class="nav-mobile-link">École</a>
+						<a href="#competitions" class="nav-mobile-link">Compétitions</a>
+						<a href="#infos" class="nav-mobile-link">Infos Pratiques</a>
+						<a href="#contact" class="nav-mobile-link">Contact</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+	{% endblock %}
