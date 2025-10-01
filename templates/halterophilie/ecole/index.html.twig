@@ -1,50 +1,227 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/halterophilie/ecole/ecole.css') }}">
-{% endblock %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/halterophilie/ecole/ecole.css') }}">
 
-{% block body %}
+	<style>:root
+	{
+		--primary: hsl(25, 90%, 50%);
+		--secondary: hsl(220, 13%, 18%);
+		--background: #ffffff;
+		--foreground: rgba(0, 0, 0, 0.85);
+		--card-bg: rgba(245, 245, 245, 0.9);
+		--shadow-color: rgba(0, 0, 0, 0.08);
+		--font-heading: 'Poppins', sans-serif;
+		--font-body: 'Inter', sans-serif;
+	}
 
-  <section class="container">
-    <!-- Hero -->
-    <div class="hero">
-      <h1>🏋️‍♂️ L'école d'haltérophilie</h1>
-    </div>
+	/* ===== Body ===== */
+	body {
+		font-family: var(--font-body);
+		background: var(--background);
+		color: var(--foreground);
+		line-height: 1.7;
+	}
 
-    <!-- Présentation -->
-    <div class="intro">
-      <div class="intro-text">
-        <p>Bienvenue à l’école d’haltérophilie ! Ici, nous formons des sportifs de tous niveaux, du débutant à l’athlète confirmé. Notre objectif est de transmettre la passion de l’haltérophilie à travers un encadrement professionnel et une ambiance conviviale.</p>
-        <ul>
-          <li>Apprentissage des mouvements olympiques (arraché, épaulé-jeté)</li>
-          <li>Encadrement par des coachs diplômés</li>
-          <li>Séances adaptées aux enfants, ados et adultes</li>
-          <li>Suivi personnalisé pour la progression et la performance</li>
-        </ul>
-      </div>
-      <div class="intro-img">
-        <img src="{{ asset('images/halterophilie1.jpg') }}" alt="Salle d'haltérophilie" />
-      </div>
-    </div>
+	/* ===== Hero ===== */
+	.hero {
+		height: 350px;
+		background: linear-gradient(120deg, var(--primary), var(--secondary));
+		border-radius: 25px;
+		margin-bottom: 60px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		color: white;
+		box-shadow: 0 12px 28px var(--shadow-color);
+		overflow: hidden;
+		position: relative;
+	}
 
-    <!-- Card fonctionnement -->
-    <div class="card">
-      <h2>ℹ️ Comment fonctionne l’école ?</h2>
-      <p>
-        Pour l’apprentissage de la pratique de l’haltérophilie et l’éducation posturale, une école est mise en place le <strong>lundi, mercredi et vendredi de 17h00 à 19h00</strong> afin d’initier dès l’âge de 8 ans aux mouvements de base de ce sport. Vous apprendrez la posture, la gestuelle et un plan d’entraînement adapté à votre initiation.
-      </p>
-      <p>
-        <strong>Pour les plus jeunes (8 à 13 ans)</strong>, des journées d’activités dites « challenges benj/minime » se dérouleront le samedi au cours de l’année. Ces journées comprennent des activités interclubs ludiques (triple saut, lancé de médecine-ball, saut en hauteur, course, …) ainsi qu’une épreuve d’haltérophilie (arraché et épaulé-jeté).
-      </p>
-      <p>
-        Ces challenges ne privilégient pas la charge maximale mais mettent l’accent sur l’aspect ludique et collectif du sport. C’est aussi l’occasion pour les jeunes de <strong>partager et s’amuser avec d’autres clubs de la région</strong>.
-      </p>
-      <p>
-        Le CHM insiste sur la <strong>qualité du geste et non sur la performance</strong>, puisqu’à cet âge, la technique est la priorité absolue. 👉
-        <a href="{{ path('halterophilie') }}">En savoir plus sur l’haltérophilie</a>.
-      </p>
-    </div>
-  </section>
-{% endblock %}
+	.hero h1 {
+		font-family: var(--font-heading);
+		font-size: 3rem;
+		font-weight: 900;
+		letter-spacing: 1px;
+		opacity: 0.95;
+		text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+		transition: all 0.5s ease;
+	}
+
+	.hero p {
+		font-size: 1.2rem;
+		margin-top: 12px;
+		font-weight: 500;
+		opacity: 0.9;
+	}
+
+	/* ===== Sections ===== */
+	.section {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 40px;
+		margin-bottom: 60px;
+		align-items: center;
+		padding: 0 10px;
+	}
+
+	.section .text {
+		flex: 1 1 50%;
+		font-size: 1rem;
+	}
+
+	.section .text ul {
+		margin-top: 15px;
+		padding-left: 20px;
+	}
+
+	.section .text ul li {
+		margin-bottom: 10px;
+		font-weight: 500;
+	}
+
+	.section .image {
+		flex: 1 1 45%;
+		text-align: center;
+	}
+
+	.section .image img {
+		width: 100%;
+		border-radius: 25px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+		transition: transform 0.4s ease, box-shadow 0.4s ease;
+	}
+
+	.section .image img:hover {
+		transform: scale(1.05) rotate(-1deg);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+	}
+
+	/* ===== Cards ===== */
+	.card {
+		background: var(--card-bg);
+		border-radius: 25px;
+		box-shadow: 0 12px 28px var(--shadow-color);
+		padding: 35px;
+		margin-bottom: 50px;
+		transition: transform 0.4s ease, box-shadow 0.4s ease;
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	.card:hover {
+		transform: translateY(-10px) scale(1.02);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+	}
+
+	.card h2 {
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-size: 1.8rem;
+		color: var(--primary);
+		margin-bottom: 20px;
+		border-left: 6px solid var(--primary);
+		padding-left: 12px;
+		transition: all 0.3s ease;
+	}
+
+	.card h2:hover {
+		color: var(--secondary);
+	}
+
+	.card p {
+		color: rgba(0, 0, 0, 0.7);
+		margin-bottom: 15px;
+	}
+
+	/* ===== Animations ===== */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* ===== Responsive ===== */
+	@media(max-width: 1024px) {
+		.hero h1 {
+			font-size: 2.5rem;
+		}
+		.section {
+			gap: 30px;
+		}
+	}
+
+	@media(max-width: 768px) {
+		.hero {
+			height: 280px;
+		}
+		.hero h1 {
+			font-size: 2rem;
+		}
+		.section {
+			flex-direction: column;
+			gap: 25px;
+		}
+		.section .text,
+		.section .image {
+			flex: 1 1 100%;
+		}
+		.card {
+			padding: 25px;
+			margin: 20px;
+		}
+	}
+</style>{% endblock %}{% block body %}
+
+<section
+	class="container">
+	<!-- Hero -->
+	<div class="hero">
+		<h1>🏋️‍♂️ L'école d'haltérophilie</h1>
+	</div>
+
+	<!-- Présentation -->
+	<div class="intro">
+		<div class="intro-text">
+			<p>Bienvenue à l’école d’haltérophilie ! Ici, nous formons des sportifs de tous niveaux, du débutant à l’athlète confirmé. Notre objectif est de transmettre la passion de l’haltérophilie à travers un encadrement professionnel et une ambiance conviviale.</p>
+			<ul>
+				<li>Apprentissage des mouvements olympiques (arraché, épaulé-jeté)</li>
+				<li>Encadrement par des coachs diplômés</li>
+				<li>Séances adaptées aux enfants, ados et adultes</li>
+				<li>Suivi personnalisé pour la progression et la performance</li>
+			</ul>
+		</div>
+		<div class="intro-img">
+			<img src="{{ asset('images/halterophilie1.jpg') }}" alt="Salle d'haltérophilie"/>
+		</div>
+	</div>
+
+	<!-- Card fonctionnement -->
+	<div class="card">
+		<h2>ℹ️ Comment fonctionne l’école ?</h2>
+		<p>
+			Pour l’apprentissage de la pratique de l’haltérophilie et l’éducation posturale, une école est mise en place le
+			<strong>lundi, mercredi et vendredi de 17h00 à 19h00</strong>
+			afin d’initier dès l’âge de 8 ans aux mouvements de base de ce sport. Vous apprendrez la posture, la gestuelle et un plan d’entraînement adapté à votre initiation.
+		</p>
+		<p>
+			<strong>Pour les plus jeunes (8 à 13 ans)</strong>, des journées d’activités dites « challenges benj/minime » se dérouleront le samedi au cours de l’année. Ces journées comprennent des activités interclubs ludiques (triple saut, lancé de médecine-ball, saut en hauteur, course, …) ainsi qu’une épreuve d’haltérophilie (arraché et épaulé-jeté).
+		</p>
+		<p>
+			Ces challenges ne privilégient pas la charge maximale mais mettent l’accent sur l’aspect ludique et collectif du sport. C’est aussi l’occasion pour les jeunes de
+			<strong>partager et s’amuser avec d’autres clubs de la région</strong>.
+		</p>
+		<p>
+			Le CHM insiste sur la
+			<strong>qualité du geste et non sur la performance</strong>, puisqu’à cet âge, la technique est la priorité absolue. 👉
+			<a href="{{ path('halterophilie') }}">En savoir plus sur l’haltérophilie</a>.
+		</p>
+	</div>
+</section>{% endblock %}

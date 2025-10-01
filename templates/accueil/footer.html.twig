@@ -6,26 +6,352 @@
 {% endblock %}
 
 {% block body %}
-
 	<style>
-		/* Fond noir pour toute la section footer */
-		#footer {
-			background-color: #0d0d0d; /* noir pur */
-			color: white; /* pour rendre le texte lisible */
+		/* Footer Elegant Styles */
+		.footer-elegant {
+			position: relative;
+			margin-top: 0.6rem;
 		}
 
-		/* Si tu veux que les icônes soient bien visibles */
-		.contact-icon,
-		.title-icon,
-		.heart-icon,
-		.heart-small {
+		/* Footer Content */
+		.footer-elegant .footer-content {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			margin-bottom: 3rem;
+		}
+
+		@media(min-width: 768px) {
+			.footer-elegant .footer-content {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		@media(min-width: 1024px) {
+			.footer-elegant .footer-content {
+				grid-template-columns: 2fr 1fr 1fr 1fr;
+			}
+		}
+
+		/* Footer Section */
+		.footer-elegant .footer-section.footer-club {
+			grid-column: span 2;
+		}
+
+		/* Club Header */
+		.footer-elegant .club-header {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.footer-elegant .club-header .club-logo {
+			padding: 0.75rem;
+			border-radius: 1rem;
+		}
+
+		.footer-elegant .club-header .club-logo .club-icon {
+			width: 2rem;
+			height: 2rem;
 			color: white;
 		}
 
-		.club-logo-img {
-			max-height: 60px;
-			width: auto;
-			display: block;
+		.footer-elegant .club-header .club-info .club-name {
+			font-size: 1.5rem;
+			font-weight: 700;
+			color: white;
+			margin: 0;
+		}
+
+		.footer-elegant .club-header .club-info .club-subtitle {
+			color: #f97316;
+			font-size: 1.2rem;
+			font-weight: 500;
+			margin: 0;
+		}
+
+		/* Club Description */
+		.footer-elegant .club-description {
+			color: #d1d5db;
+			font-size: 1.125rem;
+			line-height: 1.6;
+			margin-bottom: 1.5rem;
+		}
+
+		/* Club Values */
+		.footer-elegant .club-values {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			color: #f97316;
+		}
+
+		.footer-elegant .club-values .heart-icon {
+			width: 1.25rem;
+			height: 1.25rem;
+			animation: pulse 2s infinite;
+		}
+
+		.footer-elegant .club-values .values-text {
+			font-size: 0.875rem;
+			font-weight: 500;
+		}
+
+		/* Footer Titles */
+		.footer-elegant .footer-title {
+			font-size: 1.125rem;
+			font-weight: 700;
+			color: white;
+			display: flex;
+			align-items: center;
+			margin-bottom: 1.5rem;
+		}
+
+		.footer-elegant .footer-title .title-icon {
+			width: 1.25rem;
+			height: 1.25rem;
+			color: #f97316;
+			margin-right: 0.5rem;
+		}
+
+		/* Links List */
+		.footer-elegant .links-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.footer-elegant .links-list .link-item {
+			margin-bottom: 0.75rem;
+		}
+
+		.footer-elegant .links-list .link-item .link {
+			color: #d1d5db;
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			transition: color 0.3s ease;
+		}
+
+		.footer-elegant .links-list .link-item .link:hover {
+			color: #f97316;
+		}
+
+		.footer-elegant .links-list .link-item .link .link-bullet {
+			width: 0.5rem;
+			height: 0.5rem;
+			background-color: #6b7280;
+			border-radius: 50%;
+			margin-right: 0.75rem;
+			transition: background-color 0.3s ease;
+		}
+
+		.footer-elegant .links-list .link-item .link:hover .link-bullet {
+			background-color: #f97316;
+		}
+
+		/* Contact Items */
+		.footer-elegant .contact-items .contact-item {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
+			margin-bottom: 0.75rem;
+			font-size: 0.875rem;
+		}
+
+		.footer-elegant .contact-items .contact-item .contact-icon {
+			width: 1rem;
+			height: 1rem;
+			color: #f97316;
+			margin-top: 0.125rem;
+			flex-shrink: 0;
+		}
+
+		.footer-elegant .contact-items .contact-item .contact-text {
+			color: #d1d5db;
+			line-height: 1.4;
+		}
+
+		/* Social Links */
+		.footer-elegant .social-links {
+			display: flex;
+			gap: 1rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.footer-elegant .social-links .social-link {
+			position: relative;
+			padding: 0.75rem;
+			border-radius: 0.75rem;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			transition: all 0.3s ease;
+			text-decoration: none;
+		}
+
+		.footer-elegant .social-links .social-link:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+
+		.footer-elegant .social-links .social-link.social-facebook:hover {
+			border-color: #3b82f6;
+			background: rgba(59, 130, 246, 0.2);
+		}
+
+		.footer-elegant .social-links .social-link.social-facebook:hover .social-icon {
+			color: #3b82f6;
+		}
+
+		.footer-elegant .social-links .social-link.social-instagram:hover {
+			border-color: #ec4899;
+			background: rgba(236, 72, 153, 0.2);
+		}
+
+		.footer-elegant .social-links .social-link.social-instagram:hover .social-icon {
+			color: #ec4899;
+		}
+
+		.footer-elegant .social-links .social-link .social-icon {
+			width: 1.5rem;
+			height: 1.5rem;
+			color: #d1d5db;
+			transition: color 0.3s ease;
+		}
+
+		.footer-elegant .social-links .social-link::before {
+			content: attr(title);
+			position: absolute;
+			bottom: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			background: #1f2937;
+			color: white;
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.75rem;
+			white-space: nowrap;
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 0.3s ease;
+			margin-bottom: 0.5rem;
+		}
+
+		.footer-elegant .social-links .social-link:hover::before {
+			opacity: 1;
+		}
+
+		/* Hours Card */
+		.footer-elegant .hours-card {
+			background: rgba(255, 255, 255, 0.05);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 1rem;
+			padding: 1rem;
+		}
+
+		.footer-elegant .hours-card .hours-title {
+			font-size: 0.875rem;
+			font-weight: 600;
+			color: white;
+			margin-bottom: 0.75rem;
+		}
+
+		.footer-elegant .hours-card .hours-list .hours-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 0.5rem;
+			font-size: 0.75rem;
+		}
+
+		.footer-elegant .hours-card .hours-list .hours-item:last-child {
+			margin-bottom: 0;
+		}
+
+		.footer-elegant .hours-card .hours-list .hours-item .hours-day {
+			color: #d1d5db;
+			font-weight: 500;
+		}
+
+		.footer-elegant .hours-card .hours-list .hours-item .hours-time {
+			color: #f97316;
+			font-weight: 600;
+		}
+
+		/* Footer Bottom */
+		.footer-elegant .footer-bottom {
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			padding-top: 2rem;
+		}
+
+		.footer-elegant .footer-bottom .bottom-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		@media(min-width: 768px) {
+			.footer-elegant .footer-bottom .bottom-content {
+				flex-direction: row;
+				justify-content: space-between;
+			}
+		}
+
+		.footer-elegant .footer-bottom .copyright {
+			color: #9ca3af;
+			font-size: 0.875rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.footer-elegant .footer-bottom .copyright .separator {
+			margin: 0 0.5rem;
+		}
+
+		.footer-elegant .footer-bottom .bottom-links {
+			display: flex;
+			align-items: center;
+			gap: 1.5rem;
+			font-size: 0.875rem;
+			color: #9ca3af;
+		}
+
+		.footer-elegant .footer-bottom .bottom-links .bottom-link {
+			color: #9ca3af;
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+
+		.footer-elegant .footer-bottom .bottom-links .bottom-link:hover {
+			color: #f97316;
+		}
+
+		.footer-elegant .footer-bottom .bottom-links .made-with {
+			display: flex;
+			align-items: center;
+			gap: 0.25rem;
+		}
+
+		.footer-elegant .footer-bottom .bottom-links .made-with .heart-small {
+			width: 1rem;
+			height: 1rem;
+			color: #ef4444;
+			animation: pulse 2s infinite;
+		}
+
+		/* Pulse Animation */
+		@keyframes pulse {
+
+			0,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.5;
+			}
 		}
 
 		/* Newsletter */
@@ -66,7 +392,6 @@
 			opacity: 0.85;
 		}
 
-		/* Message de succès animé */
 		.newsletter-success {
 			margin-top: 10px;
 			font-size: 0.9rem;
@@ -81,8 +406,35 @@
 			opacity: 1;
 			transform: translateY(0);
 		}
-	</style>
 
+		/* Footer Base */
+		#footer {
+			background-color: #0d0d0d;
+			color: white;
+		}
+
+		.contact-icon,
+		.title-icon,
+		.heart-icon,
+		.heart-small {
+			color: white;
+		}
+
+		.club-logo-img {
+			max-height: 60px;
+			width: auto;
+			display: block;
+		}
+
+		#footer,
+		.footer-elegant {
+			width: 100%;
+			max-width: 100%;
+			margin: 0;
+			padding: 3rem 5%;
+			/* ajuste selon le design */
+		}
+	</style>
 	<section id="footer" class="section bg-gradient-dark">
 		<div class="container">
 			<div
@@ -102,7 +454,7 @@
 								<div
 									class="club-logo">
 									<!-- Logo du club -->
-									<img src="{{ asset('images/chm-logo.png') }}" alt="Logo CHM Saleux" class="club-logo-img">
+									<img src="{{ asset('images/logo-chm-saleux.png') }}" alt="Logo CHM Saleux" class="club-logo-img">
 								</div>
 								<div class="club-info">
 									<h3 class="club-name">CHM Saleux</h3>
@@ -111,7 +463,7 @@
 							</div>
 							<p class="club-description">
 								Rejoignez notre communauté passionnée et découvrez un environnement 
-																																																																																																																																              convivial pour atteindre vos objectifs de forme et de bien-être.
+																																																																																																																																																																																																																																																																																																																																																																								              convivial pour atteindre vos objectifs de forme et de bien-être.
 							</p>
 							<div class="club-values">
 								<i data-lucide="heart" class="heart-icon"></i>
@@ -152,17 +504,19 @@
 								Recevez les dernières actualités, événements et infos du CHM directement dans votre boîte mail.
 							</p>
 
-							<form class="newsletter-form" id="newsletterForm" action="#" method="post">
+							<form class="newsletter-form" id="newsletterForm" action="{{ path('newsletter_subscribe') }}" method="post">
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('newsletter') }}">
 								<input type="email" name="email" placeholder="Votre adresse e-mail" required class="newsletter-input">
 								<button type="submit" class="newsletter-btn">S’abonner</button>
 							</form>
 
+
 							<!-- Message de succès (caché par défaut) -->
-							<div id="newsletterSuccess" class="newsletter-success">
+							<div id="newsletterSuccess" class="newsletter-success" style="display:none;">
 								✅ Merci ! Vous êtes abonné à notre newsletter.
 							</div>
+							<div id="newsletterError" style="color:red; margin-top:10px;"></div>
 						</div>
-
 
 					</div>
 
@@ -193,26 +547,48 @@
 	</section>
 
 	 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-	  const form = document.getElementById("newsletterForm");
-	  const success = document.getElementById("newsletterSuccess");
-	
-	  form.addEventListener("submit", (e) => {
-	    e.preventDefault();
-	
-	    // Affiche le message
-	    success.classList.add("show");
-	
-	    // Réinitialise le champ email
-	    form.reset();
-	
-	    // Fait disparaître le message après 3s
-	    setTimeout(() => {
-	      success.classList.remove("show");
-	    }, 3000);
-	  });
-	});
-	
-		
-						</script>
+														document.addEventListener('DOMContentLoaded', function() {
+														    const form = document.getElementById('newsletterForm');
+														    if (!form) return;
+														
+														    form.addEventListener('submit', function(event) {
+														        event.preventDefault();
+														
+														        const formData = new FormData(form);
+														
+														        fetch(form.action, {
+														            method: 'POST',
+														            body: formData,
+														            headers: {
+														                'X-Requested-With': 'XMLHttpRequest'
+														            }
+														        })
+														        .then(response => response.json())
+														        .then(data => {
+														            const successMsg = document.getElementById('newsletterSuccess');
+														            const errorMsg = document.getElementById('newsletterError');
+														
+														            if (data.success) {
+														                successMsg.style.display = 'block';
+														                setTimeout(() => successMsg.classList.add('show'), 10);
+														                setTimeout(() => {
+														                    successMsg.classList.remove('show');
+														                    setTimeout(() => successMsg.style.display = 'none', 600);
+														                }, 3000);
+														
+														                errorMsg.textContent = '';
+														                form.reset();
+														            } else {
+														                errorMsg.textContent = data.message || 'Une erreur est survenue, veuillez réessayer.';
+														            }
+														        })
+														        .catch(err => {
+														            const errorMsg = document.getElementById('newsletterError');
+														            errorMsg.textContent = 'Une erreur est survenue, veuillez réessayer.';
+														            console.error(err);
+														        });
+														    });
+														});
+														</script>
+
 {% endblock %}

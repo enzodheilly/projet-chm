@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr" data-theme="dark">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}CHM Saleux - Club d'Haltérophilie et de Musculation
+			{% endblock %}
+		</title>
+		<meta name="description" content="{% block description %}Club d'Haltérophilie et de Musculation de Saleux. École d'haltérophilie, formations tous niveaux, compétitions. Plus de 25 ans d'expérience dans la formation d'athlètes.{% endblock %}">
+		<meta name="keywords" content="haltérophilie, musculation, Saleux, club sportif, compétition, école haltérophilie, entraînement">
+		<meta
+		name="author" content="CHM Saleux">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CHM Saleux - Club d'Haltérophilie et de Musculation{% endblock %}</title>
-    <meta name="description" content="{% block description %}Club d'Haltérophilie et de Musculation de Saleux. École d'haltérophilie, formations tous niveaux, compétitions. Plus de 25 ans d'expérience dans la formation d'athlètes.{% endblock %}">
-    <meta name="keywords" content="haltérophilie, musculation, Saleux, club sportif, compétition, école haltérophilie, entraînement">
-    <meta name="author" content="CHM Saleux">
+		<!-- Open Graph -->
+		<meta property="og:title" content="{% block og_title %}CHM Saleux - Club d'Haltérophilie et de Musculation{% endblock %}">
+		<meta property="og:description" content="{% block og_description %}Rejoignez le CHM Saleux, club d'excellence en haltérophilie et musculation. École reconnue, entraîneurs diplômés, 25 ans d'expérience.{% endblock %}">
+		<meta property="og:type" content="website">
+		<meta
+		property="og:url" content="{{ app.request.uri }}">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="{% block og_title %}CHM Saleux - Club d'Haltérophilie et de Musculation{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Rejoignez le CHM Saleux, club d'excellence en haltérophilie et musculation. École reconnue, entraîneurs diplômés, 25 ans d'expérience.{% endblock %}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ app.request.uri }}">
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Icons (Lucide via CDN) -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css">
+		<!-- Lucide Icons -->
+		 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+		<link
+		rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css"> <!-- CSS -->
+		<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('css/accueil/nav/nav.css') }}"> {% block stylesheets %}{% endblock %}
+		</head>
 
+		<body class="bg-background text-foreground" style="margin:0; padding:0; width:100%;">
 
-    <!-- CSS -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+			{% include 'accueil/navigation.html.twig' %}
 
-    {% block stylesheets %}{% endblock %}
-</head>
+			{# Si tu veux un header plein écran, il doit être **hors du main** #}
+			{% block header %}{% endblock %}
 
-<body class="bg-background text-foreground">
-     {# {% include 'accueil/navigation.html.twig' %} #} <!-- commentée temporairement -->
+			<main style="margin:0; padding:0; width:100%;"> {% block body %}{% endblock %}
+				</main>
 
-    <main>
-        {% block body %}{% endblock %}
-    </main>
-
-    <!-- JavaScript -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    {% block javascripts %}{% endblock %}
-</body>
-
-</html>
+				<!-- JavaScript -->
+				 <script src="{{ asset('js/app.js') }}"></script>
+				{% block javascripts %}{% endblock %}
+			</body>
+		</html>

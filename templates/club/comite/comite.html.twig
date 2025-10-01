@@ -1,54 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/club/comite/comite.css') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/club/comite/comite.css') }}">
+
 {% endblock %}
 
 {% block body %}
 
-  <main class="section team-section">
-    <h2>Comité Directeur et Bureau</h2>
-    <p>Voici les membres du comité directeur et du bureau du CHM Saleux.</p>
+	<main class="section team-section">
+		<h2>Comité Directeur & Bureau</h2>
+		<p class="subtitle">Découvrez les personnes qui dirigent et font vivre le
+			<strong>CHM Saleux</strong>.</p>
 
-    <!-- Bureau -->
-    <h3>Bureau</h3>
-    <div class="team-grid bureau">
-      <div class="team-member">
-        <img src="{{ asset('images/membre1.jpg') }}" alt="Rohaut Florian" />
-        <h4>Rohaut Florian</h4>
-        <p>Président</p>
-      </div>
-      <div class="team-member">
-        <img src="{{ asset('images/membre2.jpg') }}" alt="Longuepee Laurent" />
-        <h4>Longuepee Laurent</h4>
-        <p>Trésorier</p>
-      </div>
-      <div class="team-member">
-        <img src="{{ asset('images/membre3.jpg') }}" alt="Bertrand Ema" />
-        <h4>Bertrand Ema</h4>
-        <p>Secrétaire</p>
-      </div>
-    </div>
+		<!-- Bureau -->
+		<h3>Bureau</h3>
+		<div class="team-grid bureau">
+			<div class="team-member">
+				<img src="{{ asset('images/membre1.jpg') }}" alt="Rohaut Florian"/>
+				<h4>Rohaut Florian</h4>
+				<p>Président</p>
+			</div>
+			<div class="team-member">
+				<img src="{{ asset('images/membre2.jpg') }}" alt="Longuepee Laurent"/>
+				<h4>Longuepee Laurent</h4>
+				<p>Trésorier</p>
+			</div>
+			<div class="team-member">
+				<img src="{{ asset('images/membre3.jpg') }}" alt="Bertrand Ema"/>
+				<h4>Bertrand Ema</h4>
+				<p>Secrétaire</p>
+			</div>
+		</div>
 
-    <!-- Membres -->
-    <h3>Membres</h3>
-    <div class="team-grid membres">
-      <div class="team-member">
-        <img src="{{ asset('images/membre4.jpg') }}" alt="Bertrand Aurore" />
-        <h4>Bertrand Aurore</h4>
-        <p>Membre</p>
-      </div>
-      <div class="team-member">
-        <img src="{{ asset('images/membre5.jpg') }}" alt="Witasse Valentine" />
-        <h4>Witasse Valentine</h4>
-        <p>Membre</p>
-      </div>
-      <div class="team-member">
-        <img src="{{ asset('images/membre6.jpg') }}" alt="Baticle Brice" />
-        <h4>Baticle Brice</h4>
-        <p>Membre</p>
-      </div>
-    </div>
-  </main>
+		<!-- Membres -->
+		<h3>Membres</h3>
+		<div class="team-grid membres">
+			<div class="team-member">
+				<img src="{{ asset('images/membre4.jpg') }}" alt="Bertrand Aurore"/>
+				<h4>Bertrand Aurore</h4>
+				<p>Membre</p>
+			</div>
+			<div class="team-member">
+				<img src="{{ asset('images/membre5.jpg') }}" alt="Witasse Valentine"/>
+				<h4>Witasse Valentine</h4>
+				<p>Membre</p>
+			</div>
+			<div class="team-member">
+				<img src="{{ asset('images/membre6.jpg') }}" alt="Baticle Brice"/>
+				<h4>Baticle Brice</h4>
+				<p>Membre</p>
+			</div>
+		</div>
+	</main>
+
+	{% include 'accueil/footer.html.twig' %}
 {% endblock %}

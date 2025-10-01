@@ -4,7 +4,7 @@
 	{{ parent() }}
 	<style>
 		body {
-			background-color: #0d0d0d;
+			background-color: #383838;
 			color: #fff;
 			margin: 0;
 			padding: 0;
@@ -147,51 +147,51 @@
 	</div>
 
 	 <script>
-																    const slider = document.querySelector('.slider');
-																    const slides = document.querySelectorAll('.slide');
-																    const leftBtn = document.querySelector('.nav-button.left');
-																    const rightBtn = document.querySelector('.nav-button.right');
-																
-																    let currentIndex = 0; // index du premier slide visible
-																    const slidesToShow = 3;
-																
-																    function updateSlider() {
-																        const slideWidth = slides[0].offsetWidth + 10; // largeur + margin
-																        // Limite currentIndex pour ne pas dépasser la dernière slide
-																        if(currentIndex > slides.length - slidesToShow) {
-																            currentIndex = slides.length - slidesToShow;
-																        }
-																        slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-																        slides.forEach((slide, i) => {
-																            slide.classList.remove('active');
-																            if (i >= currentIndex && i < currentIndex + slidesToShow) {
-																                slide.classList.add('active');
-																            }
-																        });
-																    }
-																
-																    rightBtn.addEventListener('click', () => {
-																        if (currentIndex < slides.length - slidesToShow) {
-																            currentIndex++;
-																            updateSlider();
-																        } else {
-																            // On est déjà à la fin : affiche la dernière slide correctement
-																            currentIndex = slides.length - slidesToShow;
-																            updateSlider();
-																        }
-																    });
-																
-																    leftBtn.addEventListener('click', () => {
-																        if (currentIndex > 0) {
-																            currentIndex--;
-																            updateSlider();
-																        }
-																    });
-																
-																    window.addEventListener('resize', updateSlider);
-																
-																    // Initialisation
-																    updateSlider();
-																</script>
+																		    const slider = document.querySelector('.slider');
+																		    const slides = document.querySelectorAll('.slide');
+																		    const leftBtn = document.querySelector('.nav-button.left');
+																		    const rightBtn = document.querySelector('.nav-button.right');
+																		
+																		    let currentIndex = 0; // index du premier slide visible
+																		    const slidesToShow = 3;
+																		
+																		    function updateSlider() {
+																		        const slideWidth = slides[0].offsetWidth + 10; // largeur + margin
+																		        // Limite currentIndex pour ne pas dépasser la dernière slide
+																		        if(currentIndex > slides.length - slidesToShow) {
+																		            currentIndex = slides.length - slidesToShow;
+																		        }
+																		        slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+																		        slides.forEach((slide, i) => {
+																		            slide.classList.remove('active');
+																		            if (i >= currentIndex && i < currentIndex + slidesToShow) {
+																		                slide.classList.add('active');
+																		            }
+																		        });
+																		    }
+																		
+																		    rightBtn.addEventListener('click', () => {
+																		        if (currentIndex < slides.length - slidesToShow) {
+																		            currentIndex++;
+																		            updateSlider();
+																		        } else {
+																		            // On est déjà à la fin : affiche la dernière slide correctement
+																		            currentIndex = slides.length - slidesToShow;
+																		            updateSlider();
+																		        }
+																		    });
+																		
+																		    leftBtn.addEventListener('click', () => {
+																		        if (currentIndex > 0) {
+																		            currentIndex--;
+																		            updateSlider();
+																		        }
+																		    });
+																		
+																		    window.addEventListener('resize', updateSlider);
+																		
+																		    // Initialisation
+																		    updateSlider();
+																		</script>
 
 {% endblock %}

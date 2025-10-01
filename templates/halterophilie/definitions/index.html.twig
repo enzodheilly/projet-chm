@@ -1,99 +1,506 @@
+{# templates/halterophilie.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/halterophilie/definitions/definitions.css') }}">
+{% block title %}Définitions Haltérophilie
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="{{ asset('css/accueil/footer/footer.css') }}">
+	<style>
+		/* Fond noir pour toute la section footer */
+		#footer {
+			background-color: #0d0d0d; /* noir pur */
+			color: white; /* pour rendre le texte lisible */
+		}
 
-  <section class="container">
-    <!-- Hero -->
-    <div class="hero">
-      <div>
-        <h1>📖 Découvrir l’haltérophilie</h1>
-        <p>Un guide simple pour comprendre les mouvements olympiques</p>
-      </div>
-    </div>
+		/* Si tu veux que les icônes soient bien visibles */
+		.contact-icon,
+		.title-icon,
+		.heart-icon,
+		.heart-small {
+			color: white;
+		}
 
-    <!-- Définition -->
-    <div class="card">
-      <h2>🏋️‍♂️ Qu’est-ce que l’haltérophilie ?</h2>
-      <p>
-        L’haltérophilie est un sport de force où l’objectif est de soulever une barre chargée de poids. Mais ce n’est pas seulement une question de puissance : il faut aussi <strong>vitesse, souplesse, coordination et équilibre</strong>.
-      </p>
-      <p>En compétition, deux mouvements sont jugés :</p>
-      <ul>
-        <li>
-          <strong>l’arraché</strong> → la barre est soulevée directement au-dessus de la tête en un seul geste,
-        </li>
-        <li>
-          <strong>l’épaulé-jeté</strong> → la barre est d’abord placée aux épaules, puis projetée au-dessus de la tête.
-        </li>
-      </ul>
-      <p>
-        Chaque athlète dispose de <strong>3 essais par mouvement</strong>. Le meilleur arraché + le meilleur épaulé-jeté donnent le <strong>total olympique</strong>. Le vainqueur est celui qui a le plus grand total dans sa catégorie de poids.
-      </p>
-      <p class="mb-0">
-        Aujourd’hui, c’est le seul sport de force présent aux <strong>Jeux Olympiques</strong>. Très pratiqué dans des pays comme la <strong>Grèce, Arménie, Turquie, Bulgarie, Russie, Iran, Chine</strong> ou encore en Europe de l’Est, il est reconnu mondialement pour son exigence et son spectacle.
-      </p>
-    </div>
+		.club-logo-img {
+			max-height: 60px;
+			width: auto;
+			display: block;
+		}
 
-    <!-- Mouvements -->
-    <div class="section-title">
-      <h2>⚡ Les deux mouvements olympiques</h2>
-    </div>
+		/* Newsletter */
+		.footer-newsletter {
+			max-width: 300px;
+		}
 
-    <!-- Arraché -->
-    <div class="card">
-      <h3>1️⃣ L’arraché</h3>
-      <p>
-        L’objectif est de lever la barre <strong>du sol jusqu’au-dessus de la tête</strong>
-        <u>en un seul mouvement</u>.
-      </p>
-      <ul>
-        <li>Les mains saisissent la barre en pronation (paumes vers soi).</li>
-        <li>La barre monte en longeant le corps.</li>
-        <li>L’athlète se place sous la barre (en flexion ou en fente) puis se redresse.</li>
-        <li>
-          Bras et jambes doivent être <strong>tendus et immobiles</strong> avant le signal final.
-        </li>
-      </ul>
-      <div class="image-center">
-        <img src="{{ asset('images/arache.jpg') }}" alt="Arraché en haltérophilie" />
-      </div>
-    </div>
+		.newsletter-text {
+			font-size: 0.9rem;
+			margin-bottom: 10px;
+			color: #ccc;
+		}
 
-    <!-- Épaulé-jeté -->
-    <div class="card">
-      <h3>2️⃣ L’épaulé-jeté</h3>
-      <p>
-        Ce mouvement se fait en <strong>deux étapes</strong> :
-      </p>
+		.newsletter-form {
+			display: flex;
+			gap: 8px;
+		}
 
-      <!-- Épaulé -->
-      <h4>👉 A) L’épaulé</h4>
-      <ul>
-        <li>La barre est saisie et tirée du sol jusqu’aux épaules.</li>
-        <li>Elle repose sur les clavicules ou les bras repliés.</li>
-        <li>L’athlète se redresse, pieds alignés et stables.</li>
-      </ul>
-      <div class="image-center">
-        <img src="{{ asset('images/epaule.jpg') }}" alt="Épaulé en haltérophilie" />
-      </div>
+		.newsletter-input {
+			flex: 1;
+			padding: 8px 10px;
+			border-radius: 6px;
+			border: none;
+			outline: none;
+		}
 
-      <!-- Jeté -->
-      <h4>👉 B) Le jeté</h4>
-      <ul>
-        <li>L’athlète fléchit les jambes et pousse la barre vers le haut.</li>
-        <li>
-          La barre est maintenue <strong>au-dessus de la tête, bras tendus</strong>.
-        </li>
-        <li>Il faut rester immobile jusqu’au signal des arbitres.</li>
-      </ul>
-      <div class="image-center">
-        <img src="{{ asset('images/jete.jpg') }}" alt="Jeté en haltérophilie" />
-      </div>
-    </div>
-  </section>
+		.newsletter-btn {
+			background: linear-gradient(90deg, #ff512f, #dd2476);
+			color: white;
+			border: none;
+			padding: 8px 14px;
+			border-radius: 6px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		.newsletter-btn:hover {
+			opacity: 0.85;
+		}
+
+		/* Message de succès animé */
+		.newsletter-success {
+			margin-top: 10px;
+			font-size: 0.9rem;
+			color: #4CAF50;
+			opacity: 0;
+			transform: translateY(10px);
+			transition: opacity 0.6s ease, transform 0.6s ease;
+			pointer-events: none;
+		}
+
+		.newsletter-success.show {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	</style>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700 &display=swap');
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			color: #1a1a1a;
+			scroll-behavior: smooth;
+			overflow-x: hidden;
+		}
+
+		/* Hero Header */
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 100vh;
+			background: linear-gradient(135deg, rgba(13, 71, 161, 0.85), rgba(25, 118, 210, 0.75)), url('https://cdn-s-www.bienpublic.com/images/13568E8A-2815-411C-AA44-5315EAD67B5D/NW_raw/toute-l-emotion-de-vicky-graillot-apres-avoir-valide-une-barre-a-123-kg-mercredi-a-chisinau-photo-ffhm-1744998886.jpg') center/cover no-repeat;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			color: white;
+			overflow: hidden;
+		}
+
+		.hero-content {
+			position: relative;
+			z-index: 1;
+			max-width: 900px;
+			padding: 2rem;
+			animation: fadeInUp 1.2s ease-out;
+		}
+
+		.hero-content h1 {
+			font-size: 4rem;
+			font-weight: 700;
+			margin-bottom: 1.5rem;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+		}
+
+		.hero-content p {
+			font-size: 1.4rem;
+			line-height: 1.9;
+			color: #e0e0e0;
+			font-weight: 300;
+			margin-bottom: 2.5rem;
+			letter-spacing: 0.5px;
+			transition: color 0.3s ease;
+		}
+		.hero-content p:hover {
+			color: #ffca28;
+		}
+
+		.cta-button {
+			display: inline-block;
+			padding: 1rem 2.5rem;
+			background: linear-gradient(135deg, #ffca28, #ffa000);
+			color: #1a1a1a;
+			font-weight: 600;
+			font-size: 1.1rem;
+			text-decoration: none;
+			border-radius: 50px;
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 6px 20px rgba(255, 202, 40, 0.4);
+		}
+		.cta-button:hover {
+			background: linear-gradient(135deg, #ffa000, #ff8f00);
+			transform: translateY(-3px);
+			box-shadow: 0 12px 30px rgba(255, 202, 40, 0.6);
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(40px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		main {
+			background: linear-gradient(to bottom, #ffffff, #f5f7fa);
+		}
+
+		.section {
+			padding: 6rem 5%;
+			display: flex;
+			align-items: center;
+			gap: 4rem;
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		.section:nth-child(even) {
+			background: linear-gradient(135deg, rgba(13, 71, 161, 0.03), rgba(25, 118, 210, 0.03));
+		}
+
+		.section-content {
+			flex: 1;
+			animation: fadeIn 0.8s ease-out;
+			text-align: left;
+		}
+
+		.section-content h2 {
+			font-size: 2.8rem;
+			font-weight: 700;
+			background: linear-gradient(135deg, #0d47a1, #1976d2);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			margin-bottom: 1.5rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		/* Paragraphes améliorés */
+		.section-content p,
+		.club-section > p,
+		.video-section p,
+		.club-card p {
+			font-size: 0.95rem; /* plus petit que 1.15rem */
+			line-height: 1.6; /* un peu plus compact */
+			color: #3a3a3a;
+			font-weight: 400;
+			margin-bottom: 1.2rem; /* réduit pour aérer moins */
+			letter-spacing: 0.4px;
+			transition: color 0.3s ease;
+		}
+
+
+		.section-content p:hover,
+		.club-section > p:hover,
+		.video-section p:hover,
+		.club-card p:hover {
+			color: #0d47a1;
+		}
+
+		.section-content p b,
+		.club-card p b {
+			color: #0d47a1;
+			font-weight: 600;
+		}
+
+		.section-content p em,
+		.club-card p em {
+			color: #1976d2;
+			font-style: italic;
+		}
+
+		.section-image {
+			flex: 1;
+			max-width: 550px;
+			padding: 0 1rem;
+		}
+
+		.section-image img {
+			width: 100%;
+			height: auto;
+			margin: 0;
+			display: block;
+			border-radius: 20px;
+			box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			object-fit: cover;
+		}
+
+		.section-image img:hover {
+			transform: scale(1.05) translateY(-10px);
+			box-shadow: 0 25px 60px rgba(13, 71, 161, 0.25);
+		}
+
+		.video-section {
+			padding: 6rem 5%;
+			background: linear-gradient(135deg, #0d47a1, #1976d2);
+			text-align: center;
+			color: white;
+		}
+
+		.video-section h2 {
+			font-size: 2.8rem;
+			font-weight: 700;
+			margin-bottom: 1rem;
+			text-transform: uppercase;
+		}
+
+		.video-container {
+			display: flex;
+			justify-content: center;
+			margin-top: 2rem;
+		}
+
+		.video-container iframe {
+			border-radius: 20px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+			border: 4px solid rgba(255, 255, 255, 0.1);
+		}
+
+		.club-section {
+			padding: 6rem 5%;
+			text-align: center;
+			background: linear-gradient(to bottom, #f5f7fa, #ffffff);
+		}
+
+		.club-section h2 {
+			font-size: 3rem;
+			font-weight: 700;
+			background: linear-gradient(135deg, #0d47a1, #1976d2);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			margin-bottom: 1.5rem;
+			text-transform: uppercase;
+		}
+
+		.club-cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 3rem;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.club-card {
+			background: white;
+			border-radius: 20px;
+			overflow: hidden;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.club-card:hover {
+			transform: translateY(-15px);
+			box-shadow: 0 20px 50px rgba(13, 71, 161, 0.2);
+		}
+
+		.club-card img {
+			width: 100%;
+			height: 250px;
+			object-fit: cover;
+			transition: transform 0.5s ease;
+		}
+
+		.club-card:hover img {
+			transform: scale(1.1);
+		}
+
+		@media(max-width: 1024px) {
+			.section {
+				gap: 3rem;
+			}
+			.hero-content h1 {
+				font-size: 3rem;
+			}
+		}
+
+		@media(max-width: 900px) {
+			.section {
+				flex-direction: column;
+				padding: 4rem 5%;
+			}
+			.section:nth-child(even) {
+				flex-direction: column;
+			}
+			.section-image {
+				max-width: 100%;
+			}
+			.hero-content h1 {
+				font-size: 2.5rem;
+			}
+			.section-content h2 {
+				font-size: 2.2rem;
+			}
+			.video-container iframe {
+				width: 100%;
+				max-width: 560px;
+			}
+		}
+
+		@media(max-width: 600px) {
+			.hero-content h1 {
+				font-size: 2rem;
+				letter-spacing: 1px;
+			}
+			.hero-content p {
+				font-size: 1.1rem;
+			}
+			.section {
+				padding: 3rem 5%;
+			}
+			.section-content h2 {
+				font-size: 1.8rem;
+			}
+			.section-content p {
+				font-size: 1rem;
+			}
+			.club-section h2 {
+				font-size: 2rem;
+			}
+			.club-cards {
+				gap: 2rem;
+			}
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}
+	</style>
+
+
+	<!-- Hero Header -->
+	<header class="hero-header">
+		<div class="hero-content">
+			<h1>Découvre l'Haltérophilie</h1>
+			<p>Force, puissance et discipline : une passion olympique ouverte à tous.</p>
+			<a href="#pourquoi" class="cta-button">Explorer</a>
+		</div>
+	</header>
+
+	<!-- CONTENU PRINCIPAL -->
+	<main>
+		<section id="pourquoi" class="section">
+			<div class="section-content">
+				<h2>Pourquoi pratiquer l'haltérophilie ?</h2>
+				<p>L’haltérophilie est un sport olympique fondé sur deux mouvements essentiels : l’arraché et l’épaulé-jeté. Pratiquée régulièrement, elle améliore les qualités physiques telles que la puissance explosive, cruciale dans de nombreux sports comme le rugby, le football ou le basketball.</p>
+				<p>Elle contribue également à développer la vitesse, l’agilité et la capacité de saut, tout en renforçant l’ensemble de la musculature pour une force globale du corps. Au-delà de l’aspect physique, l’haltérophilie forge la discipline mentale, la concentration et la persévérance. Atteindre ses objectifs de charges soulignera rapidement vos progrès, renforçant la confiance en soi et l’estime personnelle.</p>
+			</div>
+			<div class="section-image">
+				<img src="https://www.ffhaltero.fr/wp-content/uploads/2024/08/IMS0002-scaled.jpg" alt="Haltérophile">
+			</div>
+		</section>
+
+		<section id="bienfaits" class="section">
+			<div class="section-image">
+				<img src="https://www.ffhaltero.fr/wp-content/uploads/2024/08/IMS4771-scaled.jpg" alt="Bienfaits">
+			</div>
+			<div class="section-content">
+				<h2>Les bienfaits de l'haltérophilie</h2>
+				<p>L’haltérophilie favorise l’augmentation de la masse musculaire, car soulever des charges sollicite constamment les muscles et stimule leur hypertrophie. Pratiquée régulièrement, elle contribue à renforcer la densité osseuse, un atout majeur pour prévenir l’ostéoporose. Elle enseigne également les bonnes postures, les techniques de levage et de manutention, tout en tonifiant le dos et l’ensemble du corps.
+				</p>
+				<p>Les mouvements complexes, tels que l’arraché ou l’épaulé-jeté, améliorent la coordination, l’équilibre et la mobilité, tout en préservant la souplesse. Comme toute activité physique intense, l’haltérophilie stimule la production d’endorphines, réduisant le stress et favorisant une meilleure humeur.</p>
+			</div>
+		</section>
+
+		<section id="public" class="section">
+			<div class="section-content">
+				<h2>À qui s'adresse l'haltérophilie ?</h2>
+				<p>L’haltérophilie s’adresse à un public très large et peut se pratiquer dès l’âge de 7-8 ans, sous encadrement adapté pour apprendre correctement les techniques. À ce stade, l’accent est mis sur la précision et la sécurité, plutôt que sur la charge.</p>
+				<p>Adolescents et adultes y trouvent un moyen efficace de développer force et masse musculaire, ou d’améliorer leurs performances dans d’autres sports. La discipline est mixte : les femmes participent aux compétitions depuis 1987.
+				</p>
+				<p>
+					Même les personnes âgées peuvent en bénéficier grâce à des charges adaptées, favorisant le maintien de la masse musculaire, de la densité osseuse et de la mobilité, tout en réduisant les risques de chute. Avec un encadrement professionnel, l’haltérophilie est une discipline accessible, sûre et extrêmement bénéfique pour tous.</p>
+			</div>
+			<div class="section-image">
+				<img src="https://www.ffhaltero.fr/wp-content/uploads/2024/08/KOCHETOVA-MARGOT_FRA_W49A__IMS7633-scaled.jpg" alt="Public">
+			</div>
+		</section>
+
+		<section id="mouvements" class="section">
+			<div class="section-image">
+				<img src="https://www.ffhaltero.fr/wp-content/uploads/2024/08/Design-sans-titre-32.png" alt="Mouvements">
+			</div>
+			<div class="section-content">
+				<h2>Les mouvements</h2>
+				<p>L’haltérophilie est un exercice qui demande force, souplesse et dynamisme. Ce sport se décompose en deux mouvements qui sont respectivement :
+					<b>L’ARRACHÉ
+					</b>
+					(La barre est placée horizontalement devant les jambes de l’athlète. Celui-ci doit l’agripper, les mains en pronation et la tirer d’un seul mouvement, du plateau jusqu’au bout des bras tendus au-dessus de la tête. Le mouvement s’effectue, soit en fléchissant ou en fendant les jambes. La barre doit longer le corps d’un mouvement ininterrompu, sans qu’aucune autre partie que les pieds touche le plateau. Le poids soulevé doit être maintenu immobile, bras et jambes tendus, pieds alignés, jusqu’au signal de replacer la barre sur le plateau. Le retournement des poignets ne doit s’effectuer que lorsque la barre a dépassé la tête de l’athlète. L’athlète se redresse aussitôt qu’il le peut, en plaçant les pieds perpendiculairement au tronc et à l’haltère. Le signal doit être donné aussitôt que l’athlète est immobile de toutes les parties de son corps.) et
+					<b>l'Épaulé-jeté</b>
+					(L’épaulé-jeté se décompose en deux temps :
+																																																																																																																																							
+																																																																																																																																							D’abord avec l’épaulé : la barre est placée horizontalement devant les jambes de l’athlète. L’athlète soulève la barre jusqu’aux épaules. Ce mouvement s’effectue soit en fléchissant ou en soit fendant les jambes.
+																																																																																																																																							Ensuite avec le jeté : la barre repose sur les épaules de l’athlète. Celui-ci effectue une légère flexion des jambes et une poussée simultanée des bras pour amener la barre à bout de bras. Le poids soulevé doit être maintenu immobile, bras et jambes tendus, pieds alignés, jusqu’au signal de replacer la barre sur le plateau.).</p>
+			</div>
+		</section>
+
+		<section class="video-section">
+			<div>
+				<h2>Présentation vidéo</h2>
+				<p>Découvrez l'haltérophilie en images</p>
+			</div>
+			<div class="video-container">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/3gFWC6f8AjQ?si=SIt6J-OmMRdfRRJh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			</div>
+		</section>
+
+		<section class="club-section">
+			<h2>Notre Club et nos valeurs</h2>
+			<p>
+				Le CHM Saleux est un club d'excellence où chaque athlète, débutant ou confirmé, trouve sa place. Nous mettons l'accent sur la technique, la sécurité et l'esprit d'équipe.
+			</p>
+
+			<div class="club-cards">
+				<div class="club-card">
+					<img src="https://tse4.mm.bing.net/th/id/OIP.Vf4TJfzO8b9P3IiPevBf0wHaEJ?pid=Api&P=0&h=180" alt="Entraînement">
+					<p>Séances d'entraînement encadrées par des professionnels.</p>
+				</div>
+				<div class="club-card">
+					<img src="https://gazettesports.fr/wp-content/uploads/2023/01/Snapchat-2023914898.jpg" alt="Compétitions">
+					<p>Participation aux compétitions locales et nationales.</p>
+				</div>
+				<div class="club-card">
+					<img src="https://gazettesports.fr/wp-content/uploads/2022/07/5B235F31-BC6C-4E1E-A98B-DB950AD1E063-2048x1277.jpeg" alt="Équipe">
+					<p>Un esprit d'équipe et de camaraderie unique.</p>
+				</div>
+			</div>
+		</section>
+	</main>
+	{% include 'accueil/footer.html.twig' %}
 {% endblock %}
