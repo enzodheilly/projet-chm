@@ -319,7 +319,7 @@
 {% endblock %}
 
 {% block body %}
-	<section class="pricing-section">
+	<section id="abonnement" class="pricing-section">
 		<h1 class="pricing-title">
 			SELECTIONNE
 			<span class="highlight">L'ABONNEMENT</span>
@@ -328,7 +328,7 @@
 		<p class="pricing-subtitle">
 			Rejoins notre club et profite d’un espace complet pour tous tes entraînements :
 			<strong>Haltérophilie, Musculation, Cardio, Cours Collectifs, Coaching Personnalisé</strong>. 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										Choisis parmi nos forfaits annuels adaptés à tous les âges et niveaux, à partir de 50€ par an ! 💪
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																		Choisis parmi nos forfaits annuels adaptés à tous les âges et niveaux, à partir de 50€ par an ! 💪
 		</p>
 
 		<div class="promo-banner">
@@ -448,31 +448,31 @@
 	</section>
 
 	 <script>
-																																																																																																																			document.addEventListener("DOMContentLoaded", () => {
-																																																																																																																			  const cards = document.querySelectorAll(".pricing-card");
-																																																																																																																			  const section = document.querySelector(".pricing-section");
-																																																																																																																			
-																																																																																																																			  const observer = new IntersectionObserver((entries, observer) => {
-																																																																																																																			    entries.forEach(entry => {
-																																																																																																																			      if (entry.isIntersecting) {
-																																																																																																																			        // Première carte : affichée directement
-																																																																																																																			        cards[0].style.opacity = "1";
-																																																																																																																			        cards[0].style.transform = "translateY(0)";
-																																																																																																																			
-																																																																																																																			        // Les autres : déclenchent leur animation
-																																																																																																																			        for (let i = 1; i < cards.length; i++) {
-																																																																																																																			          cards[i].classList.add("animate");
-																																																																																																																			        }
-																																																																																																																			
-																																																																																																																			        // Stoppe l’observer après déclenchement
-																																																																																																																			        observer.unobserve(section);
-																																																																																																																			      }
-																																																																																																																			    });
-																																																																																																																			  }, { threshold: 0.2 }); // déclenche quand 20% de la section est visible
-																																																																																																																			
-																																																																																																																			  observer.observe(section);
-																																																																																																																			});
-																																																																																																																			</script>
+																																																																																																																					document.addEventListener("DOMContentLoaded", () => {
+																																																																																																																					  const cards = document.querySelectorAll(".pricing-card");
+																																																																																																																					  const section = document.querySelector(".pricing-section");
+																																																																																																																					
+																																																																																																																					  const observer = new IntersectionObserver((entries, observer) => {
+																																																																																																																					    entries.forEach(entry => {
+																																																																																																																					      if (entry.isIntersecting) {
+																																																																																																																					        // Première carte : affichée directement
+																																																																																																																					        cards[0].style.opacity = "1";
+																																																																																																																					        cards[0].style.transform = "translateY(0)";
+																																																																																																																					
+																																																																																																																					        // Les autres : déclenchent leur animation
+																																																																																																																					        for (let i = 1; i < cards.length; i++) {
+																																																																																																																					          cards[i].classList.add("animate");
+																																																																																																																					        }
+																																																																																																																					
+																																																																																																																					        // Stoppe l’observer après déclenchement
+																																																																																																																					        observer.unobserve(section);
+																																																																																																																					      }
+																																																																																																																					    });
+																																																																																																																					  }, { threshold: 0.2 }); // déclenche quand 20% de la section est visible
+																																																																																																																					
+																																																																																																																					  observer.observe(section);
+																																																																																																																					});
+																																																																																																																					</script>
 
 
 {% endblock %}

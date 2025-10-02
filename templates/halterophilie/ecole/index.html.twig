@@ -1,227 +1,361 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('css/halterophilie/ecole/ecole.css') }}">
+{% block title %}École d'Haltérophilie
+{% endblock %}
 
-	<style>:root
-	{
-		--primary: hsl(25, 90%, 50%);
-		--secondary: hsl(220, 13%, 18%);
-		--background: #ffffff;
-		--foreground: rgba(0, 0, 0, 0.85);
-		--card-bg: rgba(245, 245, 245, 0.9);
-		--shadow-color: rgba(0, 0, 0, 0.08);
-		--font-heading: 'Poppins', sans-serif;
-		--font-body: 'Inter', sans-serif;
-	}
+{% block body %}
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700 &display=swap');
 
-	/* ===== Body ===== */
-	body {
-		font-family: var(--font-body);
-		background: var(--background);
-		color: var(--foreground);
-		line-height: 1.7;
-	}
-
-	/* ===== Hero ===== */
-	.hero {
-		height: 350px;
-		background: linear-gradient(120deg, var(--primary), var(--secondary));
-		border-radius: 25px;
-		margin-bottom: 60px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		color: white;
-		box-shadow: 0 12px 28px var(--shadow-color);
-		overflow: hidden;
-		position: relative;
-	}
-
-	.hero h1 {
-		font-family: var(--font-heading);
-		font-size: 3rem;
-		font-weight: 900;
-		letter-spacing: 1px;
-		opacity: 0.95;
-		text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-		transition: all 0.5s ease;
-	}
-
-	.hero p {
-		font-size: 1.2rem;
-		margin-top: 12px;
-		font-weight: 500;
-		opacity: 0.9;
-	}
-
-	/* ===== Sections ===== */
-	.section {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 40px;
-		margin-bottom: 60px;
-		align-items: center;
-		padding: 0 10px;
-	}
-
-	.section .text {
-		flex: 1 1 50%;
-		font-size: 1rem;
-	}
-
-	.section .text ul {
-		margin-top: 15px;
-		padding-left: 20px;
-	}
-
-	.section .text ul li {
-		margin-bottom: 10px;
-		font-weight: 500;
-	}
-
-	.section .image {
-		flex: 1 1 45%;
-		text-align: center;
-	}
-
-	.section .image img {
-		width: 100%;
-		border-radius: 25px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-		transition: transform 0.4s ease, box-shadow 0.4s ease;
-	}
-
-	.section .image img:hover {
-		transform: scale(1.05) rotate(-1deg);
-		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-	}
-
-	/* ===== Cards ===== */
-	.card {
-		background: var(--card-bg);
-		border-radius: 25px;
-		box-shadow: 0 12px 28px var(--shadow-color);
-		padding: 35px;
-		margin-bottom: 50px;
-		transition: transform 0.4s ease, box-shadow 0.4s ease;
-		opacity: 0;
-		transform: translateY(30px);
-	}
-
-	.card:hover {
-		transform: translateY(-10px) scale(1.02);
-		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-	}
-
-	.card h2 {
-		font-family: var(--font-heading);
-		font-weight: 800;
-		font-size: 1.8rem;
-		color: var(--primary);
-		margin-bottom: 20px;
-		border-left: 6px solid var(--primary);
-		padding-left: 12px;
-		transition: all 0.3s ease;
-	}
-
-	.card h2:hover {
-		color: var(--secondary);
-	}
-
-	.card p {
-		color: rgba(0, 0, 0, 0.7);
-		margin-bottom: 15px;
-	}
-
-	/* ===== Animations ===== */
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
+		body {
+			font-family: 'Poppins', sans-serif;
+			color: #1a1a1a;
+			scroll-behavior: smooth;
+			background: #fafafa;
 		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
 
-	/* ===== Responsive ===== */
-	@media(max-width: 1024px) {
-		.hero h1 {
+		/* HERO */
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 90vh;
+			background: linear-gradient(135deg, rgba(13, 71, 161, 0.85), rgba(25, 118, 210, 0.75)), url('{{ asset("images/hero-gym.jpg") }}') center/cover no-repeat;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			color: white;
+		}
+		.hero-content {
+			max-width: 900px;
+			padding: 2rem;
+			animation: fadeInUp 1.2s ease-out;
+		}
+		.hero-content h1 {
+			font-size: 3.5rem;
+			font-weight: 700;
+			margin-bottom: 1.5rem;
+			text-transform: uppercase;
+			text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
+		}
+		.hero-content p {
+			font-size: 1.4rem;
+			margin-bottom: 2rem;
+			color: #f5f5f5;
+		}
+		.cta-button {
+			display: inline-block;
+			padding: 1rem 2.5rem;
+			background: linear-gradient(135deg, #ffca28, #ffa000);
+			color: #1a1a1a;
+			font-weight: 600;
+			font-size: 1.1rem;
+			text-decoration: none;
+			border-radius: 50px;
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 6px 20px rgba(255, 202, 40, 0.4);
+		}
+		.cta-button:hover {
+			transform: translateY(-4px);
+			box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(40px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* SECTIONS */
+		main {
+			background: linear-gradient(to bottom, #fff, #f7f7f7);
+		}
+		.section {
+			padding: 6rem 5%;
+			display: flex;
+			align-items: center;
+			gap: 3rem;
+			max-width: 1300px;
+			margin: 0 auto;
+		}
+		.section:nth-child(even) {
+			flex-direction: row-reverse;
+			background: linear-gradient(135deg, rgba(230,126,34,0.05), rgba(44,62,80,0.05));
+		}
+		.section-content {
+			flex: 1;
+		}
+		.section-content h2 {
 			font-size: 2.5rem;
+			font-weight: 700;
+			background: linear-gradient(135deg, #e67e22, #d35400);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			margin-bottom: 1.2rem;
 		}
-		.section {
-			gap: 30px;
+		.section-content p {
+			font-size: 1rem;
+			line-height: 1.7;
+			color: #444;
+			margin-bottom: 1rem;
 		}
-	}
+		.section-image {
+			flex: 1;
+		}
+		.section-image img {
+			width: 100%;
+			border-radius: 20px;
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+			object-fit: cover;
+		}
 
-	@media(max-width: 768px) {
-		.hero {
-			height: 280px;
+		/* TABLE */
+		.table-container {
+			padding: 5rem 5%;
+			text-align: center;
 		}
-		.hero h1 {
-			font-size: 2rem;
+		.table-container h2 {
+			font-size: 2.5rem;
+			margin-bottom: 2rem;
+			font-weight: 700;
+			color: #e67e22;
 		}
-		.section {
-			flex-direction: column;
-			gap: 25px;
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			overflow: hidden;
+			border-radius: 15px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+			background: #fff;
 		}
-		.section .text,
-		.section .image {
-			flex: 1 1 100%;
+		thead {
+			background: #e67e22;
+			color: white;
 		}
-		.card {
-			padding: 25px;
-			margin: 20px;
+		th,
+		td {
+			padding: 15px;
+			text-align: center;
 		}
-	}
-</style>{% endblock %}{% block body %}
+		tbody tr:nth-child(even) {
+			background: #f9f9f9;
+		}
 
-<section
-	class="container">
-	<!-- Hero -->
-	<div class="hero">
-		<h1>🏋️‍♂️ L'école d'haltérophilie</h1>
-	</div>
+		/* GALLERY */
+		.gallery {
+			padding: 6rem 5%;
+			background: #fff;
+			text-align: center;
+		}
+		.gallery h2 {
+			font-size: 2.5rem;
+			margin-bottom: 2.5rem;
+			color: #e67e22;
+		}
+		.gallery-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+		}
+		.gallery-grid img {
+			width: 100%;
+			height: 220px;
+			object-fit: cover;
+			border-radius: 15px;
+			transition: transform 0.3s ease;
+		}
+		.gallery-grid img:hover {
+			transform: scale(1.05);
+		}
 
-	<!-- Présentation -->
-	<div class="intro">
-		<div class="intro-text">
-			<p>Bienvenue à l’école d’haltérophilie ! Ici, nous formons des sportifs de tous niveaux, du débutant à l’athlète confirmé. Notre objectif est de transmettre la passion de l’haltérophilie à travers un encadrement professionnel et une ambiance conviviale.</p>
-			<ul>
-				<li>Apprentissage des mouvements olympiques (arraché, épaulé-jeté)</li>
-				<li>Encadrement par des coachs diplômés</li>
-				<li>Séances adaptées aux enfants, ados et adultes</li>
-				<li>Suivi personnalisé pour la progression et la performance</li>
-			</ul>
+		/* CTA */
+		.prices-link {
+			text-align: center;
+			padding: 4rem 2rem;
+			background: linear-gradient(135deg, #e67e22, #d35400);
+			color: white;
+		}
+		.prices-link a {
+			color: #fff;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+		.prices-link a:hover {
+			color: #ffeb99;
+		}
+
+		@media(max-width: 900px) {
+			.section {
+				flex-direction: column;
+				text-align: center;
+			}
+			.section:nth-child(even) {
+				flex-direction: column;
+			}
+			.section-image img {
+				max-width: 100%;
+			}
+			.hero-content h1 {
+				font-size: 2.3rem;
+			}
+		}
+	</style>
+
+	<!-- HERO -->
+	<header class="hero-header">
+		<div class="hero-content">
+			<h1>L'École d'Haltérophilie</h1>
+			<p>Toutes les infos sur nos entraînements, catégories et activités</p>
+			<a href="#entrainements" class="cta-button">Découvrir</a>
 		</div>
-		<div class="intro-img">
-			<img src="{{ asset('images/halterophilie1.jpg') }}" alt="Salle d'haltérophilie"/>
-		</div>
-	</div>
+	</header>
 
-	<!-- Card fonctionnement -->
-	<div class="card">
-		<h2>ℹ️ Comment fonctionne l’école ?</h2>
-		<p>
-			Pour l’apprentissage de la pratique de l’haltérophilie et l’éducation posturale, une école est mise en place le
-			<strong>lundi, mercredi et vendredi de 17h00 à 19h00</strong>
-			afin d’initier dès l’âge de 8 ans aux mouvements de base de ce sport. Vous apprendrez la posture, la gestuelle et un plan d’entraînement adapté à votre initiation.
-		</p>
-		<p>
-			<strong>Pour les plus jeunes (8 à 13 ans)</strong>, des journées d’activités dites « challenges benj/minime » se dérouleront le samedi au cours de l’année. Ces journées comprennent des activités interclubs ludiques (triple saut, lancé de médecine-ball, saut en hauteur, course, …) ainsi qu’une épreuve d’haltérophilie (arraché et épaulé-jeté).
-		</p>
-		<p>
-			Ces challenges ne privilégient pas la charge maximale mais mettent l’accent sur l’aspect ludique et collectif du sport. C’est aussi l’occasion pour les jeunes de
-			<strong>partager et s’amuser avec d’autres clubs de la région</strong>.
-		</p>
-		<p>
-			Le CHM insiste sur la
-			<strong>qualité du geste et non sur la performance</strong>, puisqu’à cet âge, la technique est la priorité absolue. 👉
-			<a href="{{ path('halterophilie') }}">En savoir plus sur l’haltérophilie</a>.
-		</p>
-	</div>
-</section>{% endblock %}
+	<main>
+		<!-- SECTION 1 -->
+		<section id="entrainements" class="section">
+			<div class="section-content">
+				<h2>🏆 Licences Compétition</h2>
+				<p>
+					<b>Catégories :</b>
+					U15, U17, U20, Séniors</p>
+				<p>
+					<b>Entraînements :</b>
+					Lundi, Mercredi, Vendredi de 17h00 à 19h00</p>
+				<p>Nos athlètes bénéficient d’un suivi personnalisé avec des programmes adaptés à chaque catégorie, incluant la technique, la force et la préparation mentale.</p>
+			</div>
+			<div class="section-image">
+				<img src="{{ asset('images/club/photo2.jpg') }}" alt="Compétition">
+			</div>
+		</section>
+
+		<!-- SECTION 2 -->
+		<section class="section">
+			<div class="section-content">
+				<h2>👶 U13 / Débutants</h2>
+				<p>
+					<b>Catégorie :</b>
+					Initiation pour jeunes et débutants</p>
+				<p>
+					<b>Entraînements :</b>
+					Lundi, Mercredi, Vendredi de 17h30 à 19h00</p>
+				<p>Cette section initie les plus jeunes aux bases de l’haltérophilie dans un environnement sécurisé et ludique, en mettant l’accent sur la posture et le respect des règles.</p>
+			</div>
+			<div class="section-image">
+				<img src="{{ asset('images/club/photo3.jpg') }}" alt="Débutants">
+			</div>
+		</section>
+
+		<!-- SECTION 3 -->
+		<section class="section">
+			<div class="section-content">
+				<h2>🎯 Licences Loisir</h2>
+				<p>
+					<b>Catégorie :</b>
+					École d’Haltérophilie et Initiation</p>
+				<p>
+					<b>Entraînements :</b>
+					Mercredi de 17h30 à 19h00</p>
+				<p>Idéal pour ceux qui souhaitent pratiquer l’haltérophilie de manière ponctuelle, en découvrant la discipline sans pression de compétition.</p>
+			</div>
+			<div class="section-image">
+				<img src="{{ asset('images/club/photo4.jpg') }}" alt="Loisir">
+			</div>
+		</section>
+
+		<!-- NOUVELLE SECTION: Nos Coachs -->
+		<section class="section">
+			<div class="section-content">
+				<h2>💪 Nos Coachs</h2>
+				<p>Notre équipe est composée de coachs diplômés et expérimentés, passionnés par la pédagogie et la performance. Chaque coach apporte un suivi personnalisé selon les besoins et les objectifs des élèves.</p>
+				<p>Ils supervisent la progression technique, la sécurité des mouvements et l’encouragement dans la pratique quotidienne.</p>
+			</div>
+			<div class="section-image">
+				<img src="{{ asset('images/club/photo5.jpg') }}" alt="Coach">
+			</div>
+		</section>
+
+		<!-- NOUVELLE SECTION: Nos Valeurs -->
+		<section class="section">
+			<div class="section-content">
+				<h2>🌟 Nos Valeurs</h2>
+				<p>Respect, discipline et persévérance sont les piliers de notre école. Nous valorisons le dépassement de soi dans un environnement bienveillant et stimulant.</p>
+				<p>Nous encourageons l’esprit d’équipe, le fair-play et la passion pour l’haltérophilie, quel que soit le niveau de pratique.</p>
+			</div>
+			<div class="section-image">
+				<img src="{{ asset('images/club/photo6.jpg') }}" alt="Valeurs">
+			</div>
+		</section>
+
+		<!-- TABLE -->
+		<div class="table-container">
+			<h2>Catégories d’âge</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Catégorie</th>
+						<th>Nom</th>
+						<th>Âge</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>U10</td>
+						<td>Benjamin</td>
+						<td>7 à 10 ans</td>
+					</tr>
+					<tr>
+						<td>U13</td>
+						<td>Minime</td>
+						<td>11 à 13 ans</td>
+					</tr>
+					<tr>
+						<td>U15</td>
+						<td>Cadet 1</td>
+						<td>14 à 15 ans</td>
+					</tr>
+					<tr>
+						<td>U17</td>
+						<td>Cadet 2</td>
+						<td>16 à 17 ans</td>
+					</tr>
+					<tr>
+						<td>U20</td>
+						<td>Junior</td>
+						<td>18 à 20 ans</td>
+					</tr>
+					<tr>
+						<td>Sénior</td>
+						<td>Sénior</td>
+						<td>21 à 34 ans</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<!-- GALLERY -->
+		<div class="gallery">
+			<h2>Galerie photos</h2>
+			<div class="gallery-grid">
+				<img src="{{ asset('images/club/photo1.jpg') }}" alt="Salle">
+				<img src="{{ asset('images/club/photo2.jpg') }}" alt="Entraînement">
+				<img src="{{ asset('images/club/photo3.jpg') }}" alt="Compétition">
+				<img src="{{ asset('images/club/photo4.jpg') }}" alt="Club">
+				<img src="{{ asset('images/club/photo5.jpg') }}" alt="Coach">
+				<img src="{{ asset('images/club/photo6.jpg') }}" alt="Valeurs">
+			</div>
+		</div>
+
+		<!-- CTA -->
+		<div class="prices-link">
+			<p>👉 Consultez nos
+				<a href="{{ path('home') }}#abonnement">tarifs et abonnements</a>
+				pour plus d’infos.</p>
+		</div>
+	</main>
+	{% include 'accueil/footer.html.twig' %}
+{% endblock %}

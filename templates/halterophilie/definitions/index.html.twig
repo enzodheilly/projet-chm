@@ -6,81 +6,7 @@
 
 {% block body %}
 	<link rel="stylesheet" href="{{ asset('css/accueil/footer/footer.css') }}">
-	<style>
-		/* Fond noir pour toute la section footer */
-		#footer {
-			background-color: #0d0d0d; /* noir pur */
-			color: white; /* pour rendre le texte lisible */
-		}
 
-		/* Si tu veux que les icônes soient bien visibles */
-		.contact-icon,
-		.title-icon,
-		.heart-icon,
-		.heart-small {
-			color: white;
-		}
-
-		.club-logo-img {
-			max-height: 60px;
-			width: auto;
-			display: block;
-		}
-
-		/* Newsletter */
-		.footer-newsletter {
-			max-width: 300px;
-		}
-
-		.newsletter-text {
-			font-size: 0.9rem;
-			margin-bottom: 10px;
-			color: #ccc;
-		}
-
-		.newsletter-form {
-			display: flex;
-			gap: 8px;
-		}
-
-		.newsletter-input {
-			flex: 1;
-			padding: 8px 10px;
-			border-radius: 6px;
-			border: none;
-			outline: none;
-		}
-
-		.newsletter-btn {
-			background: linear-gradient(90deg, #ff512f, #dd2476);
-			color: white;
-			border: none;
-			padding: 8px 14px;
-			border-radius: 6px;
-			cursor: pointer;
-			transition: 0.3s;
-		}
-
-		.newsletter-btn:hover {
-			opacity: 0.85;
-		}
-
-		/* Message de succès animé */
-		.newsletter-success {
-			margin-top: 10px;
-			font-size: 0.9rem;
-			color: #4CAF50;
-			opacity: 0;
-			transform: translateY(10px);
-			transition: opacity 0.6s ease, transform 0.6s ease;
-			pointer-events: none;
-		}
-
-		.newsletter-success.show {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	</style>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700 &display=swap');
 
@@ -101,7 +27,7 @@
 		.hero-header {
 			position: relative;
 			width: 100%;
-			height: 100vh;
+			height: 90vh;
 			background: linear-gradient(135deg, rgba(13, 71, 161, 0.85), rgba(25, 118, 210, 0.75)), url('https://cdn-s-www.bienpublic.com/images/13568E8A-2815-411C-AA44-5315EAD67B5D/NW_raw/toute-l-emotion-de-vicky-graillot-apres-avoir-valide-une-barre-a-123-kg-mercredi-a-chisinau-photo-ffhm-1744998886.jpg') center/cover no-repeat;
 			display: flex;
 			justify-content: center;
