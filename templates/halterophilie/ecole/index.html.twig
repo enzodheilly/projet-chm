@@ -75,6 +75,10 @@
 		main {
 			background: linear-gradient(to bottom, #fff, #f7f7f7);
 		}
+		main + #footer {
+			margin-top: 0;
+		}
+
 		.section {
 			padding: 6rem 5%;
 			display: flex;
@@ -341,12 +345,12 @@
 		<div class="gallery">
 			<h2>Galerie photos</h2>
 			<div class="gallery-grid">
-				<img src="{{ asset('images/club/photo1.jpg') }}" alt="Salle">
-				<img src="{{ asset('images/club/photo2.jpg') }}" alt="Entraînement">
-				<img src="{{ asset('images/club/photo3.jpg') }}" alt="Compétition">
-				<img src="{{ asset('images/club/photo4.jpg') }}" alt="Club">
-				<img src="{{ asset('images/club/photo5.jpg') }}" alt="Coach">
-				<img src="{{ asset('images/club/photo6.jpg') }}" alt="Valeurs">
+				<img src="http://chm-saleux.fr/wp-content/uploads/2016/09/photo-salle-enti%C3%A8re.jpg" alt="Salle">
+				<img src="http://img.over-blog-kiwi.com/0/93/30/40/20150812/ob_8d8f6d_11816329-10205062943148547-88821196651.jpg" alt="Entraînement">
+				<img src="https://gazettesports.fr/wp-content/uploads/2021/11/IMG_20211106_190419-scaled.jpg" alt="Compétition">
+				<img src="https://gazettesports.fr/wp-content/uploads/2022/07/5B235F31-BC6C-4E1E-A98B-DB950AD1E063-2048x1277.jpeg" alt="Club">
+				<img src="https://chm-saleux.fr/wp-content/uploads/2021/04/HALTEROPHILIE-3e-Journee-de-Championnat-de-France-des-clubs-Gazette-Sports-Coralie-Sombret-29-768x512.jpg" alt="Coach">
+				<img src="https://tse2.mm.bing.net/th/id/OIP.s-qxLJNEc7GM6bMiKlFsFAHaIh?pid=Api&P=0&h=180" alt="Valeurs">
 			</div>
 		</div>
 
@@ -357,5 +361,5 @@
 				pour plus d’infos.</p>
 		</div>
 	</main>
-	{% include 'accueil/footer.html.twig' %}
+	{% include 'accueil/footer/footer.html.twig' %}
 {% endblock %}

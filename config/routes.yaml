@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+app_legal:
+    path: /mentions-legales
+    controller: App\Controller\PageController::legal
+
+app_privacy:
+    path: /confidentialite
+    controller: App\Controller\PageController::privacy

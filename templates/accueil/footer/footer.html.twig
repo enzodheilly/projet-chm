@@ -10,7 +10,7 @@
 		/* Footer Elegant Styles */
 		.footer-elegant {
 			position: relative;
-			margin-top: 0.6rem;
+			margin-top: 0;
 		}
 
 		/* Footer Content */
@@ -171,74 +171,6 @@
 		.footer-elegant .contact-items .contact-item .contact-text {
 			color: #d1d5db;
 			line-height: 1.4;
-		}
-
-		/* Social Links */
-		.footer-elegant .social-links {
-			display: flex;
-			gap: 1rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.footer-elegant .social-links .social-link {
-			position: relative;
-			padding: 0.75rem;
-			border-radius: 0.75rem;
-			border: 1px solid rgba(255, 255, 255, 0.2);
-			transition: all 0.3s ease;
-			text-decoration: none;
-		}
-
-		.footer-elegant .social-links .social-link:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-		}
-
-		.footer-elegant .social-links .social-link.social-facebook:hover {
-			border-color: #3b82f6;
-			background: rgba(59, 130, 246, 0.2);
-		}
-
-		.footer-elegant .social-links .social-link.social-facebook:hover .social-icon {
-			color: #3b82f6;
-		}
-
-		.footer-elegant .social-links .social-link.social-instagram:hover {
-			border-color: #ec4899;
-			background: rgba(236, 72, 153, 0.2);
-		}
-
-		.footer-elegant .social-links .social-link.social-instagram:hover .social-icon {
-			color: #ec4899;
-		}
-
-		.footer-elegant .social-links .social-link .social-icon {
-			width: 1.5rem;
-			height: 1.5rem;
-			color: #d1d5db;
-			transition: color 0.3s ease;
-		}
-
-		.footer-elegant .social-links .social-link::before {
-			content: attr(title);
-			position: absolute;
-			bottom: 100%;
-			left: 50%;
-			transform: translateX(-50%);
-			background: #1f2937;
-			color: white;
-			padding: 0.25rem 0.5rem;
-			border-radius: 0.25rem;
-			font-size: 0.75rem;
-			white-space: nowrap;
-			opacity: 0;
-			pointer-events: none;
-			transition: opacity 0.3s ease;
-			margin-bottom: 0.5rem;
-		}
-
-		.footer-elegant .social-links .social-link:hover::before {
-			opacity: 1;
 		}
 
 		/* Hours Card */
@@ -428,11 +360,23 @@
 
 		#footer,
 		.footer-elegant {
-			width: 100%;
-			max-width: 100%;
-			margin: 0;
-			padding: 3rem 5%;
-			/* ajuste selon le design */
+			position: relative;
+			margin-top: 0.6rem;
+			overflow: hidden; /* important pour contenir le logo */
+		}
+		.footer-elegant::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 10%;
+			transform: translateY(-50%);
+			background: url("{{ asset('images/logo.png') }}") no-repeat center;
+			background-size: 280px auto; /* ajuste la taille */
+			opacity: 0.07; /* fondu transparent */
+			width: 300px; /* largeur du logo */
+			height: 300px; /* hauteur du logo */
+			z-index: 0;
+			pointer-events: none; /* clics passent au travers */
 		}
 	</style>
 	<section id="footer" class="section bg-gradient-dark">
@@ -451,11 +395,7 @@
 						<!-- Club Info -->
 						<div class="footer-section footer-club">
 							<div class="club-header">
-								<div
-									class="club-logo">
-									<!-- Logo du club -->
-									<img src="{{ asset('images/logo-chm-saleux.png') }}" alt="Logo CHM Saleux" class="club-logo-img">
-								</div>
+
 								<div class="club-info">
 									<h3 class="club-name">CHM Saleux</h3>
 									<p class="club-subtitle">Club d'Haltérophilie & Musculation</p>
@@ -463,7 +403,7 @@
 							</div>
 							<p class="club-description">
 								Rejoignez notre communauté passionnée et découvrez un environnement 
-																																																																																																																																																																																																																																																																																																																																																																								              convivial pour atteindre vos objectifs de forme et de bien-être.
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																              convivial pour atteindre vos objectifs de forme et de bien-être.
 							</p>
 							<div class="club-values">
 								<i data-lucide="heart" class="heart-icon"></i>
@@ -547,48 +487,48 @@
 	</section>
 
 	 <script>
-														document.addEventListener('DOMContentLoaded', function() {
-														    const form = document.getElementById('newsletterForm');
-														    if (!form) return;
-														
-														    form.addEventListener('submit', function(event) {
-														        event.preventDefault();
-														
-														        const formData = new FormData(form);
-														
-														        fetch(form.action, {
-														            method: 'POST',
-														            body: formData,
-														            headers: {
-														                'X-Requested-With': 'XMLHttpRequest'
-														            }
-														        })
-														        .then(response => response.json())
-														        .then(data => {
-														            const successMsg = document.getElementById('newsletterSuccess');
-														            const errorMsg = document.getElementById('newsletterError');
-														
-														            if (data.success) {
-														                successMsg.style.display = 'block';
-														                setTimeout(() => successMsg.classList.add('show'), 10);
-														                setTimeout(() => {
-														                    successMsg.classList.remove('show');
-														                    setTimeout(() => successMsg.style.display = 'none', 600);
-														                }, 3000);
-														
-														                errorMsg.textContent = '';
-														                form.reset();
-														            } else {
-														                errorMsg.textContent = data.message || 'Une erreur est survenue, veuillez réessayer.';
-														            }
-														        })
-														        .catch(err => {
-														            const errorMsg = document.getElementById('newsletterError');
-														            errorMsg.textContent = 'Une erreur est survenue, veuillez réessayer.';
-														            console.error(err);
-														        });
-														    });
-														});
-														</script>
+																													document.addEventListener('DOMContentLoaded', function() {
+																													    const form = document.getElementById('newsletterForm');
+																													    if (!form) return;
+																													
+																													    form.addEventListener('submit', function(event) {
+																													        event.preventDefault();
+																													
+																													        const formData = new FormData(form);
+																													
+																													        fetch(form.action, {
+																													            method: 'POST',
+																													            body: formData,
+																													            headers: {
+																													                'X-Requested-With': 'XMLHttpRequest'
+																													            }
+																													        })
+																													        .then(response => response.json())
+																													        .then(data => {
+																													            const successMsg = document.getElementById('newsletterSuccess');
+																													            const errorMsg = document.getElementById('newsletterError');
+																													
+																													            if (data.success) {
+																													                successMsg.style.display = 'block';
+																													                setTimeout(() => successMsg.classList.add('show'), 10);
+																													                setTimeout(() => {
+																													                    successMsg.classList.remove('show');
+																													                    setTimeout(() => successMsg.style.display = 'none', 600);
+																													                }, 3000);
+																													
+																													                errorMsg.textContent = '';
+																													                form.reset();
+																													            } else {
+																													                errorMsg.textContent = data.message || 'Une erreur est survenue, veuillez réessayer.';
+																													            }
+																													        })
+																													        .catch(err => {
+																													            const errorMsg = document.getElementById('newsletterError');
+																													            errorMsg.textContent = 'Une erreur est survenue, veuillez réessayer.';
+																													            console.error(err);
+																													        });
+																													    });
+																													});
+																													</script>
 
 {% endblock %}
