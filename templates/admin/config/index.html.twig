@@ -1,0 +1,19 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="main-content">
+		<div class="dashboard-container">
+			<h1>⚙️
+				{{ title }}</h1>
+
+			<div class="section-card">
+				<p>Ici tu pourras gérer les paramètres du site (titre, logo, email de contact, etc.).</p>
+				<p>Cette page pourra plus tard servir de panneau de configuration global.</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

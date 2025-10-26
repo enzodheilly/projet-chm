@@ -1,0 +1,239 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Journal des connexions
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 123.4%;
+		margin-left: 1.5rem;
+	}
+
+	h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	/* -------- SECTION CARD -------- */
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+	}
+
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	/* -------- TABLE -------- */
+	.table-logs {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		color: var(--text-main);
+	}
+
+	.table-logs thead {
+		background: var(--bg-darker);
+	}
+
+	.table-logs th {
+		text-align: left;
+		padding: 0.8rem 1rem;
+		font-weight: 600;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table-logs td {
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table-logs tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.status-success {
+		color: #22c55e;
+		font-weight: 600;
+	}
+
+	.status-failed {
+		color: #ef4444;
+		font-weight: 600;
+	}
+
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+
+	/* -------- BOUTON PURGE -------- */
+	.btn-purge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-top: 1.5rem;
+		background: var(--accent);
+		color: #fff;
+		padding: 0.7rem 1.3rem;
+		border: none;
+		font-weight: 600;
+		text-decoration: none;
+		transition: 0.2s ease;
+		box-shadow: 0 3px 10px rgba(255, 102, 0, 0.25);
+	}
+
+	.btn-purge:hover {
+		background: #e25500;
+		transform: translateY(-2px);
+	}
+
+	/* -------- MESSAGE FLASH -------- */
+	.alert-success {
+		background: rgba(34, 197, 94, 0.15);
+		border: 1px solid rgba(34, 197, 94, 0.4);
+		color: #22c55e;
+		padding: 0.8rem 1rem;
+		margin-bottom: 1.2rem;
+		font-weight: 500;
+	}
+
+	@media(max-width: 900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+		.dashboard-container {
+			width: 100%;
+			margin-left: 0;
+		}
+	}
+	.session-warning {
+		background-color: #fff4e6;
+	}
+
+	.session-warning .alert-icon {
+		margin-right: 4px;
+		color: #ff9900;
+		font-weight: bold;
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>🔒 Journal des connexions</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">📋 Historique des connexions</h3>
+			</div>
+
+			{% for message in app.flashes('success') %}
+				<div class="alert-success">{{ message }}</div>
+			{% endfor %}
+
+			<table class="table-logs">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Email</th>
+						<th>Adresse IP</th>
+						<th>OS</th>
+						<th>Navigateur</th>
+						<th>Type</th>
+						{# ✅ Nouvelle colonne #}
+						<th>Message</th>
+						{# ✅ Nouvelle colonne #}
+						<th>Statut</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for log in logs %}
+						<tr class="{% if log.type == 'Session' %}session-warning{% endif %}">
+							<td>{{ log.id }}</td>
+							<td>{{ log.emailAttempt ?? 'Système' }}</td>
+							<td>{{ log.ip ?? '—' }}</td>
+							<td>{{ log.os ?? '—' }}</td>
+							<td>{{ log.browser ?? '—' }}</td>
+							<td>{{ log.type ?? 'Connexion' }}</td>
+							{# 🔥 Type d’événement #}
+							<td>
+								{% if log.type == 'Session' %}
+									<span class="alert-icon">⚠️</span>
+								{% endif %}
+								{{ log.message ?? '—' }}
+							</td>
+							<td class="{{ log.success ? 'status-success' : 'status-failed' }}">
+								{{ log.success ? 'Succès' : 'Échec' }}
+							</td>
+							<td>{{ log.createdAt|date('d/m/Y H:i') }}</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="9" class="empty-row">Aucune donnée trouvée.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('admin_security_purge_logs') }}" class="btn-purge" onclick="return confirm('Confirmer la suppression de tous les logs ?')">
+				Purger le journal
+			</a>
+		</div>
+	</div>
+</div>{% endblock %}

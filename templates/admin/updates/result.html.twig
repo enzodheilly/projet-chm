@@ -1,0 +1,15 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block body %}
+
+	<h1>Résultat de la mise à jour</h1>
+
+	<pre>
+
+{{ line }}
+
+</pre>
+	{% for line in output %}{% endfor %}
+
+	<a href="{{ path('admin_updates_index') }}">⬅️ Retour</a>
+{% endblock %}

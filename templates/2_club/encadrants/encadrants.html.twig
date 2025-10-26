@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/club/encadrants/encadrants.css') }}">
+{% endblock %}
+
+{% block body %}
+
+	<main class="section comite-section">
+		<h2 class="section-title">L’équipe encadrante haltéro et musculation</h2>
+		<p class="section-subtitle">Découvrez nos coachs et encadrants, leur parcours et leur engagement au CHM Saleux.</p>
+
+		<div class="team-grid">
+			{% for member in [{ name: 'Florian', role: 'Président et coach', photo: 'membre1.jpg', description: 'Président du club depuis 2019 et entraîneur pour tous les niveaux.' }, { name: 'Brice Baticle', role: 'Membre du bureau et coach', photo: 'membre6.jpg', description: "Membre du comité directeur depuis 2020. Assure l'initiation et le coaching en compétition." }, { name: 'Laurent Longuepee', role: 'Trésorier et coach', photo: 'membre2.jpg', description: 'Trésorier du club depuis 2019 et entraîneur en haltérophilie et musculation.' }] %}
+				<div class="team-member-card">
+					<img src="{{ asset('images/' ~ member.photo) }}" alt="{{ member.name }}"/>
+					<h3>{{ member.name }}</h3>
+					<p class="role">{{ member.role }}</p>
+					<p class="description">{{ member.description }}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</main>
+{% endblock %}

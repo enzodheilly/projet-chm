@@ -1,0 +1,187 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Paramètres - Admin
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	/* ---------- Layout principal ---------- */
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 217%;
+		max-width: none;
+		margin-left: 1.5rem;
+	}
+
+	/* ---------- Titre principal ---------- */
+	.dashboard-container h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	/* ---------- Section Card ---------- */
+	.settings-section {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.8rem 1.5rem;
+		margin-bottom: 2rem;
+		box-sizing: border-box;
+	}
+
+	.settings-section h2 {
+		font-size: 1.2rem;
+		font-weight: 600;
+		color: #fff;
+		margin-bottom: 1.2rem;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	/* ---------- Formulaires ---------- */
+	.settings-section form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.settings-section label {
+		font-size: 0.9rem;
+		color: var(--text-muted);
+		margin-bottom: 0.2rem;
+	}
+
+	.settings-section input[type="text"],
+	.settings-section input[type="email"],
+	.settings-section input[type="password"],
+	.settings-section textarea {
+		background: var(--bg-darker);
+		border: 1px solid var(--border);
+		color: var(--text-main);
+		padding: 0.6rem 0.8rem;
+		font-size: 0.95rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.settings-section input:focus {
+		outline: none;
+		border-color: var(--accent);
+	}
+
+	/* ---------- Boutons ---------- */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		background: var(--accent);
+		color: #fff;
+		border: none;
+		padding: 0.7rem 1.2rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.btn:hover {
+		background: #e25500;
+	}
+
+	.btn.red {
+		background: #ef4444;
+	}
+	.btn.red:hover {
+		background: #dc2626;
+	}
+
+	/* ---------- Checkbox & options ---------- */
+	.settings-section input[type="checkbox"] {
+		accent-color: var(--accent);
+		transform: scale(1.1);
+		margin-right: 0.5rem;
+	}
+
+	/* ---------- Responsive ---------- */
+	@media(max-width: 900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+		.dashboard-container {
+			width: 100%;
+			margin-left: 0;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>⚙️ Paramètres de l’administrateur</h1>
+
+		<section class="settings-section">
+			<h2>👤 Profil</h2>
+			<form>
+				<label>Nom d’utilisateur :</label>
+				<input type="text" value="{{ app.user.firstName }}" readonly>
+
+				<label>Email :</label>
+				<input type="email" value="{{ app.user.email }}" readonly>
+
+				<button class="btn">Modifier le mot de passe</button>
+			</form>
+		</section>
+
+		<section class="settings-section">
+			<h2>🔐 Sécurité</h2>
+			<p>Dernière connexion :
+				<strong>{{ app.user.lastLoginAt ? app.user.lastLoginAt|date('d/m/Y H:i') : 'Jamais' }}</strong>
+			</p>
+			<p>Adresse IP :
+				<strong>{{ app.user.lastLoginIp ?? '—' }}</strong>
+			</p>
+			<button class="btn red">Réinitialiser toutes les sessions</button>
+		</section>
+
+		<section class="settings-section">
+			<h2>🎨 Préférences</h2>
+			<label><input type="checkbox" checked>
+				Mode clair/sombre automatique</label>
+			<label><input type="checkbox">
+				Notifications par e-mail</label>
+		</section>
+	</div>
+</div>{% endblock %}

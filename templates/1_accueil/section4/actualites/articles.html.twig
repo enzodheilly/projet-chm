@@ -1,0 +1,257 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 60vh;
+			background-color: grey;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			text-align: center;
+			overflow: hidden;
+		}
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 0;
+		}
+
+		.hero-content {
+			position: relative;
+			margin-top: 120px;
+			text-align: center;
+			z-index: 1;
+			animation: fadeInUp 1s ease-out;
+		}
+
+		.hero-content h1 {
+			font-size: 6rem;
+			font-weight: 900;
+			margin: 0 0 1rem;
+			font-family: 'Bebas Neue', sans-serif;
+			text-transform: uppercase;
+			letter-spacing: 5px;
+			background: linear-gradient(90deg, #ff6a00, #ffca28);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.hero-content p {
+			font-size: 1.4rem;
+			line-height: 1.8;
+			color: #f0f0f0;
+			margin-bottom: 2rem;
+		}
+
+		@media(max-width: 768px) {
+			.hero-content h1 {
+				font-size: 3.5rem;
+			}
+			.hero-content p {
+				font-size: 1.1rem;
+			}
+		}
+		/* --- NEWS GRID --- */
+		.actualites-list {
+			padding: 40px 20px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.news-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 20px;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.news-card {
+			background: #fff;
+			border-radius: 10px;
+			overflow: hidden;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			transition: transform 0.3s, box-shadow 0.3s;
+		}
+
+		.news-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+		}
+
+		.news-card img {
+			width: 100%;
+			height: 180px;
+			object-fit: cover;
+		}
+
+		.news-card-content {
+			padding: 15px;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.news-card-content h4 {
+			margin: 0 0 10px;
+			font-size: 1.1rem;
+			color: #333;
+		}
+
+		.news-card-content .news-date {
+			font-size: 0.85rem;
+			color: #999;
+			margin-bottom: 10px;
+		}
+
+		.news-card-content p {
+			flex-grow: 1;
+			font-size: 0.95rem;
+			color: #555;
+			margin-bottom: 10px;
+		}
+
+		.news-card-content a {
+			text-decoration: none;
+			color: #fff;
+			background-color: #007BFF;
+			padding: 8px 12px;
+			border-radius: 5px;
+			text-align: center;
+			transition: background-color 0.3s;
+		}
+		.news-card-content a:hover {
+			background-color: #0056b3;
+		}
+		.pagination {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center; /* centre horizontalement */
+			align-items: center; /* centre verticalement */
+			gap: 8px;
+			margin: 30px 0;
+			font-family: Arial, sans-serif;
+			text-align: center; /* assure le centrage du texte */
+		}
+
+		.pagination a,
+		.pagination span {
+			padding: 4px 8px;
+			text-decoration: none;
+			font-size: 0.95rem;
+			min-width: 24px;
+			text-align: center;
+			color: #000;
+		}
+
+		.pagination span.current {
+			font-weight: bold;
+		}
+
+		.pagination span.disabled {
+			color: #888;
+			pointer-events: none;
+		}
+
+		@media(max-width: 768px) {
+			.pagination {
+				gap: 5px;
+			}
+			.pagination a,
+			.pagination span {
+				padding: 3px 6px;
+				font-size: 0.85rem;
+			}
+		}
+		/* --- RESPONSIVE --- */
+		@media(max-width: 1024px) {
+			.news-grid {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+		@media(max-width: 768px) {
+			.news-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+		@media(max-width: 480px) {
+			.news-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+{% endblock %}
+{% block body %}
+	<header class="hero-header">
+		<div class="overlay"></div>
+		<div class="hero-content">
+			<h1>Découvrer toutes les actualites</h1>
+		</div>
+	</header>
+
+	<main>
+		<section class="actualites-list">
+			{% if articles is not empty %}
+				<ul class="news-grid">
+					{% for article in articles %}
+						<li class="news-card">
+							<img src="{{ asset(article.image) }}" alt="{{ article.title }}">
+							<div class="news-card-content">
+								<h4>{{ article.title }}</h4>
+								<span class="news-date">{{ article.publishedAt|date('d M Y') }}</span>
+								<p>{{ article.summary }}</p>
+								<a href="{{ path('article_show', {'id': article.id}) }}">Lire la suite</a>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+
+				<div
+					class="pagination">
+					{# Bouton Précédent #}
+					{% if page > 1 %}
+						<a href="{{ path('actualites', {'page': page-1}) }}" class="prev-page">&larr; Précédent</a>
+					{% else %}
+						<span class="disabled">&larr; Précédent</span>
+					{% endif %}
+
+					{# Numéros de pages #}
+					{% for i in 1..totalPages %}
+						{% if i == page %}
+							<span class="current">{{ i }}</span>
+						{% else %}
+							<a href="{{ path('actualites', {'page': i}) }}">{{ i }}</a>
+						{% endif %}
+					{% endfor %}
+
+					{# Bouton Suivant #}
+					{% if page < totalPages %}
+						<a href="{{ path('actualites', {'page': page+1}) }}" class="next-page">Suivant &rarr;</a>
+					{% else %}
+						<span class="disabled">Suivant &rarr;</span>
+					{% endif %}
+				</div>
+
+			{% else %}
+				<p>Aucune actualité pour le moment.</p>
+			{% endif %}
+		</section>
+
+
+	</main>
+{% endblock %}

@@ -5,30 +5,35 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ArticleRepository;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('home/index.html.twig', []);
-    }
+        // 🔹 Vérifie si l'utilisateur est connecté
+        $user = $this->getUser();
 
-    #[Route('/about', name: 'app_about')]
-    public function about(): Response
-    {
-        return $this->render('about/index.html.twig');
-    }
+        // 🔹 Exemple : rediriger selon le rôle
+        if ($user) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('admin_dashboard'); // adapte le nom de ta route admin
+            }
 
-    #[Route('/legal', name: 'app_legal')]
-    public function legal(): Response
-    {
-        return $this->render('legal/index.html.twig');
-    }
+            if ($this->isGranted('ROLE_USER')) {
+                // tu peux garder la home ou rediriger vers un dashboard
+                // return $this->redirectToRoute('user_dashboard');
+            }
 
-    #[Route('/privacy', name: 'app_privacy')]
-    public function privacy(): Response
-    {
-        return $this->render('privacy/index.html.twig');
+            // ❌ Supprimé : dump($user);
+        }
+
+        // Récupérer les derniers articles depuis la BDD
+        $articles = $articleRepository->findBy([], ['publishedAt' => 'DESC']);
+
+        return $this->render('0_home/index.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 }

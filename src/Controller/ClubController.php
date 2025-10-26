@@ -12,19 +12,19 @@ class ClubController extends AbstractController
     public function comite(): Response
     {
         // On indique le chemin relatif depuis templates/
-        return $this->render('club/comite/comite.html.twig');
+        return $this->render('2_club/comite/comite.html.twig');
     }
 
     #[Route('/encadrants', name: 'encadrants')]
     public function encadrants(): Response
     {
-        return $this->render('club/encadrants/encadrants.html.twig');
+        return $this->render('2_club/encadrants/encadrants.html.twig');
     }
 
     #[Route('/nouveautes', name: 'nouveautes')]
     public function nouveautes(): Response
     {
-        return $this->render('club/nouveautes/nouveautes.html.twig');
+        return $this->render('2_club/nouveautes/nouveautes.html.twig');
     }
 
     // Ajouter les autres pages de la même façon

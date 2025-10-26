@@ -1,0 +1,494 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Créer une campagne
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0f1115;
+		--bg-card: #1a1c22;
+		--accent: #ff6600;
+		--border: #2a2d35;
+		--text-light: #f3f4f6;
+		--text-muted: #9ca3af;
+		--radius: 10px;
+	}
+
+	/* ====== PAGE STRUCTURE ====== */
+	.main-content {
+		padding: 2rem;
+		color: var(--text-light);
+		background: var(--bg-dark);
+		min-height: 100vh;
+		font-family: 'Inter', system-ui, sans-serif;
+	}
+
+	.page-title {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: var(--accent);
+		margin-bottom: 2rem;
+	}
+
+	.compose-layout {
+		display: grid;
+		grid-template-columns: 2fr 1.2fr;
+		gap: 2rem;
+	}
+
+	.compose-left,
+	.compose-right {
+		background: var(--bg-card);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 2rem;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+		transition: 0.3s;
+	}
+
+	.compose-left:hover,
+	.compose-right:hover {
+		border-color: var(--accent);
+	}
+
+	/* ====== FORM ====== */
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1.3rem;
+	}
+
+	.form-label {
+		font-weight: 500;
+		margin-bottom: 6px;
+		color: var(--text-muted);
+	}
+
+	.form-input,
+	textarea,
+	select {
+		background: #111318;
+		color: var(--text-light);
+		border: 1px solid var(--border);
+		padding: 0.7rem 0.9rem;
+		border-radius: 6px;
+		font-size: 0.95rem;
+		transition: 0.2s;
+	}
+
+	.form-input:focus,
+	textarea:focus,
+	select:focus {
+		outline: none;
+		border-color: var(--accent);
+		background: #15171c;
+	}
+
+	#templateSelect,
+	#variableSelect,
+	#styleBlockSelect {
+		cursor: pointer;
+	}
+
+	#saveTemplateBtn {
+		background: transparent;
+		color: var(--accent);
+		border: 1px solid var(--accent);
+		padding: 0.6rem 1rem;
+		border-radius: 6px;
+		font-weight: 500;
+		cursor: pointer;
+		transition: 0.2s;
+	}
+	#saveTemplateBtn:hover {
+		background: var(--accent);
+		color: #fff;
+	}
+
+	/* ====== BUTTONS ====== */
+	.btn,
+	.btn-secondary {
+		padding: 0.8rem 1.2rem;
+		border-radius: 6px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: 0.25s;
+		border: none;
+	}
+
+	.btn {
+		background: var(--accent);
+		color: #fff;
+	}
+
+	.btn:hover {
+		background: #ff7b1b;
+		transform: translateY(-1px);
+	}
+
+	.btn-secondary {
+		background: #22252b;
+		color: var(--text-light);
+		border: 1px solid var(--border);
+	}
+
+	.btn-secondary:hover {
+		background: #2a2d34;
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	.form-actions {
+		display: flex;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	/* ====== PREVIEW ====== */
+	.preview-box {
+		background: #0f1115;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.2rem;
+		min-height: 400px;
+		overflow-y: auto;
+		color: #e5e7eb;
+		transition: all 0.3s ease;
+	}
+
+	.preview-box p {
+		margin: 0.6rem 0;
+	}
+
+	.preview-box em {
+		color: var(--text-muted);
+	}
+
+	/* ====== MODAL ====== */
+	.modal {
+		display: none;
+		position: fixed;
+		z-index: 999;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.75);
+		justify-content: center;
+		align-items: center;
+	}
+
+	.modal-content {
+		background: var(--bg-card);
+		padding: 2rem;
+		border-radius: var(--radius);
+		width: 85%;
+		max-width: 900px;
+		max-height: 90vh;
+		overflow-y: auto;
+		border: 1px solid var(--border);
+		position: relative;
+	}
+
+	.modal-close {
+		position: absolute;
+		right: 1rem;
+		top: 1rem;
+		cursor: pointer;
+		font-size: 1.5rem;
+		color: var(--text-muted);
+		transition: 0.2s;
+	}
+	.modal-close:hover {
+		color: var(--accent);
+	}
+
+	/* ====== RESPONSIVE ====== */
+	@media(max-width: 1000px) {
+		.compose-layout {
+			grid-template-columns: 1fr;
+		}
+		.form-actions {
+			justify-content: center;
+		}
+		.compose-right {
+			order: -1;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1 class="page-title">📝 Nouvelle campagne newsletter</h1>
+
+		<div
+			class="compose-layout">
+			<!-- FORMULAIRE -->
+			<div class="compose-left">
+				<form
+					method="POST" id="newsletterForm">
+
+					<!-- 🧩 Modèles -->
+					<div class="form-group" style="display:flex;align-items:center;gap:10px;">
+						<div style="flex:1;">
+							<label class="form-label" for="templateSelect">🧩 Choisir un modèle :</label>
+							<select id="templateSelect" class="form-input">
+								<option value="">— Sélectionner un modèle —</option>
+								<option value="basic">📰 Newsletter simple</option>
+								<option value="promo">🔥 Offre promotionnelle</option>
+								<option value="announcement">📢 Annonce / Nouveauté</option>
+							</select>
+						</div>
+						<button type="button" id="saveTemplateBtn">💾 Enregistrer comme modèle</button>
+					</div>
+
+					<!-- 🎯 Variables dynamiques -->
+					<div class="form-group">
+						<label class="form-label" for="variableSelect">🔗 Insérer une variable personnalisée :</label>
+						<select id="variableSelect" class="form-input">
+							<option value="">— Choisir une variable —</option>
+							<option value="{{ '{{ firstname }}' }}">👤 Prénom</option>
+							<option value="{{ '{{ lastname }}' }}">👥 Nom</option>
+							<option value="{{ '{{ email }}' }}">📧 Adresse e-mail</option>
+							<option value="{{ '{{ unsubscribe_url }}' }}">🚪 Lien de désinscription</option>
+							<option value="{{ '{{ subscription_date }}' }}">🗓️ Date d’inscription</option>
+						</select>
+					</div>
+
+					<!-- 🎨 Blocs de style -->
+					<div class="form-group">
+						<label class="form-label" for="styleBlockSelect">🎨 Ajouter un bloc stylisé :</label>
+						<select id="styleBlockSelect" class="form-input">
+							<option value="">— Sélectionner un bloc —</option>
+							<option value="button">🔘 Bouton d’action</option>
+							<option value="highlight">🟧 Encadré de mise en avant</option>
+							<option value="quote">💬 Citation</option>
+							<option value="imageBanner">🖼️ Bannière d’image</option>
+							<option value="testimonial">💬 Témoignage client</option>
+							<option value="footer">📩 Pied de page pro</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label class="form-label" for="subject">Sujet :</label>
+						<input type="text" id="subject" name="subject" class="form-input" required>
+					</div>
+
+					<div class="form-group">
+						<label class="form-label" for="content">Contenu :</label>
+						<textarea id="content" name="content" rows="10"></textarea>
+					</div>
+
+					<div class="form-actions">
+						<button type="button" class="btn-secondary" id="previewBtn">👀 Prévisualiser</button>
+						<button type="button" class="btn-secondary" id="sendTestBtn">📨 Envoyer un test</button>
+						<button type="submit" class="btn">📤 Envoyer la campagne</button>
+					</div>
+				</form>
+			</div>
+
+			<!-- APERÇU EN DIRECT -->
+			<div class="compose-right">
+				<h3 style="color:#fff;margin-bottom:1rem;">👀 Aperçu du mail</h3>
+				<div id="preview" class="preview-box">
+					<p>
+						<em>Votre message apparaîtra ici en temps réel...</em>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div style="margin-top:20px;">
+			<a href="{{ path('admin_newsletter_index') }}" style="color:#9ca3af;text-decoration:none;">⬅ Retour à la liste des abonnés</a>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL -->
+<div id="previewModal" class="modal">
+	<div class="modal-content" id="modalContent">
+		<span class="modal-close" id="modalClose">&times;</span>
+		<div id="modalBody"></div>
+	</div>
+</div>
+
+ <script src="https://cdn.tiny.cloud/1/tn2dgt5wrvywd1db8zi5vsznnk1y5jl2uw1ngfn9hjzckm5t/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+ <script>
+/* --- Mise à jour de l’aperçu --- */
+function updatePreview() {
+  const subject = document.getElementById('subject').value;
+  const content = tinymce.get('content')?.getContent() || '';
+  document.getElementById('preview').innerHTML = `
+    <h2 style="margin-top:0;">${subject || '(Sujet du mail)'}</h2>
+    ${content || '<p><em>Commencez à rédiger votre contenu ici...</em></p>'}
+  `;
+}
+
+/* --- Initialisation TinyMCE --- */
+document.addEventListener('DOMContentLoaded', () => {
+  tinymce.init({
+    selector: '#content',
+    plugins: 'link image lists table code visualblocks fullscreen hr charmap emoticons paste searchreplace wordcount',
+    toolbar: `
+      undo redo | blocks fontfamily fontsize |
+      bold italic underline strikethrough forecolor backcolor |
+      alignleft aligncenter alignright alignjustify |
+      bullist numlist outdent indent |
+      link image table hr emoticons |
+      removeformat code fullscreen
+    `,
+    menubar: 'file edit view insert format tools table help',
+    branding: false,
+    height: 520,
+    resize: false,
+    color_map: [
+      'ff6600', 'Orange CHM',
+      '0e0e10', 'Noir CHM',
+      'ffffff', 'Blanc',
+      '9ca3af', 'Gris clair'
+    ],
+    content_style: `
+      body { font-family:Inter,system-ui,sans-serif;font-size:15px;color:#222;line-height:1.55;padding:1rem; }
+      h1,h2,h3 { color:#ff6600; }
+      a { color:#ff6600; text-decoration:underline; }
+      .highlight { background:#fff7e6;padding:15px;border-left:5px solid #ff6600;margin:1rem 0; }
+      .quote { border-left:4px solid #ff6600;padding-left:12px;color:#555;font-style:italic; }
+      .btn-action { display:inline-block;background:#ff6600;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:bold; }
+      .signature { border-top:1px solid #ccc;margin-top:30px;padding-top:15px;color:#555;font-size:0.9rem; }
+    `,
+    setup: (editor) => editor.on('keyup change', updatePreview)
+  });
+
+  document.getElementById('subject').addEventListener('input', updatePreview);
+});
+
+/* --- 🎯 Variables dynamiques --- */
+document.getElementById('variableSelect')?.addEventListener('change', (e) => {
+  const value = e.target.value;
+  if (value && tinymce.get('content')) {
+    tinymce.activeEditor.execCommand('mceInsertContent', false, value);
+    e.target.value = '';
+  }
+});
+
+/* --- 🎨 Blocs stylisés --- */
+document.getElementById('styleBlockSelect')?.addEventListener('change', (e) => {
+  const selected = e.target.value;
+  let block = '';
+  if (selected === 'button') {
+    block = `<a href="#" class="btn-action">👉 En savoir plus</a>`;
+  } else if (selected === 'highlight') {
+    block = `<div class="highlight">✨ <strong>Info importante :</strong> ajoutez votre texte ici.</div>`;
+  } else if (selected === 'quote') {
+    block = `<blockquote class="quote">“Votre citation inspirante ici.”</blockquote>`;
+  } else if (selected === 'imageBanner') {
+    block = `<div style="text-align:center;margin:20px 0;">
+               <img src="https://via.placeholder.com/600x200.png?text=Banniere+Newsletter" 
+                    alt="Bannière" style="width:100%;border-radius:8px;">
+             </div>`;
+  } else if (selected === 'testimonial') {
+    block = `<div style="border-left:4px solid #ff6600;padding:15px;margin:20px 0;background:#fff7e6;">
+               <p>“Super expérience, l’équipe CHM est au top !”</p>
+               <p style="text-align:right;font-weight:bold;">– Un abonné fidèle 💪</p>
+             </div>`;
+  } else if (selected === 'footer') {
+    block = `<footer style="border-top:1px solid #ccc;margin-top:40px;padding-top:20px;color:#777;font-size:13px;text-align:center;">
+               Vous recevez cet e-mail car vous êtes abonné à notre newsletter.<br>
+               <a href="{{ '{{ unsubscribe_url }}' }}" style="color:#ff6600;">Se désabonner</a>
+             </footer>`;
+  }
+  if (block) tinymce.activeEditor.execCommand('mceInsertContent', false, block);
+  e.target.value = '';
+});
+
+/* --- ✍️ Signature automatique --- */
+function insertSignature() {
+  const signatureHTML = `
+    <div class="signature">
+      <p>Sportivement,<br><strong>L’équipe CHM</strong><br>
+      <a href="https://clubchm.fr" style="color:#ff6600;">www.clubchm.fr</a></p>
+    </div>
+  `;
+  tinymce.activeEditor.execCommand('mceInsertContent', false, signatureHTML);
+}
+
+/* --- 📋 Modèles prédéfinis --- */
+const emailTemplates = {
+  basic: `
+    <h1 style="color:#ff6600;">Bienvenue dans notre newsletter !</h1>
+    <p>Bonjour {{ '{{ firstname }}' }},</p>
+    <p>Merci de nous suivre ❤️. Voici les dernières nouvelles de la semaine :</p>
+    <ul>
+      <li>📰 Nouvel article sur notre blog</li>
+      <li>💡 Astuce de la semaine</li>
+      <li>🎁 Un petit bonus pour nos abonnés fidèles</li>
+    </ul>
+    <p>À très bientôt,<br>L’équipe <strong>CHM</strong></p>
+    <p><a href="{{ '{{ unsubscribe_url }}' }}">Se désabonner</a></p>
+  `,
+  promo: `
+    <h1 style="color:#ff6600;text-align:center;">🔥 Offre Spéciale Limitée !</h1>
+    <p>Bonjour {{ '{{ firstname }}' }},</p>
+    <p style="text-align:center;">Profitez de <strong>-30%</strong> sur toute la boutique jusqu’à dimanche soir 🎉</p>
+    <div style="text-align:center;margin:30px 0;">
+      <a href="#" style="background:#ff6600;color:#fff;padding:12px 24px;border-radius:5px;text-decoration:none;font-weight:bold;">JE PROFITE DE L’OFFRE</a>
+    </div>
+    <p>Ne manquez pas cette occasion de vous faire plaisir 😉</p>
+    <p><a href="{{ '{{ unsubscribe_url }}' }}">Se désabonner</a></p>
+  `,
+  announcement: `
+    <h1 style="color:#ff6600;">📢 Grande nouvelle !</h1>
+    <p>Bonjour {{ '{{ firstname }}' }},</p>
+    <p>Nous avons le plaisir de vous annoncer le lancement de notre <strong>nouvelle fonctionnalité</strong> 🎉</p>
+    <p>Découvrez-la dès maintenant et dites-nous ce que vous en pensez !</p>
+    <div style="text-align:center;margin:30px 0;">
+      <a href="#" style="background:#ff6600;color:#fff;padding:12px 24px;border-radius:5px;text-decoration:none;font-weight:bold;">Découvrir maintenant</a>
+    </div>
+    <p>Merci pour votre fidélité,<br>L’équipe <strong>CHM</strong></p>
+    <p><a href="{{ '{{ unsubscribe_url }}' }}">Se désabonner</a></p>
+  `
+};
+
+/* --- Sélection d’un modèle --- */
+document.addEventListener('DOMContentLoaded', () => {
+  const select = document.getElementById('templateSelect');
+  if (!select) return;
+
+  select.addEventListener('change', (e) => {
+    const key = e.target.value;
+    const tmpl = emailTemplates[key];
+    if (!key || !tmpl) return;
+
+    if (!tinymce.get('content')) {
+      console.warn('TinyMCE non initialisé');
+      return;
+    }
+
+    if (confirm("Voulez-vous remplacer le contenu actuel par ce modèle ?")) {
+      tinymce.get('content').setContent(tmpl);
+      updatePreview();
+    }
+  });
+});
+
+/* --- 🪄 Modal Preview --- */
+document.getElementById('previewBtn').addEventListener('click', () => {
+  const subject = document.getElementById('subject').value;
+  const content = tinymce.get('content').getContent();
+  document.getElementById('modalBody').innerHTML = `
+    <h2 style="margin-top:0;color:#ff6600;">${subject || '(Sujet du mail)'}</h2>
+    ${content || '<p><em>Aucun contenu...</em></p>'}
+  `;
+  document.getElementById('previewModal').style.display = 'flex';
+});
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('previewModal').style.display = 'none';
+});
+window.addEventListener('click', (e) => {
+  if (e.target.id === 'previewModal')
+    document.getElementById('previewModal').style.display = 'none';
+});
+</script>{% endblock %}

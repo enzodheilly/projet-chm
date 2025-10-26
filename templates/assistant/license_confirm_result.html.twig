@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block newsletter_script %}{% endblock %}
+
+{% block title %}Confirmation licence
+{% endblock %}
+{% block body %}
+	<div style="max-width:720px;margin:3rem auto;background:#fff;padding:2rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.08);font-family:Poppins,sans-serif">
+		{% if ok %}
+			<h1 style="color:#16a34a">🎉 Confirmation réussie</h1>
+			{% if license %}
+				<p>Bonjour
+					{{ user.firstName }}
+					{{ user.lastName }},</p>
+				<p>Voici votre numéro de licence :</p>
+				<p style="font-size:1.8rem;font-weight:700;letter-spacing:.5px">{{ license }}</p>
+			{% else %}
+				<p>Votre compte ne contient pas encore de numéro de licence. Contactez le club si besoin.</p>
+			{% endif %}
+		{% else %}
+			<h1 style="color:#dc2626">⛔ Impossible de confirmer</h1>
+			{% if reason == 'expired' %}
+				<p>Le lien a expiré. Merci de recommencer la demande depuis l’assistant.</p>
+			{% else %}
+				<p>Lien invalide. Merci de recommencer la demande.</p>
+			{% endif %}
+		{% endif %}
+	</div>
+{% endblock %}

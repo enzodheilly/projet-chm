@@ -6,14 +6,6 @@ use App\Entity\NewsletterSubscriber;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @extends ServiceEntityRepository<NewsletterSubscriber>
- *
- * @method NewsletterSubscriber|null find($id, $lockMode = null, $lockVersion = null)
- * @method NewsletterSubscriber|null findOneBy(array $criteria, array $orderBy = null)
- * @method NewsletterSubscriber[]    findAll()
- * @method NewsletterSubscriber[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class NewsletterSubscriberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,25 +13,54 @@ class NewsletterSubscriberRepository extends ServiceEntityRepository
         parent::__construct($registry, NewsletterSubscriber::class);
     }
 
-    public function add(NewsletterSubscriber $subscriber, bool $flush = true): void
+    /**
+     * Compte les abonnés confirmés à la newsletter
+     */
+    public function countConfirmed(): int
     {
-        $this->_em->persist($subscriber);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        return $this->count(['isConfirmed' => true]);
     }
 
-    public function remove(NewsletterSubscriber $subscriber, bool $flush = true): void
+    /**
+     * Récupère les abonnés récents
+     */
+    public function findRecent(int $limit = 5): array
     {
-        $this->_em->remove($subscriber);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        return $this->createQueryBuilder('n')
+            ->orderBy('n.subscribedAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 
-    // Exemple de méthode personnalisée
-    public function findByEmail(string $email): ?NewsletterSubscriber
+    /**
+     * Compte le nombre d’abonnés par jour sur les X derniers jours
+     * (version SQL native pour éviter l’erreur DQL)
+     */
+    public function countByDay(int $days = 7): array
     {
-        return $this->findOneBy(['email' => $email]);
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+            SELECT DATE(subscribed_at) AS day, COUNT(id) AS count
+            FROM newsletter_subscriber
+            WHERE subscribed_at >= :date
+            GROUP BY day
+            ORDER BY day ASC
+        ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery([
+            'date' => (new \DateTimeImmutable("-{$days} days"))->format('Y-m-d H:i:s')
+        ]);
+
+        $rows = $result->fetchAllAssociative();
+
+        $data = [];
+        foreach ($rows as $r) {
+            $data[$r['day']] = (int) $r['count'];
+        }
+
+        return $data;
     }
 }

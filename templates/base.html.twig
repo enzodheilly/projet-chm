@@ -3,12 +3,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 		<title>
-			{% block title %}CHM Saleux - Club d'Haltérophilie et de Musculation
+			{% block title %}
+				CHM Saleux - Club d'Haltérophilie et de Musculation
 			{% endblock %}
 		</title>
-		<meta name="description" content="{% block description %}Club d'Haltérophilie et de Musculation de Saleux. École d'haltérophilie, formations tous niveaux, compétitions. Plus de 25 ans d'expérience dans la formation d'athlètes.{% endblock %}">
-		<meta name="keywords" content="haltérophilie, musculation, Saleux, club sportif, compétition, école haltérophilie, entraînement">
+
+		<!-- SEO -->
+		<meta name="description" content="{% block description %}Club d'Haltérophilie et de Musculation de Saleux. École d'haltérophilie, formations tous niveaux, compétitions. Plus de 25 ans d'expérience.{% endblock %}">
+		<meta name="keywords" content="haltérophilie, musculation, Saleux, club sportif, compétition, école, entraînement">
 		<meta
 		name="author" content="CHM Saleux">
 
@@ -19,6 +23,10 @@
 		<meta
 		property="og:url" content="{{ app.request.uri }}">
 
+		<!-- Favicon -->
+		<link
+		rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
+
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,27 +35,55 @@
 
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 		<!-- Lucide Icons -->
 		 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 		<link
-		rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css"> <!-- CSS -->
+		rel="stylesheet" href="https://unpkg.com/lucide-static/font/lucide.css"> <!-- CSS Global -->
 		<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-		<link rel="stylesheet" href="{{ asset('css/accueil/nav/nav.css') }}"> {% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="{{ asset('css/accueil/nav/nav.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/accueil/footer/footer.css') }}"> {% block stylesheets %}{% endblock %}
 		</head>
 
-		<body class="bg-background text-foreground" style="margin:0; padding:0; width:100%;">
+		<body
+			class="bg-background text-foreground" style="margin:0; padding:0; width:100%;">
 
-			{% include 'accueil/navigation.html.twig' %}
+			{# Navbar visible sur toutes les pages sauf si redéfinie vide #}
+			{% block navbar %}
+				{% include '1_accueil/navbar/navigation.html.twig' %}
+			{% endblock %}
 
-			{# Si tu veux un header plein écran, il doit être **hors du main** #}
-			{% block header %}{% endblock %}
-
+			{# Contenu principal des pages #}
 			<main style="margin:0; padding:0; width:100%;"> {% block body %}{% endblock %}
 				</main>
 
-				<!-- JavaScript -->
+				{# Footer (avec newsletter) #}
+				{% block footer %}
+					{% include '1_accueil/footer/footer.html.twig' %}
+
+					{# Script newsletter uniquement quand le footer est présent #}
+					{% block newsletter_script %}
+						 <script src="{{ asset('js/newsletter.js') }}" defer></script>
+					{% endblock %}
+				{% endblock %}
+
+				{# ✅ Assistant IA — doit être placé AVANT les scripts JS pour être détecté #}
+				{% if app.request.attributes.get('_route') not in ['app_login', 'admin_dashboard'] %}
+					{% include '_shared/assistant.html.twig' %}
+				{% endif %}
+
+				{# Scripts globaux communs à tout le site #}
 				 <script src="{{ asset('js/app.js') }}"></script>
-				{% block javascripts %}{% endblock %}
+
+				{# JS de l’assistant — on le charge après le HTML #}
+				 <script src="{{ asset('js/assistant.js') }}" defer></script>
+
+				{# Zone libre pour ajouter des JS spécifiques à certaines pages #}{% block javascripts %}
+			{% endblock %}
+
+				<!-- BASE.HTML.TWIG RENDU ✅ -->
+
 			</body>
 		</html>

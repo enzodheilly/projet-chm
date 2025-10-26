@@ -1,0 +1,178 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 100.2%;
+		margin-left: 1.5rem;
+	}
+
+	h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+	}
+
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+	}
+
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		color: #e5e7eb;
+	}
+
+	.table thead {
+		background: var(--bg-darker);
+		color: #fff;
+	}
+
+	.table th,
+	.table td {
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	/* Actions dans le tableau */
+	.actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.action-edit,
+	.action-delete {
+		display: inline-flex; /* ✅ pour les aligner sur la même ligne */
+		align-items: center;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.9rem;
+	}
+
+	.action-edit {
+		color: #93c5fd;
+	}
+	.action-edit:hover {
+		color: #ffcc80;
+	}
+
+	.action-delete {
+		color: #ef4444;
+	}
+	.action-delete:hover {
+		color: #ff6666;
+	}
+
+
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>📰
+			{{ title }}</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">📋 Liste des articles</h3>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Titre</th>
+						<th>Résumé</th>
+						<th>Date de publication</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for article in articles %}
+						<tr>
+							<td>{{ article.id }}</td>
+							<td>{{ article.title }}</td>
+							<td>{{ article.summary|length > 80 ? article.summary|slice(0, 80) ~ '...' : article.summary }}</td>
+							<td>{{ article.publishedAt ? article.publishedAt|date('d/m/Y H:i') : '—' }}</td>
+							<td>
+								<div class="actions">
+									<a href="#" class="action-edit">Modifier</a>
+									<span>|</span>
+									<a href="#" class="action-delete" onclick="return confirm('Supprimer cet article ?')">Supprimer</a>
+								</div>
+							</td>
+
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5" class="empty-row">Aucun article trouvé.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>{% endblock %}

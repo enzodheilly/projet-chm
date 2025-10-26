@@ -1,0 +1,198 @@
+{# templates/admin/security/blocklist.html.twig #}
+{% extends 'admin/base_admin.html.twig' %}
+{% block title %}Blocklist IP
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		background: var(--bg-dark);
+		min-height: 100vh;
+		box-sizing: border-box;
+	}
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 333.3%;
+		max-width: none;
+		margin-left: 1.5rem;
+	}
+	.dashboard-container h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+	}
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+	}
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.95rem;
+		color: var(--text-main);
+	}
+	.table thead {
+		background: var(--bg-darker);
+		color: #fff;
+	}
+	.table th {
+		text-align: left;
+		padding: 0.8rem 1rem;
+		font-weight: 600;
+		border-bottom: 1px solid var(--border);
+	}
+	.table td {
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+	.table tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+	.badge {
+		display: inline-block;
+		padding: 0.25rem 0.5rem;
+		font-weight: 700;
+		font-size: 0.8rem;
+	}
+	.badge-success {
+		color: #22c55e;
+	}
+	.badge-danger {
+		color: #ef4444;
+	}
+	.btn {
+		background: var(--accent);
+		color: #fff;
+		border: none;
+		padding: 0.5rem 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: 0.2s;
+	}
+	.btn:hover {
+		background: #e25500;
+	}
+	.search-bar {
+		padding: 0.45rem 0.8rem;
+		border: 1px solid var(--border);
+		background: var(--bg-darker);
+		color: var(--text-main);
+		font-size: 0.9rem;
+		outline: none;
+	}
+	.search-bar:focus {
+		border-color: var(--accent);
+	}
+	.table-toolbar {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+	@media(max-width:900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>🚫 Blocklist IP</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">Adresses IP bloquées</h3>
+				<div class="table-toolbar">
+					<input id="searchBlock" class="search-bar" type="text" placeholder="Rechercher une IP...">
+				{# Exemple d’action si tu ajoutes une route de purge : #}
+					{# <a href="{{ path('admin_security_purge_blocklist') }}" class="btn" onclick="return confirm('Purger la blocklist ?')">🧹 Purger</a> #}
+				</div>
+			</div>
+
+			{% set items = blockedIps|default([]) %}
+			{# 👈 Sécurise si la var n’est pas passée #}
+
+			<table class="table" id="blockTable">
+				<thead>
+					<tr>
+						<th>IP</th>
+						<th>Raison</th>
+						<th>Depuis</th>
+						<th>Statut</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in items %}
+						<tr>
+							<td>{{ row.ip }}</td>
+							<td>{{ row.reason ?? '—' }}</td>
+							<td>{{ (row.blockedAt ?? null) ? row.blockedAt|date('d/m/Y H:i') : '—' }}</td>
+							<td>
+								<span class="badge badge-danger">Bloquée</span>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4" class="empty-row">Aucune IP bloquée.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+ <script>
+(function(){
+  const input=document.getElementById('searchBlock');
+  const rows=document.querySelectorAll('#blockTable tbody tr');
+  if(!input) return;
+  input.addEventListener('keyup',()=>{
+    const q=input.value.toLowerCase();
+    rows.forEach(r=>{ r.style.display = r.textContent.toLowerCase().includes(q)?'':'none'; });
+  });
+})();
+</script>{% endblock %}

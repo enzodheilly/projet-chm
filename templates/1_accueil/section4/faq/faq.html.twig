@@ -1,0 +1,669 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ - CHM Saleux
+{% endblock %}
+
+{% block body %}
+
+	<header class="hero-header">
+		<div class="overlay"></div>
+		<div class="hero-content">
+			<h1>FAQ</h1>
+			<p>Consultez notre foire aux questions ci-dessous</p>
+		</div>
+	</header>
+
+	<!-- SECTION FAQ -->
+	<section class="faq-container">
+		<div class="faq-sidebar">
+			<h3>CHOISISSEZ<br>VOTRE
+				<span>SUJET</span>
+			</h3>
+			<ul>
+				<li class="active" data-section="questions">
+					<a href="#">Questions Fréquemment Posées</a>
+				</li>
+				<li data-section="abonnement">
+					<a href="#">Mon Abonnement</a>
+				</li>
+				<li data-section="entrainement">
+					<a href="#">Entraînement & Coaching</a>
+				</li>
+				<li data-section="installations">
+					<a href="#">Installations</a>
+				</li>
+				<li data-section="competition">
+					<a href="#">Compétition & Événements</a>
+				</li>
+				<li data-section="autres">
+					<a href="#">Autres</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- SECTION : Questions fréquentes -->
+		<div class="faq-content" data-section="questions">
+			<h2>Questions Fréquemment Posées</h2>
+
+			<div class="faq-item">
+				<div class="faq-question">Faut-il une expérience avant de s’inscrire ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Pas du tout ! Le CHM Saleux accueille les débutants comme les confirmés. Nos coachs vous accompagnent selon votre niveau.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je faire une séance d’essai ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, une séance d’essai gratuite est disponible sur rendez-vous. C’est idéal pour découvrir le club et l’ambiance.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Y a-t-il des coachs disponibles tout le temps ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Un coach diplômé est présent sur les horaires principaux pour encadrer, conseiller et garantir la sécurité des pratiquants.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Les femmes peuvent-elles s’inscrire ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Bien sûr ! De nombreuses adhérentes s’entraînent régulièrement au CHM Saleux dans une ambiance respectueuse et motivante.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Proposez-vous des tarifs étudiants ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, des réductions sont disponibles pour les étudiants et les jeunes de moins de 21 ans.</div>
+			</div>
+		</div>
+
+		<!-- SECTION : Mon Abonnement -->
+		<div class="faq-content" data-section="abonnement" style="display:none;">
+			<h2>Mon Abonnement</h2>
+
+			<div class="faq-item">
+				<div class="faq-question">Quels abonnements proposez-vous ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Nous proposons deux formules principales :
+					<br>• Loisir Musculation & Haltérophilie<br>• Compétition (8-13 ans, 14-20 ans, +21 ans)</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je mettre mon abonnement en pause ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, il est possible de suspendre votre abonnement pour une durée minimale d’un mois (maladie, vacances, etc.).</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Quels moyens de paiement acceptez-vous ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Carte bancaire, espèces et prélèvements automatiques sont acceptés pour les abonnements annuels.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je changer de formule en cours d’année ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, il est possible de passer d’un abonnement Loisir à un abonnement Compétition sur simple demande.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Les licences sont-elles incluses dans le tarif ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Les licences fédérales sont incluses pour les adhérents Compétition et en option pour les adhérents Loisir.</div>
+			</div>
+		</div>
+
+		<!-- SECTION : Entraînement & Coaching -->
+		<div class="faq-content" data-section="entrainement" style="display:none;">
+			<h2>Entraînement & Coaching</h2>
+
+			<div class="faq-item">
+				<div class="faq-question">Les coachs sont-ils diplômés ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, tous nos coachs sont diplômés d’État et formés à l’encadrement en musculation et en haltérophilie.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Proposez-vous des programmes personnalisés ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, un programme sur mesure peut être établi selon vos objectifs : prise de masse, perte de poids, force, compétition, etc.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je m’entraîner seul ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, les adhérents Loisir ont accès libre à la salle pendant les horaires d’ouverture pour un entraînement autonome.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Comment se déroule une séance d’haltérophilie ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Une séance comprend un échauffement, un travail technique (arraché / épaulé-jeté) et un renforcement musculaire complémentaire.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je suivre mes performances ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, nous proposons des suivis personnalisés et vous pouvez utiliser vos montres ou applications connectées.</div>
+			</div>
+		</div>
+
+		<!-- SECTION : Installations -->
+		<div class="faq-content" data-section="installations" style="display:none;">
+			<h2>Installations</h2>
+
+			<div class="faq-item">
+				<div class="faq-question">Quels équipements sont disponibles ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Racks, barres olympiques, haltères, bancs, kettlebells, machines guidées et un espace cardio complet.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Avez-vous une zone d’haltérophilie dédiée ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, nous disposons de plateformes officielles avec barres et disques adaptés à la compétition.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Disposez-vous de vestiaires et douches ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, des vestiaires hommes/femmes séparés, douches, casiers et un espace détente sont à votre disposition.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je venir avec un ami non adhérent ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, nous proposons un pass découverte pour venir s’entraîner avec un ami occasionnellement.</div>
+			</div>
+		</div>
+
+		<!-- SECTION : Compétition -->
+		<div class="faq-content" data-section="competition" style="display:none;">
+			<h2>Compétition & Événements</h2>
+
+			<div class="faq-item">
+				<div class="faq-question">Organisez-vous des compétitions ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, le CHM Saleux participe à de nombreuses compétitions régionales et nationales d’haltérophilie.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Y a-t-il un suivi spécifique pour les athlètes ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, nos coachs accompagnent les athlètes tout au long de la saison avec une préparation adaptée.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Faites-vous des événements internes ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, des challenges, portes ouvertes et initiations sont régulièrement organisés pour la communauté du club.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je assister à une compétition sans participer ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Bien sûr ! Les spectateurs sont toujours les bienvenus pour encourager les athlètes du CHM.</div>
+			</div>
+		</div>
+
+		<!-- SECTION : Autres -->
+		<div class="faq-content" data-section="autres" style="display:none;">
+			<h2>Autres</h2>
+
+			<div class="faq-item">
+				<div class="faq-question">Comment contacter le CHM Saleux ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Vous pouvez nous joindre via Instagram, Facebook, WhatsApp ou directement à la salle.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Où se situe le club ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Le CHM Saleux se situe à Saleux (près d’Amiens), avec un parking gratuit pour les membres.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Proposez-vous des stages ou ateliers ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Oui, nous organisons des stages techniques et des journées de perfectionnement tout au long de l’année.</div>
+			</div>
+
+			<div class="faq-item">
+				<div class="faq-question">Puis-je louer la salle pour un événement ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">Sous certaines conditions, il est possible de privatiser la salle pour un stage ou une démonstration.</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="faq-contact-section">
+		<div class="faq-contact-wrapper">
+			<h2>Votre question n’est pas ici ?</h2>
+			<p>Pas de souci ! Contactez-nous directement via vos réseaux préférés ou envoyez-nous un message.</p>
+
+			<div class="faq-contact-cards">
+				<div class="faq-card">
+					<a href="https://www.instagram.com/chmsaleux/" target="_blank" rel="noopener noreferrer">
+						<img src="{{ asset('images/instagram.png') }}" alt="Instagram">
+						<h3>Instagram</h3>
+					</a>
+				</div>
+
+				<div class="faq-card">
+					<a href="https://www.facebook.com/chmsaleux1/" target="_blank" rel="noopener noreferrer">
+						<img src="{{ asset('images/facebook.png') }}" alt="Facebook">
+						<h3>Facebook</h3>
+					</a>
+				</div>
+
+				<div class="faq-card">
+					<a href="https://chat.whatsapp.com/TON_CODE_DE_GROUPE" target="_blank" rel="noopener noreferrer">
+						<img src="{{ asset('images/whatsapp.png') }}" alt="WhatsApp">
+						<h3>WhatsApp</h3>
+					</a>
+				</div>
+
+				<div class="faq-card">
+					<a href="{{ path('contact') }}" target="_blank" rel="noopener noreferrer">
+						<img src="{{ asset('images/envelope.png') }}" alt="Contact">
+						<h3>Envoyer un message</h3>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- JS pour ouvrir/fermer les réponses -->
+	 <script>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													document.querySelectorAll('.faq-sidebar li').forEach(li => {
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    li.addEventListener('click', e => {
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        e.preventDefault();
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Retirer "active" des autres liens
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        document.querySelectorAll('.faq-sidebar li').forEach(item => item.classList.remove('active'));
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        li.classList.add('active');
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Récupérer la section ciblée
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        const target = li.getAttribute('data-section');
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Cacher toutes les sections FAQ
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        document.querySelectorAll('.faq-content').forEach(content => {
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													            content.style.display = 'none';
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        });
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Afficher la section correspondante
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        const activeContent = document.querySelector(`.faq-content[data-section="${target}"]`);
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        if (activeContent) activeContent.style.display = 'block';
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    });
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													});
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													// Animation ouverture/fermeture réponses
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													document.addEventListener('click', e => {
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    if (e.target.classList.contains('faq-question')) {
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        const item = e.target.closest('.faq-item');
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        item.classList.toggle('active');
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    }
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													});
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																													</script>
+	<!-- Styles FAQ -->
+		<style>
+
+
+/* ================= HERO HEADER ================= */
+
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 0;
+}
+
+.hero-header {
+	position: relative;
+	width: 100%;
+	height: 50vh;
+	background: linear-gradient(rgba(37, 99, 235, 0.5), rgba(37, 99, 235, 0.5)), url('http://chm-saleux.fr/wp-content/uploads/2018/06/IMAG1090.jpg') center/cover no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--text-light);
+	text-align: center;
+	overflow: hidden;
+}
+
+.hero-content {
+	position: relative;
+	z-index: 1;
+	margin-top: 100px;
+	animation: fadeInUp 1s ease-out;
+}
+
+.hero-content h1 {
+	font-size: 5rem;
+	font-weight: 900;
+	margin: 0 0 1rem;
+	font-family: 'Bebas Neue', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	color: white;
+	text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content p {
+	font-size: 1.4rem;
+	line-height: 1.8;
+	color: #E2E8F0;
+	margin-bottom: 2rem;
+}
+
+@media(max-width: 768px) {
+	.hero-content h1 {
+		font-size: 3.2rem;
+	}
+	.hero-content p {
+		font-size: 1.1rem;
+	}
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+/* ================= FAQ ================= */
+.faq-container {
+	display: flex;
+	max-width: 1600px;
+	width: 95%;
+	margin: 5rem auto;
+	gap: 3rem;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1.1rem; /* taille de base augmentée */
+	line-height: 1.7;
+}
+
+/* ----- SIDEBAR ----- */
+.faq-sidebar {
+	flex: 0.8;
+	min-width: 260px;
+	background-color: #fff;
+	padding: 2.5rem 2rem;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	position: sticky;
+	top: 2rem;
+}
+.faq-sidebar h2 {
+	font-size: 1.8rem; /* plus grand */
+	color: #333;
+	margin-bottom: 1.8rem;
+}
+.faq-sidebar h3 {
+	font-size: 2rem;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	line-height: 1.2;
+	font-weight: 900;
+	color: #07123a;
+}
+
+.faq-sidebar h3 span {
+	color: #ff6600;
+}
+.faq-sidebar a {
+	color: #ff7e5f;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 1.1rem;
+	transition: color 0.3s ease;
+}
+.faq-sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.faq-sidebar ul li {
+	border-bottom: 1px solid #eee;
+}
+
+.faq-sidebar ul li a {
+	display: block;
+	position: relative;
+	padding: 0.9rem 25px 0.9rem 0;
+	color: #555;
+	text-decoration: none;
+	font-weight: 600;
+	transition: color 0.3s, transform 0.2s;
+}
+
+.faq-sidebar ul li a::after {
+	content: "➔"; /* flèche simple → */
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #555; /* couleur flèche par défaut */
+	transition: transform 0.3s, color 0.3s;
+}
+.faq-sidebar ul li a:hover::after {
+	color: #ff6600; /* couleur flèche au survol */
+}
+.faq-sidebar ul li a:hover {
+	color: #ff6600;
+}
+
+/* ----- CONTENU FAQ ----- */
+.faq-content {
+	flex: 2.5;
+	background: #fff;
+	padding: 3rem;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.faq-content h1 {
+	font-size: 2.4rem;
+	margin-bottom: 2rem;
+	color: #333;
+	text-align: center;
+}
+.faq-content h2 {
+	font-size: 2rem;
+	text-transform: uppercase;
+	font-weight: 900;
+	margin-bottom: 1.5rem;
+	color: #07123a;
+}
+.faq-content p {
+	font-size: 1.1rem;
+	color: #555;
+	margin-bottom: 1rem;
+}
+.faq-content a {
+	color: #ff7e5f;
+	font-weight: 600;
+	text-decoration: none;
+}
+/* ----- QUESTIONS / RÉPONSES ----- */
+.faq-item {
+	border-top: 1px solid #eee;
+	padding: 1rem 0;
+}
+
+.faq-question {
+	display: flex;
+	justify-content: space-between;
+	font-weight: 700;
+	cursor: pointer;
+	color: #333;
+	padding-right: 1rem;
+}
+.faq-question:hover {
+	transition: transform 0.3s, color 0.3s;
+	color: #ff6600;
+}
+.faq-question span {
+	transition: transform 0.3s, color 0.3s;
+	font-size: 1.5rem;
+	color: #ff6600;
+}
+
+.faq-item.active .faq-question span {
+	transform: rotate(45deg);
+}
+
+.faq-answer {
+	display: none;
+	margin-top: 0.6rem;
+	color: #555;
+	line-height: 1.6;
+	padding-left: 1rem;
+	border-left: 3px solid #ff6600;
+	transition: all 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+	display: block;
+}
+
+@media(max-width: 900px) {
+	.faq-container {
+		flex-direction: column;
+		padding: 0 1rem;
+	}
+	.faq-sidebar {
+		position: relative;
+		top: 0;
+		margin-bottom: 2rem;
+	}
+}
+
+/* ================= CONTACT (Modernisé) ================= */
+.faq-contact-section {
+	padding: 3rem 1rem;
+	text-align: center;
+	border-top: 1px solid #e0e6ef;
+}
+
+.faq-contact-wrapper h2 {
+	font-size: 2.6rem;
+	font-weight: 800;
+	margin-bottom: 0.5rem;
+	color: #07123a;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.faq-contact-wrapper p {
+	font-size: 1.2rem;
+	color: #555;
+	margin-bottom: 3.5rem;
+	max-width: 650px;
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 1.6;
+}
+
+/* Conteneur cartes contact */
+.faq-contact-cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0;
+}
+
+/* Carte contact moderne */
+.faq-card {
+	border-radius: 16px;
+	padding: 0 1rem;
+	width: 180px;
+	text-align: center;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.faq-card img {
+	width: 45px;
+	height: 45px;
+	margin-bottom: 1rem;
+	transition: transform 0.3s ease;
+}
+
+.faq-card:hover img {
+	transform: scale(1.1);
+}
+
+.faq-card h3 {
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #07123a;
+	margin: 0;
+	transition: color 0.3s;
+}
+
+.faq-card:hover h3 {
+	color: #ff6600;
+}
+
+.faq-card a {
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+	.faq-contact-section {
+		padding: 3rem 1rem;
+	}
+	.faq-contact-cards {
+		flex-direction: column;
+		align-items: center;
+	}
+	.faq-card {
+		width: 85%;
+		max-width: 300px;
+	}
+}
+
+
+</style>{% endblock %}

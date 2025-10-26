@@ -1,0 +1,237 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	.dashboard-container {
+		transform: scale(1.00); /* au lieu de 1.15 */
+		transform-origin: top left;
+		width: 173%; /* limite le débordement */
+		margin-left: 1.5rem; /* pour centrer légèrement à cause de la sidebar */
+	}
+
+	.dashboard-container h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+	}
+
+	/* Header / Toolbar */
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.table-toolbar {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.search-bar {
+		padding: 0.45rem 0.8rem;
+		border: 1px solid var(--border);
+		background: var(--bg-darker);
+		color: var(--text-main);
+		font-size: 0.9rem;
+		outline: none;
+	}
+	.search-bar:focus {
+		border-color: var(--accent);
+	}
+
+	.btn {
+		background: var(--accent);
+		color: #fff;
+		border: none;
+		padding: 0.5rem 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: 0.2s;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	.btn:hover {
+		background: #e25500;
+	}
+
+	/* Table */
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		color: #e5e7eb;
+	}
+
+	.table thead {
+		background: var(--bg-darker);
+		color: #fff;
+	}
+
+	.table th,
+	.table td {
+		text-align: left;
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.action-edit {
+		color: #60a5fa;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.action-edit:hover {
+		color: #93c5fd;
+	}
+	.action-delete {
+		color: #ef4444;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.action-delete:hover {
+		color: #f87171;
+	}
+
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+	.action-delete {
+		color: #ef4444;
+		font-weight: 600;
+		border: none;
+		background: none;
+		cursor: pointer;
+		padding: 0;
+		transition: color 0.2s ease;
+	}
+
+	.action-delete:hover {
+		color: #ff6666;
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>📄
+			{{ title }}</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">📋 Liste des pages</h3>
+				<div class="table-toolbar">
+					<input type="text" id="searchPages" class="search-bar" placeholder="Rechercher...">
+					<button class="btn" onclick="location.href='{{ path('admin_pages_new') }}'">Ajouter une page</button>
+
+				</div>
+			</div>
+
+			<table class="table" id="pagesTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Titre</th>
+						<th>Slug</th>
+						<th>Dernière mise à jour</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for page in pages %}
+						<tr>
+							<td>{{ page.id }}</td>
+							<td>{{ page.title }}</td>
+							<td>{{ page.slug }}</td>
+							<td>{{ page.updatedAt ? page.updatedAt|date('d/m/Y H:i') : '-' }}</td>
+							<td>
+								<a href="{{ path('admin_pages_edit', { id: page.id }) }}" class="action-edit">Modifier</a>
+								|
+								<form method="post" action="{{ path('admin_pages_delete', { id: page.id }) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette page ?');" style="display:inline;">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ page.id) }}">
+									<button class="action-delete">Supprimer</button>
+								</form>
+
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5" class="empty-row">Aucune page trouvée.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+ <script>
+function attachSearch(inputSel, tableSel) {
+	const input = document.querySelector(inputSel);
+	const rows = document.querySelectorAll(tableSel + ' tbody tr');
+	if (!input) return;
+	input.addEventListener('keyup', () => {
+		const q = input.value.toLowerCase();
+		rows.forEach(r => {
+			r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
+		});
+	});
+}
+attachSearch('#searchPages', '#pagesTable');
+</script>{% endblock %}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head><meta charset="UTF-8"><title>Confirmez votre demande</title>
+	</head>
+	<body style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#111;">
+		<h2>Confirmez votre demande de numéro de licence</h2>
+		<p>Bonjour
+			{{ firstName ?? 'adhérent' }},</p>
+		<p>Une demande a été effectuée pour récupérer votre numéro de licence.</p>
+		<p>Si c'est bien vous, cliquez sur le bouton ci-dessous (le lien expire à
+			{{ expiresAt|date('d/m/Y H:i') }}).</p>
+		<p>
+			<a href="{{ confirmUrl }}" style="display:inline-block;background:#2563eb;color:#fff;padding:10px 16px;border-radius:6px;text-decoration:none">
+				✅ Confirmer ma demande
+			</a>
+		</p>
+		<p>Si vous n'êtes pas à l'origine de cette demande, ignorez cet email.</p>
+		<p style="color:#666;font-size:12px">Club d’Haltérophilie et Musculation</p>
+	</body>
+</html>

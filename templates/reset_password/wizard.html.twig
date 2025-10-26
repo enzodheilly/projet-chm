@@ -1,0 +1,434 @@
+{% block body %}
+	<div class="header-logo">
+		<img src="{{ asset('images/logo-chm.png') }}" alt="CHM Saleux Logo">
+	</div>
+
+	<div class="form-container reset-container">
+		<h1>Réinitialisation du mot de passe</h1>
+		<p>Suivez les étapes ci-dessous pour réinitialiser votre mot de passe</p>
+
+		<!-- ✅ Barre de progression -->
+		<div class="progress-container">
+			<div class="progress-bar">
+				<div class="progress-fill"></div>
+
+				<div class="step-wrapper">
+					<div class="step active" data-step="1">
+						<span>1</span>
+					</div>
+					<p>Email</p>
+				</div>
+
+				<div class="step-wrapper">
+					<div class="step" data-step="2">
+						<span>2</span>
+					</div>
+					<p>Vérification</p>
+				</div>
+
+				<div class="step-wrapper">
+					<div class="step" data-step="3">
+						<span>3</span>
+					</div>
+					<p>Nouveau</p>
+				</div>
+
+				<div class="step-wrapper">
+					<div class="step" data-step="4">
+						<span>4</span>
+					</div>
+					<p>Terminé</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- ✅ Étape 1 -->
+		<div class="step-content active" id="step1">
+			<h2>Entrez votre email</h2>
+			<input type="email" id="resetEmail" placeholder="Votre adresse email">
+			<button id="sendEmailBtn">Envoyer</button>
+		</div>
+
+		<!-- ✅ Étape 2 -->
+		<div class="step-content" id="step2">
+			<h2>Vérification</h2>
+			<p>Un lien de réinitialisation a été envoyé à votre adresse email.</p>
+		</div>
+
+		<!-- ✅ Étape 3 -->
+		<div class="step-content" id="step3">
+			<h2>Nouveau mot de passe</h2>
+
+			<div class="password-input-wrapper">
+				<input type="password" id="newPassword" placeholder="Nouveau mot de passe" minlength="8" maxlength="12" required>
+				<span class="toggle-password" onclick="togglePassword('newPassword')">
+					<img id="eyeOpen_newPassword" src="{{ asset('images/oeil1.png') }}" alt="Afficher">
+					<img id="eyeClosed_newPassword" src="{{ asset('images/oeil2.png') }}" alt="Cacher" class="hide">
+				</span>
+			</div>
+
+			<div class="password-input-wrapper">
+				<input type="password" id="confirmPassword" placeholder="Confirmer le mot de passe" minlength="8" maxlength="12" required>
+				<span class="toggle-password" onclick="togglePassword('confirmPassword')">
+					<img id="eyeOpen_confirmPassword" src="{{ asset('images/oeil1.png') }}" alt="Afficher">
+					<img id="eyeClosed_confirmPassword" src="{{ asset('images/oeil2.png') }}" alt="Cacher" class="hide">
+				</span>
+			</div>
+
+			<button id="savePasswordBtn">Changer le mot de passe</button>
+		</div>
+
+
+		<!-- ✅ Étape 4 -->
+		<div class="step-content" id="step4">
+			<h2>✅ Mot de passe réinitialisé</h2>
+			<p>Vous pouvez maintenant vous connecter.</p>
+			<a href="{{ path('app_login') }}" class="btn">Retour à la connexion</a>
+		</div>
+	</div>
+
+	 <script>
+						function goToStep(step) {
+							document.querySelectorAll('.step-content').forEach(c => c.classList.remove('active'));
+							document.querySelector(`#step${step}`).classList.add('active');
+					
+							const steps = document.querySelectorAll('.step');
+							steps.forEach((el, i) => {
+								el.classList.toggle('active', i + 1 === step);
+								el.classList.toggle('completed', i + 1 < step);
+							});
+					
+							const progressFill = document.querySelector('.progress-fill');
+							const totalSteps = steps.length - 1;
+							const progress = ((step - 1) / totalSteps) * 100;
+							progressFill.style.width = `calc(${progress}% + 16px)`;
+						}
+					
+						// --- Étape 1 : envoi de l'email ---
+						document.getElementById('sendEmailBtn')?.addEventListener('click', async () => {
+							const email = document.getElementById('resetEmail').value.trim();
+							if (!email) return alert('Veuillez entrer un email.');
+					
+							try {
+								const res = await fetch('/reset-password', {
+									method: 'POST',
+									headers: { 'Content-Type': 'application/json' },
+									body: JSON.stringify({ email })
+								});
+								const data = await res.json();
+								if (data.success) goToStep(2);
+								else alert(data.message || 'Erreur lors de l’envoi du mail.');
+							} catch (err) {
+								alert("Une erreur est survenue. Veuillez réessayer.");
+							}
+						});
+					
+						// --- Étape 3 : changement du mot de passe ---
+						document.getElementById('savePasswordBtn')?.addEventListener('click', async () => {
+							const pass1 = document.getElementById('newPassword').value;
+							const pass2 = document.getElementById('confirmPassword').value;
+					
+							// ✅ Vérifications de sécurité
+							if (pass1.length < 12)
+								return alert('Le mot de passe doit contenir au moins 12 caractères.');
+							if (pass1.length > 64)
+								return alert('Le mot de passe ne doit pas dépasser 64 caractères.');
+							if (pass1 !== pass2)
+								return alert('Les mots de passe ne correspondent pas.');
+					
+							try {
+								const res = await fetch('/api/reset-password-final', {
+									method: 'POST',
+									headers: { 'Content-Type': 'application/json' },
+									body: JSON.stringify({ token: "{{ token|default('') }}", password: pass1 })
+								});
+								const data = await res.json();
+					
+								if (data.success) goToStep(4);
+								else alert(data.message || 'Erreur lors de la réinitialisation.');
+							} catch (err) {
+								alert("Une erreur est survenue. Veuillez réessayer.");
+							}
+						});
+					
+						// --- Gestion des yeux ---
+						function togglePassword(fieldId) {
+							const input = document.getElementById(fieldId);
+							const eyeOpen = document.getElementById("eyeOpen_" + fieldId);
+							const eyeClosed = document.getElementById("eyeClosed_" + fieldId);
+					
+							if (input.type === "password") {
+								input.type = "text";
+								eyeOpen.classList.add("hide");
+								eyeClosed.classList.remove("hide");
+							} else {
+								input.type = "password";
+								eyeClosed.classList.add("hide");
+								eyeOpen.classList.remove("hide");
+							}
+						}
+					
+						// --- Si token présent : aller directement à l’étape 3 ---
+						{% if invalid_token %}
+							alert("Le lien de réinitialisation est invalide ou expiré. Veuillez refaire une demande.");
+							goToStep(1);
+						{% elseif token %}
+							goToStep(3);
+						{% else %}
+							goToStep(1);
+						{% endif %}
+					
+						// ✅ Disparition automatique des flash messages
+						setTimeout(() => {
+							document.querySelectorAll('.flash-message').forEach(msg => {
+								msg.style.transition = 'opacity 0.5s ease';
+								msg.style.opacity = '0';
+								setTimeout(() => msg.remove(), 500);
+							});
+						}, 4000);
+					</script>
+
+	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+			background: white;
+			min-height: 100vh;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #333;
+			position: relative;
+		}
+
+		.header-logo {
+			position: absolute;
+			top: 15px;
+			left: 25px;
+		}
+		.header-logo img {
+			height: 50px;
+		}
+
+		.form-container {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 1.8rem 1.6rem;
+			width: 100%;
+			max-width: 380px;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+			text-align: left;
+		}
+
+		h1 {
+			font-size: 1.4rem;
+			color: #003366;
+			text-align: center;
+			margin-bottom: 0.3rem;
+		}
+		p {
+			color: #666;
+			font-size: 0.85rem;
+			margin-bottom: 1.3rem;
+			text-align: center;
+		}
+
+		/* ----------- PROGRESSION ----------- */
+		.progress-bar {
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			margin: 1.2rem 0;
+		}
+		.progress-bar::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 0;
+			width: 100%;
+			height: 5px;
+			background: #ddd;
+			transform: translateY(-50%);
+			border-radius: 5px;
+			z-index: 0;
+		}
+		.progress-fill {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			height: 5px;
+			width: 0;
+			background: #ff6600;
+			transform: translateY(-50%);
+			border-radius: 5px;
+			transition: width 0.4s ease;
+			z-index: 1;
+		}
+		.step-wrapper {
+			position: relative;
+			text-align: center;
+			flex: 1;
+			z-index: 2;
+		}
+		.step {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			background: #ccc;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			font-weight: 600;
+			margin: 0 auto 0.4rem;
+			transition: all 0.3s ease;
+			font-size: 0.8rem;
+			box-shadow: 0 0 0 3px #fff;
+		}
+		.step.active {
+			background: #ff6600;
+			transform: scale(1.15);
+		}
+		.step.completed {
+			background: #00cc66;
+		}
+		.step-wrapper p {
+			margin: 0;
+			font-size: 0.75rem;
+			color: #555;
+			font-weight: 500;
+		}
+		.step.active + p {
+			color: #ff6600;
+			font-weight: 600;
+		}
+
+		/* ----------- INPUTS & BOUTONS ----------- */
+		.password-input-wrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+		}
+		.password-input-wrapper input {
+			width: 100%;
+			padding-right: 38px;
+		}
+		.toggle-password {
+			position: absolute;
+			right: 10px;
+			top: 36%;
+			transform: translateY(-50%);
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.toggle-password img {
+			width: 18px;
+			height: 18px;
+			opacity: 0.7;
+			transition: opacity 0.3s ease, transform 0.2s ease;
+		}
+		.toggle-password img.hide {
+			display: none;
+		}
+		.toggle-password:hover img {
+			opacity: 1;
+			transform: scale(1.1);
+		}
+
+		input {
+			display: block;
+			width: 100%;
+			padding: 0.7rem;
+			margin-bottom: 1rem;
+			border-radius: 8px;
+			border: 1.3px solid #ddd;
+			font-size: 0.85rem;
+			background: #fafafa;
+			transition: all 0.3s ease;
+		}
+		input:focus {
+			border-color: #ff6600;
+			background-color: #fff;
+			box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+			outline: none;
+		}
+
+		button,
+		.btn {
+			width: 70%;
+			padding: 0.8rem;
+			background: #ff6600;
+			border: none;
+			border-radius: 8px;
+			color: #fff;
+			font-weight: 600;
+			font-size: 0.9rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto;
+		}
+		button:hover,
+		.btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+		}
+
+		.step-content {
+			display: none;
+			text-align: center;
+			animation: fadeIn 0.3s ease;
+		}
+		.step-content.active {
+			display: block;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* ----------- FLASH MESSAGES ----------- */
+		.flash-message {
+			padding: 0.7rem 1rem;
+			border-radius: 8px;
+			margin-bottom: 1rem;
+			font-size: 0.8rem;
+			font-weight: 500;
+			text-align: left;
+			animation: fadeIn 0.3s ease;
+		}
+		.flash-message.success {
+			background-color: #e6ffed;
+			color: #007a3d;
+			border: 1px solid #8de0a4;
+		}
+		.flash-message.warning {
+			background-color: #fff7e6;
+			color: #b36b00;
+			border: 1px solid #ffd580;
+		}
+		.flash-message.error {
+			background-color: #ffe6e6;
+			color: #cc0000;
+			border: 1px solid #ff9999;
+		}
+		.flash-message.info {
+			background-color: #e6f0ff;
+			color: #0047b3;
+			border: 1px solid #99c2ff;
+		}
+	</style>
+{% endblock %}

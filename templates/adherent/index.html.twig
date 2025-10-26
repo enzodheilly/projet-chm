@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace membre
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5 mb-5">
+
+		<h1 class="text-center mb-4">👋 Bonjour
+			{{ app.user.firstname }}</h1>
+
+		<!-- Informations sur la licence -->
+		<div class="card mb-4 shadow-sm p-4">
+			<h2 class="text-primary mb-3">🎫 Informations licence</h2>
+			<ul>
+				<li>
+					<strong>Numéro de licence :</strong>
+					{{ app.user.licenceNumber }}</li>
+				<li>
+					<strong>Statut :</strong>
+					<span class="badge {% if app.user.licenceStatus == 'Active' %}bg-success{% else %}bg-danger{% endif %}">
+						{{ app.user.licenceStatus }}
+					</span>
+				</li>
+				<li>
+					<strong>Date d’expiration :</strong>
+					{{ app.user.licenceEndDate|date('d/m/Y') }}</li>
+			</ul>
+		</div>
+
+		<!-- Paiement HelloAsso intégré -->
+		<div id="paiement" class="card mb-4 shadow-sm p-4">
+			<h2 class="text-primary mb-3">💳 Paiement de la cotisation</h2>
+			<p>
+				Le paiement de la cotisation annuelle du club s’effectue exclusivement via HelloAsso.
+				      Remplissez le formulaire ci-dessous pour régler votre adhésion en toute sécurité :
+			</p>
+
+			<div class="helloasso-container mt-4 mb-4 text-center">
+				<iframe src="https://www.helloasso.com/associations/ton-club/adhesions/licence-2025/formulaire" width="100%" height="950" frameborder="0" style="border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"></iframe>
+			</div>
+
+			<p class="text-muted small text-center">
+				(Le paiement est entièrement géré par HelloAsso sur une plateforme sécurisée.)
+			</p>
+		</div>
+
+		<!-- Historique des paiements -->
+		<div class="card shadow-sm p-4">
+			<h2 class="text-primary mb-3">📜 Historique des paiements</h2>
+
+			{% if app.user.payments is not empty %}
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Montant</th>
+							<th>Méthode</th>
+							<th>Statut</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for payment in app.user.payments %}
+							<tr>
+								<td>{{ payment.date|date('d/m/Y') }}</td>
+								<td>{{ payment.amount }}
+									€</td>
+								<td>{{ payment.method }}</td>
+								<td>
+									<span class="badge {% if payment.status == 'Validé' %}bg-success{% else %}bg-warning{% endif %}">
+										{{ payment.status }}
+									</span>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% else %}
+				<p class="text-muted">Aucun paiement enregistré pour le moment.</p>
+			{% endif %}
+		</div>
+
+	</div>
+{% endblock %}

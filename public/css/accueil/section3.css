@@ -1,0 +1,164 @@
+/* ✅ Style global */
+		body {
+			color: #0f172a;
+			margin: 0;
+			padding: 0;
+			font-family: 'Inter', sans-serif;
+			overflow-x: hidden;
+		}
+
+		/* ✅ Section principale */
+		.slider-section {
+			background-color: #005b94;
+			padding: 3rem 5%;
+		}
+
+		/* ✅ Titre */
+		.slider-title {
+			font-family: "Oswald", sans-serif;
+			font-weight: 700;
+			font-size: 2.2rem;
+			color: #f97316;
+			margin-bottom: 0.5rem;
+			text-align: center;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		/* ✅ Sous-titre */
+		.slider-subtitle {
+			font-size: 1rem;
+			color: white;
+			margin-bottom: 2rem;
+			font-weight: 400;
+			max-width: 600px;
+			text-align: center;
+			margin-inline: auto;
+		}
+
+		/* ✅ Wrapper pour le slider et les flèches */
+		.slider-wrapper {
+			position: relative;
+			width: 100%;
+			max-width: 1300px;
+			margin: 0 auto;
+		}
+
+		/* ✅ Conteneur du slider (cache les slides hors viewport) */
+		.slider-container {
+			overflow: hidden; /* important ! */
+		}
+
+		/* ✅ Slider */
+		.slider {
+			display: flex;
+			transition: transform 0.5s ease;
+		}
+
+		/* ✅ Slide */
+		.slide {
+			flex: 0 0 33.333%; /* 3 slides visibles sur desktop */
+			text-align: center;
+			transition: all 0.4s ease;
+			border-radius: 1rem;
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+
+		.slide img {
+			width: 100%;
+			height: auto;
+			max-height: 400px;
+			object-fit: cover;
+			border-radius: 1rem;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+		}
+
+		.slide p {
+			margin-top: 10px;
+			font-size: 1rem;
+			color: white;
+			text-transform: uppercase;
+		}
+
+		/* ✅ Flèches */
+		.nav-button {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background: rgba(255, 255, 255, 0.85);
+			color: #005b94;
+			border: none;
+			cursor: pointer;
+			padding: 0.6rem 1.3rem;
+			font-size: 1.6rem;
+			z-index: 10;
+			border-radius: 50%;
+			transition: all 0.3s ease;
+			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+		}
+
+		.nav-button:hover {
+			background: #005b94;
+			color: #fff;
+		}
+
+		.nav-button.left {
+			left: -60px;
+		}
+		.nav-button.right {
+			right: -60px;
+		}
+
+		/* ✅ Responsive tablette */
+		@media(max-width: 1024px) {
+			.slide {
+				flex: 0 0 50%;
+			} /* 2 slides visibles */
+			.slide img {
+				max-height: 350px;
+			}
+		}
+
+		/* ✅ Responsive mobile */
+		@media(max-width: 768px) {
+			.slider-title {
+				font-size: 1.8rem;
+				text-align: center;
+			}
+			.slider-subtitle {
+				font-size: 0.95rem;
+				padding: 0 1rem;
+			}
+			.slide {
+				flex: 0 0 100%;
+				padding: 0;
+				margin-bottom: 1rem;
+			}
+			.nav-button {
+				display: none;
+			}; /* flèches cachées sur mobile */
+		}
+
+		@media(max-width: 768px) {
+			.slider-container {
+				overflow-x: auto; /* permet le scroll horizontal sur mobile */
+				-webkit-overflow-scrolling: touch; /* pour un scroll fluide sur iOS */
+				scroll-snap-type: x mandatory; /* pour "snap" sur chaque slide */
+			}
+
+			.slider {
+				display: flex;
+				gap: 10px;
+			}
+
+			.slide {
+				flex: 0 0 80%; /* largeur d’une slide visible sur mobile */
+				scroll-snap-align: start; /* s’aligne sur le début du container */
+				margin-right: 10px;
+			}
+
+			.nav-button {
+				display: none; /* flèches cachées sur mobile */
+			}
+		}

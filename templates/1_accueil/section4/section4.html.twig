@@ -1,0 +1,97 @@
+<section class="news-section">
+	<h2 class="news-title">
+		DÉCOUVREZ LES
+		<span style="color:#ff6600;">DERNIÈRES ACTUALITÉS</span>
+	</h2>
+	<p class="news-subtitle">
+		Suivez les performances, événements et moments forts de notre club !
+	</p>
+	<div class="news-grid">
+		{% for article in articles|slice(0, 4) %}
+			<a href="{{ path('article_show', { id: article.id }) }}" class="news-card">
+				<img src="{{ asset(article.image) }}" alt="{{ article.title }}">
+				<div class="news-overlay">
+					<h4>{{ article.title }}</h4>
+					<p>{{ article.summary }}</p>
+				</div>
+			</a>
+		{% else %}
+			<p>Aucune actualité pour le moment.</p>
+		{% endfor %}
+	</div>
+	<a href="actualites" class="btn-news">VOIR PLUS D'ACTUALITÉS</a>
+</section>
+<section class="faq-section">
+	<h2>FAQ</h2>
+	<div
+		class="faq-page">
+		<!-- Liste des FAQ -->
+		<div class="faq-items">
+			<div class="faq-item">
+				<div class="faq-question">Quels types d'abonnements propose le CHM Saleux ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">
+					Nous proposons des abonnements adaptés à tous les âges et niveaux :
+					<ul>
+						<li>Compétition Haltérophilie (8-13 ans, 14-20 ans, +21 ans)</li>
+						<li>Loisir Musculation & Haltérophilie (tout âge)</li>
+					</ul>
+				</div>
+			</div>
+			<div class="faq-item">
+				<div class="faq-question">Quelle est la différence entre les licences compétition jeune et adulte ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">
+					La licence compétition jeune (14-20 ans) inclut un encadrement adapté et l’accès aux compétitions juniors, tandis que la licence adulte (+21 ans) inclut la licence officielle, l’accès complet à la salle et la participation aux compétitions adultes.
+				</div>
+			</div>
+			<div class="faq-item">
+				<div class="faq-question">Que comprend l'abonnement Loisir Musculation & Haltérophilie ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">
+					Il comprend l’accès libre à la salle de musculation, l’haltérophilie loisir encadrée, le cardio, les cours collectifs et une ambiance conviviale pour tous les membres.
+				</div>
+			</div>
+			<div class="faq-item">
+				<div class="faq-question">Comment fonctionne l’accompagnement aux compétitions ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">
+					Nos coachs accompagnent les membres inscrits en compétition pour les préparer, assurer la sécurité et les accompagner lors des événements officiels.
+				</div>
+			</div>
+			<div class="faq-item">
+				<div class="faq-question">Est-ce que des cours collectifs sont inclus ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">
+					Oui, tous les membres Loisir ont accès à nos cours collectifs de renforcement, cardio et haltérophilie loisir. Les membres Compétition peuvent également bénéficier de séances encadrées spécifiques.
+				</div>
+			</div>
+			<div class="faq-item">
+				<div class="faq-question">Quels équipements sont disponibles dans la salle ?
+					<span>+</span>
+				</div>
+				<div class="faq-answer">
+					Nous disposons de racks de squat, bancs de musculation, haltères, barres olympiques, kettlebells, machines de musculation et d’un espace cardio complet.
+				</div>
+			</div>
+			<div class="faq-item">
+				<div class="faq-question">Quels sont les horaires d’ouverture de la salle ?
+					<span>+</span>
+				</div>
+			</div>
+			<a href="{{ path('faq') }}" class="faq-more">VOIR TOUTES LES FAQ ➔</a>
+		</div>
+		<!-- Encadré contact -->
+		<div class="faq-contact">
+			<h3>VOUS NE TROUVEZ PAS VOTRE QUESTION ?</h3>
+			<p>Contactez-nous pour toute demande spécifique, nous serons ravis de vous aider.</p>
+			<a href="{{ path('contact') }}" class="btn-faq">NOUS CONTACTER</a>
+		</div>
+	</div>
+</section>
+ <script> const faqItems = document.querySelectorAll('.faq-item'); faqItems.forEach(item => { item.querySelector('.faq-question').addEventListener('click', () => { const answer = item.querySelector('.faq-answer'); const isVisible = answer.style.display === 'block'; answer.style.display = isVisible ? 'none' : 'block'; item.querySelector('.faq-question span').textContent = isVisible ? '+' : '-'; }); }); </script>

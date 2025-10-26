@@ -1,0 +1,352 @@
+/* Design : CHM Saleux — Page Abonnements - Palette : blanc / gris doux / #005b94 (bleu) / #f97316 (orange) - Typo : Oswald titres, Inter corps de texte */
+:root {
+  --bg: #fff;
+  --card: #ffffff;
+  --blue: #005b94;
+  --orange: #f97316;
+  --accent-grad: linear-gradient(90deg, var(--blue) 0%, var(--orange) 100%);
+  --glass: rgba(255, 255, 255, 0.55);
+  --radius: 14px;
+  --shadow-soft: 0 8px 30px rgba(2, 6, 23, 0.06);
+  --shadow-strong: 0 12px 40px rgba(2, 6, 23, 0.12);
+}
+body {
+  background: var(--bg) !important;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  color: #0f172a;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+} /* Section wrapper */
+.pricing-hero {
+  max-width: 1200px;
+  margin: 4.5rem auto;
+  padding: 2.25rem;
+  box-sizing: border-box;
+} /* Header / intro */
+.pricing-head {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.pricing-left {
+  max-width: 62%;
+  margin-top: -30px;
+  margin-left: -10rem;
+}
+.eyebrow {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(0, 91, 148, 0.08);
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.6px;
+  margin-bottom: 0.6rem;
+}
+.pricing-title {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  margin: 0 0 0.6rem;
+  color: #07123a;
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.pricing-sub {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+} /* Grid of pricing cards */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cartes */
+  gap: 1rem; /* réduit légèrement pour donner plus de place aux cartes */
+  max-width: 1600px; /* augmente la largeur totale du container */
+  margin: 2.5rem auto 0 -10rem;
+}
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  min-width: 350px;
+  box-shadow: var(--shadow-strong);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  text-align: left;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 45px rgba(2, 6, 23, 0.14);
+}
+.card .badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--blue);
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+}
+.card-title {
+  font-family: "Oswald", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.35rem;
+  border-bottom: 2px solid var(--orange);
+  padding-bottom: 0.25rem;
+}
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.price {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #07123a;
+  line-height: 1;
+}
+.price sup {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.period {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-left: 0;
+}
+.subprice {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: -14px; /* moins d'espace */
+}
+.features {
+  margin-top: 0.8rem;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row; /* mettre les items sur la même ligne */
+  flex-wrap: wrap; /* permet de passer à la ligne si trop long */
+  gap: 1rem; /* espace entre les items */
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem; /* espace entre icône et texte */
+}
+.features li::before {
+  content: "\f058";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #10b981;
+  font-size: 0.85rem;
+}
+.card-cta {
+  margin-top: auto;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--blue);
+  color: white;
+  padding: 0.62rem 0.9rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 91, 148, 0.12);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+}
+.btn-outline {
+  border: 2px dashed rgba(0, 0, 0, 0.06);
+  background: transparent;
+  color: var(--blue);
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+} /* footer disclaimer */
+.pricing-foot {
+  margin-top: 2.2rem;
+  display: flex;
+  justify-content: center;
+}
+.disclaimer {
+  background: white;
+  padding: 1rem 1.4rem;
+  border-radius: 10px;
+  color: #4b5563;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
+  font-size: 0.95rem;
+  max-width: 960px;
+  margin-top: 30px;
+  text-align: center;
+}
+.disclaimer a {
+  text-decoration: none;
+  color: #ff7e5f; /* exemple : même couleur que ton thème */
+  font-weight: bold; /* optionnel */
+} /* ------------------ TABLETTE ------------------ */
+@media (max-width: 1024px) {
+  .pricing-left {
+    max-width: 58%;
+    margin-left: 0; /* éviter le décalage */
+  }
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0; /* alignement centré */
+    gap: 1rem;
+  }
+} /* ------------------ MOBILE ------------------ */
+@media (max-width: 760px) {
+  .pricing-hero {
+    margin: 2rem 1rem;
+    padding: 1rem;
+  }
+  .pricing-head {
+    gap: 1rem;
+  }
+  .pricing-left {
+    max-width: 100%; /* prend toute la largeur */
+    margin-left: 0; /* supprime le décalage */
+    margin-top: 0; /* supprime les marges négatives */
+    text-align: center; /* centre le texte */
+    padding: 0 1rem; /* petit padding pour ne pas toucher les bords */
+  } /* Grille responsive mobile : 1 carte par ligne */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  } /* Cartes plus compactes */
+  .card {
+    padding: 1.2rem;
+    border-radius: 12px;
+    min-width: auto;
+    text-align: center; /* texte centré sur mobile */
+    align-items: center; /* centre les éléments */
+  } /* Eyebrow, titres, prix adaptés */
+  .eyebrow {
+    font-size: 0.8rem;
+  }
+  .pricing-title {
+    font-size: 1.6rem;
+  }
+  .price {
+    font-size: 1.6rem;
+  } /* Liste des features */
+  .features {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  } /* Buttons card centrés */
+  .card-cta {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+} /* ------------------ TRÈS PETIT MOBILE ------------------ */
+@media (max-width: 360px) {
+  .pricing-title {
+    font-size: 1.35rem;
+  }
+  .price {
+    font-size: 1.35rem;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+  }
+  .btn-primary {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+}
+.payment-container iframe {
+  width: 100%;
+  min-height: 950px;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .payment-container iframe {
+    height: 1100px;
+  }
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.btn-success:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.btn-payment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #1db954, #0fa34a);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+  width: 100%;          
+  text-align: center;   
+  margin: 0; 
+  margin-left:11px;        
+}
+
+.btn-payment:hover {
+  background: linear-gradient(135deg, #19a64d, #0d8b3f);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+
+.btn-payment:active {
+  transform: scale(0.97);
+}
+
+.btn-payment .icon {
+  font-size: 1.2rem;
+}

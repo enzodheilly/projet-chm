@@ -1,0 +1,511 @@
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/registration.css') }}">
+
+	<style>
+		/* ----------- PAGE INSCRIPTION ----------- */
+		body {
+			font-family: 'Poppins', sans-serif;
+			background: white;
+			min-height: 100vh;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #333;
+			position: relative;
+		}
+
+		/* ----------- LOGO ----------- */
+		.header-logo {
+			position: absolute;
+			top: 15px;
+			left: 25px;
+		}
+		.header-logo img {
+			height: 50px;
+			width: auto;
+		}
+
+		/* ----------- CONTAINER ----------- */
+		.form-container {
+			background: #ffffff;
+			border-radius: 14px;
+			padding: 1.8rem 1.6rem;
+			width: 100%;
+			max-width: 340px;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+			text-align: left;
+		}
+
+		/* ----------- TITRE ----------- */
+		h1 {
+			font-size: 1.4rem;
+			color: #003366;
+			margin-bottom: 0.3rem;
+		}
+
+		.form-container p {
+			color: #666;
+			font-size: 0.85rem;
+			margin-bottom: 1.3rem;
+		}
+		.form-container p a {
+			color: #ff6600;
+			text-decoration: none;
+			font-weight: 600;
+		}
+		.form-container p a:hover {
+			text-decoration: underline;
+		}
+
+		/* ----------- FORMULAIRE ----------- */
+		form div {
+			margin-bottom: 0.9rem;
+		}
+
+		.input-group {
+			position: relative;
+		}
+
+
+		label {
+			display: block;
+			margin-bottom: 0.25rem;
+			font-weight: 500;
+			color: #003366;
+			font-size: 0.8rem;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"] {
+			width: 100%;
+			padding: 0.7rem;
+			border: 1.3px solid #ddd;
+			border-radius: 8px;
+			font-size: 0.85rem;
+			background: #fafafa;
+			transition: all 0.3s ease;
+		}
+		input:focus {
+			border-color: #ff6600;
+			background-color: #fff;
+			box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+			outline: none;
+		}
+		.password-group {
+			margin-bottom: 1rem;
+		}
+
+		.password-input-wrapper {
+			position: relative;
+			display: flex;
+			align-items: center;
+		}
+
+		.password-input-wrapper input {
+			padding-right: 38px; /* espace pour l’œil */
+		}
+		/* ----------- SÉPARATEUR ----------- */
+		.form-separator {
+			display: flex;
+			align-items: center;
+			text-align: center;
+			margin: 1.3rem 0;
+		}
+		.form-separator::before,
+		.form-separator::after {
+			content: "";
+			flex: 1;
+			border-bottom: 1px solid #ddd;
+		}
+		.form-separator span {
+			color: #888;
+			font-size: 0.75rem;
+			padding: 0 0.6rem;
+			font-style: italic;
+		}
+
+		/* ----------- MOT DE PASSE ----------- */
+		.password-label-wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.password-rules-link {
+			font-size: 0.75rem;
+			color: #ff6600;
+			cursor: pointer;
+			text-align: right;
+			font-weight: 500;
+		}
+		.password-rules-link:hover {
+			text-decoration: underline;
+			color: #e65500;
+		}
+
+		/* ----------- MODALE ----------- */
+		.modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			justify-content: center;
+			align-items: center;
+			z-index: 999;
+		}
+		.modal-content {
+			background: white;
+			padding: 1.5rem;
+			border-radius: 10px;
+			width: 90%;
+			max-width: 360px;
+			text-align: left;
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+			animation: fadeIn 0.25s ease;
+		}
+		.modal-content h2 {
+			color: #003366;
+			font-size: 1rem;
+			margin-bottom: 0.8rem;
+		}
+		.modal-content ul {
+			padding-left: 1rem;
+			color: #444;
+			font-size: 0.85rem;
+			line-height: 1.5;
+		}
+		.modal-content li {
+			list-style: disc;
+			margin-bottom: 0.4rem;
+		}
+		.close-modal {
+			background: none;
+			border: none;
+			color: #ff6600;
+			font-weight: 600;
+			font-size: 0.8rem;
+			cursor: pointer;
+			margin-top: 0.5rem;
+			float: right;
+		}
+		.close-modal:hover {
+			text-decoration: underline;
+			color: #e65500;
+		}
+
+		/* ----------- ICÔNES ŒIL ----------- */
+		.toggle-password {
+			position: absolute;
+			right: 10px;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.toggle-password img {
+			width: 18px;
+			height: 18px;
+			opacity: 0.7;
+			transition: opacity 0.3s ease, transform 0.2s ease;
+		}
+		.toggle-password img.hide {
+			display: none;
+		}
+
+		/* ----------- BOUTON ----------- */
+		button[type="submit"] {
+			width: 70%;
+			padding: 0.8rem;
+			background: #ff6600;
+			border: none;
+			border-radius: 8px;
+			color: #fff;
+			font-weight: 600;
+			font-size: 0.9rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-left: 50px;
+			position: relative;
+		}
+		button[type="submit"]:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+		}
+		button[disabled] {
+			opacity: 0.8;
+			cursor: not-allowed;
+		}
+
+		/* ----------- FLASH MESSAGE ERREUR GLOBAL ----------- */
+		.flash-message {
+			padding: 0.7rem 1rem;
+			border-radius: 8px;
+			margin-bottom: 1rem;
+			font-size: 0.8rem;
+			font-weight: 500;
+			text-align: left;
+			animation: fadeIn 0.3s ease;
+		}
+		.flash-message.error {
+			background-color: #ffe6e6;
+			color: #cc0000;
+			border: 1px solid #ff9999;
+		}
+		.flash-message.error ul {
+			margin: 0;
+			padding-left: 1rem;
+		}
+		.flash-message.error li {
+			list-style: disc;
+			margin-bottom: 0.2rem;
+		}
+
+		/* ❌ Cache les erreurs sous les champs */
+		.form-error-message,
+		ul.form-errors,
+		.form-error,
+		.form-errors {
+			display: none !important;
+		}
+
+		/* ----------- SPINNER GLOBAL ----------- */
+		#loading-spinner {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255, 255, 255, 0.8);
+			z-index: 9999;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		.spinner {
+			border: 5px solid #f3f3f3;
+			border-top: 5px solid #ff6600;
+			border-radius: 50%;
+			width: 60px;
+			height: 60px;
+			animation: spin 0.9s linear infinite;
+		}
+		.spinner-text {
+			margin-top: 1rem;
+			font-weight: 500;
+			color: #003366;
+			font-size: 0.95rem;
+			animation: blink 2s ease-in-out infinite;
+		}
+		@keyframes spin {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+		@keyframes blink {
+			0,
+			100% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0.5;
+			}
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="header-logo">
+		<img src="{{ asset('images/logo-chm.png') }}" alt="CHM Saleux Logo">
+	</div>
+
+	<div class="form-container">
+
+		{% import _self as macros %}
+
+		{# 📋 Gestion des erreurs globales #}
+		{% set all_errors = [] %}
+		{% for error in registrationForm.vars.errors %}
+			{% set all_errors = all_errors|merge([error.message]) %}
+		{% endfor %}
+		{% for child in registrationForm %}
+			{% for error in child.vars.errors %}
+				{% set all_errors = all_errors|merge([error.message]) %}
+			{% endfor %}
+			{% for subchild in child %}
+				{% for error in subchild.vars.errors %}
+					{% set all_errors = all_errors|merge([error.message]) %}
+				{% endfor %}
+			{% endfor %}
+		{% endfor %}
+
+		{% if all_errors|length > 0 %}
+			<div class="flash-message error">
+				<ul>
+					{% for message in all_errors %}
+						<li>{{ message }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+
+		<h1>Créer un compte</h1>
+		<p>
+			Créez un compte ou
+			<a href="{{ path('app_login', { redirect: app.request.get('redirect') }) }}">Se connecter</a>
+		</p>
+
+		{# ✅ Formulaire avec gestion du redirect #}
+		{{ form_start(registrationForm, {
+        'attr': {'id': 'register-form'},
+        'action': path('app_register', { redirect: app.request.get('redirect') })
+    }) }}
+
+		{# ✅ Champ caché pour conserver l’URL d’origine (paiement, etc.) #}
+		{% if app.request.get('redirect') %}
+			<input type="hidden" name="redirect" value="{{ app.request.get('redirect') }}">
+		{% endif %}
+
+		<div class="form-section">
+			<div class="input-group">
+				{{ form_label(registrationForm.firstName) }}
+				{{ form_widget(registrationForm.firstName) }}
+			</div>
+			<div class="input-group">
+				{{ form_label(registrationForm.lastName) }}
+				{{ form_widget(registrationForm.lastName) }}
+			</div>
+			<div class="input-group">
+				{{ form_label(registrationForm.email) }}
+				{{ form_widget(registrationForm.email) }}
+			</div>
+		</div>
+
+		<div class="form-separator">
+			<span>Informations de connexion</span>
+		</div>
+
+		<div class="form-section">
+			<div class="input-group password-group">
+				<div class="password-label-wrapper">
+					{{ form_label(registrationForm.password.first, 'Mot de passe') }}
+					<span class="password-rules-link" onclick="openModal()">Voir les critères</span>
+				</div>
+				<div class="password-input-wrapper">
+					{{ form_widget(registrationForm.password.first) }}
+					<span class="toggle-password" onclick="togglePassword('password_first')">
+						<img id="eyeOpen_password_first" src="{{ asset('images/oeil1.png') }}" alt="Afficher">
+						<img id="eyeClosed_password_first" src="{{ asset('images/oeil2.png') }}" alt="Cacher" class="hide">
+					</span>
+				</div>
+			</div>
+
+			<div class="input-group password-group">
+				{{ form_label(registrationForm.password.second, 'Confirmer le mot de passe') }}
+				<div class="password-input-wrapper">
+					{{ form_widget(registrationForm.password.second) }}
+					<span class="toggle-password" onclick="togglePassword('password_second')">
+						<img id="eyeOpen_password_second" src="{{ asset('images/oeil1.png') }}" alt="Afficher">
+						<img id="eyeClosed_password_second" src="{{ asset('images/oeil2.png') }}" alt="Cacher" class="hide">
+					</span>
+				</div>
+			</div>
+
+			<div class="checkbox-conditions">
+				{{ form_widget(registrationForm.acceptedTerms) }}
+				<label for="{{ registrationForm.acceptedTerms.vars.id }}">
+					J’accepte les
+					<a href="{{ path('page_show', { 'slug': 'conditions-utilisation' }) }}">Conditions d’utilisation</a>
+					et la
+					<a href="{{ path('page_show', { 'slug': 'confidentialite' }) }}">Politique de confidentialité</a>.
+				</label>
+			</div>
+
+			<button type="submit" id="registerButton">S’inscrire</button>
+
+			{{ form_widget(registrationForm._token) }}
+			{{ form_end(registrationForm, { 'render_rest': false }) }}
+		</div>
+
+		<!-- ✅ Spinner global -->
+		<div id="loading-spinner">
+			<div class="spinner"></div>
+			<div class="spinner-text">Création du compte...</div>
+		</div>
+
+		{# ----------- MODALE ----------- #}
+		<div class="modal" id="passwordModal">
+			<div class="modal-content">
+				<h2>Critères du mot de passe</h2>
+				<ul>
+					<li>Au moins
+						<strong>12 caractères</strong>
+					</li>
+					<li>Contenir
+						<strong>une majuscule</strong>
+					</li>
+					<li>Contenir
+						<strong>une minuscule</strong>
+					</li>
+					<li>Contenir
+						<strong>un chiffre</strong>
+					</li>
+					<li>Contenir
+						<strong>un caractère spécial</strong>
+					</li>
+				</ul>
+				<button class="close-modal" onclick="closeModal()">Fermer</button>
+			</div>
+		</div>
+	</div>
+
+
+	 <script>
+			function togglePassword(fieldName) {
+				const input = document.getElementById("registration_form_" + fieldName);
+				const eyeOpen = document.getElementById("eyeOpen_" + fieldName);
+				const eyeClosed = document.getElementById("eyeClosed_" + fieldName);
+		
+				if (input.type === "password") {
+					input.type = "text";
+					eyeOpen.classList.add("hide");
+					eyeClosed.classList.remove("hide");
+				} else {
+					input.type = "password";
+					eyeClosed.classList.add("hide");
+					eyeOpen.classList.remove("hide");
+				}
+			}
+		
+			// ✅ Spinner global lors de l’envoi du formulaire
+			document.getElementById("register-form").addEventListener("submit", function() {
+				document.getElementById("loading-spinner").style.display = "flex";
+			});
+		
+			// ✅ Modale critères de mot de passe
+			function openModal() {
+				document.getElementById("passwordModal").style.display = "flex";
+			}
+			function closeModal() {
+				document.getElementById("passwordModal").style.display = "none";
+			}
+			window.onclick = function(e) {
+				const modal = document.getElementById("passwordModal");
+				if (e.target === modal) modal.style.display = "none";
+			};
+		</script>
+
+{% endblock %}

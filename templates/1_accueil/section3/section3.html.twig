@@ -1,0 +1,79 @@
+<div class="slider-section">
+	<div class="slider-title">Nos nouvelles machines</div>
+	<div class="slider-subtitle">
+		Découvrez les toutes dernières arrivées dans notre salle ! Des équipements modernes et performants pour améliorer vos entraînements.
+	</div>
+
+	<div class="slider-wrapper">
+		<button class="nav-button left">&#10094;</button>
+
+		<div class="slider-container">
+			<div class="slider">
+				<div class="slide active">
+					<img src="/images/machine1.jpg" alt="Nouvelle machine 1">
+					<p>Chest press inclinée</p>
+				</div>
+				<div class="slide">
+					<img src="/images/machine2.jpg" alt="Nouvelle machine 2">
+					<p>Poulie vis à vis</p>
+				</div>
+				<div class="slide">
+					<img src="/images/machine3.jpg" alt="Nouvelle machine 3">
+					<p>Cross-over 4 postes</p>
+				</div>
+				<div class="slide">
+					<img src="/images/machine4.jpg" alt="Nouvelle machine 4">
+					<p>Hip thrust machine</p>
+				</div>
+				<div class="slide">
+					<img src="/images/machine5.jpg" alt="Nouvelle machine 5">
+					<p>Banc inclinable</p>
+				</div>
+			</div>
+		</div>
+
+		<button class="nav-button right">&#10095;</button>
+	</div>
+</div>
+
+
+ <script>
+																											const slider = document.querySelector('.slider');
+																											const slides = document.querySelectorAll('.slide');
+																											const leftBtn = document.querySelector('.nav-button.left');
+																											const rightBtn = document.querySelector('.nav-button.right');
+																											
+																											let currentIndex = 0;
+																											
+																											function getSlidesToShow() {
+																											    if (window.innerWidth <= 768) return 1;   // mobile
+																											    if (window.innerWidth <= 1024) return 2;  // tablette
+																											    return 3;                                 // desktop
+																											}
+																											
+																											function updateSlider() {
+																											    const slidesToShow = getSlidesToShow();
+																											    const slideWidth = slides[0].offsetWidth + 20; // inclut le padding/margin si besoin
+																											    // Limites pour ne pas dépasser
+																											    if (currentIndex > slides.length - slidesToShow) {
+																											        currentIndex = slides.length - slidesToShow;
+																											    }
+																											    if (currentIndex < 0) currentIndex = 0;
+																											
+																											    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+																											}
+																											
+																											rightBtn.addEventListener('click', () => {
+																											    currentIndex++;
+																											    updateSlider();
+																											});
+																											
+																											leftBtn.addEventListener('click', () => {
+																											    currentIndex--;
+																											    updateSlider();
+																											});
+																											
+																											window.addEventListener('resize', updateSlider);
+																											updateSlider();
+																											
+																																															</script>

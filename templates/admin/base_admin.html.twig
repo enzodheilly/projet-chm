@@ -1,0 +1,253 @@
+{# templates/admin/base_admin.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Admin Dashboard
+			{% endblock %}
+		</title>
+
+		<style>
+		/* =================== VARIABLES GLOBALES =================== */:root
+		{
+			--bg-dark: #0e0e10;
+			--bg-darker: #141416;
+			--bg-light: #1c1c1f;
+			--text-main: #e5e7eb;
+			--text-muted: #9ca3af;
+			--accent: #ff6600;
+			--border: #2a2a2d;
+		}
+
+		body {
+			font-family: "Inter", system-ui, sans-serif;
+			background: var(--bg-dark);
+			color: var(--text-main);
+			margin: 0;
+			display: flex;
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		/* =================== SIDEBAR =================== */
+		.sidebar {
+			width: 230px;
+			background: var(--bg-darker);
+			color: #fff;
+			display: flex;
+			flex-direction: column;
+			padding-top: 2rem;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			border-right: 1px solid var(--border);
+			box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+		}
+
+		.sidebar h2 {
+			font-size: 1.3rem;
+			font-weight: 700;
+			text-align: center;
+			color: var(--text-main);
+			margin-bottom: 2.2rem;
+			letter-spacing: 0.3px;
+		}
+
+		.sidebar a {
+			display: flex;
+			align-items: center;
+			gap: 0.6rem;
+			text-decoration: none;
+			color: var(--text-muted);
+			padding: 0.65rem 1.2rem;
+			font-size: 0.93rem;
+			font-weight: 500;
+			transition: all 0.2s ease;
+			border-left: 3px solid transparent;
+		}
+
+		.sidebar a:hover,
+		.sidebar a.active {
+			background: var(--bg-light);
+			color: #fff;
+			border-left: 3px solid var(--accent);
+		}
+
+		/* =================== SUBMENUS =================== */
+		.submenu {
+			display: none;
+			flex-direction: column;
+			padding-left: 1rem;
+			margin-bottom: 0.4rem;
+			border-left: 1px solid var(--border);
+		}
+
+		.submenu a {
+			font-size: 0.87rem;
+			color: #9ca3af;
+			padding: 0.45rem 0.8rem;
+			border-left: 2px solid transparent;
+			transition: 0.2s;
+		}
+
+		.submenu a:hover {
+			color: #fff;
+			border-left-color: var(--accent);
+		}
+
+		/* =================== BOUTON DÉCONNEXION =================== */
+		.logout-btn {
+			position: absolute;
+			bottom: 2rem;
+			left: 50%;
+			transform: translateX(-50%);
+			width: calc(100% - 2rem);
+			background: linear-gradient(135deg, #ff6600, #e25500);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			padding: 0.75rem 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.25s ease;
+			text-align: center;
+			box-shadow: 0 0 0 rgba(255, 102, 0, 0);
+			font-size: 0.95rem;
+			letter-spacing: 0.3px;
+		}
+
+		.logout-btn:hover {
+			background: linear-gradient(135deg, #ff7a1f, #ff6600);
+			box-shadow: 0 0 12px rgba(255, 102, 0, 0.4);
+			transform: translateX(-50%) scale(1.03);
+		}
+
+		.logout-btn:active {
+			transform: translateX(-50%) scale(0.98);
+			box-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
+		}
+
+
+		/* =================== MAIN CONTENT =================== */
+		.main-content {
+			flex: 1;
+			margin-left: 230px;
+			padding: 2.5rem 3rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			box-sizing: border-box;
+			background: var(--bg-dark);
+		}
+
+		/* =================== RESPONSIVE =================== */
+		@media(max-width: 900px) {
+			.sidebar {
+				width: 200px;
+			}
+			.main-content {
+				margin-left: 200px;
+				padding: 1.5rem;
+			}
+		}
+
+		@media(max-width: 700px) {
+			.sidebar {
+				position: relative;
+				width: 100%;
+				height: auto;
+				border-right: none;
+				border-bottom: 1px solid var(--border);
+				box-shadow: none;
+			}
+			.main-content {
+				margin-left: 0;
+			}
+		}
+
+		.sidebar-separator {
+			border: none;
+			border-bottom: 1px solid var(--border);
+			margin: 0.8rem 0;
+		}
+	</style>
+
+	{% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+	<div class="sidebar">
+
+		<a href="{{ path('admin_dashboard') }}" class="{% if app.request.get('_route') starts with 'admin_dashboard' %}active{% endif %}">
+			📊 Tableau de bord
+		</a>
+
+		<a href="#" onclick="toggleMenu('userMenu')">👥 Utilisateurs ▾</a>
+		<div class="submenu" id="userMenu">
+			<a href="{{ path('admin_users_index') }}">Liste des utilisateurs</a>
+			<a href="{{ path('admin_users_new') }}">Ajouter un utilisateur</a>
+		</div>
+
+		<a href="#" onclick="toggleMenu('securityMenu')">🔒 Sécurité ▾</a>
+		<div class="submenu" id="securityMenu">
+			<a href="{{ path('admin_security_logs') }}">Journal des connexions</a>
+			<a href="{{ path('admin_security_blocklist') }}">Blocages / IP bannies</a>
+		</div>
+
+		<hr class="sidebar-separator">
+
+		<a href="#" onclick="toggleMenu('contentMenu')">📰 Contenu ▾</a>
+		<div class="submenu" id="contentMenu">
+			<a href="{{ path('admin_pages_index') }}">Pages</a>
+			<a href="{{ path('admin_articles_index') }}">Articles</a>
+		</div>
+
+		<!-- 🧩 Nouveau menu Newsletter -->
+		<a href="#" onclick="toggleMenu('newsletterMenu')">💌 Newsletter ▾</a>
+		<div class="submenu" id="newsletterMenu">
+			<a href="{{ path('admin_newsletter_index') }}">Abonnés</a>
+			<a href="{{ path('admin_newsletter_compose') }}">Créer une campagne</a>
+			<a href="{{ path('admin_newsletter_history') }}">Historique des envois</a>
+		</div>
+
+		<a href="{{ path('admin_contact_index') }}">✉️ Messages de contact</a>
+
+		<a href="#" onclick="toggleMenu('eliosMenu')">🤖 Elios ▾</a>
+		<div class="submenu" id="eliosMenu">
+			<a href="{{ path('admin_clubinfo_index') }}">Informations du club</a>
+		</div>
+
+		<hr class="sidebar-separator">
+
+		<a href="{{ path('admin_stats_index') }}">📈 Statistiques</a>
+
+		<a href="#" onclick="toggleMenu('configMenu')">⚙️ Configuration ▾</a>
+		<div class="submenu" id="configMenu">
+			<a href="{{ path('admin_settings_index') }}">Paramètres</a>
+			<a href="{{ path('admin_logs_index') }}">Logs système</a>
+			<a href="{{ path('admin_backups_index') }}">Sauvegardes</a>
+			<a href="{{ path('admin_updates_index') }}">Mises à jour</a>
+		</div>
+
+
+		<button class="logout-btn" onclick="window.location='{{ path('app_logout') }}'">
+			🚪 Déconnexion
+		</button>
+	</div>
+
+
+	<main class="main-content"> {% block body %}{% endblock %}
+		</main>
+
+		 <script>
+																																																																				        function toggleMenu(id) {
+																																																																				            const el = document.getElementById(id);
+																																																																				            el.style.display = el.style.display === "flex" ? "none" : "flex";
+																																																																				        }
+																																																																				    </script>
+
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

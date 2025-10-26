@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ article.title }}
+{% endblock %}
+
+{% block body %}
+	<article class="article-detail">
+		<h1>{{ article.title }}</h1>
+		<span class="news-date">{{ article.publishedAt|date('d M Y') }}</span>
+		<img src="{{ asset(article.image) }}" alt="{{ article.title }}">
+		<p>{{ article.summary }}</p>
+		{# Tu peux ajouter un champ "content" si ton article a du contenu complet #}
+	</article>
+{% endblock %}

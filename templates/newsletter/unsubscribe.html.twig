@@ -1,0 +1,28 @@
+{% block title %}Désinscription
+{% endblock %}
+
+{% block body %}
+	<div style="max-width:600px;margin:60px auto;padding:30px;background:#f9fafb;border-radius:12px;
+						              box-shadow:0 0 10px rgba(0,0,0,0.1);font-family:'Inter',sans-serif;text-align:center;">
+
+		{% if alreadyUnsubscribed %}
+			<h1 style="color:#ff6600;">🚪 Vous êtes déjà désinscrit(e)</h1>
+			<p>L’adresse
+				<strong>{{ email }}</strong>
+				ne recevra plus nos newsletters.</p>
+			<p style="color:#777;">Si vous changez d’avis, vous pouvez vous réinscrire à tout moment sur notre site.</p>
+		{% else %}
+			<h1 style="color:#ff6600;">✅ Désinscription confirmée</h1>
+			<p>L’adresse
+				<strong>{{ email }}</strong>
+				a bien été retirée de notre liste de diffusion.</p>
+			<p style="color:#777;">Vous ne recevrez plus de messages de notre part.</p>
+		{% endif %}
+
+		<hr style="margin:30px 0;border:none;border-top:1px solid #ddd;">
+
+		<a href="{{ path('home') }}" style="text-decoration:none;color:#ff6600;font-weight:bold;">
+			🔙 Retour au site CHM
+		</a>
+	</div>
+{% endblock %}

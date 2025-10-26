@@ -1,0 +1,221 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}🧩 Informations du club
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 143.4%;
+		margin-left: 1.5rem;
+	}
+
+	h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	/* -------- SECTION CARD -------- */
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+	}
+
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	/* -------- TABLE -------- */
+	.table-infos {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		color: var(--text-main);
+	}
+
+	.table-infos thead {
+		background: var(--bg-darker);
+	}
+
+	.table-infos th {
+		text-align: left;
+		padding: 0.8rem 1rem;
+		font-weight: 600;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table-infos td {
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+		vertical-align: top;
+	}
+
+	.table-infos tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+
+	/* -------- BOUTONS -------- */
+	.btn-primary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		background: var(--accent);
+		color: #fff;
+		padding: 0.7rem 1.3rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: 0.2s ease;
+		box-shadow: 0 3px 10px rgba(255, 102, 0, 0.25);
+	}
+	.btn-primary:hover {
+		background: #e25500;
+		transform: translateY(-2px);
+	}
+
+	.btn-sm {
+		font-size: 0.8rem;
+		padding: 0.35rem 0.8rem;
+		text-decoration: none;
+		font-weight: 600;
+		transition: 0.2s ease;
+	}
+
+	.btn-warning {
+		background: #facc15;
+		color: #111;
+	}
+	.btn-warning:hover {
+		background: #eab308;
+	}
+
+	.btn-danger {
+		background: #ef4444;
+		color: #fff;
+	}
+	.btn-danger:hover {
+		background: #dc2626;
+	}
+
+	/* -------- FLASH MESSAGE -------- */
+	.alert-success {
+		background: rgba(34, 197, 94, 0.15);
+		border: 1px solid rgba(34, 197, 94, 0.4);
+		color: #22c55e;
+		padding: 0.8rem 1rem;
+		margin-bottom: 1.2rem;
+		font-weight: 500;
+	}
+
+	@media(max-width: 900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+		.dashboard-container {
+			width: 100%;
+			margin-left: 0;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>🧩 Informations du club</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">📋 Liste des informations disponibles</h3>
+				<a href="{{ path('admin_clubinfo_new') }}" class="btn-primary">Ajouter une information</a>
+			</div>
+
+			{% for message in app.flashes('success') %}
+				<div class="alert-success">{{ message }}</div>
+			{% endfor %}
+
+			<table class="table-infos">
+				<thead>
+					<tr>
+						<th>Catégorie</th>
+						<th>Contenu</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for info in infos %}
+						<tr>
+							<td>
+								<strong>{{ info.category|capitalize }}</strong>
+							</td>
+							<td>{{ info.content|slice(0, 120) ~ (info.content|length > 120 ? '…' : '') }}</td>
+							<td>
+								<a href="{{ path('admin_clubinfo_edit', {id: info.id}) }}" class="btn-sm btn-warning">Modifier</a>
+								<a href="{{ path('admin_clubinfo_delete', {id: info.id}) }}" class="btn-sm btn-danger" onclick="return confirm('Supprimer cette information ?')">Supprimer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3" class="empty-row">Aucune information enregistrée.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>{% endblock %}

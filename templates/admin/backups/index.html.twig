@@ -1,0 +1,231 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Sauvegardes complètes
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	/* ===================== CONTAINER ===================== */
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 178.8%;
+		max-width: none;
+		margin-left: 1.5rem;
+	}
+
+	.dashboard-container h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	/* ===================== CARD ===================== */
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* ===================== HEADER ===================== */
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	/* ===================== BOUTON ===================== */
+	.btn {
+		background: var(--accent);
+		color: #fff;
+		border: none;
+		padding: 0.5rem 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: 0.2s;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		text-decoration: none;
+	}
+	.btn:hover {
+		background: #e25500;
+	}
+
+	/* ===================== TABLE ===================== */
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		color: #e5e7eb;
+	}
+
+	.table thead {
+		background: var(--bg-darker);
+		color: #fff;
+	}
+
+	.table th {
+		text-align: left;
+		padding: 0.8rem 1rem;
+		font-weight: 600;
+	}
+
+	.table td {
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	/* ===================== ACTIONS ===================== */
+	.action-link {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+		margin-right: 0.6rem;
+		transition: color 0.2s ease;
+	}
+	.action-link:hover {
+		color: #ffa366;
+	}
+
+	.action-delete {
+		color: #ef4444;
+		font-weight: 600;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+	.action-delete:hover {
+		color: #ff6666;
+	}
+
+	/* ===================== LIGNE VIDE ===================== */
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+
+	/* ===================== RESPONSIVE ===================== */
+	@media(max-width: 900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>💾 Sauvegardes complètes</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">📋 Liste des sauvegardes</h3>
+				<a href="{{ path('admin_backups_create') }}" class="btn">Créer une nouvelle sauvegarde</a>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Fichier</th>
+						<th>Taille</th>
+						<th>Date</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for file in files %}
+						<tr>
+							<td>{{ file.name }}</td>
+							<td>
+								{% set size = file.size %}
+								{% if size < 1024 %}
+									{{ size }}
+									o
+								{% elseif size < 1048576 %}
+									{{ (size / 1024)|number_format(2, ',', ' ') }}
+									Ko
+								{% elseif size < 1073741824 %}
+									{{ (size / 1048576)|number_format(2, ',', ' ') }}
+									Mo
+								{% else %}
+									{{ (size / 1073741824)|number_format(2, ',', ' ') }}
+									Go
+								{% endif %}
+							</td>
+
+							{% set match = file.name|replace({'.zip':''})|split('_') %}
+							{% if match|length > 2 %}
+								{% set datetime = match[1] ~ ' ' ~ (match[2]|replace({'-':':'})) %}
+								<td>{{ datetime|date('d/m/Y H:i') }}</td>
+							{% else %}
+								<td>—</td>
+							{% endif %}
+
+							<td>
+								<a href="{{ path('admin_backups_download', { filename: file.name }) }}" class="action-link">⬇️ Télécharger</a>
+								<a href="{{ path('admin_backups_delete', { filename: file.name }) }}" class="action-delete" onclick="return confirm('Supprimer cette sauvegarde ?')">🗑️ Supprimer</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4" class="empty-row">Aucune sauvegarde trouvée.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</div>{% endblock %}

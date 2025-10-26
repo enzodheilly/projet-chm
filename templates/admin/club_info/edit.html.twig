@@ -1,0 +1,173 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+		--success: #22c55e;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 158%;
+		margin-left: 1.5rem;
+	}
+
+	h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.8rem;
+		max-width: 800px;
+	}
+
+	label {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: var(--text-main);
+	}
+
+	input[type="text"],
+	textarea {
+		width: 95%;
+		background: var(--bg-darker);
+		color: var(--text-main);
+		border: 1px solid var(--border);
+		padding: 0.7rem 1rem;
+		font-size: 0.95rem;
+		outline: none;
+		transition: border-color 0.2s ease;
+	}
+
+	input[disabled] {
+		color: var(--text-muted);
+	}
+
+	textarea:focus {
+		border-color: var(--accent);
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 140px;
+	}
+
+	.form-actions {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1.8rem;
+	}
+
+	.btn-success {
+		background: var(--accent);
+		color: #fff;
+		font-weight: 600;
+		padding: 0.75rem 1.5rem;
+		border: none;
+		cursor: pointer;
+		transition: background 0.2s ease, transform 0.2s ease;
+		box-shadow: 0 3px 10px rgba(255, 102, 0, 0.25);
+	}
+
+	.btn-success:hover {
+		background: #e25500;
+		transform: translateY(-2px);
+	}
+
+	.btn-secondary {
+		background: var(--bg-darker);
+		color: var(--text-main);
+		font-weight: 500;
+		padding: 0.75rem 1.5rem;
+		border: 1px solid var(--border);
+		cursor: pointer;
+		transition: background 0.2s ease;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.btn-secondary:hover {
+		background: #2a2a2d;
+	}
+
+	.alert-success {
+		background: rgba(34, 197, 94, 0.15);
+		border: 1px solid rgba(34, 197, 94, 0.4);
+		color: var(--success);
+		padding: 0.8rem 1rem;
+		margin-bottom: 1.2rem;
+		font-weight: 500;
+	}
+
+	@media(max-width: 900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+		.dashboard-container {
+			width: 100%;
+			margin-left: 0;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>{{ title }}</h1>
+
+		<div class="section-card">
+			{% for message in app.flashes('success') %}
+				<div class="alert-success">{{ message }}</div>
+			{% endfor %}
+
+			{{ form_start(form) }}
+			{{ form_row(form.category) }}
+			{{ form_row(form.content) }}
+			<div class="form-actions">
+				<button class="btn-success">Enregistrer</button>
+				<a href="{{ path('admin_clubinfo_index') }}" class="btn-secondary">Retour</a>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+</div>{% endblock %}

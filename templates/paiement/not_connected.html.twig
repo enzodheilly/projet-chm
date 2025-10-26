@@ -1,0 +1,178 @@
+{% block stylesheets %}
+	<style>
+		body {
+			font-family: 'Poppins', sans-serif;
+			background: white;
+			color: #333;
+			margin: 0;
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+		.header-logo {
+			position: absolute;
+			top: 15px;
+			left: 25px;
+		}
+		.header-logo img {
+			height: 50px;
+			width: auto;
+		}
+		.login-container {
+			background: #fff;
+			border-radius: 14px;
+			padding: 1.8rem 1.6rem;
+			width: 100%;
+			max-width: 340px;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+			text-align: center;
+			margin-top: 2rem;
+			animation: fadeIn 0.5s ease;
+		}
+		.login-container h1 {
+			color: #003366;
+			font-size: 1.4rem;
+			margin-bottom: 0.5rem;
+		}
+		.login-container p {
+			color: #666;
+			font-size: 0.85rem;
+			margin-bottom: 1.3rem;
+			line-height: 1.5;
+		}
+		.action-buttons {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.8rem;
+			margin-top: 1rem;
+		}
+		.action-buttons a {
+			display: inline-block;
+			width: 75%;
+			padding: 0.7rem;
+			border-radius: 8px;
+			font-weight: 600;
+			font-size: 0.9rem;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+		.action-buttons a.login-btn {
+			background: #ff6600;
+			color: #fff;
+		}
+		.action-buttons a.login-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+		}
+		.action-buttons a.register-btn {
+			border: 1.3px solid #ff6600;
+			color: #ff6600;
+			background: #fff;
+		}
+		.action-buttons a.register-btn:hover {
+			background: #ff6600;
+			color: #fff;
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+		}
+		.note {
+			font-size: 0.75rem;
+			color: #555;
+			margin-top: 1.2rem;
+		}
+		#loading-spinner {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(255, 255, 255, 0.85);
+			z-index: 9999;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		.spinner {
+			border: 5px solid #f3f3f3;
+			border-top: 5px solid #ff6600;
+			border-radius: 50%;
+			width: 60px;
+			height: 60px;
+			animation: spin 0.9s linear infinite;
+		}
+		.spinner-text {
+			margin-top: 1rem;
+			font-weight: 500;
+			color: #003366;
+			font-size: 0.95rem;
+		}
+		@keyframes spin {
+			from {
+				transform: rotate(0)
+			}
+			to {
+				transform: rotate(360deg)
+			}
+		}
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px)
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0)
+			}
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="header-logo">
+		<img src="{{ asset('images/logo-chm.png') }}" alt="CHM Saleux Logo">
+	</div>
+
+	<div class="login-container">
+		<h1>🔒 Connexion requise</h1>
+		<p>
+			Afin de pouvoir
+			<strong>finaliser votre paiement pour la formule
+				{{ type }}</strong>, 
+																																						il est nécessaire de vous connecter à votre compte ou d’en créer un nouveau.
+		</p>
+
+		<div class="action-buttons">
+			<a href="{{ path('app_login', { redirect: redirectUrl }) }}" class="login-btn" id="loginLink">
+				🔐 Me connecter
+			</a>
+
+			<a href="{{ path('app_register', { redirect: redirectUrl }) }}" class="register-btn" id="registerLink">
+				🆕 Créer un compte
+			</a>
+		</div>
+
+
+		<p class="note">Une fois connecté, vous serez automatiquement redirigé vers la page de paiement.</p>
+	</div>
+
+	<div id="loading-spinner">
+		<div class="spinner"></div>
+		<div class="spinner-text">Chargement...</div>
+	</div>
+
+	 <script>
+										const spinner = document.getElementById("loading-spinner");
+										const loginLink = document.getElementById("loginLink");
+										const registerLink = document.getElementById("registerLink");
+									
+										loginLink.addEventListener("click", () => spinner.style.display = "flex");
+										registerLink.addEventListener("click", () => spinner.style.display = "flex");
+									
+										window.addEventListener("pageshow", (e) => { if (e.persisted) spinner.style.display = "none"; });
+										window.addEventListener("load", () => spinner.style.display = "none");
+									</script>
+{% endblock %}

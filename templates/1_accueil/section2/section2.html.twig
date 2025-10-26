@@ -1,0 +1,125 @@
+<main class="pricing-hero" role="main" aria-labelledby="abonnement-title">
+	<div class="pricing-head" role="region" aria-label="Introduction abonnements">
+		<div class="pricing-left">
+			<div class="eyebrow">CHM Saleux — Abonnements 2025</div>
+			<h1 id="abonnement-title" class="pricing-title">
+				<span style="white-space: nowrap;">
+					Choisis ton abonnement —
+					<span style="color: var(--orange);">Rejoins le Club</span>
+				</span>
+			</h1>
+			<p class="pricing-sub">
+				Rejoins le CHM Saleux pour un coaching pro, un encadrement en haltérophilie, accès aux compétitions et séances libres.
+			</p>
+		</div>
+	</div>
+
+	<section
+		class="pricing-grid" aria-label="Liste des abonnements">
+
+		<!-- Compétition -->
+		<article class="card">
+			<div class="badge">+21 ans</div>
+			<h3 class="card-title">Compétition</h3>
+			<div class="price-row">
+				<div class="price">90€<sup>00</sup>
+				</div>
+				<div class="period">/ an</div>
+			</div>
+			<div class="subprice">Soit 7,50€/mois</div>
+			<ul class="features">
+				<li>Licence compétition officielle</li>
+				<li>Accès complet à la salle</li>
+				<li>Encadrement par coachs diplômés</li>
+				<li>Participation aux compétitions</li>
+			</ul>
+			<div class="text-center mt-3">
+				<a href="{{ path('paiement_type', { type: 'competition' }) }}" class="btn-payment">
+					CHOISIR CETTE FORMULE
+				</a>
+			</div>
+		</article>
+
+		<!-- Jeunes -->
+		<article class="card">
+			<div class="badge">Jeunes</div>
+			<h3 class="card-title">Compétition Jeunes</h3>
+			<div class="price-row">
+				<div class="price">70€<sup>00</sup>
+				</div>
+				<div class="period">/ an</div>
+			</div>
+			<div class="subprice">Soit 5,83€/mois</div>
+			<ul class="features">
+				<li>Licence adaptée</li>
+				<li>Encadrement spécialisé</li>
+				<li>Accès aux entraînements dédiés</li>
+				<li>Accompagnement en compétition</li>
+			</ul>
+			<div class="text-center mt-3">
+				<a href="{{ path('paiement_type', { type: 'jeunes' }) }}" class="btn-payment">
+					CHOISIR CETTE FORMULE
+				</a>
+			</div>
+		</article>
+
+		<!-- Loisir -->
+		<article class="card">
+			<h3 class="card-title">Loisir & Musculation</h3>
+			<div class="price-row">
+				<div class="price">200€<sup>00</sup>
+				</div>
+				<div class="period">/ an</div>
+			</div>
+			<div class="subprice">Soit 16,66€/mois</div>
+			<ul class="features">
+				<li>Accès libre salle musculation</li>
+				<li>Haltérophilie loisir encadrée</li>
+				<li>Cardio & cours collectifs</li>
+				<li>Ambiance conviviale</li>
+			</ul>
+			<div class="text-center mt-3">
+				<a href="{{ path('paiement_type', { type: 'loisir' }) }}" class="btn-payment">
+					CHOISIR CETTE FORMULE
+				</a>
+			</div>
+		</article>
+
+		<!-- Enfants -->
+		<article class="card">
+			<div class="badge">Enfant</div>
+			<h3 class="card-title">Initiation Enfants</h3>
+			<div class="price-row">
+				<div class="price">50€<sup>00</sup>
+				</div>
+				<div class="period">/ an</div>
+			</div>
+			<div class="subprice">Soit 4,17€/mois</div>
+			<ul class="features">
+				<li>Initiation sécurisée</li>
+				<li>Encadrement par coachs</li>
+				<li>Ateliers ludiques</li>
+				<li>Participation aux événements jeunes</li>
+			</ul>
+			<div class="text-center mt-3">
+				<a href="{{ path('paiement_type', { type: 'enfants' }) }}" class="btn-payment">
+					CHOISIR CETTE FORMULE
+				</a>
+			</div>
+		</article>
+	</section>
+
+	<div class="pricing-foot">
+		<div class="disclaimer">
+			⚠️
+			<strong>Note :</strong>
+			Le paiement se fait désormais en ligne via HelloAsso.<br>
+			Avant de procéder au paiement, veuillez vous assurer d’avoir bien rempli le
+			<strong>formulaire de licence</strong>.<br>
+			Si ce n’est pas le cas, vous pouvez le télécharger
+			<a href="URL_DU_FORMULAIRE" target="_blank">ici</a>
+			et le remettre directement au bureau du club.
+		</div>
+	</div>
+
+</main>

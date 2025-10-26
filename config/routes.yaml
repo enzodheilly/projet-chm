@@ -11,3 +11,35 @@ app_legal:
 app_privacy:
     path: /confidentialite
     controller: App\Controller\PageController::privacy
+
+admin_dashboard:
+    path: /admin
+    controller: App\Controller\Admin\AdminDashboardController::index
+
+admin_users_index:
+    path: /admin/users
+    controller: App\Controller\Admin\AdminUsersController::index
+
+admin_users_new:
+    path: /admin/users/new
+    controller: App\Controller\Admin\AdminUsersController::new
+
+admin_security_logs:
+    path: /admin/security/logs
+    controller: App\Controller\Admin\AdminSecurityController::logs
+
+admin_security_blocklist:
+    path: /admin/security/blocklist
+    controller: App\Controller\Admin\AdminSecurityController::blocklist
+
+admin_newsletter_index:
+    path: /admin/newsletter
+    controller: App\Controller\Admin\AdminNewsletterController::index
+
+admin_settings:
+    path: /admin/settings
+    controller: App\Controller\Admin\AdminSettingsController::index
+
+admin_activity:
+    path: /admin/activity
+    controller: App\Controller\Admin\AdminActivityController::index

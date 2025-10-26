@@ -1,0 +1,241 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block title %}Messages de contact
+{% endblock %}
+
+{% block stylesheets %}
+	<style>:root
+	{
+		--bg-dark: #0e0e10;
+		--bg-darker: #141416;
+		--bg-light: #1c1c1f;
+		--text-main: #e5e7eb;
+		--text-muted: #9ca3af;
+		--accent: #ff6600;
+		--border: #2a2a2d;
+	}
+
+	body {
+		font-family: "Inter", system-ui, sans-serif;
+		background: var(--bg-dark);
+		color: var(--text-main);
+		margin: 0;
+		min-height: 100vh;
+	}
+
+	.main-content {
+		flex: 1;
+		margin-left: 100px;
+		padding: 2.5rem 3rem;
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		background: var(--bg-dark);
+		min-height: 100vh;
+	}
+
+	/* ===================== SECTION CONTAINER ===================== */
+	.dashboard-container {
+		transform: scale(1.00);
+		transform-origin: top left;
+		width: 195.6%;
+		max-width: none;
+		margin-left: 1.5rem;
+	}
+
+	.dashboard-container h1 {
+		font-size: 2.3rem;
+		font-weight: 800;
+		color: #fff;
+		margin-bottom: 2.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	/* ===================== SECTION CARD ===================== */
+	.section-card {
+		background: var(--bg-light);
+		border: 1px solid var(--border);
+		padding: 1.5rem 1.3rem;
+		margin-bottom: 2rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* ===================== HEADER ===================== */
+	.section-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.2rem;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.8rem;
+	}
+
+	.section-title {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	/* ===================== TOOLBAR ===================== */
+	.table-toolbar {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.search-bar {
+		padding: 0.45rem 0.8rem;
+		border: 1px solid var(--border);
+		background: var(--bg-darker);
+		color: var(--text-main);
+		font-size: 0.9rem;
+		outline: none;
+	}
+	.search-bar:focus {
+		border-color: var(--accent);
+	}
+
+	.btn {
+		background: var(--accent);
+		color: #fff;
+		border: none;
+		padding: 0.5rem 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: 0.2s;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	.btn:hover {
+		background: #e25500;
+	}
+
+	/* ===================== TABLE ===================== */
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9rem;
+		color: #e5e7eb;
+	}
+
+	.table thead {
+		background: var(--bg-darker);
+		color: #fff;
+	}
+
+	.table th {
+		text-align: left;
+		padding: 0.8rem 1rem;
+		font-weight: 600;
+	}
+
+	.table td {
+		padding: 0.8rem 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.table tbody tr:hover {
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	/* ===================== ACTIONS ===================== */
+	.action-delete {
+		color: #ef4444;
+		font-weight: 600;
+		text-decoration: none;
+		transition: color 0.2s ease;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+	.action-delete:hover {
+		color: #ff6666;
+	}
+
+	/* ===================== EMPTY ===================== */
+	.empty-row {
+		text-align: center;
+		padding: 1.2rem;
+		color: var(--text-muted);
+	}
+
+	/* ===================== RESPONSIVE ===================== */
+	@media(max-width: 900px) {
+		.main-content {
+			margin-left: 0;
+			padding: 1.5rem;
+		}
+		.table-toolbar {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		.search-bar {
+			width: 100%;
+		}
+	}
+</style>{% endblock %}{% block body %}
+<div class="main-content">
+	<div class="dashboard-container">
+		<h1>📬 Messages de contact</h1>
+
+		<div class="section-card">
+			<div class="section-header">
+				<h3 class="section-title">📋 Liste des messages reçus</h3>
+				<div class="table-toolbar">
+					<input type="text" id="searchMessages" class="search-bar" placeholder="Rechercher...">
+				</div>
+			</div>
+
+			<table class="table" id="messagesTable">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Téléphone</th>
+						<th>Message</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for message in messages %}
+						<tr>
+							<td>{{ message.nom }}
+								{{ message.prenom }}</td>
+							<td>{{ message.email }}</td>
+							<td>{{ message.telephone ?: '-' }}</td>
+							<td>{{ message.message|length > 60 ? message.message|slice(0, 60) ~ '...' : message.message }}</td>
+							<td>{{ message.createdAt|date('d/m/Y H:i') }}</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5" class="empty-row">Aucun message reçu.</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+ <script>
+/* --------- Recherche table --------- */
+function attachSearch(inputSel, tableSel) {
+	const input = document.querySelector(inputSel);
+	const rows = document.querySelectorAll(tableSel + ' tbody tr');
+	if (!input) return;
+	input.addEventListener('keyup', () => {
+		const q = input.value.toLowerCase();
+		rows.forEach(r => {
+			r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
+		});
+	});
+}
+attachSearch('#searchMessages', '#messagesTable');
+</script>{% endblock %}

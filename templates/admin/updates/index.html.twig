@@ -1,0 +1,14 @@
+{% extends 'admin/base_admin.html.twig' %}
+
+{% block body %}
+
+	<h1>⬆️ Mises à jour</h1>
+
+	<p>Version actuelle :
+		<strong>{{ version }}</strong>
+	</p>
+
+	<a href="{{ path('admin_updates_run') }}" class="btn btn-primary" onclick="return confirm('Lancer la mise à jour du site ?')">
+		🔄 Mettre à jour maintenant
+	</a>
+{% endblock %}

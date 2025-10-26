@@ -1,0 +1,244 @@
+<style>
+	.footer-modern {
+		background-color: black;
+		color: #fff;
+		font-family: 'Poppins', sans-serif;
+		padding: 60px 20px 30px;
+	}
+
+	.footer-content {
+		max-width: 1600px;
+		margin: 0 auto;
+	}
+
+	/* Flex pour aligner les colonnes horizontalement */
+	.footer-columns {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between; /* espace égal entre toutes les colonnes */
+		gap: 0; /* pas de gap global, l'espace est géré automatiquement */
+	}
+
+	.footer-column {
+		flex: 1 1 220px; /* chaque colonne flexible avec largeur minimale */
+	}
+
+	/* Colonnes spécifiques (si besoin de largeur différente) */
+	.footer-newsletter-column {
+		flex: 1.2; /* newsletter un peu plus large */
+	}
+
+	.footer-logo {
+		color: #ff6600;
+		font-size: 28px;
+		margin-bottom: 10px;
+		font-weight: 700;
+	}
+
+	.footer-column h4 {
+		color: #ff6600;
+		margin-bottom: 15px;
+		font-size: 18px;
+		font-weight: 600;
+	}
+
+	.footer-column p {
+		color: #ddd;
+		line-height: 1.6;
+		max-width: 320px;
+	}
+
+	.footer-column ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.footer-column ul li {
+		margin-bottom: 10px;
+		color: #ccc;
+	}
+
+	.footer-column ul li a {
+		color: #fff;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.footer-column ul li a:hover {
+		color: #ff6600;
+	}
+
+	.footer-socials {
+		margin: 15px 0;
+	}
+
+	.footer-socials a {
+		color: #fff;
+		margin-right: 10px;
+		font-size: 18px;
+		display: inline-block;
+		transition: color 0.3s ease, transform 0.3s ease;
+	}
+
+	.footer-socials a:hover {
+		color: #ff6600;
+		transform: translateY(-3px);
+	}
+
+	.newsletter-text {
+		font-size: 0.9rem;
+		margin-bottom: 10px;
+		color: #ccc;
+	}
+
+	.newsletter-form {
+		display: flex;
+		gap: 8px;
+	}
+
+	.newsletter-input {
+		flex: 1;
+		padding: 8px 10px;
+		border-radius: 6px;
+		border: none;
+		outline: none;
+	}
+
+	.newsletter-btn {
+		background: linear-gradient(90deg,#ff512f,#dd2476);
+		color: #fff;
+		border: none;
+		padding: 8px 14px;
+		border-radius: 6px;
+		cursor: pointer;
+		transition: 0.3s;
+	}
+
+	.newsletter-btn:hover {
+		opacity: 0.85;
+	}
+
+	.newsletter-success {
+		margin-top: 10px;
+		font-size: 0.9rem;
+		color: #4CAF50;
+		opacity: 0;
+		transform: translateY(10px);
+		transition: opacity 0.6s ease, transform 0.6s ease;
+		pointer-events: none;
+	}
+
+	.newsletter-success.show {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.footer-bottom {
+		border-top: 1px solid rgba(255, 255, 255, 0.2);
+		margin-top: 40px;
+		padding-top: 20px;
+		text-align: center;
+		font-size: 14px;
+		color: #aaa;
+	}
+
+	/* Responsive */
+	@media(max-width: 900px) {
+		.footer-columns {
+			flex-direction: column;
+			text-align: center;
+			align-items: center;
+		}
+		.newsletter-form {
+			flex-direction: column;
+		}
+		.newsletter-input,
+		.newsletter-form button {
+			width: 100%;
+		}
+	}
+</style>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer-modern">
+	<div class="footer-content">
+		<div
+			class="footer-columns">
+
+			<!-- Présentation -->
+			<div class="footer-column footer-logo-column">
+				<h3 class="footer-logo">CHM SALEUX</h3>
+				<p>Club d’Haltérophilie & Musculation à Saleux. Un lieu convivial pour se dépasser, progresser et partager la passion du sport.</p>
+				<div class="footer-socials">
+					<a href="#">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a href="#">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a href="#">
+						<i class="fab fa-youtube"></i>
+					</a>
+				</div>
+			</div>
+
+			<!-- Contact -->
+			<div class="footer-column footer-contact-column">
+				<h4>Nous contacter</h4>
+				<ul>
+					<li>
+						<strong>Adresse :</strong>
+						12 Rue du Stade, 80480 Saleux</li>
+					<li>
+						<strong>Téléphone :</strong>
+						03 22 00 00 00</li>
+					<li>
+						<strong>Email :</strong>
+						<a href="mailto:contact@chmsaleux.fr">contact@chmsaleux.fr</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Informations -->
+			<div class="footer-column footer-info-column">
+				<h4>Informations</h4>
+				<ul>
+					<li><ahref="{{path('page_show',{'slug':'mentions-legales'})}}">Mentions légales</a></li>
+					<li><ahref="{{path('page_show',{'slug':'conditions-utilisation'})}}">Conditions d’utilisation</a></li>
+					<li><ahref="{{path('page_show',{'slug':'confidentialite'})}}">Politique de confidentialité</a></li>
+					<li><ahref="{{path('page_show',{'slug':'cookies'})}}">Cookies</a></li>
+				</ul>
+			</div>
+
+			<!-- Newsletter -->
+			<div class="footer-column footer-newsletter-column">
+				<h4>Abonnez-vous à notre newsletter</h4>
+				<p class="newsletter-text">Recevez les dernières actualités, événements et infos du CHM directement dans votre boîte mail.</p>
+
+				<form id="newsletter-form" method="POST" action="{{ path('newsletter_subscribe') }}">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('newsletter') }}">
+
+					<input
+					type="email" name="email" placeholder="Votre email" required>
+
+					<!-- Champ anti-bot -->
+					<div style="display:none;">
+						<label for="nickname">Ne pas remplir ce champ</label>
+						<input type="text" name="nickname" id="nickname" autocomplete="off">
+					</div>
+
+					<button type="submit">S’abonner</button>
+				</form>
+
+				<div id="newsletterSuccess" class="newsletter-success"></div>
+				<div id="newsletterError" class="newsletter-error"></div>
+			</div>
+
+		</div>
+
+		<div class="footer-bottom">
+			<p>&copy; 2025 CHM SALEUX - Tous droits réservés</p>
+		</div>
+	</div>
+</footer>

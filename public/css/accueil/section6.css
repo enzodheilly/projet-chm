@@ -1,0 +1,94 @@
+.partners-section {
+		background-color: #005b94;
+		padding: 40px 20px; /* réduit de 60px à 40px */
+		text-align: center;
+		font-family: "Poppins", sans-serif;
+	}
+
+	.partners-header {
+		margin-bottom: 40px; /* réduit de 60px à 40px */
+	}
+
+	.partners-subtitle {
+		color: white;
+		font-weight: 600;
+		font-size: 1rem; /* légèrement plus petit */
+		letter-spacing: 1px;
+	}
+
+	.partners-header h2 {
+		font-size: 2rem; /* réduit de 3rem à 2rem */
+		font-weight: 800;
+		color: white;
+		margin-top: 5px;
+	}
+
+	.partners-line {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 20px; /* réduit de 30px à 20px */
+		flex-direction: row;
+	}
+
+	.partner {
+		padding: 0 15px; /* réduit de 20px à 15px */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.partner img {
+		max-height: 60px; /* réduit de 80px à 60px */
+		width: auto;
+		object-fit: contain;
+		transition: transform 0.3s ease;
+	}
+
+	.partner img:hover {
+		transform: scale(1.05);
+	}
+
+	.separator {
+		width: 1px;
+		height: 40px; /* réduit de 60px à 40px */
+		background-color: #ddd;
+	}
+
+	.become-sponsor {
+		margin-top: 30px; /* réduit de 50px à 30px */
+	}
+	.become-sponsor p {
+		color: white; /* réduit de 50px à 30px */
+	}
+	.btn-sponsor {
+		display: inline-block;
+		background-color: #0072bb;
+		color: white;
+		padding: 10px 22px; /* réduit légèrement le padding */
+		border-radius: 30px;
+		margin-top: 20px;
+		font-weight: bold;
+		text-decoration: none;
+		transition: background-color 0.3s ease;
+	}
+
+	.btn-sponsor i {
+		margin-right: 6px; /* réduit un peu */
+	}
+
+	.btn-sponsor:hover {
+		background-color: #005b94;
+	}
+
+	/* Responsive */
+	@media(max-width: 900px) {
+		.partners-line {
+			flex-direction: column;
+			gap: 15px; /* réduit un peu le gap */
+		}
+		.separator {
+			display: none;
+		}
+	}
