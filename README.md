@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./images/logo/logo.png" width="120" alt="Logo CHM Saleux" />
+  <img src="./images/logo/logo-chm.png" width="120" alt="Logo CHM Saleux" />
 </p>
 
 <h1 align="center">🏋️‍♂️ CHM Saleux</h1>
