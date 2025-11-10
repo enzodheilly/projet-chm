@@ -38,9 +38,9 @@ Le site web du CHM Saleux a pour objectif de :
 | --------------------------- | ------------------------------ |
 | **Frontend**                | HTML5, CSS3 / SCSS, JavaScript |
 | **Backend**                 | PHP                            |
-| **Base de données**         | MySQL _(si utilisée)_          |
+| **Base de données**         | MySQL                          |
 | **Outils de développement** | VS Code, Git, GitHub           |
-| **Hébergement (optionnel)** | GitHub Pages / Serveur PHP     |
+| **Hébergement**             | A venir                        |
 
 ---
 
