@@ -5,7 +5,6 @@
 
 </p>
 
-<h1 align="center">🏋️‍♂️ CHM Saleux</h1>
 <h3 align="center">Club d’Haltérophilie et de Musculation de Saleux</h3>
 
 <p align="center">
