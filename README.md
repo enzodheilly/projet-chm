@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Weightlifting_pictogram.svg" width="120" alt="Logo CHM Saleux" />
+  <img src="./images/logo/logo.png" width="120" alt="Logo CHM Saleux" />
 </p>
 
 <h1 align="center">🏋️‍♂️ CHM Saleux</h1>
@@ -55,18 +55,3 @@ Le site web du CHM Saleux a pour objectif de :
 -   📍 **Carte interactive** pour localiser le club à Saleux
 
 ---
-
-## 🖥️ Installation locale
-
-Si tu souhaites exécuter le projet localement :
-
-```bash
-# 1. Cloner le dépôt
-git clone https://github.com/ton-compte/chm-saleux.git
-
-# 2. Accéder au dossier du projet
-cd chm-saleux
-
-# 3. Lancer un serveur local (par exemple avec PHP)
-php -S localhost:8000
-```
