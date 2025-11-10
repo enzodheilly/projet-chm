@@ -1,427 +1,349 @@
-/* Footer Elegant Styles */
-.footer-elegant {
-    position: relative;
-    margin-top: 0.6rem;
+	/* ==================== FOOTER CHM SALEUX ==================== */
+	.footer-chm {
+		background-color: #0a0a0a;
+		color: #fff;
+		font-family: 'Poppins', sans-serif;
+		padding: 70px 30px 30px;
+	}
+
+	/* Conteneur principal */
+	.footer-chm .footer-container {
+		max-width: 1300px;
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 60px; /* écart uniforme entre les colonnes */
+	}
+
+	/* Colonnes */
+	.footer-chm .footer-column {
+		flex: 1 1 250px;
+		min-width: 240px;
+	}
+
+	/* Bloc identité club */
+	.footer-chm .footer-brand h3 {
+		color: #005b94;
+		font-size: 26px;
+		font-weight: 700;
+		margin-bottom: 12px;
+	}
+
+	.footer-chm .footer-brand p {
+		color: #ccc;
+		line-height: 1.7;
+		font-size: 15px;
+		max-width: 300px;
+	}
+
+	/* Bloc réseaux sociaux */
+	.footer-chm .socials h4 {
+		color: #005b94;
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 15px;
+		text-transform: uppercase;
+	}
+
+	.footer-chm .social-icons {
+		display: flex;
+		gap: 15px;
+		margin-top: 10px;
+	}
+
+	.footer-chm .social-icons a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: #1a1a1a;
+		color: #fff;
+		font-size: 20px;
+		transition: all 0.3s ease;
+	}
+
+	.footer-chm .social-icons a:hover {
+		background: #005b94;
+		transform: translateY(-3px);
+	}
+
+	/* Bloc contact */
+	.footer-chm .contact h4 {
+		color: #005b94;
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 15px;
+		text-transform: uppercase;
+	}
+
+	.footer-chm .contact ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.footer-chm .contact li {
+		color: #ccc;
+		margin-bottom: 8px;
+		font-size: 15px;
+		line-height: 1.6;
+	}
+
+	.footer-chm .contact a {
+		color: #fff;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.footer-chm .contact a:hover {
+		color: #ff6600;
+	}
+
+	/* Bloc newsletter */
+	.footer-chm .newsletter h4 {
+		color: #005b94;
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 15px;
+		text-transform: uppercase;
+	}
+
+	.footer-chm .newsletter p {
+		font-size: 15px;
+		color: #ccc;
+		margin-bottom: 15px;
+		line-height: 1.6;
+	}
+
+	.footer-chm .newsletter-form {
+		display: flex;
+		gap: 3px;
+	}
+
+	.footer-chm .newsletter-form input[type="email"] {
+		flex: 1;
+		padding: 10px 12px;
+		border-radius: 0;
+		border: none;
+		outline: none;
+		font-size: 15px;
+	}
+
+	.footer-chm .newsletter-form button {
+		background: #f97316;
+		border: none;
+		color: #fff;
+		padding: 10px 18px;
+		border-radius: 0;
+		cursor: pointer;
+		font-weight: 600;
+	}
+
+	.footer-chm .newsletter-form button:hover {
+		opacity: 0.85;
+	}
+
+.footer-chm .newsletter-success {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #4CAF50;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  display: none; /* 👈 ajoute ceci */
 }
 
-/* Footer Content */
-.footer-elegant .footer-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
+.footer-chm .newsletter-success.show {
+  opacity: 1;
+  transform: translateY(0);
+  display: block; /* 👈 et celui-ci */
 }
 
-@media (min-width: 768px) {
-    .footer-elegant .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
-@media (min-width: 1024px) {
-    .footer-elegant .footer-content {
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-    }
-}
+	/* Liens bas de page */
+	.footer-chm .footer-links {
+		margin-top: 50px;
+		text-align: center;
+		border-top: 1px solid rgba(255, 255, 255, 0.15);
+		padding-top: 25px;
+	}
 
-/* Footer Section */
-.footer-elegant .footer-section.footer-club {
-    grid-column: span 2;
-}
+	.footer-chm .footer-links a {
+		color: #ccc;
+		text-decoration: none;
+		margin: 0 12px;
+		font-size: 15px;
+		transition: color 0.3s ease;
+	}
 
-/* Club Header */
-.footer-elegant .club-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
+	.footer-chm .footer-links a:hover {
+		color: #ff6600;
+	}
 
-.footer-elegant .club-header .club-logo {
-    padding: 0.75rem;
-    border-radius: 1rem;
-}
+	/* Copyright */
+	.footer-chm .footer-bottom {
+		text-align: center;
+		font-size: 14px;
+		color: #777;
+		margin-top: 15px;
+	}
 
-.footer-elegant .club-header .club-logo .club-icon {
-    width: 2rem;
-    height: 2rem;
-    color: white;
-}
+	/* Responsive */
+	@media(max-width: 900px) {
+		.footer-chm .footer-container {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			gap: 40px;
+		}
 
-.footer-elegant .club-header .club-info .club-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: white;
-    margin: 0;
-}
+		.footer-chm .newsletter-form {
+			flex-direction: column;
+		}
 
-.footer-elegant .club-header .club-info .club-subtitle {
-    color: #f97316;
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 0;
-}
+		.footer-chm .newsletter-form input,
+		.footer-chm .newsletter-form button {
+			width: 100%;
+		}
 
-/* Club Description */
-.footer-elegant .club-description {
-    color: #d1d5db;
-    font-size: 1.125rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-/* Club Values */
-.footer-elegant .club-values {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #f97316;
-}
-
-.footer-elegant .club-values .heart-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    animation: pulse 2s infinite;
-}
-
-.footer-elegant .club-values .values-text {
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-/* Footer Titles */
-.footer-elegant .footer-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: white;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.footer-elegant .footer-title .title-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: #f97316;
-    margin-right: 0.5rem;
-}
-
-/* Links List */
-.footer-elegant .links-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-elegant .links-list .link-item {
-    margin-bottom: 0.75rem;
-}
-
-.footer-elegant .links-list .link-item .link {
-    color: #d1d5db;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s ease;
-}
-
-.footer-elegant .links-list .link-item .link:hover {
-    color: #f97316;
-}
-
-.footer-elegant .links-list .link-item .link .link-bullet {
-    width: 0.5rem;
-    height: 0.5rem;
-    background-color: #6b7280;
-    border-radius: 50%;
-    margin-right: 0.75rem;
-    transition: background-color 0.3s ease;
-}
-
-.footer-elegant .links-list .link-item .link:hover .link-bullet {
-    background-color: #f97316;
-}
-
-/* Contact Items */
-.footer-elegant .contact-items .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.875rem;
-}
-
-.footer-elegant .contact-items .contact-item .contact-icon {
-    width: 1rem;
-    height: 1rem;
-    color: #f97316;
-    margin-top: 0.125rem;
-    flex-shrink: 0;
-}
-
-.footer-elegant .contact-items .contact-item .contact-text {
-    color: #d1d5db;
-    line-height: 1.4;
-}
-
-/* Social Links */
-.footer-elegant .social-links {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.footer-elegant .social-links .social-link {
-    position: relative;
-    padding: 0.75rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.footer-elegant .social-links .social-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.footer-elegant .social-links .social-link.social-facebook:hover {
-    border-color: #3b82f6;
-    background: rgba(59, 130, 246, 0.2);
-}
-
-.footer-elegant .social-links .social-link.social-facebook:hover .social-icon {
-    color: #3b82f6;
-}
-
-.footer-elegant .social-links .social-link.social-instagram:hover {
-    border-color: #ec4899;
-    background: rgba(236, 72, 153, 0.2);
-}
-
-.footer-elegant .social-links .social-link.social-instagram:hover .social-icon {
-    color: #ec4899;
-}
-
-.footer-elegant .social-links .social-link .social-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    color: #d1d5db;
-    transition: color 0.3s ease;
-}
-
-.footer-elegant .social-links .social-link::before {
-    content: attr(title);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1f2937;
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    margin-bottom: 0.5rem;
-}
-
-.footer-elegant .social-links .social-link:hover::before {
-    opacity: 1;
-}
-
-/* Hours Card */
-.footer-elegant .hours-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1rem;
-}
-
-.footer-elegant .hours-card .hours-title {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 0.75rem;
-}
-
-.footer-elegant .hours-card .hours-list .hours-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    font-size: 0.75rem;
-}
-
-.footer-elegant .hours-card .hours-list .hours-item:last-child {
-    margin-bottom: 0;
-}
-
-.footer-elegant .hours-card .hours-list .hours-item .hours-day {
-    color: #d1d5db;
-    font-weight: 500;
-}
-
-.footer-elegant .hours-card .hours-list .hours-item .hours-time {
-    color: #f97316;
-    font-weight: 600;
-}
-
-/* Footer Bottom */
-.footer-elegant .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
-}
-
-.footer-elegant .footer-bottom .bottom-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-@media (min-width: 768px) {
-    .footer-elegant .footer-bottom .bottom-content {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
-
-.footer-elegant .footer-bottom .copyright {
-    color: #9ca3af;
-    font-size: 0.875rem;
-    display: flex;
-    align-items: center;
-}
-
-.footer-elegant .footer-bottom .copyright .separator {
-    margin: 0 0.5rem;
-}
-
-.footer-elegant .footer-bottom .bottom-links {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    font-size: 0.875rem;
-    color: #9ca3af;
-}
-
-.footer-elegant .footer-bottom .bottom-links .bottom-link {
-    color: #9ca3af;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-elegant .footer-bottom .bottom-links .bottom-link:hover {
-    color: #f97316;
-}
-
-.footer-elegant .footer-bottom .bottom-links .made-with {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.footer-elegant .footer-bottom .bottom-links .made-with .heart-small {
-    width: 1rem;
-    height: 1rem;
-    color: #ef4444;
-    animation: pulse 2s infinite;
-}
-
-/* Pulse Animation */
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-}
-
-/* Newsletter */
-.footer-newsletter {
-    max-width: 300px;
-}
-
-.newsletter-text {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    color: #ccc;
-}
+		.footer-chm .social-icons {
+			justify-content: center;
+		}
+	}
 
 .newsletter-form {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.newsletter-input {
-    flex: 1;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
+.newsletter-inputs {
+  display: flex;
+  gap: 10px; /* espace entre l'input et le bouton */
 }
 
-.newsletter-btn {
-    background: linear-gradient(90deg, #ff512f, #dd2476);
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
+#newsletter-submit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 44px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
 }
 
-.newsletter-btn:hover {
-    opacity: 0.85;
+/* Texte du bouton */
+#newsletter-submit .btn-text {
+  transition: opacity 0.2s ease;
 }
 
-.newsletter-success {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #4CAF50;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    pointer-events: none;
+/* Calque centré absolu pour icônes */
+#newsletter-submit .icon-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
-.newsletter-success.show {
-    opacity: 1;
-    transform: translateY(0);
+/* Spinner */
+#newsletter-submit .spinner {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+  display: none;
 }
 
-/* Footer Base */
-#footer {
-    background-color: #0d0d0d;
-    color: white;
+/* Coche */
+#newsletter-submit .checkmark {
+  font-size: 20px;
+  color: #fff;
+  display: none;
+  line-height: 1;
+  position: relative;
+  top: -1px; /* 🟢 ajustement visuel */
 }
 
-.contact-icon,
-.title-icon,
-.heart-icon,
-.heart-small {
-    color: white;
+/* États */
+#newsletter-submit.loading .btn-text,
+#newsletter-submit.success .btn-text {
+  opacity: 0;
 }
 
-.club-logo-img {
-    max-height: 60px;
-    width: auto;
-    display: block;
+#newsletter-submit.loading .spinner {
+  display: inline-block;
 }
 
-#footer,
-.footer-elegant {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 3rem 5%;
-    /* ajuste selon le design */
+#newsletter-submit.success .checkmark {
+  display: inline-block;
+}
+
+/* Animation de rotation (rotation pure) */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ✅ Message utilisateur déjà abonné */
+.newsletter .already-subscribed {
+  background: rgba(0, 91, 148, 0.08);
+  border-left: 4px solid #00c853;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #d0d0d0;
+  line-height: 1.6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+/* ✅ Icône / emoji de confirmation */
+.newsletter .already-subscribed::before {
+  margin-right: 6px;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+/* ✅ Adresse e-mail mise en valeur */
+.newsletter .already-subscribed strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ✅ Lien de désabonnement */
+.newsletter .already-subscribed .unsubscribe-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #f97316;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.newsletter .already-subscribed .unsubscribe-link:hover {
+  color: #ffb84d;
+  transform: translateX(3px);
+}
+
+/* ---- Masque visuellement le CAPTCHA ---- */
+.cf-turnstile {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }

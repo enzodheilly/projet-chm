@@ -31,8 +31,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     private array $roles = [];
 
-    #[ORM\Column(type: "string")]
-    private string $password;
+    #[ORM\Column(type: "string", nullable: true)]
+    private ?string $password = null;
 
     #[ORM\Column(type: "boolean")]
     private bool $isVerified = false;
@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private ?\DateTimeImmutable $lastResetRequestAt = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', targetEntity: NewsletterSubscriber::class)]
+    #[ORM\OneToOne(mappedBy: 'user', targetEntity: NewsletterSubscriber::class, cascade: ['persist', 'remove'])]
     private ?NewsletterSubscriber $newsletterSubscription = null;
 
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
@@ -85,14 +85,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Payment::class, orphanRemoval: true)]
     private Collection $payments;
 
+    #[ORM\Column(type: "blob", nullable: true)]
+    private $profileImage;
+
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    private ?string $profileImageMime = null;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?\DateTimeInterface $profileImageUpdatedAt = null;
+
     #[ORM\Column(type: "boolean")]
     private bool $acceptedTerms = false;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: PasswordHistory::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $passwordHistories;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SecurityLog::class, cascade: ['remove'], orphanRemoval: true)]
+    private Collection $securityLogs;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Licence::class, orphanRemoval: true)]
+    private Collection $licences;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->payments = new ArrayCollection();
+        $this->licences = new ArrayCollection();
+        $this->passwordHistories = new ArrayCollection();
+        $this->securityLogs = new ArrayCollection();
     }
 
     #[ORM\PreUpdate]
@@ -159,7 +180,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -381,6 +402,151 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->payments->removeElement($payment)) {
             if ($payment->getUser() === $this) {
                 $payment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProfileImage(): ?string
+    {
+        if ($this->profileImage === null) {
+            return null;
+        }
+
+        if (is_resource($this->profileImage)) {
+            return stream_get_contents($this->profileImage);
+        }
+
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(?string $binary): self
+    {
+        $this->profileImage = $binary;
+        return $this;
+    }
+
+    public function getProfileImageMime(): ?string
+    {
+        return $this->profileImageMime;
+    }
+
+    public function setProfileImageMime(?string $mime): self
+    {
+        $this->profileImageMime = $mime;
+        return $this;
+    }
+
+    public function getProfileImageUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->profileImageUpdatedAt;
+    }
+
+    public function setProfileImageUpdatedAt(?\DateTimeInterface $date): self
+    {
+        $this->profileImageUpdatedAt = $date;
+        return $this;
+    }
+
+    public function getProfileImageDataUrl(): ?string
+    {
+        if (!$this->profileImage || !$this->profileImageMime) {
+            return null;
+        }
+
+        $data = null;
+
+        // ✅ Si le champ est un flux (BLOB)
+        if (is_resource($this->profileImage)) {
+            // On revient au début du flux au cas où il aurait déjà été lu
+            rewind($this->profileImage);
+            $data = stream_get_contents($this->profileImage);
+        } else {
+            // Sinon, c’est déjà une chaîne binaire (VARBINARY)
+            $data = $this->profileImage;
+        }
+
+        if (!$data) {
+            return null;
+        }
+
+        return sprintf('data:%s;base64,%s', $this->profileImageMime, base64_encode($data));
+    }
+
+    public function getLicences(): Collection
+    {
+        return $this->licences;
+    }
+
+    public function addLicence(Licence $licence): self
+    {
+        if (!$this->licences->contains($licence)) {
+            $this->licences[] = $licence;
+            $licence->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLicence(Licence $licence): self
+    {
+        if ($this->licences->removeElement($licence)) {
+            if ($licence->getUser() === $this) {
+                $licence->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPasswordHistories(): Collection
+    {
+        return $this->passwordHistories;
+    }
+
+    public function addPasswordHistory(PasswordHistory $passwordHistory): self
+    {
+        if (!$this->passwordHistories->contains($passwordHistory)) {
+            $this->passwordHistories[] = $passwordHistory;
+            $passwordHistory->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePasswordHistory(PasswordHistory $passwordHistory): self
+    {
+        if ($this->passwordHistories->removeElement($passwordHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($passwordHistory->getUser() === $this) {
+                $passwordHistory->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSecurityLogs(): Collection
+    {
+        return $this->securityLogs;
+    }
+
+    public function addSecurityLog(SecurityLog $log): self
+    {
+        if (!$this->securityLogs->contains($log)) {
+            $this->securityLogs->add($log);
+            $log->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSecurityLog(SecurityLog $log): self
+    {
+        if ($this->securityLogs->removeElement($log)) {
+            if ($log->getUser() === $this) {
+                $log->setUser(null);
             }
         }
 

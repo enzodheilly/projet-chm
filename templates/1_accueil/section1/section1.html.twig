@@ -1,14 +1,11 @@
-<section
-	id="accueil" class="hero-section">
+<section id="accueil" class="hero-section">
+	<video class="hero-video" autoplay muted loop playsinline>
+		<source src="{{ asset('videos/background.mp4') }}" type="video/mp4">
+	</video>
 
-	<!-- Fond de la section -->
-	<img
-	src="{{ asset('images/fond.png') }}" alt="Fond Salle" class="hero-background">
-
-	<!-- Texte à gauche -->
 	<div class="hero-content">
-		<div class="club-title">CLUB HALTÉROPHILIE & MUSCULATION</div>
-		<div class="club-subtitle">Relevez vos limites et dépassez-vous chaque jour !</div>
+		<h1 class="club-title">CLUB HALTÉROPHILIE & MUSCULATION</h1>
+		<p class="club-subtitle">Relevez vos limites et dépassez-vous chaque jour !</p>
 
 		<div class="hero-inner">
 			<div class="hero-line" id="adherents-counter">
@@ -22,23 +19,15 @@
 		</div>
 
 		<div class="hero-buttons">
-			<a href="#plus" class="nous-rejoindre">Nous rejoindre</a>
-			<a href="#plus" class="btn-en-savoir-plus">En savoir plus sur nous</a>
+			<a href="#plus" class="nous-rejoindre js-open-register-modal">NOUS REJOINDRE</a>
+			<a href="#plus" class="btn-en-savoir-plus">DÉCOUVRIR LE CLUB</a>
 		</div>
 
 		<div class="ffhm-container">
 			<img src="{{ asset('images/ffhm.png') }}" alt="Logo FFHM" class="ffhm-logo">
 		</div>
 	</div>
-
-	<!-- Vidéo à droite -->
-	<div class="hero-video-container">
-		<video class="hero-video" autoplay muted loop playsinline>
-			<source src="{{ asset('videos/background.mp4') }}" type="video/mp4">
-			Votre navigateur ne supporte pas les vidéos HTML5.
-		</video>
-	</div>
-
 </section>
+
 
  <script src="js/section1/section1.js"></script>

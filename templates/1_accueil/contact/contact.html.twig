@@ -1,196 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact | Mon Site
+{% block title %}Contact | CHM SALEUX
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/accueil/contact/contact.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+	 <script src="{{ asset('js/1_accueil/contact/contact.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-
-	<header class="hero-header">
-		<div class="overlay"></div>
-		<div class="hero-content">
-			<h1>Nous contacter</h1>
-		</div>
-	</header>
-
-	<div class="contact-container">
+	<section class="contact-section">
 
 		{% for message in app.flashes('success') %}
-			<div style="background-color:#d1fae5;color:#065f46;padding:10px;margin-bottom:20px;border-radius:8px;text-align:center;">
-				{{ message }}
-			</div>
+			<div class="flash-success">{{ message }}</div>
 		{% endfor %}
 
-		<h1>Contactez-nous</h1>
-		<p>N’hésitez pas à nous écrire pour toute question ou demande d’information.</p>
+		<header class="contact-header">
+			<h1>CONTACTEZ-NOUS</h1>
+			<p>Une question, un projet ou une demande d'information ? Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</p>
 
-		<form action="{{ path('contact_submit') }}" method="POST" class="max-w-lg mx-auto space-y-4">
-			<div>
-				<label for="nom">Nom</label>
-				<input type="text" id="nom" name="nom" class="w-full border p-2 rounded" required>
+		</header>
+
+		<div class="contact-grid">
+			<div class="form-area">
+				<form action="{{ path('contact_submit') }}" method="POST">
+					<div class="form-group">
+						<label for="nom">Nom</label>
+						<input type="text" id="nom" name="nom" required>
+					</div>
+
+					<div class="form-group">
+						<label for="prenom">Prénom</label>
+						<input type="text" id="prenom" name="prenom" required>
+					</div>
+
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" required>
+					</div>
+
+					<div class="form-group">
+						<label for="telephone">Téléphone</label>
+						<input type="text" id="telephone" name="telephone">
+					</div>
+
+					<div class="form-group">
+						<label for="message">Message</label>
+						<textarea id="message" name="message" rows="4" required></textarea>
+					</div>
+
+					<button type="submit" class="btn-modern">
+						<span class="btn-text">Envoyer</span>
+						<span class="spinner" style="display: none;"></span>
+					</button>
+
+				</form>
 			</div>
 
-			<div>
-				<label for="prenom">Prénom</label>
-				<input type="text" id="prenom" name="prenom" class="w-full border p-2 rounded" required>
+			<div class="map-area">
+				<h2>OÙ NOUS TROUVER</h2>
+				<iframe src="https://www.google.com/maps?q=49.8609999,2.2373333+(Hangar+GERIS+Saleux)&hl=fr&z=18&output=embed" allowfullscreen loading="lazy"></iframe>
+				<div class="contact-info">
+					<p>
+						<strong>Adresse :</strong>
+						8 rue Marx Dormoy (en face de la mairie), 80480 Saleux</p>
+					<p>
+						<strong>Téléphone :</strong>
+						03.22.89.72.57</p>
+				</div>
 			</div>
-
-			<div>
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" class="w-full border p-2 rounded" required>
-			</div>
-
-			<div>
-				<label for="telephone">Téléphone</label>
-				<input type="text" id="telephone" name="telephone" class="w-full border p-2 rounded">
-			</div>
-
-			<div>
-				<label for="message">Message</label>
-				<textarea id="message" name="message" rows="5" class="w-full border p-2 rounded" required></textarea>
-			</div>
-
-			<button type="submit" class="btn-submit">Envoyer</button>
-
-		</form>
-	</div>
-
-	<style>
-
-		.overlay {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0, 0, 0, 0.5);
-			z-index: 0;
-		}
-
-		.hero-header {
-			position: relative;
-			width: 100%;
-			height: 50vh;
-			background: linear-gradient(rgba(37, 99, 235, 0.5), rgba(37, 99, 235, 0.5)), url('http://chm-saleux.fr/wp-content/uploads/2018/06/IMAG1090.jpg') center/cover no-repeat;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: var(--text-light);
-			text-align: center;
-			overflow: hidden;
-		}
-
-		.hero-content {
-			position: relative;
-			z-index: 1;
-			margin-top: 100px;
-			animation: fadeInUp 1s ease-out;
-		}
-
-		.hero-content h1 {
-			font-size: 5rem;
-			font-weight: 900;
-			margin: 0 0 1rem;
-			font-family: 'Bebas Neue', sans-serif;
-			text-transform: uppercase;
-			letter-spacing: 5px;
-			color: white;
-			text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-		}
-
-		.hero-content p {
-			font-size: 1.4rem;
-			line-height: 1.8;
-			color: #E2E8F0;
-			margin-bottom: 2rem;
-		}
-
-		@media(max-width: 768px) {
-			.hero-content h1 {
-				font-size: 3.2rem;
-			}
-			.hero-content p {
-				font-size: 1.1rem;
-			}
-		}
-
-		/* ================= ANIMATION ================= */
-		@keyframes fadeInUp {
-			from {
-				opacity: 0;
-				transform: translateY(20px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-
-		.contact-container {
-			max-width: 600px;
-			margin: 80px auto;
-			background: white;
-			padding: 40px;
-			border-radius: 15px;
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-		}
-
-		h1 {
-			text-align: center;
-			color: #333;
-			margin-bottom: 20px;
-		}
-
-		p {
-			text-align: center;
-
-			margin-bottom: 30px;
-		}
-
-		.contact-form .form-group {
-			margin-bottom: 20px;
-		}
-
-		.contact-form label {
-			display: block;
-			color: #444;
-			margin-bottom: 5px;
-			font-weight: 600;
-		}
-
-		.contact-form input {
-			width: 100%;
-			padding: 10px;
-			border: 1px solid #ccc;
-			border-radius: 8px;
-			font-size: 16px;
-			outline: none;
-		}
-
-		.contact-form input:focus {
-			border-color: #ff7e5f;
-			box-shadow: 0 0 5px rgba(255, 126, 95, 0.4);
-		}
-
-		.btn-submit {
-			display: block;
-			width: 45%;
-			background: #005b94;
-			color: white;
-			border: none;
-			padding: 12px;
-			border-radius: 8px;
-			font-size: 16px;
-			font-weight: bold;
-			margin-left: 144px;
-			cursor: pointer;
-			transition: 0.3s ease;
-		}
-
-		.btn-submit:hover {
-			transform: scale(1.03);
-			opacity: 0.9;
-		}
-	</style>
+		</div>
+	</section>
 
 {% endblock %}

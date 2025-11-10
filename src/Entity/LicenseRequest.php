@@ -8,22 +8,23 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: LicenseRequestRepository::class)]
 class LicenseRequest
 {
-    public const STATUS_PENDING = 'PENDING';
+    public const STATUS_PENDING   = 'PENDING';
     public const STATUS_CONFIRMED = 'CONFIRMED';
-    public const STATUS_EXPIRED = 'EXPIRED';
+    public const STATUS_EXPIRED   = 'EXPIRED';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    // L’utilisateur trouvable par nom/prénom/email
-    #[ORM\ManyToOne(inversedBy: 'licenseRequests')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?\App\Entity\User $user = null;
+    #[ORM\Column(length: 255, nullable: false)]
+    private ?string $userEmail = null;
 
     #[ORM\Column(length: 128, unique: true)]
     private string $token;
+
+    #[ORM\Column(type: 'integer')]
+    private int $failedAttempts = 0;
 
     #[ORM\Column(length: 20)]
     private string $status = self::STATUS_PENDING;
@@ -37,28 +38,36 @@ class LicenseRequest
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $expiresAt;
 
+    #[ORM\Column(length: 6, nullable: true)]
+    private ?string $verificationCode = null;
+
     #[ORM\Column(length: 45, nullable: true)]
     private ?string $requesterIp = null;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-        // Expire dans 15 minutes
         $this->expiresAt = (new \DateTimeImmutable())->modify('+15 minutes');
         $this->token = bin2hex(random_bytes(32));
     }
+
+    // =====================
+    //        GETTERS / SETTERS
+    // =====================
 
     public function getId(): ?int
     {
         return $this->id;
     }
-    public function getUser(): ?\App\Entity\User
+
+    public function getUserEmail(): ?string
     {
-        return $this->user;
+        return $this->userEmail;
     }
-    public function setUser(\App\Entity\User $user): self
+
+    public function setUserEmail(?string $email): self
     {
-        $this->user = $user;
+        $this->userEmail = $email;
         return $this;
     }
 
@@ -66,6 +75,7 @@ class LicenseRequest
     {
         return $this->token;
     }
+
     public function setToken(string $t): self
     {
         $this->token = $t;
@@ -76,6 +86,7 @@ class LicenseRequest
     {
         return $this->status;
     }
+
     public function setStatus(string $s): self
     {
         $this->status = $s;
@@ -91,6 +102,7 @@ class LicenseRequest
     {
         return $this->confirmedAt;
     }
+
     public function setConfirmedAt(?\DateTimeImmutable $d): self
     {
         $this->confirmedAt = $d;
@@ -101,6 +113,7 @@ class LicenseRequest
     {
         return $this->expiresAt;
     }
+
     public function setExpiresAt(\DateTimeImmutable $d): self
     {
         $this->expiresAt = $d;
@@ -116,9 +129,44 @@ class LicenseRequest
     {
         return $this->requesterIp;
     }
+
     public function setRequesterIp(?string $ip): self
     {
         $this->requesterIp = $ip;
+        return $this;
+    }
+
+    public function getVerificationCode(): ?string
+    {
+        return $this->verificationCode;
+    }
+
+    public function setVerificationCode(?string $verificationCode): self
+    {
+        $this->verificationCode = $verificationCode;
+        return $this;
+    }
+
+    public function getFailedAttempts(): int
+    {
+        return $this->failedAttempts;
+    }
+
+    public function setFailedAttempts(int $attempts): self
+    {
+        $this->failedAttempts = max(0, $attempts);
+        return $this;
+    }
+
+    public function incrementFailedAttempts(): self
+    {
+        $this->failedAttempts++;
+        return $this;
+    }
+
+    public function resetFailedAttempts(): self
+    {
+        $this->failedAttempts = 0;
         return $this;
     }
 }

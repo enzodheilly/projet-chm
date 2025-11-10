@@ -58,7 +58,14 @@ services:
               }
 
     # ============================================================
-    # 📬 AUTRES SERVICES PERSONNALISÉS (ajoute ici si besoin)
+    # 📬 AUTRES SERVICES PERSONNALISÉS
     # ============================================================
     # Exemple :
     # App\Service\MailService: ~
+
+    # ============================================================
+    # 🧱 CLOUDFLARE TURNSTILE - VERIFICATION CAPTCHA
+    # ============================================================
+    App\Service\TurnstileVerifierService:
+        arguments:
+            $secretKey: "%env(TURNSTILE_SECRET_KEY)%"

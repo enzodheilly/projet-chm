@@ -1,5 +1,4 @@
 <?php
-
 // src/Entity/Article.php
 namespace App\Entity;
 
@@ -25,11 +24,16 @@ class Article
     #[ORM\Column(type: "datetime")]
     private $publishedAt;
 
-    // Getters et setters
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: "articles")]
+    #[ORM\JoinColumn(nullable: true, onDelete: "SET NULL")]
+    private ?Categorie $categorie = null;
+
+    // Getters / Setters
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -39,6 +43,7 @@ class Article
         $this->title = $title;
         return $this;
     }
+
     public function getSummary(): ?string
     {
         return $this->summary;
@@ -48,6 +53,7 @@ class Article
         $this->summary = $summary;
         return $this;
     }
+
     public function getImage(): ?string
     {
         return $this->image;
@@ -57,6 +63,7 @@ class Article
         $this->image = $image;
         return $this;
     }
+
     public function getPublishedAt(): ?\DateTimeInterface
     {
         return $this->publishedAt;
@@ -64,6 +71,16 @@ class Article
     public function setPublishedAt(\DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
         return $this;
     }
 }

@@ -263,37 +263,66 @@
 	</section>
 
 
-	<section class="faq-contact-section">
+	<!-- SECTION CONTACT STYLE BASIC-FIT -->
+	<section class="faq-contact-section basicfit-style">
 		<div class="faq-contact-wrapper">
-			<h2>Votre question n’est pas ici ?</h2>
-			<p>Pas de souci ! Contactez-nous directement via vos réseaux préférés ou envoyez-nous un message.</p>
+			<h2>VOTRE QUESTION N'EST PAS ICI ?</h2>
+			<p>Alors contactez-nous et nous serons heureux de vous aider.</p>
 
-			<div class="faq-contact-cards">
-				<div class="faq-card">
-					<a href="https://www.instagram.com/chmsaleux/" target="_blank" rel="noopener noreferrer">
-						<img src="{{ asset('images/instagram.png') }}" alt="Instagram">
-						<h3>Instagram</h3>
+			<div
+				class="faq-contact-grid">
+				<!-- Elios Live Chat -->
+				<div class="contact-option">
+					<a href="/elios" target="_blank" rel="noopener noreferrer">
+						<div class="icon">
+							<img src="{{ asset('images/faq/ai-bot.png') }}" alt="Elios Bot IA">
+						</div>
+						<h3>Live chat (Elios)</h3>
+						<span>Disponible 24h/24 🤖</span>
 					</a>
 				</div>
 
-				<div class="faq-card">
-					<a href="https://www.facebook.com/chmsaleux1/" target="_blank" rel="noopener noreferrer">
-						<img src="{{ asset('images/facebook.png') }}" alt="Facebook">
-						<h3>Facebook</h3>
-					</a>
-				</div>
-
-				<div class="faq-card">
+				<!-- WhatsApp -->
+				<div class="contact-option">
 					<a href="https://chat.whatsapp.com/TON_CODE_DE_GROUPE" target="_blank" rel="noopener noreferrer">
-						<img src="{{ asset('images/whatsapp.png') }}" alt="WhatsApp">
+						<div class="icon">
+							<img src="{{ asset('images/faq/whatsapp1.png') }}" alt="WhatsApp">
+						</div>
 						<h3>WhatsApp</h3>
+						<span>Réponse rapide aux horaires du club</span>
 					</a>
 				</div>
 
-				<div class="faq-card">
+				<!-- Facebook -->
+				<div class="contact-option">
+					<a href="https://www.facebook.com/chmsaleux1/" target="_blank" rel="noopener noreferrer">
+						<div class="icon">
+							<img src="{{ asset('images/faq/facebook1.png') }}" alt="Facebook">
+						</div>
+						<h3>Facebook</h3>
+						<span>Réponse sous 2 jours</span>
+					</a>
+				</div>
+
+				<!-- Instagram -->
+				<div class="contact-option">
+					<a href="https://www.instagram.com/chmsaleux/" target="_blank" rel="noopener noreferrer">
+						<div class="icon">
+							<img src="{{ asset('images/faq/instagram1.png') }}" alt="Instagram">
+						</div>
+						<h3>Instagram</h3>
+						<span>Suivez-nous & écrivez en DM</span>
+					</a>
+				</div>
+
+				<!-- Formulaire -->
+				<div class="contact-option">
 					<a href="{{ path('contact') }}" target="_blank" rel="noopener noreferrer">
-						<img src="{{ asset('images/envelope.png') }}" alt="Contact">
+						<div class="icon">
+							<img src="{{ asset('images/faq/envelope.png') }}" alt="Contact">
+						</div>
 						<h3>Envoyer un message</h3>
+						<span>Réponse sous 3 jours</span>
 					</a>
 				</div>
 			</div>
@@ -303,36 +332,70 @@
 
 	<!-- JS pour ouvrir/fermer les réponses -->
 	 <script>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													document.querySelectorAll('.faq-sidebar li').forEach(li => {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    li.addEventListener('click', e => {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        e.preventDefault();
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Retirer "active" des autres liens
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        document.querySelectorAll('.faq-sidebar li').forEach(item => item.classList.remove('active'));
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        li.classList.add('active');
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Récupérer la section ciblée
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        const target = li.getAttribute('data-section');
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Cacher toutes les sections FAQ
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        document.querySelectorAll('.faq-content').forEach(content => {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													            content.style.display = 'none';
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        });
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        // Afficher la section correspondante
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        const activeContent = document.querySelector(`.faq-content[data-section="${target}"]`);
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        if (activeContent) activeContent.style.display = 'block';
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    });
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													});
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													// Animation ouverture/fermeture réponses
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													document.addEventListener('click', e => {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    if (e.target.classList.contains('faq-question')) {
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        const item = e.target.closest('.faq-item');
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													        item.classList.toggle('active');
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													    }
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													});
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																													</script>
+																			document.addEventListener("DOMContentLoaded", () => {
+																			  // === GESTION DU MENU LATÉRAL ===
+																			  document.querySelectorAll(".faq-sidebar li").forEach(li => {
+																			    li.addEventListener("click", e => {
+																			      e.preventDefault();
+																			
+																			      // Retirer "active" des autres liens
+																			      document.querySelectorAll(".faq-sidebar li").forEach(item => item.classList.remove("active"));
+																			      li.classList.add("active");
+																			
+																			      // Récupérer la section ciblée
+																			      const target = li.getAttribute("data-section");
+																			
+																			      // Masquer toutes les sections
+																			      document.querySelectorAll(".faq-content").forEach(content => {
+																			        content.style.display = "none";
+																			      });
+																			
+																			      // Afficher la section correspondante
+																			      const activeContent = document.querySelector(`.faq-content[data-section="${target}"]`);
+																			      if (activeContent) activeContent.style.display = "block";
+																			    });
+																			  });
+																			
+																			  // === GESTION DES QUESTIONS / RÉPONSES ===
+																			  document.querySelectorAll(".faq-question").forEach(question => {
+																			    question.addEventListener("click", () => {
+																			      const item = question.closest(".faq-item");
+																			      const answer = item.querySelector(".faq-answer");
+																			      const span = question.querySelector("span");
+																			
+																			      // Fermer les autres questions si souhaité (optionnel)
+																			      // document.querySelectorAll(".faq-item").forEach(i => {
+																			      //   if (i !== item) {
+																			      //     i.classList.remove("active");
+																			      //     const a = i.querySelector(".faq-answer");
+																			      //     const s = i.querySelector(".faq-question span");
+																			      //     if (a) a.style.maxHeight = null;
+																			      //     if (s) s.textContent = "+";
+																			      //   }
+																			      // });
+																			
+																			      // Toggle de l’état actif
+																			      item.classList.toggle("active");
+																			
+																			      // Animation ouverture/fermeture
+																			      if (item.classList.contains("active")) {
+																			        answer.style.maxHeight = answer.scrollHeight + "px";
+																			        answer.style.opacity = "1";
+																			        span.textContent = "−";
+																			        span.style.transform = "rotate(180deg)";
+																			        span.style.color = "#005b94";
+																			      } else {
+																			        answer.style.maxHeight = null;
+																			        answer.style.opacity = "0";
+																			        span.textContent = "+";
+																			        span.style.transform = "rotate(0deg)";
+																			        span.style.color = "#005b94";
+																			      }
+																			    });
+																			  });
+																			});
+																			</script>
+
 	<!-- Styles FAQ -->
 		<style>
 
@@ -354,7 +417,7 @@
 	position: relative;
 	width: 100%;
 	height: 50vh;
-	background: linear-gradient(rgba(37, 99, 235, 0.5), rgba(37, 99, 235, 0.5)), url('http://chm-saleux.fr/wp-content/uploads/2018/06/IMAG1090.jpg') center/cover no-repeat;
+	background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('http://chm-saleux.fr/wp-content/uploads/2018/06/IMAG1090.jpg') center/cover no-repeat;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -425,23 +488,19 @@
 	min-width: 260px;
 	background-color: #fff;
 	padding: 2.5rem 2rem;
-	border-radius: 12px;
+	border-radius: 0;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 	position: sticky;
 	top: 2rem;
 }
-.faq-sidebar h2 {
-	font-size: 1.8rem; /* plus grand */
-	color: #333;
-	margin-bottom: 1.8rem;
-}
+
 .faq-sidebar h3 {
 	font-size: 2rem;
 	text-transform: uppercase;
 	margin-bottom: 1rem;
 	line-height: 1.2;
 	font-weight: 900;
-	color: #07123a;
+	color: #005b94;
 }
 
 .faq-sidebar h3 span {
@@ -468,7 +527,7 @@
 	display: block;
 	position: relative;
 	padding: 0.9rem 25px 0.9rem 0;
-	color: #555;
+	color: #1f2937;
 	text-decoration: none;
 	font-weight: 600;
 	transition: color 0.3s, transform 0.2s;
@@ -495,21 +554,16 @@
 	flex: 2.5;
 	background: #fff;
 	padding: 3rem;
-	border-radius: 12px;
+	border-radius: 0;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
-.faq-content h1 {
-	font-size: 2.4rem;
-	margin-bottom: 2rem;
-	color: #333;
-	text-align: center;
-}
+
 .faq-content h2 {
 	font-size: 2rem;
 	text-transform: uppercase;
 	font-weight: 900;
 	margin-bottom: 1.5rem;
-	color: #07123a;
+	color: #005b94;
 }
 .faq-content p {
 	font-size: 1.1rem;
@@ -532,35 +586,39 @@
 	justify-content: space-between;
 	font-weight: 700;
 	cursor: pointer;
-	color: #333;
+	color: #1f2937;
 	padding-right: 1rem;
 }
-.faq-question:hover {
-	transition: transform 0.3s, color 0.3s;
-	color: #ff6600;
-}
+
+/* --- Icône + / - animée façon pro --- */
 .faq-question span {
-	transition: transform 0.3s, color 0.3s;
+	display: inline-block;
+	font-weight: bold;
 	font-size: 1.5rem;
-	color: #ff6600;
+	color: #005b94;
+	transition: transform 0.35s ease, color 0.3s ease, opacity 0.2s ease;
+	transform-origin: center;
 }
 
 .faq-item.active .faq-question span {
-	transform: rotate(45deg);
+	transform: rotate(180deg);
+	color: #ff6600; /* petit accent visuel quand c’est ouvert */
 }
 
+/* Ajout d’une animation subtile d’apparition de la réponse */
 .faq-answer {
-	display: none;
-	margin-top: 0.6rem;
-	color: #555;
+	max-height: 0;
+	overflow: hidden;
+	color: #4b5563;
+	font-size: 0.95rem;
 	line-height: 1.6;
-	padding-left: 1rem;
-	border-left: 3px solid #ff6600;
-	transition: all 0.3s ease;
+	transition: max-height 0.4s ease, opacity 0.3s ease;
+	opacity: 0;
 }
 
 .faq-item.active .faq-answer {
-	display: block;
+	max-height: 500px; /* assez grand pour tout le contenu */
+	opacity: 1;
 }
 
 @media(max-width: 900px) {
@@ -575,93 +633,109 @@
 	}
 }
 
-/* ================= CONTACT (Modernisé) ================= */
-.faq-contact-section {
-	padding: 3rem 1rem;
+/* ================= CONTACT STYLE BASIC-FIT (COULEUR CHM SALEUX) ================= */
+.basicfit-style {
+	background: #fff;
 	text-align: center;
-	border-top: 1px solid #e0e6ef;
+	padding: 4rem 1rem;
 }
 
-.faq-contact-wrapper h2 {
-	font-size: 2.6rem;
-	font-weight: 800;
-	margin-bottom: 0.5rem;
-	color: #07123a;
+.basicfit-style h2 {
+	font-size: 2.2rem;
+	font-weight: 900;
 	text-transform: uppercase;
-	letter-spacing: 1px;
+	color: #111;
+	margin-bottom: 0.5rem;
 }
 
-.faq-contact-wrapper p {
-	font-size: 1.2rem;
-	color: #555;
-	margin-bottom: 3.5rem;
-	max-width: 650px;
-	margin-left: auto;
-	margin-right: auto;
-	line-height: 1.6;
+.basicfit-style p {
+	font-size: 1.05rem;
+	color: #444;
+	margin-bottom: 3rem;
 }
 
-/* Conteneur cartes contact */
-.faq-contact-cards {
+.faq-contact-grid {
 	display: flex;
-	flex-wrap: wrap;
 	justify-content: center;
-	gap: 0;
+	flex-wrap: wrap;
+	gap: 3rem;
 }
 
-/* Carte contact moderne */
-.faq-card {
-	border-radius: 16px;
-	padding: 0 1rem;
-	width: 180px;
+.contact-option {
+	width: 200px;
 	text-align: center;
-	transition: all 0.3s ease;
-	cursor: pointer;
 }
 
-.faq-card img {
-	width: 45px;
-	height: 45px;
-	margin-bottom: 1rem;
-	transition: transform 0.3s ease;
-}
-
-.faq-card:hover img {
-	transform: scale(1.1);
-}
-
-.faq-card h3 {
-	font-size: 1.3rem;
-	font-weight: 700;
-	color: #07123a;
-	margin: 0;
-	transition: color 0.3s;
-}
-
-.faq-card:hover h3 {
-	color: #ff6600;
-}
-
-.faq-card a {
+.contact-option a {
 	text-decoration: none;
 	color: inherit;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	transition: all 0.3s ease;
+}
+
+.contact-option:hover {
+	transform: translateY(-5px);
+}
+
+.contact-option .icon {
+	width: 55px;
+	height: 55px;
+	margin-bottom: 0.8rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contact-option .icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	filter: invert(25%) sepia(98%) saturate(1570%) hue-rotate(179deg) brightness(94%) contrast(102%);
+
+	/* ce filtre colore les icônes en bleu #005b94 */
+	transition: transform 0.3s ease;
+}
+
+.contact-option:hover .icon img {
+	transform: scale(1.1);
+}
+
+.contact-option h3 {
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: #111;
+	margin-bottom: 0.3rem;
+}
+
+.contact-option span {
+	font-size: 0.85rem;
+	color: #555;
+}
+
+/* Carte Elios mise en avant */
+.contact-option:first-child h3 {
+	color: #005b94;
+}
+
+.contact-option:first-child:hover {
+	transform: scale(1.05);
+}
+
+/* Hover global couleur CHM */
+.contact-option:hover h3 {
+	color: #005b94;
 }
 
 /* Responsive */
 @media(max-width: 768px) {
-	.faq-contact-section {
-		padding: 3rem 1rem;
-	}
-	.faq-contact-cards {
+	.faq-contact-grid {
 		flex-direction: column;
-		align-items: center;
+		gap: 2rem;
 	}
-	.faq-card {
-		width: 85%;
-		max-width: 300px;
+	.contact-option {
+		width: 100%;
 	}
 }
 

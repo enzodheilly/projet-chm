@@ -6,6 +6,8 @@ use App\Repository\NewsletterSubscriberRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NewsletterSubscriberRepository::class)]
+#[ORM\Table(name: 'newsletter_subscriber')]
+#[ORM\UniqueConstraint(name: 'uniq_newsletter_email', columns: ['email'])]
 class NewsletterSubscriber
 {
     #[ORM\Id]
@@ -19,20 +21,28 @@ class NewsletterSubscriber
     #[ORM\Column(type: 'string', length: 64, nullable: true)]
     private ?string $confirmationToken = null;
 
+    #[ORM\Column(type: 'string', length: 64, unique: true)]
+    private ?string $unsubscribeToken = null; // ✅ token dédié au désabonnement
+
     #[ORM\Column(type: "boolean")]
     private bool $isConfirmed = false;
 
-    #[ORM\Column(type: "datetime")]
-    private \DateTimeInterface $subscribedAt;
+    #[ORM\Column(type: "datetime_immutable")]
+    private \DateTimeImmutable $subscribedAt;
 
     #[ORM\OneToOne(inversedBy: 'newsletterSubscription', targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
     private ?User $user = null;
 
     public function __construct()
     {
-        $this->subscribedAt = new \DateTime();
+        $this->subscribedAt = new \DateTimeImmutable();
+        $this->generateTokens();
     }
+
+    // =========================================
+    // ✅ Getters / Setters
+    // =========================================
 
     public function getId(): ?int
     {
@@ -43,17 +53,19 @@ class NewsletterSubscriber
     {
         return $this->email;
     }
+
     public function setEmail(string $email): self
     {
-        $this->email = $email;
+        $this->email = mb_strtolower(trim($email));
         return $this;
     }
 
-    public function getSubscribedAt(): ?\DateTimeInterface
+    public function getSubscribedAt(): \DateTimeImmutable
     {
         return $this->subscribedAt;
     }
-    public function setSubscribedAt(\DateTimeInterface $date): self
+
+    public function setSubscribedAt(\DateTimeImmutable $date): self
     {
         $this->subscribedAt = $date;
         return $this;
@@ -67,6 +79,17 @@ class NewsletterSubscriber
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+        return $this;
+    }
+
+    public function getUnsubscribeToken(): ?string
+    {
+        return $this->unsubscribeToken;
+    }
+
+    public function setUnsubscribeToken(string $token): self
+    {
+        $this->unsubscribeToken = $token;
         return $this;
     }
 
@@ -86,35 +109,31 @@ class NewsletterSubscriber
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
         return $this;
     }
 
-    /* ===========================================================
-     * 🔽 Ajouts pour personnalisation des newsletters 🔽
-     * ===========================================================
-     */
+    // =========================================
+    // 🧩 Helpers / Tokens
+    // =========================================
 
-    public function getFirstname(): ?string
+    public function generateTokens(): self
     {
-        // Si le User lié existe, on retourne son prénom
-        return $this->user?->getFirstname();
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->user?->getLastname();
-    }
-
-    public function getSubscriptionDate(): string
-    {
-        return $this->subscribedAt->format('d/m/Y');
+        $this->confirmationToken = bin2hex(random_bytes(32));
+        $this->unsubscribeToken = bin2hex(random_bytes(32));
+        return $this;
     }
 
     public function getUnsubscribeUrl(): string
     {
-        return sprintf('https://tondomaine.fr/newsletter/unsubscribe/%d', $this->id);
+        // ✅ Corrigé : on utilise bien le token de désabonnement
+        return sprintf('http://127.0.0.1:8000/newsletter/unsubscribe/%s', $this->unsubscribeToken);
+    }
+
+    public function __toString(): string
+    {
+        return $this->email ?? 'Abonné sans email';
     }
 }

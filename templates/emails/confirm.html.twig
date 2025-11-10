@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="UTF-8">
 		<title>Confirmation d’inscription à la newsletter</title>
@@ -8,20 +8,36 @@
 		<div style="background: white; border-radius: 8px; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
 			<h2 style="color: #003366;">Bienvenue dans la newsletter du CHM Saleux 💪</h2>
 
-			<p>Bonjour,</p>
+			<p>Bonjour{{ subscriber is defined and subscriber ? ' ' ~ (subscriber.getFirstname() ?? '') : '' }},</p>
 
-			<p>Merci de vous être inscrit à notre newsletter ! Pour confirmer votre inscription, cliquez sur le bouton ci-dessous :</p>
 
-			<p style="text-align: center;">
-				<a href="{{ confirmUrl }}" style="display:inline-block; background-color:#ff6600; color:white; padding:10px 20px; text-decoration:none; border-radius:6px; font-weight:bold;">
-					Confirmer mon inscription
+			<p>
+				Merci de vous être inscrit à notre newsletter !  
+																            Pour confirmer votre inscription, cliquez sur le bouton ci-dessous :
+			</p>
+
+			<p style="text-align: center; margin: 25px 0;">
+				<a href="{{ confirmUrl }}" style="display:inline-block; background-color:#ff6600; color:white;
+																								                      padding:12px 22px; text-decoration:none; border-radius:6px;
+																								                      font-weight:bold; letter-spacing:0.3px;">
+					✅ Confirmer mon inscription
 				</a>
-
 			</p>
 
 			<p style="font-size: 0.9rem; color: #555;">
 				Si vous n’avez pas demandé cette inscription, ignorez simplement cet e-mail.
 			</p>
+
+			<hr
+			style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+			<!-- 🔗 Lien de désinscription -->
+			<hr style="border:none; border-top:1px solid #ddd; margin:20px 0;">
+			<p style="font-size:13px; color:#666;">
+				Vous recevez cet e-mail car vous êtes abonné à la newsletter du CHM Saleux.<br>
+				<a href="{{ subscriber.getUnsubscribeUrl() }}" style="color:#d32f2f;">Se désabonner</a>
+			</p>
+
 
 			<p style="margin-top: 30px; font-size: 0.85rem; color: #888; text-align:center;">
 				— L’équipe du CHM Saleux 🏋️‍♂️

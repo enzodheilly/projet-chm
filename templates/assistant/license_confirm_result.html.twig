@@ -1,31 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block navbar %}{% endblock %}
-{% block footer %}{% endblock %}
-{% block newsletter_script %}{% endblock %}
-
 {% block title %}Confirmation licence
 {% endblock %}
+
 {% block body %}
-	<div style="max-width:720px;margin:3rem auto;background:#fff;padding:2rem;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.08);font-family:Poppins,sans-serif">
+	 <script>
+	    // Dès que la page se charge, on envoie un "signal" au parent
+	    window.addEventListener("load", () => {
+	        if (window.opener && !window.opener.closed) {
+	            window.opener.postMessage({
+	                type: "licenseConfirmed",
+	                ok: {{ ok ? 'true' : 'false' }},
+	                reason: "{{ reason|e('js') }}"
+	            }, "*");
+	        }
+	        // Ferme automatiquement la fenêtre au bout de 1 seconde
+	        setTimeout(() => window.close(), 1000);
+	    });
+	</script>
+
+	<div style="display:flex;justify-content:center;align-items:center;min-height:60vh;">
 		{% if ok %}
-			<h1 style="color:#16a34a">🎉 Confirmation réussie</h1>
-			{% if license %}
-				<p>Bonjour
-					{{ user.firstName }}
-					{{ user.lastName }},</p>
-				<p>Voici votre numéro de licence :</p>
-				<p style="font-size:1.8rem;font-weight:700;letter-spacing:.5px">{{ license }}</p>
-			{% else %}
-				<p>Votre compte ne contient pas encore de numéro de licence. Contactez le club si besoin.</p>
-			{% endif %}
+			<div style="text-align:center;padding:2rem;background:#f0fdf4;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+				<h2 style="color:#22c55e;">🎉 Confirmation réussie</h2>
+				<p>Vous pouvez fermer cette page.</p>
+			</div>
 		{% else %}
-			<h1 style="color:#dc2626">⛔ Impossible de confirmer</h1>
-			{% if reason == 'expired' %}
-				<p>Le lien a expiré. Merci de recommencer la demande depuis l’assistant.</p>
-			{% else %}
-				<p>Lien invalide. Merci de recommencer la demande.</p>
-			{% endif %}
+			<div style="text-align:center;padding:2rem;background:#fee2e2;border-radius:10px;">
+				<h2 style="color:#ef4444;">❌ Erreur</h2>
+				<p>
+					{% if reason == 'invalid' %}
+						Lien de confirmation invalide.
+					{% elseif reason == 'expired' %}
+						Le lien de confirmation a expiré.
+					{% else %}
+						Une erreur est survenue.
+					{% endif %}
+				</p>
+			</div>
 		{% endif %}
 	</div>
 {% endblock %}

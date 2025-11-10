@@ -18,27 +18,30 @@ security:
             provider: app_user_provider
             custom_authenticators:
                 - App\Security\LoginFormAuthenticator
+                - App\Security\GoogleAuthenticator
             entry_point: App\Security\LoginFormAuthenticator
 
-            # 🔒 Gestion de la déconnexion
+            # 👇 Bloc essentiel : définit les routes de login utilisées par le firewall
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+
             logout:
                 path: app_logout
                 target: /
 
-            # 🧠 Activation du système “Se souvenir de moi”
             remember_me:
                 secret: "%kernel.secret%"
-                lifetime: 604800 # Durée en secondes (ici = 7 jours)
+                lifetime: 604800 # 7 jours
                 path: /
-                always_remember_me: false # l’utilisateur doit cocher la case
-                name: REMEMBERME # nom du cookie (facultatif mais propre)
+                always_remember_me: false
+                name: REMEMBERME
 
             stateless: false
 
     access_control:
-        # 🔐 Accès réservé aux utilisateurs connectés
+        - { path: ^/connect/google, roles: PUBLIC_ACCESS }
         - { path: ^/dashboard, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
-
-        # 🔑 Accès réservé aux administrateurs
         - { path: ^/admin, roles: ROLE_ADMIN }

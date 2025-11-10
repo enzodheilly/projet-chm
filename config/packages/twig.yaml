@@ -1,5 +1,9 @@
 twig:
-    file_name_pattern: '*.twig'
+    file_name_pattern: "*.twig"
+
+    # 🔑 Variables globales accessibles dans tous les templates Twig
+    globals:
+        turnstile_site_key: "%env(TURNSTILE_SITE_KEY)%"
 
 when@test:
     twig:

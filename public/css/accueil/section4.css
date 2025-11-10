@@ -1,225 +1,308 @@
-/* --- Thème Orange & Bleu --- */
-		.news-section {
-			padding: 60px 20px;
-			text-align: center;
-			background: white; /* fond clair neutre */
-			color: #1f2937; /* texte gris foncé */
-		}
-		.news-title {
-			font-size: 28px;
-			font-weight: bold;
-			margin-bottom: 50px;
-			color: #07123a;
-		}
-		.news-title span {
-			color: #ff6600; /* accent orange */
-		}
-		.news-subtitle {
-			font-size: 16px;
-			color: #4b5563; /* gris moyen */
-			margin-top: -40px;
-		}
-		.news-grid {
-			display: flex;
-			margin-top: 40px;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 20px;
-			margin-bottom: 30px;
-		}
-		.news-card {
-			position: relative;
-			width: 380px;
-			height: 250px;
-			border: none;
-			box-shadow: none;
-			border-radius: 12px;
-			overflow: hidden;
-			display: block;
-			text-decoration: none;
-			cursor: pointer;
-		}
+/* ============================
+   SECTION ACTUALITÉS
+============================ */
+.news-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: #ffffff;
+  color: #1f2937;
+}
 
-		.news-card:hover {
-			transform: scale(1.02);
-		}
-		.news-overlay {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			padding: 15px 20px;
-			background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-			color: white;
-			text-align: left; /* aligne le texte à gauche */
-		}
-		.news-overlay h4 {
-			font-size: 18px;
-			margin: 0;
-			font-weight: bold;
-			color: #fff;
-		}
-		.news-overlay p {
-			font-size: 14px;
-			margin-top: 5px;
-			color: #fff;
-		}
-		.news-card img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			display: block;
-			transition: transform 0.5s ease; /* transition pour le zoom */
-		}
+.news-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #005b94;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
-		.news-card:hover img {
-			transform: scale(1.05);
-		}
+.news-title span {
+  color: #0f172a;
+}
 
-		.news-card-content {
-			padding: 20px;
-		}
-		.news-card-content h4 {
-			font-size: 20px;
-			margin-bottom: 5px;
-			font-weight: bold;
-			color: #005b94; /* titre bleu */
-			overflow: hidden;
-			text-overflow: ellipsis;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-		}
-		.news-card-content p {
-			font-size: 15px;
-			color: #4b5563;
-			margin-bottom: 10px;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			display: -webkit-box;
-			-webkit-line-clamp: 3;
-			-webkit-box-orient: vertical;
-		}
-		.news-date {
-			display: block;
-			font-size: 12px;
-			color: #9ca3af;
-			margin-bottom: 8px;
-		}
-		.btn-news {
-			background: #005b94; /* bleu */
-			color: white;
-			padding: 10px 20px;
-			text-decoration: none;
-			border-radius: 5px;
-			display: inline-block;
-			transition: background 0.3s ease, transform 0.2s ease;
-			margin-top: 15px;
-		}
-		.btn-news:hover {
-			background: #004472;
-			transform: translateY(-2px);
-		} /* FAQ */
-		.faq-section {
-			max-width: 1300px;
-			margin: 10px auto 80px; /* plus d'espace vertical */
-			padding: 30px; /* padding intérieur augmenté */
-			background: #fff;
-			color: #1f2937;
-			border-radius: 16px; /* arrondi plus doux */
-		}
-		.faq-section h2 {
-			font-size: 28px;
-			font-weight: bold;
-			margin-bottom: 30px;
-			color: #07123a; /* titre bleu */
-		}
-		.faq-page {
-			display: flex;
-			flex-direction: column;
-			gap: 40px;
-		}
-		@media(min-width: 1024px) {
-			.faq-page {
-				flex-direction: row;
-				justify-content: space-between;
-			}
-		}
-		.faq-items {
-			width: 100%;
-		}
-		@media(min-width: 1024px) {
-			.faq-items {
-				width: 65%;
-			}
-		}
-		.faq-item {
-			border-bottom: 1px solid #e5e7eb;
-			padding: 15px 0;
-		}
-		.faq-question {
-			font-weight: bold;
-			cursor: pointer;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			color: black; /* bleu question */
-		}
-		.faq-answer {
-			display: none;
-			padding-top: 10px;
-			color: #4b5563;
-			font-size: 14px;
-		}
-		.faq-contact {
-			width: 100%;
-			height: 250px;
-			background: #fff;
-			padding: 25px;
-			border-radius: 8px;
-			border: 1px solid black;
-			text-align: left;
-			border-top: 4px solid #005b94; /* accent orange */
-			margin-left: 80px;
-			margin-top: 50px;
-		}
-		@media(min-width: 1024px) {
-			.faq-contact {
-				width: 30%;
-			}
-		}
-		.faq-contact h3 {
-			font-size: 18px;
-			font-weight: bold;
-			margin-bottom: 15px;
-			color: #07123a; /* bleu */
-		}
-		.faq-contact p {
-			font-size: 14px;
-			margin-bottom: 20px;
-			color: #4b5563;
-		}
-		.btn-faq {
-			display: inline-block;
-			border: 1px solid #ff6600;
-			color: #ff6600;
-			padding: 10px 20px;
-			font-size: 14px;
-			text-decoration: none;
-			border-radius: 5px;
-			font-weight: bold;
-			transition: 0.3s;
-			margin-left: 65px;
-		}
-		.btn-faq:hover {
-			background: #ff6600;
-			color: #fff;
-		}
-		.faq-more {
-			margin-top: 20px;
-			display: block;
-			font-size: 14px;
-			font-weight: bold;
-			color: #ff6600; /* accent orange */
-			text-decoration: none;
-		}
+.news-subtitle {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-top: 0;
+  margin-bottom: 50px;
+  line-height: 1.6;
+}
+
+.news-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.news-card {
+  position: relative;
+  width: 360px;
+  height: 240px;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.news-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover img {
+  transform: scale(1.05);
+}
+
+.news-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+  color: #fff;
+  text-align: left;
+}
+
+.news-overlay h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.news-overlay p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  line-height: 1.4;
+  opacity: 0.95;
+}
+
+.btn-news {
+  background: #005b94;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 0px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-news:hover {
+  background: #004472;
+}
+
+/* ============================
+   SECTION FAQ
+============================ */
+.faq-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 60px 30px;
+  background: #ffffff;
+  color: #1f2937;
+  border-radius: 0px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Header --- */
+.faq-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.faq-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #005b94;
+  text-transform: uppercase;
+  font-family: "Oswald", sans-serif;
+  margin-bottom: 10px;
+}
+
+.faq-header p {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* --- Layout --- */
+.faq-page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media (min-width: 1024px) {
+  .faq-page {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.faq-items {
+  flex: 2;
+}
+
+/* --- Item --- */
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 18px 0;
+  transition: all 0.3s ease;
+}
+
+/* --- Question (reset bouton + style) --- */
+.faq-question {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0f172a;
+  transition: color 0.3s ease, background 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* --- Icône dynamique + / - --- */
+.faq-question::after {
+  content: "+";
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #005b94;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active::after {
+  content: "−";
+  transform: rotate(180deg);
+}
+
+/* --- Réponse --- */
+.faq-answer {
+  display: none;
+  padding-top: 10px;
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Lien vers toutes les FAQ --- */
+.faq-more {
+  margin-top: 25px;
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #005b94;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.faq-more:hover {
+  text-decoration: underline;
+}
+
+/* --- Encadré contact --- */
+.faq-contact {
+  flex: 1;
+  background: #f3f7fb;
+  padding: 30px;
+  border-radius: 0px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  border-top: 4px solid #005b94;
+}
+
+@media (min-width: 1024px) {
+  .faq-contact {
+    margin-left: 40px;
+  }
+}
+
+.faq-contact h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #005b94;
+  margin-bottom: 12px;
+}
+
+.faq-contact p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* --- Bouton contact --- */
+.btn-faq {
+  display: inline-block;
+  background: #005b94;
+  color: #fff;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0px;
+  transition: all 0.3s ease;
+}
+
+.btn-faq:hover {
+  background: #004472;
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 768px) {
+  .news-card {
+    width: 100%;
+    height: 220px;
+  }
+
+  .faq-section {
+    padding: 40px 20px;
+  }
+
+  .faq-contact {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+}

@@ -31,7 +31,8 @@ class SecurityLog
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $reason = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'securityLogs')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE', nullable: true)]
     private ?User $user = null;
 
     #[ORM\Column(length: 100, nullable: true)]

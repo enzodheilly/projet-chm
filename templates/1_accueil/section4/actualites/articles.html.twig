@@ -4,254 +4,524 @@
 {% endblock %}
 
 {% block stylesheets %}
-	<style>
-		.hero-header {
-			position: relative;
-			width: 100%;
-			height: 60vh;
-			background-color: grey;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-			text-align: center;
-			overflow: hidden;
+	<style>:root
+	{
+		--primary: #004a97;
+		--secondary: #007bff;
+		--light-bg: #f5f6fa;
+		--text-color: #1c1c1c;
+		--muted: #888;
+	}
+
+	body {
+		background: var(--light-bg);
+		font-family: 'Poppins', sans-serif;
+		color: var(--text-color);
+	}
+
+	/* ---- HEADER BANNER ---- */
+	.page-banner {
+		background: linear-gradient(to right, rgba(0, 40, 90, 0.85), rgba(0, 90, 180, 0.75)), url('{{ asset("images/banner-actu.jpg") }}') center/cover no-repeat;
+		color: white;
+		text-align: center;
+		padding: 200px 20px 80px;
+	}
+
+	.page-banner h1 {
+		font-size: 2.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	/* ---- FILTER BAR (améliorée) ---- */
+	.filter-bar {
+		background: #fff;
+		box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+		padding: 25px 30px;
+		margin-top: -50px;
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 18px;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		z-index: 2;
+	}
+
+	.filter-bar form {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 18px;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		max-width: 950px;
+	}
+
+	/* ---- INPUTS & SELECTS ---- */
+	.filter-bar select,
+	.filter-bar input[type="date"] {
+		padding: 12px 38px 12px 14px; /* espace à droite pour la flèche du select */
+		border: 1px solid #e0e0e0;
+		min-width: 220px;
+		font-size: 0.95rem;
+		font-family: 'Poppins', sans-serif;
+		color: var(--text-color);
+		background-color: #fafafa;
+		transition: all 0.25s ease;
+		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+		border-radius: 4px;
+	}
+
+	/* flèche personnalisée pour le select */
+	.filter-bar select {
+		appearance: none; /* masque la flèche native */
+		background-image: url("data:image/svg+xml;charset=UTF-8, <svg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'><path fill='%23004a97' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/></svg>");
+		background-repeat: no-repeat;
+		background-position: right 12px center; /* flèche centrée avec marge à droite */
+		background-size: 12px 8px;
+	}
+
+	/* Hover */
+	.filter-bar select:hover,
+	.filter-bar input[type="date"]:hover {
+		border-color: var(--secondary);
+		background-color: #fff;
+	}
+
+	/* Focus */
+	.filter-bar select:focus,
+	.filter-bar input[type="date"]:focus {
+		outline: none;
+		border-color: var(--primary);
+		box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+		background-color: #fff;
+	}
+
+
+	/* ---- BUTTON ---- */
+	.filter-bar button {
+		background: #005b94;
+		color: white;
+		border: none;
+		padding: 12px 28px;
+		font-weight: 700;
+		cursor: pointer;
+		font-size: 0.95rem;
+		letter-spacing: 0.3px;
+	}
+
+	.filter-bar button:hover {}
+
+	.date-input {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.date-input label {
+		font-weight: 600;
+		color: #005b94;
+		font-size: 0.9rem;
+	}
+
+	.input-wrapper {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.input-wrapper input[type="date"] {
+		padding-right: 28px; /* laisse la place pour la croix */
+		border: 1px solid #ddd;
+		border-radius: 6px;
+		background-color: #fafafa;
+		font-size: 0.95rem;
+		transition: border-color 0.2s ease, background-color 0.2s ease;
+	}
+
+	.input-wrapper input[type="date"]:hover {
+		border-color: var(--secondary);
+		background-color: #fff;
+	}
+
+	.clear-icon {
+		position: absolute;
+		right: 8px;
+		color: #aaa;
+		cursor: pointer;
+		font-size: 18px;
+		line-height: 1;
+		user-select: none;
+		opacity: 0;
+		transition: opacity 0.2s ease, color 0.2s ease;
+	}
+
+	.input-wrapper:hover .clear-icon {
+		opacity: 0.6;
+	}
+
+	.clear-icon:hover {
+		opacity: 1;
+		color: var(--secondary);
+	}
+
+	/* ---- RESPONSIVE ---- */
+	@media(max-width: 768px) {
+		.filter-bar {
+			padding: 20px;
+			gap: 15px;
 		}
 
-		.overlay {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0, 0, 0, 0.5);
-			z-index: 0;
-		}
-
-		.hero-content {
-			position: relative;
-			margin-top: 120px;
-			text-align: center;
-			z-index: 1;
-			animation: fadeInUp 1s ease-out;
-		}
-
-		.hero-content h1 {
-			font-size: 6rem;
-			font-weight: 900;
-			margin: 0 0 1rem;
-			font-family: 'Bebas Neue', sans-serif;
-			text-transform: uppercase;
-			letter-spacing: 5px;
-			background: linear-gradient(90deg, #ff6a00, #ffca28);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-		}
-
-		.hero-content p {
-			font-size: 1.4rem;
-			line-height: 1.8;
-			color: #f0f0f0;
-			margin-bottom: 2rem;
-		}
-
-		@media(max-width: 768px) {
-			.hero-content h1 {
-				font-size: 3.5rem;
-			}
-			.hero-content p {
-				font-size: 1.1rem;
-			}
-		}
-		/* --- NEWS GRID --- */
-		.actualites-list {
-			padding: 40px 20px;
-			max-width: 1200px;
-			margin: 0 auto;
-		}
-
-		.news-grid {
-			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			gap: 20px;
-			list-style: none;
-			padding: 0;
-			margin: 0;
-		}
-
-		.news-card {
-			background: #fff;
-			border-radius: 10px;
-			overflow: hidden;
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-			display: flex;
+		.filter-bar form {
 			flex-direction: column;
-			transition: transform 0.3s, box-shadow 0.3s;
+			gap: 15px;
 		}
 
-		.news-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+		.filter-bar select,
+		.filter-bar input,
+		.filter-bar button {
+			width: 100%;
 		}
+	}
 
+
+	/* ---- SECTION ACTUALITÉS ---- */
+	.actualites-section {
+		max-width: 1600px;
+		margin: 0 auto;
+		padding: 80px 20px;
+	}
+
+	.news-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+		gap: 50px 40px;
+		justify-content: center;
+	}
+
+	/* ---- CARTE ARTICLE ---- */
+	.news-card {
+		display: flex;
+		flex-direction: column;
+		background: #fff;
+		border-radius: 0;
+		overflow: hidden;
+		transition: all 0.3s ease;
+		border-bottom: 4px solid transparent;
+	}
+
+	.news-card:hover {
+		transform: translateY(-5px);
+		border-bottom-color: #005b94; /* accent bleu */
+	}
+
+	/* ---- IMAGE ---- */
+	.news-card img {
+		width: 100%;
+		height: 210px;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+
+	.news-card:hover img {
+		transform: scale(1.03);
+	}
+
+	/* ---- CONTENU ---- */
+	.news-info {
+		padding: 22px 5px 30px;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	/* Catégorie */
+	.news-category {
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: #005b94;
+		letter-spacing: 0.5px;
+		margin-bottom: 10px;
+	}
+
+	/* Titre principal */
+	.news-info h3 {
+		font-size: 1.05rem;
+		font-weight: 800;
+		color: #005b94;
+		text-transform: uppercase;
+		line-height: 1.4;
+		margin-bottom: 12px;
+	}
+
+	/* Texte */
+	.news-info p {
+		font-size: 0.95rem;
+		color: #333;
+		line-height: 1.55;
+		flex-grow: 1;
+		margin-bottom: 20px;
+	}
+
+	/* Date */
+	.news-date {
+		font-size: 0.85rem;
+		color: #7c7c7c;
+		font-weight: 500;
+	}
+
+	/* ---- Lien Lire la suite moderne ---- */
+	.news-info a {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: #005b94;
+		font-weight: 600;
+		font-size: 0.95rem;
+		text-decoration: none;
+		position: relative;
+		transition: all 0.3s ease;
+	}
+
+	.news-info a::after {
+		content: "→";
+		font-weight: bold;
+		font-size: 1rem;
+		transition: transform 0.3s ease, color 0.3s ease;
+	}
+
+	.news-info a:hover {
+		color: #005b94;
+	}
+
+	.news-info a:hover::after {
+		transform: translateX(4px);
+		color: #005b94;
+	}
+
+
+	/* ---- RESPONSIVE ---- */
+	@media(max-width: 768px) {
+		.news-info {
+			padding: 20px 0 25px;
+		}
 		.news-card img {
-			width: 100%;
 			height: 180px;
-			object-fit: cover;
 		}
+	}
 
-		.news-card-content {
-			padding: 15px;
-			flex-grow: 1;
-			display: flex;
-			flex-direction: column;
-		}
 
-		.news-card-content h4 {
-			margin: 0 0 10px;
-			font-size: 1.1rem;
-			color: #333;
-		}
+	/* ---- PAGINATION MODERNE ---- */
+	.pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+		margin-top: 60px;
+		flex-wrap: wrap;
+	}
 
-		.news-card-content .news-date {
-			font-size: 0.85rem;
-			color: #999;
-			margin-bottom: 10px;
-		}
+	.pagination a,
+	.pagination span {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 38px;
+		height: 38px;
+		border: 1px solid #005b94;
+		border-radius: 3px;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+		color: #005b94;
+		transition: all 0.25s ease;
+	}
 
-		.news-card-content p {
-			flex-grow: 1;
-			font-size: 0.95rem;
-			color: #555;
-			margin-bottom: 10px;
-		}
+	.pagination a:hover {
+		background: #005b94;
+		color: #fff;
+	}
 
-		.news-card-content a {
-			text-decoration: none;
-			color: #fff;
-			background-color: #007BFF;
-			padding: 8px 12px;
-			border-radius: 5px;
-			text-align: center;
-			transition: background-color 0.3s;
-		}
-		.news-card-content a:hover {
-			background-color: #0056b3;
-		}
-		.pagination {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center; /* centre horizontalement */
-			align-items: center; /* centre verticalement */
-			gap: 8px;
-			margin: 30px 0;
-			font-family: Arial, sans-serif;
-			text-align: center; /* assure le centrage du texte */
-		}
+	.pagination .current {
+		background: #005b94;
+		color: #fff;
+		border-color: #005b94;
+		cursor: default;
+	}
 
-		.pagination a,
-		.pagination span {
-			padding: 4px 8px;
-			text-decoration: none;
-			font-size: 0.95rem;
-			min-width: 24px;
-			text-align: center;
-			color: #000;
-		}
+	.pagination .disabled {
+		opacity: 0.4;
+		cursor: not-allowed;
+		border-color: #ddd;
+		color: #bbb;
+	}
 
-		.pagination span.current {
-			font-weight: bold;
-		}
+	.pagination .dots {
+		border: none;
+		color: #999;
+		pointer-events: none;
+		background: transparent;
+		font-weight: 700;
+	}
 
-		.pagination span.disabled {
-			color: #888;
-			pointer-events: none;
-		}
+	.pagination .page-arrow {
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		border: 1px solid #005b94;
+		color: #005b94;
+		font-size: 1.1rem;
+	}
 
-		@media(max-width: 768px) {
-			.pagination {
-				gap: 5px;
-			}
-			.pagination a,
-			.pagination span {
-				padding: 3px 6px;
-				font-size: 0.85rem;
-			}
-		}
-		/* --- RESPONSIVE --- */
-		@media(max-width: 1024px) {
-			.news-grid {
-				grid-template-columns: repeat(3, 1fr);
-			}
-		}
-		@media(max-width: 768px) {
-			.news-grid {
-				grid-template-columns: repeat(2, 1fr);
-			}
-		}
-		@media(max-width: 480px) {
-			.news-grid {
-				grid-template-columns: 1fr;
-			}
-		}
-	</style>
-{% endblock %}
-{% block body %}
-	<header class="hero-header">
-		<div class="overlay"></div>
-		<div class="hero-content">
-			<h1>Découvrer toutes les actualites</h1>
-		</div>
-	</header>
+	.pagination .page-arrow:hover {
+		background: #005b94;
+		color: #fff;
+	}
+</style>{% endblock %}{% block body %}
+<main>
+	<section class="page-banner">
+		<h1>Actualités</h1>
+	</section>
 
-	<main>
-		<section class="actualites-list">
-			{% if articles is not empty %}
-				<ul class="news-grid">
-					{% for article in articles %}
-						<li class="news-card">
-							<img src="{{ asset(article.image) }}" alt="{{ article.title }}">
-							<div class="news-card-content">
-								<h4>{{ article.title }}</h4>
-								<span class="news-date">{{ article.publishedAt|date('d M Y') }}</span>
-								<p>{{ article.summary }}</p>
-								<a href="{{ path('article_show', {'id': article.id}) }}">Lire la suite</a>
-							</div>
-						</li>
+	<section class="filter-bar">
+		<form method="get" action="{{ path('actualites', {'page': 1}) }}">
+			{% if categories is defined %}
+				<select name="categorie">
+					<option value="">Toutes les catégories</option>
+					{% for cat in categories %}
+						<option value="{{ cat.id }}" {% if filters.categorie is defined and filters.categorie == cat.id %} selected {% endif %}>
+							{{ cat.name }}
+						</option>
 					{% endfor %}
-				</ul>
-
-				<div
-					class="pagination">
-					{# Bouton Précédent #}
-					{% if page > 1 %}
-						<a href="{{ path('actualites', {'page': page-1}) }}" class="prev-page">&larr; Précédent</a>
-					{% else %}
-						<span class="disabled">&larr; Précédent</span>
-					{% endif %}
-
-					{# Numéros de pages #}
-					{% for i in 1..totalPages %}
-						{% if i == page %}
-							<span class="current">{{ i }}</span>
-						{% else %}
-							<a href="{{ path('actualites', {'page': i}) }}">{{ i }}</a>
-						{% endif %}
-					{% endfor %}
-
-					{# Bouton Suivant #}
-					{% if page < totalPages %}
-						<a href="{{ path('actualites', {'page': page+1}) }}" class="next-page">Suivant &rarr;</a>
-					{% else %}
-						<span class="disabled">Suivant &rarr;</span>
-					{% endif %}
-				</div>
-
+				</select>
 			{% else %}
-				<p>Aucune actualité pour le moment.</p>
+				<select disabled>
+					<option>Toutes les catégories</option>
+				</select>
 			{% endif %}
-		</section>
+
+			<!-- Champ date "De" avec bouton reset -->
+			<div class="date-input">
+				<label for="date_from">De :</label>
+				<div class="input-wrapper">
+					<input type="date" id="date_from" name="date_from" value="{{ filters.date_from is defined ? filters.date_from : '' }}">
+					<span class="clear-icon" title="Effacer la date" onclick="clearDate('date_from')">×</span>
+				</div>
+			</div>
+
+			<div class="date-input">
+				<label for="date_to">À :</label>
+				<div class="input-wrapper">
+					<input type="date" id="date_to" name="date_to" value="{{ filters.date_to is defined ? filters.date_to : '' }}">
+					<span class="clear-icon" title="Effacer la date" onclick="clearDate('date_to')">×</span>
+				</div>
+			</div>
 
 
-	</main>
-{% endblock %}
+			<button type="submit">Rechercher</button>
+		</form>
+	</section>
+
+
+	<section class="actualites-section">
+		{% if articles is not empty %}
+			<ul class="news-grid">
+				{% for article in articles %}
+					<li class="news-card">
+						<img src="{{ asset(article.image) }}" alt="{{ article.title }}">
+						<div class="news-info">
+							<span class="news-category">{{ article.categorie.name|upper }}</span>
+
+							<h3>{{ article.title }}</h3>
+							<p>{{ article.summary|length > 130 ? article.summary|slice(0,130) ~ '...' : article.summary }}</p>
+							<span class="news-date">{{ article.publishedAt|date('d/m/Y') }}</span>
+							<a href="{{ path('article_show', {'id': article.id}) }}">Lire la suite</a>
+
+						</div>
+					</li>
+
+				{% endfor %}
+			</ul>
+
+			<div class="pagination">
+				{% set query = {
+        'categorie': filters.categorie,
+        'date_from': filters.date_from,
+        'date_to': filters.date_to
+    } %}
+
+				{# Bouton "Précédent" #}
+				{% if page > 1 %}
+					<a href="{{ path('actualites', query|merge({'page': page - 1})) }}" class="page-arrow">&lsaquo;</a>
+				{% else %}
+					<span class="page-arrow disabled">&lsaquo;</span>
+				{% endif %}
+
+				{# Calcul de la plage de pages à afficher #}
+				{% set start = (page > 3) ? page - 2 : 1 %}
+				{% set end = (page < totalPages - 2) ? page + 2 : totalPages %}
+
+				{% if start > 1 %}
+					<a href="{{ path('actualites', query|merge({'page': 1})) }}">1</a>
+					{% if start > 2 %}
+						<span class="dots">...</span>
+					{% endif %}
+				{% endif %}
+
+				{% for i in start..end %}
+					{% if i == page %}
+						<span class="current">{{ i }}</span>
+					{% else %}
+						<a href="{{ path('actualites', query|merge({'page': i})) }}">{{ i }}</a>
+					{% endif %}
+				{% endfor %}
+
+				{% if end < totalPages %}
+					{% if end < totalPages - 1 %}
+						<span class="dots">...</span>
+					{% endif %}
+					<a href="{{ path('actualites', query|merge({'page': totalPages})) }}">{{ totalPages }}</a>
+				{% endif %}
+
+				{# Bouton "Suivant" #}
+				{% if page < totalPages %}
+					<a href="{{ path('actualites', query|merge({'page': page + 1})) }}" class="page-arrow">&rsaquo;</a>
+				{% else %}
+					<span class="page-arrow disabled">&rsaquo;</span>
+				{% endif %}
+			</div>
+
+		{% else %}
+			<p style="text-align:center; color:#777;">Aucune actualité pour le moment.</p>
+		{% endif %}
+	</section>
+
+	 <script>
+															document.addEventListener('DOMContentLoaded', () => {
+															  const form = document.querySelector('.filter-bar form');
+															  if (!form) return;
+															
+															  // Soumission automatique sur changement de filtre
+															  form.querySelectorAll('select[name="categorie"], input[type="date"]').forEach(el => {
+															    el.addEventListener('change', () => form.submit());
+															  });
+															
+															  // Réinitialisation rapide des dates
+															  window.clearDate = function(id) {
+															    const input = document.getElementById(id);
+															    if (input) {
+															      input.value = '';
+															      form.submit();
+															    }
+															  };
+															});
+															</script>
+
+
+</main>{% endblock %}

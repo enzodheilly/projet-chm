@@ -1,407 +1,89 @@
-{% block stylesheets %}
-	<style>
-		/* --- Reset horizontal overflow global --- */
-		html,
-		body {
-			margin: 0;
-			padding: 0;
-			overflow-x: hidden;
-		}
-
-		/* Banner info */
-		.info-banner {
-			width: 100%;
-			background: #005b94;
-			color: white;
-			font-weight: 600;
-			font-size: 1.6rem;
-			padding: 1rem 0; /* tu peux ajuster pour changer la hauteur */
-			position: relative; /* important pour que le contenu reste bien placé */
-		}
-
-		.info-banner-content {
-			display: flex;
-			justify-content: space-between; /* garde les éléments à gauche et à droite */
-			align-items: center; /* ✅ centre verticalement les deux blocs */
-			width: 98%; /* adapte à ton design */
-			margin: 0 auto;
-			box-sizing: border-box;
-		}
-
-		.info-banner-horaire {
-			display: flex;
-			position: relative;
-			align-items: center;
-			gap: 1rem; /* espace entre chaque jour */
-			color: white;
-			font-size: 0.85rem;
-			font-weight: 500;
-			left: 18.5rem; /* décale un peu à gauche */
-		}
-
-		.info-banner-horaire p {
-			display: flex;
-			align-items: center;
-			margin: 0;
-			gap: 0.25rem; /* espace entre icône et texte */
-		}
-
-		.info-banner-horaire i {
-			font-size: 0.9rem;
-			color: white;
-		}
-
-		.info-banner-links {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-			margin-right: 19.1rem; /* rapproche les liens vers le centre */
-		}
-
-		.info-link {
-			color: white;
-			text-decoration: none;
-			font-weight: 600;
-			font-size: 0.9rem;
-			transition: 0.3s;
-		}
-		.info-link i {
-			margin-right: 0.4rem;
-			font-size: 1rem;
-			color: white;
-		}
-		.info-link:hover i {
-			color: #f97316;
-		}
-
-		.info-link:hover {
-			color: #f97316;
-		}
-		.info-link i.fa-user {
-			font-size: 0.85rem; /* un poil plus petit que la moyenne */
-		}
-		/* Responsive : centrer tout sur mobile */
-		@media(max-width: 768px) {
-			.info-banner-content {
-				flex-direction: column;
-				gap: 0.4rem;
-				text-align: center;
-			}
-
-			.info-banner-links {
-				gap: 0.75rem;
-			}
-		}
-		@media(max-width: 768px) {
-			.info-banner-horaire {
-				flex-direction: column;
-				align-items: flex-start;
-				font-size: 0.75rem;
-			}
-		}
-		/* Nav fixed */
-		.nav-fixed {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100vw;
-			background: #fff;
-			z-index: 1000;
-			border-bottom: 1px solid #e5e7eb;
-			overflow-x: hidden;
-			box-sizing: border-box;
-		}
-
-		/* Nav content */
-		.nav-content {
-			display: flex;
-			justify-content: center; /* centre horizontalement les liens */
-			align-items: center;
-			height: 5rem;
-			padding: 0 2rem; /* padding général */
-			max-width: 100vw;
-			position: relative;
-		}
-
-		/* Logo */
-		.nav-logo-container {
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
-		}
-		.logo-rectangle {
-			display: flex;
-			margin-left: 45px;
-			align-items: center;
-			justify-content: center;
-			border-radius: 0.5rem;
-			width: 3.5rem;
-			height: 3.5rem;
-			background: white;
-		}
-
-		.logo-rectangle img {
-			max-height: 100%;
-			width: auto;
-			object-fit: contain;
-		}
-
-		/* Liens centrés */
-		.nav-links-center {
-			display: flex;
-			align-items: center;
-			font-size: 1.1rem;
-			font-family: "BBH Sans Bartle", sans-serif;
-			font-weight: 600;
-			margin-left: 5rem; /* décale l'ensemble des liens vers la droite */
-			position: relative;
-		}
-
-		.nav-links-center a {
-			position: relative;
-			text-decoration: none;
-			color: black;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 0 2rem; /* espace égal gauche/droite autour du texte */
-			transition: 0.3s;
-		}
-
-		/* séparateur diagonal */
-		.nav-links-center a:not(:last-child)::after {
-			content: '';
-			position: absolute;
-			right: 0;
-			top: 50%;
-			transform: translateY(-50%) rotate(45deg);
-			width: 1px;
-			height: 115px;
-			background-color: #005b94;
-		}
-
-		.nav-links-center a:hover {
-			color: #f97316;
-		}
-
-		/* Bouton inscription */
-		.btn-inscription {
-			padding: 0.5rem 1rem;
-			background: #f97316;
-			color: white;
-			border-radius: 0.5rem;
-			font-weight: 600;
-			text-decoration: none;
-			transition: 0.3s;
-			margin-left: 1.2rem;
-		}
-
-		.btn-inscription:hover {
-			background: #0d0d0d;
-		}
-
-		/* Hamburger */
-		.nav-mobile-toggle {
-			display: none;
-			font-size: 1.8rem;
-			cursor: pointer;
-		}
-
-		/* Mobile menu */
-		.nav-mobile {
-			display: none;
-			flex-direction: column;
-			gap: 0.5rem;
-			padding: 1rem;
-			background: #fff;
-			position: absolute;
-			top: 100%;
-			left: 0;
-			width: 100%;
-			box-sizing: border-box;
-			z-index: 999;
-		}
-
-		.nav-mobile.show {
-			display: flex;
-		}
-
-		.nav-mobile-link {
-			text-decoration: none;
-			color: black;
-			padding: 0.5rem 0.75rem;
-			border-radius: 0.5rem;
-		}
-
-		.nav-mobile-link:hover {
-			background: #f97316;
-			color: white;
-		}
-
-		/* Texte mobile */
-		.nav-mobile-title {
-			display: none; /* caché sur desktop */
-			font-weight: 600;
-			font-size: 1rem;
-			color: #0d0d0d;
-			text-align: center;
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-		}
-
-		/* Responsive */
-		@media(max-width: 768px) {
-			.info-banner {
-				display: none !important; /* cacher banner sur mobile */
-			}
-
-			.nav-links-center,
-			.btn-inscription {
-				display: none; /* cacher liens desktop */
-			}
-
-			.nav-mobile-toggle {
-				display: block; /* afficher hamburger */
-			}
-
-			.nav-content {
-				justify-content: space-between; /* logo à gauche, burger à droite */
-			}
-
-			.logo-rectangle {
-				width: 3rem;
-				height: 3rem;
-			}
-		}
-
-		/* Très petits écrans */
-		/* Très petits écrans */
-		@media(max-width: 360px) {
-			.nav-mobile-link,
-			.nav-link {
-				font-size: 0.9rem;
-			}
-
-			.btn-connexion {
-				padding: 0.4rem 0.6rem;
-				font-size: 0.85rem;
-			}
-		}
-		@media(max-width: 768px) {
-			.info-banner {
-				display: none;
-			}
-		}
-	</style>
-{% endblock %}
-
-{% block body %}
-	<nav
-		class="nav-fixed">
-		<!-- Banner info -->
-		<div class="info-banner">
-			<div class="info-banner-content">
-				<div class="info-banner-horaire">
-					<p>
-						<i class="fa-solid fa-clock" style="margin-right: 2px; color: #fff;"></i>
-						<strong>Lundi / Mercredi / Vendredi :</strong>
-						10H-12H / 16H-20H
-					</p>
-					<p>
-						<i class="fa-solid fa-clock" style="margin-right: 2px; color: #fff;"></i>
-						<strong>Mardi / Jeudi :</strong>
-						10H-12H / 16H-19H30
-					</p>
-				</div>
-
-				<div class="info-banner-links">
-					<a href="{{ path('contact') }}" class="info-link">
-						<i class="fa-solid fa-envelope"></i>Contact
-					</a>
-
-					{# ✅ Si l'utilisateur est connecté #}
-					{% if app.user %}
-						<a href="{{ path('app_logout') }}" class="info-link">
-							<i class="fa-solid fa-right-from-bracket"></i>Déconnexion
-						</a>
-					{% else %}
-						{# ✅ Si l'utilisateur n'est pas connecté #}
-						<a href="{{ path('app_login') }}" class="info-link">
-							<i class="fa-solid fa-user"></i>Mon espace adhérent
-						</a>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-
-		<!-- Navigation -->
-		<div
-			class="nav-content">
-			<!-- Logo -->
-			<div class="nav-logo-container">
-				<div class="logo-rectangle">
-					<img src="{{ asset('images/logo-chm.png') }}" alt="CHM Saleux"/>
-				</div>
+<nav
+	class="nav-fixed">
+	<!-- Banner info -->
+	<div class="info-banner">
+		<div class="info-banner-content">
+			<div class="info-banner-horaire">
+				<p>
+					<i class="fa-solid fa-clock" style="margin-right: 2px; color: #fff;"></i>
+					<strong>Lundi / Mercredi / Vendredi :</strong>
+					10H-12H / 16H-20H
+				</p>
+				<p>
+					<i class="fa-solid fa-clock" style="margin-right: 2px; color: #fff;"></i>
+					<strong>Mardi / Jeudi :</strong>
+					10H-12H / 16H-19H30
+				</p>
 			</div>
 
-			<!-- Desktop links -->
-			<div class="nav-links-center">
-				<a href="{{ path('home') }}">Accueil</a>
-				<a href="#" class="nav-link dropdown-toggle">Le Club</a>
-				<a href="{{ path('halterophilie') }}">Haltérophilie</a>
-				<a href="{{ path('ecole') }}">Notre École</a>
-				<a href="#">Compétitions</a>
-				<a href="#resultats">Nos Résultats</a>
-			</div>
+			<div class="info-banner-links">
+				<a href="{{ path('contact') }}" class="info-link">
+					<i class="fa-solid fa-envelope"></i>Contact
+				</a>
 
-			<!-- Desktop button -->
-			{% if app.user %}
-				<a href="{{ path('dashboard') }}" class="btn-inscription">Mon espace adhérent</a>
-			{% else %}
-				<a href="{{ path('app_register') }}" class="btn-inscription">Inscription</a>
-			{% endif %}
-
-			<!-- Hamburger -->
-			<div class="nav-mobile-toggle" id="mobile-menu-btn">
-				<i class="fa fa-bars"></i>
-			</div>
-
-			<!-- Mobile menu -->
-			<div class="nav-mobile" id="mobile-menu">
-				<a href="{{ path('home') }}" class="nav-mobile-link">Accueil</a>
-				<a href="#" class="nav-mobile-link">Le Club</a>
-				<a href="{{ path('halterophilie') }}" class="nav-mobile-link">Haltérophilie</a>
-				<a href="{{ path('ecole') }}" class="nav-mobile-link">Notre École</a>
-				<a href="#" class="nav-mobile-link">Compétitions</a>
-				<a href="#resultats" class="nav-mobile-link">Nos Résultats</a>
-
+				{# ✅ Si l'utilisateur est connecté #}
 				{% if app.user %}
-					<a href="{{ path('dashboard') }}" class="nav-mobile-link">Mon espace adhérent</a>
-					<a href="{{ path('app_logout') }}" class="nav-mobile-link">Déconnexion</a>
+					<a href="{{ path('app_logout') }}" class="info-link">
+						<i class="fa-solid fa-right-from-bracket"></i>Déconnexion
+					</a>
 				{% else %}
-					<a href="{{ path('app_login') }}" class="nav-mobile-link">Connexion</a>
-					<a href="{{ path('app_register') }}" class="nav-mobile-link">Inscription</a>
+					{# ✅ Si l'utilisateur n'est pas connecté #}
+					<a href="{{ path('app_login') }}" class="info-link">
+						<i class="fa-solid fa-user"></i>Mon espace adhérent
+					</a>
 				{% endif %}
 			</div>
 		</div>
-	</nav>
+	</div>
 
-	 <script>
-			document.addEventListener('DOMContentLoaded', () => {
-			    const mobileBtn = document.getElementById('mobile-menu-btn');
-			    const mobileMenu = document.getElementById('mobile-menu');
-			
-			    if (!mobileBtn || !mobileMenu) return;
-			
-			    // Évite les conflits si le code est chargé plusieurs fois
-			    if (!mobileBtn.dataset.listenerAdded) {
-			        mobileBtn.addEventListener('click', () => {
-			            mobileMenu.classList.toggle('show');
-			        });
-			        mobileBtn.dataset.listenerAdded = 'true';
-			    }
-			});
-			</script>
+	<!-- Navigation -->
+	<div
+		class="nav-content">
+		<!-- Logo -->
+		<div class="nav-logo-container">
+			<div class="logo-rectangle">
+				<img src="{{ asset('images/logo/logo-chm.png') }}" alt="CHM Saleux"/>
+			</div>
+		</div>
 
-{% endblock %}
+		<!-- Desktop links -->
+		<div class="nav-links-center">
+			<a href="{{ path('home') }}">Accueil</a>
+			<a href="#">Le Club</a>
+			<a href="{{ path('halterophilie') }}">Haltérophilie</a>
+			<a href="{{ path('ecole') }}">Notre École</a>
+			<a href="#">Compétitions</a>
+			<a href="#resultats">Nos Résultats</a>
+		</div>
+
+		<!-- Desktop button -->
+		{% if app.user %}
+			<a href="{{ path('dashboard') }}" class="btn-inscription">Mon espace adhérent</a>
+		{% else %}
+			<a href="#" class="btn-inscription js-open-register-modal">S'INSCRIRE</a>
+		{% endif %}
+
+		<!-- Hamburger -->
+		<div class="nav-mobile-toggle" id="mobile-menu-btn">
+			<i class="fa fa-bars"></i>
+		</div>
+
+		<!-- Mobile menu -->
+		<div class="nav-mobile" id="mobile-menu">
+			<a href="{{ path('home') }}" class="nav-mobile-link">Accueil</a>
+			<a href="#" class="nav-mobile-link">Le Club</a>
+			<a href="{{ path('halterophilie') }}" class="nav-mobile-link">Haltérophilie</a>
+			<a href="{{ path('ecole') }}" class="nav-mobile-link">Notre École</a>
+			<a href="#" class="nav-mobile-link">Compétitions</a>
+			<a href="#resultats" class="nav-mobile-link">Nos Résultats</a>
+
+			{% if app.user %}
+				<a href="{{ path('dashboard') }}" class="nav-mobile-link">Mon espace adhérent</a>
+				<a href="{{ path('app_logout') }}" class="nav-mobile-link">Déconnexion</a>
+			{% else %}
+				<a href="{{ path('app_login') }}" class="nav-mobile-link">Connexion</a>
+				<a href="{{ path('app_register') }}" class="nav-mobile-link">Inscription</a>
+			{% endif %}
+		</div>
+	</div>
+</nav>

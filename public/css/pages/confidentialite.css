@@ -1,62 +1,54 @@
-/* ================= HERO HEADER ================= */
-.overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 0;
-}
+/* ==================== STYLE NEUTRE POLITIQUE DE CONFIDENTIALITÉ ==================== */
 
+/* HERO HEADER */
 .hero-header {
 	position: relative;
 	width: 100%;
-	height: 50vh;
-	background: linear-gradient(rgba(37, 99, 235, 0.5), rgba(37, 99, 235, 0.5)),
+	height: 40vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
 		url('http://chm-saleux.fr/wp-content/uploads/2018/06/IMAG1090.jpg') center/cover no-repeat;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--text-light);
+	color: #fff;
 	text-align: center;
 	overflow: hidden;
+}
+
+.overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 0;
 }
 
 .hero-content {
 	position: relative;
 	z-index: 1;
-	margin-top: 100px;
-	animation: fadeInUp 1s ease-out;
+	margin-top: 80px;
+	animation: fadeInUp 1s ease-out forwards;
 }
 
 .hero-content h1 {
-	font-size: 5rem;
+	font-size: clamp(2.5rem, 5vw, 5rem);
 	font-weight: 900;
-	margin: 0 0 1rem;
+	margin-bottom: 1rem;
+    margin-top: 30px;
 	font-family: 'Bebas Neue', sans-serif;
 	text-transform: uppercase;
-	letter-spacing: 5px;
-	color: white;
-	text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+	letter-spacing: 4px;
+	color: var(--bg-white);
+	text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 .hero-content p {
-	font-size: 1.4rem;
-	line-height: 1.8;
-	color: #E2E8F0;
+	font-size: clamp(1rem, 2vw, 1.4rem);
+	line-height: 1.7;
+	color: #e5e5e5;
 	margin-bottom: 2rem;
 }
 
-@media(max-width: 768px) {
-	.hero-content h1 {
-		font-size: 3.2rem;
-	}
-	.hero-content p {
-		font-size: 1.1rem;
-	}
-}
-
+/* Animation */
 @keyframes fadeInUp {
 	from {
 		opacity: 0;
@@ -68,92 +60,97 @@
 	}
 }
 
-/* ---------- SECTION PRINCIPALE ---------- */
+/* ==================== SECTION PRINCIPALE ==================== */
 .section-privacy {
-	padding: 4rem 6%;
-	background: #121212;
-	color: #eaeaea;
-	font-family: 'Poppins', sans-serif;
-	line-height: 1.8;
+	background: #fff;
+	color: #111;
+	font-family: "Poppins", "Helvetica Neue", Arial, sans-serif;
+	line-height: 1.75;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 60px 10%;
+	box-sizing: border-box;
 }
 
+/* Conteneur principal */
 .section-privacy .container {
-	max-width: 900px;
-	margin: auto;
-	background: rgba(255, 255, 255, 0.02);
-	padding: 3rem;
-	border-radius: 1rem;
-	box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+	max-width: 1100px;
+	margin: 0 auto;
+	text-align: left;
 }
 
-/* ---------- TITRES ---------- */
+/* Titres */
 .section-privacy h1 {
-	font-size: 2.2rem;
-	color: #ff7e5f;
-	text-align: center;
-	margin-bottom: 2rem;
-	text-transform: uppercase;
-	letter-spacing: 1px;
+	font-size: 2.6rem;
+	font-weight: 700;
+	color: #000;
+	margin-bottom: 1.5rem;
+	text-transform: none;
 }
 
 .section-privacy h2 {
-	font-size: 1.5rem;
-	color: #feb47b;
+	font-size: 1.4rem;
+	font-weight: 600;
 	margin-top: 2.5rem;
-	margin-bottom: 1rem;
-	border-left: 4px solid #ff7e5f;
-	padding-left: 10px;
+	margin-bottom: 0.8rem;
+	color: #000;
 }
 
-/* ---------- TEXTE ---------- */
+/* Texte */
 .section-privacy p {
 	margin-bottom: 1rem;
-	font-size: 1rem;
-	color: #d4d4d4;
+	color: #111;
+	max-width: 950px;
 }
 
 .section-privacy ul {
-	margin: 0.5rem 0 1.5rem 1.5rem;
-	list-style: none;
+	margin: 0 0 1.5rem 1.5rem;
+	padding-left: 0;
 }
 
-.section-privacy ul li::before {
-	content: "•";
-	color: #ff7e5f;
-	margin-right: 8px;
+.section-privacy li {
+	margin-bottom: 0.5rem;
 }
 
+/* Liens */
 .section-privacy a {
-	color: #feb47b;
-	text-decoration: none;
-	transition: color 0.2s ease;
+	color: #000;
+	text-decoration: underline;
+	transition: opacity 0.2s ease;
 }
 
 .section-privacy a:hover {
-	color: #ff7e5f;
+	opacity: 0.6;
 }
 
-/* ---------- FOOTER DE PAGE ---------- */
+/* Footer de section (dernière ligne ou date de mise à jour) */
 .section-privacy em {
 	display: block;
-	text-align: center;
-	color: #999;
 	margin-top: 2rem;
-	font-size: 0.9rem;
+	font-style: italic;
+	color: #555;
+	font-size: 0.95rem;
+	text-align: left;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media(max-width: 768px) {
+/* Ligne de séparation optionnelle */
+hr {
+	border: none;
+	border-top: 1px solid #e0e0e0;
+	margin: 2.5rem 0;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
 	.section-privacy {
-		padding: 2rem 5%;
-	}
-	.section-privacy .container {
-		padding: 2rem;
+		padding: 40px 7%;
 	}
 	.section-privacy h1 {
-		font-size: 1.8rem;
+		font-size: 2rem;
 	}
 	.section-privacy h2 {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 	}
 }

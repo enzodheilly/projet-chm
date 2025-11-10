@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\NewsletterSubscriber;
-use App\Entity\NewsletterCampaign;
 use App\Service\SystemLoggerService;
+use App\Service\TurnstileVerifierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class NewsletterController extends AbstractController
@@ -22,74 +21,135 @@ class NewsletterController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         MailerInterface $mailer,
-        SystemLoggerService $logger
+        SystemLoggerService $logger,
+        TurnstileVerifierService $turnstile
     ): Response {
-        usleep(400000); // Anti-bot léger
+        usleep(400000); // 🕓 Délai anti-bot léger
 
         $user = $this->getUser();
-        if (!$user) {
-            $this->addFlash('info', 'Veuillez vous connecter pour vous abonner à la newsletter.');
-            return $this->redirectToRoute('app_login', ['newsletter_required' => 1]);
+        $emailInput = $user ? $user->getEmail() : trim($request->request->get('email'));
+
+        // 🧠 Validation e-mail
+        if (!$emailInput || !filter_var($emailInput, FILTER_VALIDATE_EMAIL)) {
+            return $this->json(['success' => false, 'message' => 'Adresse e-mail invalide.'], 400);
         }
 
-        // CSRF + honeypot
+        // 🔒 Vérif CSRF
         $submittedToken = $request->request->get('_csrf_token');
         if (!$this->isCsrfTokenValid('newsletter', $submittedToken)) {
             return $this->json(['success' => false, 'message' => 'Token CSRF invalide.'], 400);
         }
+
+        // 🕵️‍♂️ Honeypot anti-bot
         if (!empty($request->request->get('nickname'))) {
             $logger->add('Tentative spam newsletter', sprintf('Bot détecté depuis IP %s.', $request->getClientIp()));
             return $this->json(['success' => false, 'message' => 'Requête refusée (spam détecté).'], 400);
         }
 
-        $emailInput = $user->getEmail();
-        $lastSubscription = $em->getRepository(NewsletterSubscriber::class)->findOneBy(['user' => $user]);
-        if ($lastSubscription && $lastSubscription->getSubscribedAt() > new \DateTimeImmutable('-1 minute')) {
-            return $this->json(['success' => false, 'message' => 'Veuillez patienter avant de réessayer.'], 429);
+        // 🔁 Vérification d’abonnement existant AVANT CAPTCHA
+        $existingSubscriber = $em->getRepository(NewsletterSubscriber::class)
+            ->findOneBy(['email' => $emailInput]);
+
+        if ($existingSubscriber) {
+            if ($existingSubscriber->getIsConfirmed()) {
+                // ✅ Déjà inscrit et confirmé
+                return $this->json([
+                    'success' => false,
+                    'message' => 'Cette adresse est déjà abonnée à la newsletter.'
+                ], 200);
+            } else {
+                // 🔁 Inscription non confirmée → renvoyer e-mail de confirmation
+                return $this->resendConfirmation($existingSubscriber, $mailer, $logger);
+            }
         }
 
-        if ($lastSubscription && $lastSubscription->getIsConfirmed()) {
-            return $this->json(['success' => false, 'message' => 'Vous êtes déjà abonné.'], 400);
+        // 🧩 Vérification Turnstile (Cloudflare)
+        $captchaToken = $request->request->get('cf-turnstile-response');
+        if (!$turnstile->verify($captchaToken, $request->getClientIp())) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Échec de la vérification anti-robot. Merci de réessayer.'
+            ], 400);
         }
 
-        $subscriber = $lastSubscription ?? new NewsletterSubscriber();
-        $subscriber->setUser($user);
-        $subscriber->setEmail($emailInput);
-        $subscriber->setIsConfirmed(false);
-        $subscriber->setSubscribedAt(new \DateTimeImmutable());
-        $subscriber->setConfirmationToken(bin2hex(random_bytes(32)));
+        // ✍️ Nouvelle inscription
+        $subscriber = new NewsletterSubscriber();
+        $subscriber->setEmail($emailInput)
+            ->setIsConfirmed(false)
+            ->generateTokens(); // ✅ crée confirmationToken + unsubscribeToken
+
+        if ($user) {
+            $subscriber->setUser($user);
+        }
 
         $em->persist($subscriber);
         $em->flush();
 
+        // 📧 Envoi e-mail de confirmation
+        $this->sendConfirmationEmail($subscriber, $mailer, $logger);
+
+        return $this->json([
+            'success' => true,
+            'message' => 'Un e-mail de confirmation vient de vous être envoyé.'
+        ]);
+    }
+
+    // =======================================================
+    // 📨 RÉUTILISABLE : envoi du mail de confirmation
+    // =======================================================
+    private function sendConfirmationEmail(NewsletterSubscriber $subscriber, MailerInterface $mailer, SystemLoggerService $logger): void
+    {
         try {
+            $confirmUrl = $this->generateUrl(
+                'newsletter_confirm',
+                ['token' => $subscriber->getConfirmationToken()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+
+            $unsubscribeUrl = $subscriber->getUnsubscribeUrl();
+
             $email = (new TemplatedEmail())
-                ->from('no-reply@monsite.com')
+                ->from('CHM Saleux <no-reply@chmsaleux.fr>')
                 ->to($subscriber->getEmail())
                 ->subject('Confirmez votre inscription à la newsletter')
                 ->htmlTemplate('emails/confirm.html.twig')
                 ->context([
                     'subscriber' => $subscriber,
-                    'confirmUrl' => $this->generateUrl(
-                        'newsletter_confirm',
-                        ['token' => $subscriber->getConfirmationToken()],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    )
+                    'confirmUrl' => $confirmUrl,
                 ]);
+
+            // 📨 Headers Gmail / Outlook
+            $email->getHeaders()
+                ->addTextHeader('List-Unsubscribe', '<' . $unsubscribeUrl . '>')
+                ->addTextHeader('List-Unsubscribe-Post', 'List-Unsubscribe=One-Click');
 
             $mailer->send($email);
         } catch (\Exception $e) {
             $logger->add('Erreur envoi e-mail newsletter', $e->getMessage());
-            return $this->json(['success' => false, 'message' => 'Inscription enregistrée, mais e-mail non envoyé.'], 500);
         }
-
-        return $this->json(['success' => true, 'message' => 'Un e-mail de confirmation vient de vous être envoyé.']);
     }
 
+    // =======================================================
+    // 🔁 RÉUTILISABLE : renvoi du mail de confirmation
+    // =======================================================
+    private function resendConfirmation(NewsletterSubscriber $subscriber, MailerInterface $mailer, SystemLoggerService $logger): Response
+    {
+        $this->sendConfirmationEmail($subscriber, $mailer, $logger);
+
+        return $this->json([
+            'success' => true,
+            'message' => 'Vous aviez déjà une inscription en attente. Un nouvel e-mail de confirmation vient d’être envoyé.'
+        ]);
+    }
+
+    // =======================================================
+    // ✅ CONFIRMATION
+    // =======================================================
     #[Route('/newsletter/confirm/{token}', name: 'newsletter_confirm')]
     public function confirm(string $token, EntityManagerInterface $em, SystemLoggerService $logger): Response
     {
-        $subscriber = $em->getRepository(NewsletterSubscriber::class)->findOneBy(['confirmationToken' => $token]);
+        $subscriber = $em->getRepository(NewsletterSubscriber::class)
+            ->findOneBy(['confirmationToken' => $token]);
 
         if (!$subscriber) {
             $this->addFlash('error', 'Lien de confirmation invalide ou expiré.');
@@ -106,85 +166,65 @@ class NewsletterController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    #[Route('/newsletter/unsubscribe/{id}', name: 'newsletter_unsubscribe')]
-    public function unsubscribe(
-        NewsletterSubscriber $subscriber,
-        EntityManagerInterface $em
+    // =======================================================
+    // 🚫 DÉSINSCRIPTION
+    // =======================================================
+    #[Route('/newsletter/unsubscribe/{token}', name: 'newsletter_unsubscribe', methods: ['GET'])]
+    public function unsubscribeByToken(
+        string $token,
+        EntityManagerInterface $em,
+        SystemLoggerService $logger
     ): Response {
-        if (!$subscriber->getIsConfirmed()) {
-            return $this->render('newsletter/unsubscribe.html.twig', [
-                'alreadyUnsubscribed' => true,
-                'email' => $subscriber->getEmail(),
-            ]);
+        $subscriber = $em->getRepository(NewsletterSubscriber::class)
+            ->findOneBy(['unsubscribeToken' => $token]);
+
+        if (!$subscriber) {
+            $this->addFlash('error', 'Lien de désabonnement invalide ou expiré.');
+            return $this->redirectToRoute('home');
         }
 
-        $subscriber->setIsConfirmed(false);
+        $email = $subscriber->getEmail();
+
+        $em->remove($subscriber);
         $em->flush();
 
-        return $this->render('newsletter/unsubscribe.html.twig', [
-            'alreadyUnsubscribed' => false,
-            'email' => $subscriber->getEmail(),
+        $logger->add('Désinscription newsletter', sprintf('L’adresse %s s’est désinscrite.', $email));
+
+        return $this->render('emails/unsubscribed.html.twig', [
+            'email' => $email,
         ]);
     }
 
-    #[Route('/test-email', name: 'test_email')]
-    public function testEmail(MailerInterface $mailer, SystemLoggerService $logger): Response
-    {
-        $htmlContent = $this->renderView('emails/confirm.html.twig', [
-            'subscriber' => ['id' => 123],
-            'confirmUrl' => 'https://example.com/newsletter/confirm/testtoken'
-        ]);
 
-        $email = (new Email())
-            ->from('no-reply@monsite.com')
-            ->to('enzodheilly134@gmail.com')
-            ->subject('Newsletter - Test')
-            ->html($htmlContent);
+    // =======================================================
+    // ✉️ TEST MAIL LOCAL
+    // =======================================================
+    #[Route('/test/mail', name: 'test_mail')]
+    public function testMail(MailerInterface $mailer): Response
+    {
+        $fakeSubscriber = new class {
+            public function getFirstname(): string
+            {
+                return 'Enzo';
+            }
+            public function getUnsubscribeUrl(): string
+            {
+                return 'https://chmsaleux.fr/newsletter/unsubscribe/faketoken';
+            }
+        };
+
+        $email = (new TemplatedEmail())
+            ->from('CHM Saleux <no-reply@chmsaleux.fr>')
+            ->to('enzo.dheilly78@gmail.com')
+            ->subject('📬 Test de mail CHM Saleux')
+            ->htmlTemplate('emails/confirm.html.twig')
+            ->context([
+                'subscriber' => $fakeSubscriber,
+                'confirmUrl' => 'https://chmsaleux.fr/newsletter/confirm/faketoken'
+            ]);
 
         $mailer->send($email);
-        $logger->add('Test newsletter', 'Email de test envoyé à enzodheilly134@gmail.com');
 
-        return new Response('Mail test envoyé !');
-    }
-
-    // 🟢 Tracking d’ouverture (pixel invisible)
-    #[Route('/newsletter/open/{campaignId}/{subscriberId}', name: 'newsletter_open')]
-    public function trackOpen(
-        int $campaignId,
-        int $subscriberId,
-        EntityManagerInterface $em
-    ): Response {
-        $campaign = $em->getRepository(NewsletterCampaign::class)->find($campaignId);
-        if ($campaign) {
-            $campaign->setOpenCount(($campaign->getOpenCount() ?? 0) + 1);
-            $em->flush();
-        }
-
-        // Pixel GIF transparent 1x1
-        $pixel = base64_decode('R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==');
-        $response = new Response($pixel);
-        $response->headers->set('Content-Type', 'image/gif');
-        $response->headers->set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
-        return $response;
-    }
-
-    // 🟣 Tracking des clics
-    #[Route('/newsletter/click/{campaignId}/{subscriberId}', name: 'newsletter_click')]
-    public function trackClick(
-        Request $request,
-        int $campaignId,
-        int $subscriberId,
-        EntityManagerInterface $em
-    ): Response {
-        $campaign = $em->getRepository(NewsletterCampaign::class)->find($campaignId);
-        $url = $request->query->get('url');
-
-        if ($campaign && $url) {
-            $campaign->setClickCount(($campaign->getClickCount() ?? 0) + 1);
-            $em->flush();
-            return $this->redirect($url);
-        }
-
-        return new Response('Invalid click', 400);
+        return new Response('✅ E-mail de test envoyé avec succès !');
     }
 }

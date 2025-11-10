@@ -196,6 +196,20 @@
 			<a href="{{ path('admin_security_blocklist') }}">Blocages / IP bannies</a>
 		</div>
 
+		<!-- 🪪 Gestion des licences -->
+		<a href="#" onclick="toggleMenu('licenceMenu')">🪪 Licences ▾</a>
+		<div class="submenu" id="licenceMenu">
+			<a href="{{ path('admin_licence_index') }}">Liste des licences</a>
+			<a href="{{ path('admin_licence_new') }}">Ajouter une licence</a>
+		</div>
+
+		<!-- 💳 Gestion des forfaits -->
+		<a href="#" onclick="toggleMenu('forfaitMenu')">💳 Forfaits ▾</a>
+		<div class="submenu" id="forfaitMenu">
+			<a href="{{ path('admin_forfait_index') }}">Liste des forfaits</a>
+			<a href="{{ path('admin_forfait_new') }}">Ajouter un forfait</a>
+		</div>
+
 		<hr class="sidebar-separator">
 
 		<a href="#" onclick="toggleMenu('contentMenu')">📰 Contenu ▾</a>
@@ -231,7 +245,6 @@
 			<a href="{{ path('admin_updates_index') }}">Mises à jour</a>
 		</div>
 
-
 		<button class="logout-btn" onclick="window.location='{{ path('app_logout') }}'">
 			🚪 Déconnexion
 		</button>
@@ -242,11 +255,11 @@
 		</main>
 
 		 <script>
-																																																																				        function toggleMenu(id) {
-																																																																				            const el = document.getElementById(id);
-																																																																				            el.style.display = el.style.display === "flex" ? "none" : "flex";
-																																																																				        }
-																																																																				    </script>
+																																																																								        function toggleMenu(id) {
+																																																																								            const el = document.getElementById(id);
+																																																																								            el.style.display = el.style.display === "flex" ? "none" : "flex";
+																																																																								        }
+																																																																								    </script>
 
 		{% block javascripts %}{% endblock %}
 	</body>

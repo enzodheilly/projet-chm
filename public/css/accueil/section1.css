@@ -1,265 +1,164 @@
-/* Section plein écran avec vidéo en background */
-		.hero-section {
-			display: flex;
-			justify-content: flex-end; /* texte à droite */
-			align-items: center;
-			min-height: 80vh;
-			position: relative;
-			padding: 0 5%;
-			overflow: hidden;
-		}
+/* === SECTION HERO === */
+.hero-section {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 85vh;
+	padding: 0 8%;
+	color: #fff;
+	overflow: hidden;
+	background: #000;
+}
 
-		.hero-background {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			z-index: 0;
-		}
-		.hero-section::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0, 0, 0, 0.4);
-			z-index: 1;
-		}
+/* --- Vidéo plein écran --- */
+.hero-video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	filter: brightness(55%);
+	z-index: 0;
+}
 
-		/* Container vidéo */
-		.hero-video-container {
-			position: relative;
-			width: 70%;
-			height: 80vh;
-			margin-right: -106px;
-			overflow: hidden;
-			box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-			flex-shrink: 0;
-			clip-path: polygon(12% 0%, 100% 0%, 100% 100%, 0% 100%);
-		}
+/* Dégradé subtil à droite */
+.hero-section::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(100deg, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.1) 90%);
+	z-index: 1;
+}
 
-		.hero-video {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 165%;
-			height: 100%;
-			object-fit: cover;
-			object-position: center;
-			transform: translateX(-10%);
-		}
+/* --- Contenu texte --- */
+.hero-content {
+	position: relative;
+	z-index: 2;
+	padding-top: 15.5vh;
+	max-width: 580px;
+	animation: fadeInUp 1.3s ease-out both;
+}
 
+.club-title {
+	font-size: 2.8rem;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #fff;
+	margin-bottom: 0.75rem;
+}
 
-		/* Contenu texte */
-		.hero-content {
-			position: relative;
-			z-index: 2;
-			margin-top: 110px;
-			width: 40%; /* prend 40% de la largeur */
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			color: white;
-			padding-left: 2rem; /* espace entre texte et diagonale */
-		}
-		.hero-content p,
-		.hero-line {
-			color: white;
-		}
+.club-subtitle {
+	font-size: 1.3rem;
+	font-weight: 300;
+	margin-bottom: 1.8rem;
+	color: #e6e6e6;
+}
 
-		/* Titres */
-		.club-title {
-			font-weight: 700;
-			font-size: 2.2rem;
-			color: white;
-			margin: 0;
-		}
+.hero-line {
+	font-size: 1.8rem;
+	font-weight: 500;
+	margin-bottom: 0.25rem;
+}
 
-		.club-subtitle {
-			font-size: 1.4rem;
-			font-weight: 300;
-			color: white;
-			margin-bottom: 1rem;
-		}
+.thin-text {
+	font-weight: 300;
+	color: #f97316;
+}
 
-		/* Statistiques */
-		.hero-inner {
-			animation: slideIn 1.3s ease-out forwards;
-			text-align: left;
-		}
+/* --- Boutons --- */
+.hero-buttons {
+	display: flex;
+	gap: 1rem;
+	margin-top: 1.5rem;
+	flex-wrap: wrap;
+}
 
-		.hero-line {
-			font-size: 1.9rem;
-			font-weight: 450;
-			color: white;
-			line-height: 1.2;
-			margin: 0.25rem 0;
-		}
+.hero-buttons a {
+	text-decoration: none;
+	padding: 0.8rem 1.2rem;
+	border-radius: 0;
+	font-size: 1.1rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
 
-		.thin-text {
-			font-weight: 300;
-		}
+.nous-rejoindre {
+	background: #f97316;
+	color: #fff;
+}
 
-		/* Boutons */
-		.hero-buttons {
-			display: flex;
-			gap: 0.75rem;
-			margin-top: 0.75rem;
-			flex-wrap: wrap;
-		}
+.nous-rejoindre:hover {
+	box-shadow: 0 6px 15px rgba(249, 115, 22, 0.6);
+}
 
-		.btn-en-savoir-plus {
-			padding: 0.65rem 0.98rem;
-			background: white;
-			font-size: 1.3rem;
-			font-family: "BBH Sans Hegarty", sans-serif;
-			color: #f97316;
-			font-weight: 300;
-			border-radius: 0.5rem;
-			text-decoration: none;
-			transition: all 0.3s ease;
-		}
+.btn-en-savoir-plus {
+	border: 1px solid #fff;
+	color: #fff;
+	background: transparent;
+}
 
-		.btn-en-savoir-plus:hover {
-			color: black;
-		}
+.btn-en-savoir-plus:hover {
+	background: #fff;
+	color: #000;
+}
 
-		.nous-rejoindre {
-			background: #005b94;
-			font-size: 1.3rem;
-			font-family: "BBH Sans Hegarty", sans-serif;
-			color: white;
-			padding: 0.65rem 0.98rem;
-			border-radius: 0.5rem;
-			text-decoration: none;
-			font-weight: 300;
-			transition: all 0.3s ease;
-		}
+/* --- Logo FFHM --- */
+.ffhm-container {
+	margin-top: 2rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
 
-		.nous-rejoindre:hover {
-			background: #f97316;
-			color: black;
-		}
+.ffhm-logo {
+	height: 80px;
+	opacity: 0.9;
+	transition: opacity 0.3s ease;
+}
 
-		/* Logo FFHM */
-		.ffhm-container {
-			display: flex;
-			align-items: center;
-			gap: 0.75rem;
-			margin-top: 1rem;
-		}
+.ffhm-logo:hover {
+	opacity: 1;
+}
 
-		.ffhm-logo {
-			height: 95px;
-			width: auto;
-		}
+/* --- Animations --- */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(40px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
+/* --- Responsive --- */
+@media (max-width: 992px) {
+	.hero-content {
+		max-width: 90%;
+		text-align: center;
+		margin: 0 auto;
+	}
 
-		/* Animations */
-		@keyframes slideIn {
-			from {
-				opacity: 0;
-				transform: translateX(800px);
-			}
-			to {
-				opacity: 1;
-				transform: translateX(0);
-			}
-		}
+	.hero-buttons {
+		justify-content: center;
+	}
 
-		/* ------------------ RESPONSIVE ------------------ */
+	.ffhm-container {
+		justify-content: center;
+	}
+}
 
-		/* Tablettes */
-		@media(max-width: 1024px) {
-			.hero-content {
-				max-width: 100%;
-				height: 100vh;
-			}
-		}
-
-		/* ------------------ MOBILE ------------------ */
-		@media(max-width: 768px) {
-			.hero-section {
-				position: relative;
-				display: flex;
-				justify-content: center; /* centre horizontalement */
-				align-items: center; /* centre verticalement */
-				min-height: 100vh;
-				padding: 0;
-				text-align: center;
-			}
-
-			.hero-content {
-				position: absolute; /* position absolue pour centrage exact */
-				top: 40%;
-				left: 50%;
-				transform: translate(-50%, -50%); /* centre exact vertical & horizontal */
-				width: 90%;
-				max-width: 95%;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				z-index: 2;
-				padding: 0 1rem;
-			}
-
-			.club-title,
-			.club-subtitle,
-			.hero-line {
-				text-align: center; /* texte centré */
-			}
-
-			.hero-buttons {
-				flex-direction: column; /* boutons empilés */
-				gap: 0.5rem;
-				justify-content: center;
-				align-items: center;
-				margin-top: 1rem;
-			}
-
-			.hero-video-container,
-			.hero-video {
-				display: none; /* cacher la vidéo */
-			}
-
-			.hero-video-mobile {
-				display: block;
-				width: 100%;
-				height: auto;
-				margin-top: 1rem;
-			}
-		}
-
-
-		/* Très petits écrans <= 360px */
-		@media(max-width: 360px) {
-			.club-title {
-				font-size: 1.6rem;
-			}
-			.club-subtitle {
-				font-size: 0.95rem;
-			}
-			.hero-line {
-				font-size: 1.1rem;
-			}
-			.btn-en-savoir-plus,
-			.nous-rejoindre {
-				padding: 0.4rem 0.6rem;
-				font-size: 0.85rem;
-			}
-		}
-
-		/* Sur mobile, cacher la vidéo et afficher l'image */
-		@media(max-width: 768px) {
-			.hero-video {
-				display: none;
-			}
-
-			.hero-video-mobile {
-				display: block;
-			}
-		}
+@media (max-width: 768px) {
+	.club-title {
+		font-size: 2rem;
+	}
+	.club-subtitle {
+		font-size: 1rem;
+	}
+	.hero-line {
+		font-size: 1.3rem;
+	}
+}
