@@ -1,11 +1,9 @@
 <p align="center">
   <p align="center">
-  <img src="https://github.com/enzodheilly/projet-chm/blob/3eb81f3756d770bd8bdd5793fbdbf79555ddcf2a/public/images/logo/logo-chm.png" width="120" alt="Logo CHM Saleux" />
+  <img src="https://github.com/enzodheilly/projet-chm/blob/3eb81f3756d770bd8bdd5793fbdbf79555ddcf2a/public/images/logo/logo-chm.png" width="190" alt="Logo CHM Saleux" />
 </p>
 
 </p>
-
-<h3 align="center">Club d’Haltérophilie et de Musculation de Saleux</h3>
 
 <p align="center">
   <a href="https://github.com/ton-compte/chm-saleux">
