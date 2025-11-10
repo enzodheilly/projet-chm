@@ -18,40 +18,47 @@
 
 ---
 
-## 🌟 Présentation
-
-Le **CHM Saleux (Club d’Haltérophilie et de Musculation de Saleux)** est une **association sportive** située à Saleux, dédiée à la pratique de l’haltérophilie, de la musculation et du renforcement musculaire.  
-Le club met l’accent sur la **convivialité**, la **progression personnelle** et la **performance sportive**.
-
-Le site web du CHM Saleux a pour objectif de :
-
--   Présenter le club, son équipe et ses valeurs
--   Informer sur les **horaires, tarifs et modalités d’inscription**
--   Mettre en avant les **événements sportifs**, **compétitions** et **résultats**
--   Fournir un moyen de **contact direct** et une **galerie photo** des activités
-
----
-
 ## 🛠️ Technologies utilisées
 
-| Catégorie                   | Technologies                   |
-| --------------------------- | ------------------------------ |
-| **Frontend**                | HTML5, CSS3 / SCSS, JavaScript |
-| **Backend**                 | PHP                            |
-| **Base de données**         | MySQL                          |
-| **Outils de développement** | VS Code, Git, GitHub           |
-| **Hébergement**             | A venir                        |
+| Catégorie                    | Technologies                                     |
+| ---------------------------- | ------------------------------------------------ |
+| **Frontend**                 | HTML5, CSS3 / SCSS, JavaScript                   |
+| **Backend**                  | PHP                                              |
+| **Base de données**          | MySQL                                            |
+| **Outils de développement**  | VS Code, Git, GitHub                             |
+| **Hébergement**              | Serveur PHP / GitHub Pages                       |
+| **API / Connexions futures** | Application mobile connectée au dashboard client |
 
 ---
 
 ## ⚙️ Fonctionnalités principales
 
--   🏠 **Page d’accueil** : Présentation du club et actualités récentes
--   📅 **Planning** : Horaires d’ouverture et séances d’entraînement
--   🧍‍♂️ **Présentation du club et des encadrants**
--   📸 **Galerie photos** des compétitions et événements
--   🧾 **Section actualités** : articles et résultats
--   💬 **Formulaire de contact** pour les inscriptions et demandes d’informations
--   📍 **Carte interactive** pour localiser le club à Saleux
+### 👤 Dashboard client
 
----
+-   Gestion complète du **profil adhérent**
+-   **Suivi des licences** (création, renouvellement, statut)
+-   Interface intuitive et sécurisée
+
+### 🏋️‍♂️ Section “Séances”
+
+-   Enregistrement des **séances d’entraînement passées**
+-   Visualisation de l’historique sportif
+-   Suivi des performances et des progrès
+
+### 📚 Section “Programmes d’entraînement” _(en développement)_
+
+-   Gestion des programmes personnalisés selon les objectifs
+-   Création, suivi et modification via le dashboard
+-   Synchronisation avec l’application mobile à venir
+
+### 📱 Application mobile (à venir)
+
+-   Connexion directe au compte adhérent
+-   Consultation du planning, des séances et des programmes
+-   Notifications et rappels d’entraînement
+
+### 🌐 Autres pages
+
+-   Présentation du club, des encadrants et de l’histoire du CHM Saleux
+-   Horaires, tarifs et coordonnées
+-   Actualités, événements et galeries photos
