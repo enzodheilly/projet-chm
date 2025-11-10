@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="{{ asset('images/logo/logo-chm.png') }}" alt="CHM Saleux"/>
+  <p align="center">
+  <img src="https://github.com/enzodheilly/projet-chm/blob/3eb81f3756d770bd8bdd5793fbdbf79555ddcf2a/public/images/logo/logo-chm.png" width="120" alt="Logo CHM Saleux" />
+</p>
+
 </p>
 
 <h1 align="center">🏋️‍♂️ CHM Saleux</h1>
