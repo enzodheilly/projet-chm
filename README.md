@@ -1,6 +1,6 @@
 <p align="center">
   <p align="center">
-  <img src="https://github.com/enzodheilly/projet-chm/blob/3eb81f3756d770bd8bdd5793fbdbf79555ddcf2a/public/images/logo/logo-chm.png" width="190" alt="Logo CHM Saleux" />
+  <img src="https://github.com/enzodheilly/projet-chm/blob/3eb81f3756d770bd8bdd5793fbdbf79555ddcf2a/public/images/logo/logo-chm.png" width="250" alt="Logo CHM Saleux" />
 </p>
 
 </p>
