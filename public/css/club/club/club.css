@@ -1,0 +1,528 @@
+/* ==========================================================
+   PAGE "LE CLUB" - CHM SALEUX
+   ========================================================== */
+
+
+/* ==========================================================
+   🧱 1. BASE GÉNÉRALE
+   ========================================================== */
+
+body.club-page,
+.club-page {
+  font-family: 'Inter', sans-serif;
+  color: #222;
+  background-color: #fff;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* Espace sous la navbar */
+.club-page {
+  padding-top: 90px;
+}
+
+/* Conteneur global */
+.container {
+  width: min(1200px, 90%);
+  margin: 0 auto;
+}
+
+/* Titres */
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color:#005b94;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+
+/* ==========================================================
+   🦸 2. SECTION HERO
+   ========================================================== */
+
+.club-hero {
+  position: relative;
+  background: url("../../../images/club/photo_chm_saleux.jpg");
+  background-size: cover;
+  color: #fff;
+  padding: 120px 20px; /* un peu plus d’espace latéral pour mobile */
+  overflow: hidden;
+    background-position: center 30%; /* un peu plus haut */
+background-position: center 40%; /* un peu plus bas */
+}
+
+/* Filtre noir renforcé avec léger dégradé */
+.club-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7)
+  ); /* 🔹 dégradé noir semi-transparent */
+  z-index: 1;
+}
+
+/* Contenu au-dessus du filtre */
+.club-hero-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* ✅ lisibilité améliorée */
+}
+
+/* Sous-titres et titres */
+.club-hero-eyebrow {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  color: #005b94;
+  font-weight: 600;
+}
+
+.club-hero-title {
+  font-size: 2.8rem;
+  margin: 0.8rem 0;
+  line-height: 1.2;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.club-hero-subtitle {
+  font-size: 1.2rem;
+  color: #f5f5f5;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+/* Boutons */
+.club-hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  padding: 0.9rem 1.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: #005b94;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #0071c2;
+  box-shadow: 0 4px 10px rgba(0, 91, 148, 0.25);
+}
+
+.btn-secondary {
+  border: 2px solid #fff;
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.btn-secondary:hover {
+  background: #fff;
+  color: #111;
+}
+
+/* Adaptation mobile */
+@media (max-width: 600px) {
+  .club-hero-title {
+    font-size: 2rem;
+  }
+  .club-hero-subtitle {
+    font-size: 1rem;
+  }
+}
+
+
+/* ==========================================================
+   👨‍💼 3. SECTION PRÉSIDENT
+   ========================================================== */
+
+#club-president .club-section-grid {
+  align-items: center;
+}
+
+#club-president .club-president-photo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2rem;
+}
+
+#club-president .club-president-photo img {
+  width: 100%;
+  max-width: 450px;
+  transform: translateX(-130px);
+}
+
+.club-president-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0.3rem;
+  margin-top: 50px;
+}
+
+.club-president-text h2 {
+  margin-bottom: 0.3rem;
+}
+
+.club-president-text h3 {
+  color: #f2c94c;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.club-president-text p {
+  margin-bottom: 1rem;
+}
+
+
+/* ==========================================================
+   📖 4. STRUCTURE DES SECTIONS GÉNÉRALES
+   ========================================================== */
+
+.club-section {
+  padding: 80px 0;
+}
+
+.club-section-alt {
+  background: #f9f9f9;
+}
+
+.club-text-block p {
+  margin-bottom: 1rem;
+}
+
+.club-section-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .club-section-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+
+/* ==========================================================
+   💬 5. SECTION VALEURS
+   ========================================================== */
+
+.club-values-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .club-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.club-value-card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 2rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.club-value-card:hover {
+  transform: translateY(-5px);
+}
+
+
+/* ==========================================================
+   📋 6. LISTES PERSONNALISÉES
+   ========================================================== */
+
+.club-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.club-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.club-list li::before {
+  content: "•";
+  color: #005b94;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+
+/* ==========================================================
+   🏋️ 7. SECTION INSTALLATIONS / ÉQUIPEMENTS
+   ========================================================== */
+
+.club-equip-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .club-equip-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.club-equip-column {
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+
+/* ==========================================================
+   📅 8. SECTION INFOS PRATIQUES
+   ========================================================== */
+
+.club-infos-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 992px) {
+  .club-infos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.club-info-card {
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.club-info-card h3,
+.club-equip-column h3 {
+  color: #111;
+  margin-bottom: 0.8rem;
+}
+
+
+/* ==========================================================
+   🚀 9. SECTION CTA FINALE
+   ========================================================== */
+
+.club-cta-final {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.club-cta-final h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.club-cta-final p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  color: #ccc;
+}
+
+.club-cta-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+/* ==========================================================
+   🎨 10. CARTES / BLOCS DIVERS
+   ========================================================== */
+
+.club-highlight-card {
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+
+/* ==========================================================
+   📱 11. RESPONSIVE DESIGN
+   ========================================================== */
+
+@media (max-width: 768px) {
+  .club-section-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .club-president-photo img {
+    margin: 0 auto 1.5rem;
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .club-hero-title {
+    font-size: 2rem;
+  }
+
+  .club-hero {
+    padding: 80px 0;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.club-equip-photo {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.club-equip-photo img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* SECTION AVEC FOND */
+.ambassador-section {
+    background: #f1efee;
+    padding: 160px 0 280px 0; /* le bas est très grand exprès */
+    position: relative;
+}
+
+.section-title {
+    font-size: 34px;
+    margin-top:-120px;
+    margin-left:35px;
+    font-weight: 900;
+    color: #005b94;
+}
+
+.section-title span{
+  color:#ff6600;
+  display: block;
+}
+/* SLIDER ENTRE LES 2 SECTIONS */
+.ambassador-slider {
+    position: relative;
+    width: 100%;
+    margin-top: -280px; /* FAIT SORTIR LE SLIDER DE LA SECTION */
+    display: flex;
+    align-items: center;
+    margin-left:375px;
+    overflow-x: auto;
+    gap: 40px;
+    padding-left: 30px;
+    scroll-snap-type: x mandatory;
+}
+
+.ambassador-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.ambassador-card {
+    background: #FFF;
+    min-width: 1100px;
+    border: 1px solid #6B6969;
+    height: 400px;
+    display: none;
+    scroll-snap-align: start;
+}
+
+.ambassador-card.active {
+    display: flex; /* seule la slide active s’affiche */
+}
+.ambassador-card img {
+    width: 50%;
+    object-fit: cover;
+}
+
+.ambassador-text {
+    width: 50%;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider-actions {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.slider-next {
+    padding: 10px 16px;
+    background: #fff;
+    border: none;
+    color: black;
+    font-weight: bold;
+    font-size:1.5rem;
+    border-radius: 500px;
+    cursor: pointer;
+}
+
+/* SECTION SUIVANTE */
+.next-section {
+    padding: 400px 0 160px 0;
+    margin-top:-260px;
+    background-color:white;
+}
+
+/* INDICATEURS DE SLIDES */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 55px;
+}
+
+.slider-dot {
+    width: 40px;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    transition: background 0.3s;
+}
+
+.slider-dot.active {
+    background: #ff6600;
+}

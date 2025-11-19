@@ -34,7 +34,7 @@ class PaiementController extends AbstractController
         }
 
         // ✅ Si connecté → afficher le formulaire de paiement HelloAsso
-        return $this->render('paiement/index.html.twig', [
+        return $this->render('1_accueil/section2/paiement/index.html.twig', [
             'iframeUrl' => $urls[$type],
             'type' => ucfirst($type),
         ]);

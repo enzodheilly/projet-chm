@@ -1,0 +1,399 @@
+<!-- templates/_shared/assistant.html.twig -->
+
+<div class="assistant-bubble" id="assistantWidgetOpen">
+	<img src="{{ asset('images/elios-logo.png') }}" alt="Elios logo" class="elios-bubble-logo">
+	<span>Elios</span>
+</div>
+
+<div class="assistant-panel" id="assistantWidgetPanel">
+	<div class="assistant-header">
+		<h3>Elios
+			<small>beta</small>
+		</h3>
+		<div class="elios-logo">
+			<img src="{{ asset('images/elios-logo.png') }}" alt="Elios logo">
+		</div>
+	</div>
+
+	<div class="assistant-body" id="assistantWidgetBody">
+		<div class="assistant-msg">
+			Bonjour, je m’appelle
+			<strong>Elios</strong>
+			👋<br>
+			Je peux vous aider sur vos questions liées au club, aux licences, ou même à l’entraînement.
+		</div>
+	</div>
+</div>
+
+<style>
+/* ==========================================
+   Assistant "Elios" — Nouvelle version pro
+   ========================================== */:root
+{
+	--elios-blue: #2563eb;
+	--elios-blue-light: #eff6ff;
+	--elios-border: #e5e7eb;
+	--elios-gray: #f9fafb;
+	--elios-text: #111827;
+	--elios-muted: #6b7280;
+	--elios-radius: 16px;
+	--elios-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+	--elios-font: 'Inter', 'Poppins', sans-serif;
+}
+
+/* === Bouton flottant === */
+.assistant-bubble {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	background: var(--elios-blue);
+	color: #fff;
+	border-radius: 50px;
+	padding: 12px 20px;
+	font-weight: 600;
+	font-family: var(--elios-font);
+	cursor: pointer;
+	box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+	z-index: 1000;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.assistant-bubble:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 12px 25px rgba(37, 99, 235, 0.5);
+}
+
+/* === Panneau principal === */
+.assistant-panel {
+	position: fixed;
+	right: 24px;
+	bottom: 90px;
+	width: 400px; /* ← Augmente la largeur (avant : 340px) */
+	background: #fff;
+	border-radius: var(--elios-radius);
+	box-shadow: var(--elios-shadow);
+	border: 1px solid var(--elios-border);
+	display: none;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	z-index: 1000;
+}
+.assistant-panel.open {
+	display: block;
+	animation: eliosFadeIn 0.25s ease;
+}
+
+/* === En-tête === */
+.assistant-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 18px;
+	background: rgba(255, 255, 255, 0.7);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	border: none;
+	border-bottom: none !important; /* ✅ Supprime totalement le séparateur */
+	border-top-left-radius: var(--elios-radius);
+	border-top-right-radius: var(--elios-radius);
+}
+
+.assistant-header h3 {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--elios-text);
+	font-family: var(--elios-font);
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.assistant-header small {
+	color: var(--elios-muted);
+	font-weight: 500;
+	font-size: 0.8rem;
+}
+.assistant-header .elios-logo {
+	font-size: 1.2rem;
+	color: var(--elios-blue);
+}
+
+/* === Corps === */
+.assistant-body {
+	background: var(--elios-gray);
+	padding: 16px;
+	max-height: 520px; /* ← avant : 420px */
+	overflow-y: auto;
+	font-family: var(--elios-font);
+	font-size: 0.95rem;
+	color: var(--elios-text);
+}
+
+/* === Message principal === */
+.assistant-msg {
+	background: #fff;
+	border: 1px solid var(--elios-border);
+	border-radius: var(--elios-radius);
+	padding: 12px 14px;
+	margin-bottom: 10px;
+	line-height: 1.5;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+.assistant-msg strong {
+	color: var(--elios-blue);
+}
+
+/* === Catégories === */
+.assistant-categories {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	margin-top: 12px;
+}
+.assistant-cat-btn {
+	background: var(--elios-blue-light);
+	color: var(--elios-blue);
+	border: none;
+	border-radius: 10px;
+	padding: 10px 12px;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: var(--elios-font);
+	font-size: 0.9rem;
+	text-align: center;
+	transition: background 0.2s ease, transform 0.15s ease;
+}
+.assistant-cat-btn:hover {
+	background: #dbeafe;
+	transform: translateY(-2px);
+}
+
+/* === Zone de chat === */
+.assistant-chat-area {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 10px;
+	background: var(--elios-gray);
+	border-top: 1px solid var(--elios-border);
+	border-bottom: 1px solid var(--elios-border);
+	overflow-y: auto;
+	height: 320px;
+	max-height: 55vh;
+	scroll-behavior: smooth;
+}
+
+/* Messages chat */
+.assistant-msg {
+	padding: 10px 14px;
+	border-radius: 14px;
+	line-height: 1.4;
+	word-break: break-word;
+	max-width: 85%;
+	animation: msgPop 0.3s ease;
+}
+.assistant-msg.user {
+	align-self: flex-end;
+	background: var(--elios-blue);
+	color: #fff;
+	border: none;
+	border-bottom-right-radius: 4px;
+}
+.assistant-msg.bot {
+	align-self: flex-start;
+	background: #fff;
+	border: 1px solid var(--elios-border);
+	border-bottom-left-radius: 4px;
+}
+
+/* === Animation apparition message === */
+@keyframes msgPop {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* === Animation ouverture panneau === */
+@keyframes eliosFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* === Animation écriture === */
+.assistant-typing {
+	display: inline-flex;
+	gap: 4px;
+	align-items: center;
+	padding: 6px 12px;
+}
+.assistant-typing span {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #94a3b8;
+	opacity: 0.6;
+	animation: blink 1.2s infinite;
+}
+.assistant-typing span:nth-child(2) {
+	animation-delay: 0.15s;
+}
+.assistant-typing span:nth-child(3) {
+	animation-delay: 0.3s;
+}
+@keyframes blink {
+	0,
+	80%,
+	100% {
+		opacity: 0.25;
+	}
+	40% {
+		opacity: 1;
+	}
+}
+
+/* === Entrée utilisateur === */
+.assistant-chat-input {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 16px;
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: none;
+	border-top: 1px solid rgba(229, 231, 235, 0.3);
+	width: 100%; /* ✅ prend toute la largeur */
+	box-sizing: border-box;
+	margin: 0; /* ✅ évite les marges parasites */
+	position: sticky;
+	bottom: 0;
+	z-index: 2;
+}
+.assistant-chat-input input {
+	flex: 1;
+	border: 1px solid var(--elios-border);
+	border-radius: 20px;
+	padding: 8px 12px;
+	font-size: 0.9rem;
+	font-family: var(--elios-font);
+	outline: none;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.assistant-chat-input input:focus {
+	border-color: var(--elios-blue);
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+.assistant-chat-input button {
+	background: var(--elios-blue);
+	border: none;
+	color: #fff;
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+.assistant-chat-input button:hover {
+	background: #1e40af;
+	transform: scale(1.05);
+}
+
+/* === Scrollbar discrète === */
+.assistant-body::-webkit-scrollbar,
+.assistant-chat-area::-webkit-scrollbar {
+	width: 6px;
+}
+.assistant-body::-webkit-scrollbar-thumb,
+.assistant-chat-area::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+}
+
+.elios-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	border-radius: 8px;
+	background: radial-gradient(circle at center, rgba(37,99,235,0.1), transparent);
+}
+
+.elios-logo img {
+	width: 26px;
+	height: 26px;
+	object-fit: contain;
+	filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.5));
+	transition: transform 0.3s ease;
+}
+
+.elios-logo img:hover {
+	transform: scale(1.08);
+}
+
+.assistant-bubble {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #fff;
+	color: var(--elios-blue);
+	border-radius: 50px;
+	padding: 12px 20px;
+	font-weight: 700;
+	font-family: var(--elios-font);
+	cursor: pointer;
+	box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+	z-index: 1000;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.assistant-bubble:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+}
+
+.elios-bubble-logo {
+	width: 22px;
+	height: 22px;
+	object-fit: contain;
+	filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.4));
+}
+
+
+/* === Responsive === */
+@media(max-width: 480px) {
+	.assistant-panel {
+		right: 10px;
+		bottom: 80px;
+		width: calc(100% - 20px);
+	}
+	.assistant-bubble {
+		right: 10px;
+		bottom: 10px;
+	}
+}</style>

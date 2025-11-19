@@ -19,7 +19,7 @@ class PageController extends AbstractController
             throw $this->createNotFoundException('Page non trouvée');
         }
 
-        return $this->render('page/show.html.twig', [
+        return $this->render('footer/page/show.html.twig', [
             'page' => $page,
         ]);
     }

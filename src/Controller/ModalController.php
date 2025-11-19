@@ -22,7 +22,7 @@ class ModalController extends AbstractController
         $recaptchaSiteKey = $_ENV['GOOGLE_RECAPTCHA_SITE_KEY'] ?? '';
 
         // ✅ On passe la clé à Twig
-        return $this->render("_partials/auth_{$view}.html.twig", [
+        return $this->render("modal/auth_{$view}.html.twig", [
             'recaptcha_site_key' => $recaptchaSiteKey,
         ]);
     }

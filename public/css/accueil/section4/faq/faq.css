@@ -1,0 +1,335 @@
+	.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 0;
+		}
+
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 40vh;
+			background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('http://chm-saleux.fr/wp-content/uploads/2018/06/IMAG1090.jpg') center/cover no-repeat;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--text-light);
+			text-align: center;
+			overflow: hidden;
+		}
+
+		.hero-content {
+			position: relative;
+			z-index: 1;
+			margin-top: 100px;
+			animation: fadeInUp 1s ease-out;
+		}
+
+		.hero-content h1 {
+			font-size: 5rem;
+			font-weight: 900;
+			margin: 0 0 1rem;
+			font-family: 'Bebas Neue', sans-serif;
+			text-transform: uppercase;
+			letter-spacing: 5px;
+			color: white;
+			text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		}
+
+		.hero-content p {
+			font-size: 1.4rem;
+			line-height: 1.8;
+			color: #E2E8F0;
+			margin-bottom: 2rem;
+		}
+
+		@media(max-width: 768px) {
+			.hero-content h1 {
+				font-size: 3.2rem;
+			}
+			.hero-content p {
+				font-size: 1.1rem;
+			}
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		/* ================= FAQ ================= */
+		.faq-container {
+			display: flex;
+			max-width: 1600px;
+			width: 95%;
+			margin: 5rem auto;
+			gap: 3rem;
+			font-family: 'Poppins', sans-serif;
+			font-size: 1.1rem; /* taille de base augmentée */
+			line-height: 1.7;
+		}
+
+		/* ----- SIDEBAR ----- */
+		.faq-sidebar {
+			flex: 0.8;
+			min-width: 260px;
+			background-color: #fff;
+			padding: 2.5rem 2rem;
+			border-radius: 0;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+			position: sticky;
+			top: 2rem;
+		}
+
+		.faq-sidebar h3 {
+			font-size: 2rem;
+			text-transform: uppercase;
+			margin-bottom: 1rem;
+			line-height: 1.2;
+			font-weight: 900;
+			color: #005b94;
+		}
+
+		.faq-sidebar h3 span {
+			color: #ff6600;
+		}
+		.faq-sidebar a {
+			color: #ff7e5f;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 1.1rem;
+			transition: color 0.3s ease;
+		}
+		.faq-sidebar ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.faq-sidebar ul li {
+			border-bottom: 1px solid #eee;
+		}
+
+		.faq-sidebar ul li a {
+			display: block;
+			position: relative;
+			padding: 0.9rem 25px 0.9rem 0;
+			color: #1f2937;
+			text-decoration: none;
+			font-weight: 600;
+			transition: color 0.3s, transform 0.2s;
+		}
+
+		.faq-sidebar ul li a::after {
+			content: "➔"; /* flèche simple → */
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			color: #555; /* couleur flèche par défaut */
+			transition: transform 0.3s, color 0.3s;
+		}
+		.faq-sidebar ul li a:hover::after {
+			color: #ff6600; /* couleur flèche au survol */
+		}
+		.faq-sidebar ul li a:hover {
+			color: #ff6600;
+		}
+
+		/* ----- CONTENU FAQ ----- */
+		.faq-content {
+			flex: 2.5;
+			background: #fff;
+			padding: 3rem;
+			border-radius: 0;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		}
+
+		.faq-content h2 {
+			font-size: 2rem;
+			text-transform: uppercase;
+			font-weight: 900;
+			margin-bottom: 1.5rem;
+			color: #005b94;
+		}
+		.faq-content p {
+			font-size: 1.1rem;
+			color: #555;
+			margin-bottom: 1rem;
+		}
+		.faq-content a {
+			color: #ff7e5f;
+			font-weight: 600;
+			text-decoration: none;
+		}
+		/* ----- QUESTIONS / RÉPONSES ----- */
+		.faq-item {
+			border-top: 1px solid #eee;
+			padding: 1rem 0;
+		}
+
+		.faq-question {
+			display: flex;
+			justify-content: space-between;
+			font-weight: 700;
+			cursor: pointer;
+			color: #1f2937;
+			padding-right: 1rem;
+		}
+
+		/* --- Icône + / - animée façon pro --- */
+		.faq-question span {
+			display: inline-block;
+			font-weight: bold;
+			font-size: 1.5rem;
+			color: #005b94;
+			transition: transform 0.35s ease, color 0.3s ease, opacity 0.2s ease;
+			transform-origin: center;
+		}
+
+		.faq-item.active .faq-question span {
+			transform: rotate(180deg);
+			color: #ff6600; /* petit accent visuel quand c’est ouvert */
+		}
+
+		/* Ajout d’une animation subtile d’apparition de la réponse */
+		.faq-answer {
+			max-height: 0;
+			overflow: hidden;
+			color: #4b5563;
+			font-size: 0.95rem;
+			line-height: 1.6;
+			transition: max-height 0.4s ease, opacity 0.3s ease;
+			opacity: 0;
+		}
+
+		.faq-item.active .faq-answer {
+			max-height: 500px; /* assez grand pour tout le contenu */
+			opacity: 1;
+		}
+
+		@media(max-width: 900px) {
+			.faq-container {
+				flex-direction: column;
+				padding: 0 1rem;
+			}
+			.faq-sidebar {
+				position: relative;
+				top: 0;
+				margin-bottom: 2rem;
+			}
+		}
+
+		/* ================= CONTACT STYLE BASIC-FIT (COULEUR CHM SALEUX) ================= */
+		.basicfit-style {
+			background: #fff;
+			text-align: center;
+			padding: 4rem 1rem;
+		}
+
+		.basicfit-style h2 {
+			font-size: 2.2rem;
+			font-weight: 900;
+			text-transform: uppercase;
+			color: #111;
+			margin-bottom: 0.5rem;
+		}
+
+		.basicfit-style p {
+			font-size: 1.05rem;
+			color: #444;
+			margin-bottom: 3rem;
+		}
+
+		.faq-contact-grid {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 3rem;
+		}
+
+		.contact-option {
+			width: 200px;
+			text-align: center;
+		}
+
+		.contact-option a {
+			text-decoration: none;
+			color: inherit;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			transition: all 0.3s ease;
+		}
+
+		.contact-option:hover {
+			transform: translateY(-5px);
+		}
+
+		.contact-option .icon {
+			width: 55px;
+			height: 55px;
+			margin-bottom: 0.8rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.contact-option .icon img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			filter: invert(25%) sepia(98%) saturate(1570%) hue-rotate(179deg) brightness(94%) contrast(102%);
+
+			/* ce filtre colore les icônes en bleu #005b94 */
+			transition: transform 0.3s ease;
+		}
+
+		.contact-option:hover .icon img {
+			transform: scale(1.1);
+		}
+
+		.contact-option h3 {
+			font-size: 1.1rem;
+			font-weight: 800;
+			color: #111;
+			margin-bottom: 0.3rem;
+		}
+
+		.contact-option span {
+			font-size: 0.85rem;
+			color: #555;
+		}
+
+		/* Carte Elios mise en avant */
+		.contact-option:first-child h3 {
+			color: #005b94;
+		}
+
+		.contact-option:first-child:hover {
+			transform: scale(1.05);
+		}
+
+		/* Hover global couleur CHM */
+		.contact-option:hover h3 {
+			color: #005b94;
+		}
+
+		/* Responsive */
+		@media(max-width: 768px) {
+			.faq-contact-grid {
+				flex-direction: column;
+				gap: 2rem;
+			}
+			.contact-option {
+				width: 100%;
+			}
+		}

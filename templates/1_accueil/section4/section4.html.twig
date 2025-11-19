@@ -76,13 +76,4 @@
 	</div>
 </section>
 
-
- <script>
-  document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('active');
-      const answer = btn.nextElementSibling;
-      answer.style.display = btn.classList.contains('active') ? 'block' : 'none';
-    });
-  });
-</script>
+ <script src="{{ asset('js/accueil/section4/faq.js') }}" defer></script>

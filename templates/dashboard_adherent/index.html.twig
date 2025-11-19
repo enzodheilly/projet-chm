@@ -1,0 +1,370 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block newsletter_script %}{% endblock %}
+
+{% block title %}CHM SALEUX - Espace Membre
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/dashboard_adherent/dashboard.css') }}">
+{% endblock %}
+
+{% block body %}
+	<div class="dashboard-container no-footer no-navbar" id="dashboardContainer">
+		<div
+			class="dashboard-layout">
+
+			<!-- Sidebar -->
+			<div
+				class="sidebar">
+
+				<!-- Logo -->
+				<div class="sidebar-header">
+					<div class="brand">
+						<img src="{{ asset('images/logo-chm.png') }}" alt="Logo Club Force" class="chm-logo">
+					</div>
+				</div>
+
+				<!-- User Profile -->
+				<div class="user-profile">
+					<div id="header-avatar" class="user-avatar" style="position: relative; cursor: pointer;">
+						<img id="user-avatar-img" src="{{ app.user.getProfileImageDataUrl() ?? asset('images/default-avatar.png') }}" alt="Photo de profil" style="width:48px;height:48px;border-radius:50%;object-fit:cover;transition:0.2s ease;">
+
+						<form id="avatar-upload-form" style="display:none;" method="post" enctype="multipart/form-data">
+							<input id="avatar-file-input" name="avatar" type="file" accept="image/*">
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('profile_image') }}">
+						</form>
+
+						<div class="change-avatar-overlay" style="
+																																																																																																																																																																																																						display:none;
+																																																																																																																																																																																																						position:absolute;
+																																																																																																																																																																																																						inset:0;
+																																																																																																																																																																																																						background:rgba(0,0,0,0.45);
+																																																																																																																																																																																																						color:#fff;
+																																																																																																																																																																																																						border-radius:50%;
+																																																																																																																																																																																																						justify-content:center;
+																																																																																																																																																																																																						align-items:center;
+																																																																																																																																																																																																						font-size:12px;
+																																																																																																																																																																																																						font-weight:500;">
+							Changer
+						</div>
+					</div>
+
+					<div class="user-info">
+						<h4>{{ app.user.firstName }}</h4>
+						<p>Membre actif</p>
+					</div>
+				</div>
+
+				<!-- Navigation -->
+				<nav class="sidebar-nav">
+					<button class="nav-item active" data-tab="dashboard">
+						<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+							<polyline points="9,22 9,12 15,12 15,22"/>
+						</svg>
+						<span>Tableau de bord</span>
+					</button>
+
+					<button class="nav-item" data-tab="licence">
+						<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect width="20" height="14" x="2" y="5" rx="2"/>
+							<line x1="2" x2="22" y1="10" y2="10"/>
+						</svg>
+						<span>Licence</span>
+					</button>
+
+					<button class="nav-item" data-tab="settings">
+						<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="3"/>
+							<path d="M12 1v6m0 6v6"/>
+							<path d="m21 12-6 0m-6 0-6 0"/>
+							<path d="m16.24 7.76-4.24 4.24m-4.24 4.24-4.24-4.24"/>
+						</svg>
+						<span>Paramètres</span>
+					</button>
+
+					<button class="nav-item" data-tab="planning">
+						<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="3" y="4" width="18" height="18" rx="2"></rect>
+							<line x1="16" x2="16" y1="2" y2="6"></line>
+							<line x1="8" x2="8" y1="2" y2="6"></line>
+							<line x1="3" x2="21" y1="10" y2="10"></line>
+						</svg>
+						<span>Planning</span>
+					</button>
+
+					<button class="nav-item" data-tab="perf">
+						<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+						</svg>
+						<span>Performances</span>
+					</button>
+
+					<button class="nav-item" data-tab="messages">
+						<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+						</svg>
+						<span>Messages</span>
+					</button>
+				</nav>
+
+				<!-- Theme Toggle -->
+				<div class="theme-toggle-container">
+					<button class="theme-toggle" id="themeToggle">
+						<svg class="sun-icon" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="5"/>
+							<path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+						</svg>
+						<svg class="moon-icon" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+						</svg>
+						<span class="theme-text">Mode clair</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Main Content -->
+			<div
+				class="main-content">
+
+				<!-- Dashboard Tab -->
+				<div class="tab-content active" id="dashboard-tab">
+					<div class="content-header">
+						<h1>Bienvenue,
+							{{ app.user.firstName }}
+							👋</h1>
+						<p>Voici un aperçu de votre activité</p>
+					</div>
+
+					<div
+						class="cards-grid">
+
+						<!-- Activité récente -->
+						<div class="card">
+							<div class="card-header">
+								<div class="card-icon activity-icon">
+									<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+									</svg>
+								</div>
+								<h3>Activité récente</h3>
+							</div>
+							<div class="activity-list">
+								<div class="activity-item">
+									<div class="activity-dot green"></div>
+									<p>Séance du
+										{{ "now"|date("d/m/Y") }}</p>
+								</div>
+								<div class="activity-item">
+									<div class="activity-dot blue"></div>
+									<p>Licence renouvelée</p>
+								</div>
+								<div class="activity-item">
+									<div class="activity-dot orange"></div>
+									<p>Inscription cours technique</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Messages -->
+						<div class="card">
+							<div class="card-header">
+								<div class="card-icon messages-icon">
+									<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+									</svg>
+								</div>
+								<h3>Messages</h3>
+							</div>
+							<div class="messages-list">
+								<div class="message-item new">
+									<p class="message-status">Nouveau</p>
+									<p class="message-text">Planning des cours modifié</p>
+								</div>
+								<div class="message-item read">
+									<p class="message-status">Lu</p>
+									<p class="message-text">Bienvenue au club !</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Statistiques -->
+						<div class="card">
+							<div class="card-header">
+								<div class="card-icon stats-icon">
+									<svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+										<line x1="16" x2="16" y1="2" y2="6"/>
+										<line x1="8" x2="8" y1="2" y2="6"/>
+										<line x1="3" x2="21" y1="10" y2="10"/>
+									</svg>
+								</div>
+								<h3>Cette semaine</h3>
+							</div>
+							<div class="stats-content">
+								<div class="stat-item">
+									<p class="stat-label">Séances effectuées</p>
+									<p class="stat-value">3</p>
+								</div>
+								<div class="stat-item">
+									<p class="stat-label">Objectif hebdomadaire</p>
+									<div class="progress-bar">
+										<div class="progress-fill" style="width: 75%"></div>
+									</div>
+									<p class="progress-text">3/4 séances</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Licence Tab -->
+				<div class="tab-content" id="licence-tab">
+					<div class="content-header">
+						<h2>Informations licence</h2>
+						<p>Détails de votre adhésion au club</p>
+					</div>
+
+					<div class="licence-card">
+						<div class="licence-grid">
+
+							<div class="licence-info">
+								<div class="info-group">
+									<label>Numéro de licence</label>
+									{% if app.user.licenceNumber %}
+										<p class="licence-number">{{ app.user.licenceNumber }}</p>
+
+										<!-- Bouton de suppression -->
+										<button id="remove-licence-btn" class="btn-secondary" style="margin-top:10px;">
+											Supprimer ma licence
+										</button>
+										<div id="remove-licence-message" style="margin-top:10px;"></div>
+									{% else %}
+										<button class="btn-primary" id="add-licence-btn">Ajouter mon numéro de licence</button>
+
+										<div id="licence-modal" class="licence-modal" style="display:none;">
+											<div class="licence-modal-content">
+												<h4>Ajouter votre numéro de licence</h4>
+
+												<form id="licence-form" method="POST" action="{{ path('adherent_edit_license') }}">
+													<input type="text" name="licenceNumber" id="licenceNumberInput" placeholder="Ex: CHM-1A2B3C" required>
+													<button type="submit" class="btn-primary">Valider</button>
+												</form>
+
+												<div id="licence-message" class="licence-message" style="margin-top:10px;"></div>
+
+												<button id="licence-help-btn" class="btn-secondary">Je ne connais pas mon numéro</button>
+											</div>
+										</div>
+									{% endif %}
+								</div>
+
+								<div class="info-group">
+									<label>Statut</label>
+									<div class="status-container">
+										{% if app.user.licenceStatus == 'Active' %}
+											<svg class="status-icon success" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+												<polyline points="22,4 12,14.01 9,11.01"/>
+											</svg>
+											<span class="status-badge success">Active</span>
+										{% else %}
+											<svg class="status-icon error" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+												<circle cx="12" cy="12" r="10"/>
+												<line x1="15" x2="9" y1="9" y2="15"/>
+												<line x1="9" x2="15" y1="9" y2="15"/>
+											</svg>
+											<span class="status-badge error">Expirée</span>
+										{% endif %}
+									</div>
+								</div>
+
+								<div class="info-group">
+									<label>Date d'expiration</label>
+									<p class="expiry-date">
+										{% if app.user.licenceEndDate %}
+											{{ app.user.licenceEndDate|date('d/m/Y') }}
+										{% else %}
+											Non définie
+										{% endif %}
+									</p>
+								</div>
+							</div>
+
+							<div class="benefits-section">
+								<h4>Avantages membres</h4>
+								<ul class="benefits-list">
+									{% if app.user.licenceStatus == 'Active' %}
+										<li>✔️ Accès complet à la salle d’entraînement</li>
+										<li>✔️ Coaching personnalisé sur demande</li>
+										<li>✔️ Participation aux compétitions</li>
+									{% else %}
+										<li>❌ Aucun avantage — licence non active</li>
+										<li>💬 Astuce : retrouve ton numéro de licence via le chatbot “Elios”.</li>
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Planning Tab -->
+				<div class="tab-content" id="planning-tab">
+					<div class="content-header">
+						<h2>Planning des séances</h2>
+						<p>Réservations et créneaux à venir</p>
+					</div>
+					<div id="calendar" style="background:#fff;border-radius:16px;padding:10px"></div>
+				</div>
+
+				<!-- Performances Tab -->
+				<div class="tab-content" id="perf-tab">
+					<div class="content-header">
+						<h2>Performances</h2>
+						<p>Suivi de ta progression</p>
+					</div>
+					<div class="card">
+						<div class="card-header">
+							<div class="card-icon stats-icon"></div>
+							<h3>PR (kg) — Squat / Bench / Deadlift</h3>
+						</div>
+						<div style="padding:16px;">
+							<canvas id="prChart" height="120"></canvas>
+						</div>
+					</div>
+
+					<div class="card" style="margin-top:16px;">
+						<div class="card-header">
+							<div class="card-icon activity-icon"></div>
+							<h3>Séances par semaine</h3>
+						</div>
+						<div style="padding:16px;">
+							<canvas id="sessionsChart" height="120"></canvas>
+						</div>
+					</div>
+				</div>
+
+				<!-- Messages Tab -->
+				<div class="tab-content" id="messages-tab">
+					<div class="content-header">
+						<h2>Messages du club</h2>
+						<p>Notifications et annonces</p>
+					</div>
+					<div id="messages-list" class="card" style="padding:16px;"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	 <script src="{{ asset('js/dashboard_adherent/dashboard_adherent.js') }}"></script>
+{% endblock %}

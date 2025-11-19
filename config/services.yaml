@@ -26,7 +26,7 @@ services:
     # ============================================================
     # 🔐 AUTHENTICATOR PERSONNALISÉ (formulaire de connexion)
     # ============================================================
-    App\Security\LoginFormAuthenticator:
+    App\Authenticator\LoginFormAuthenticator:
         arguments:
             $router: "@router"
             $passwordHasher: "@security.user_password_hasher"

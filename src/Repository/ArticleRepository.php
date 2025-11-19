@@ -1,8 +1,11 @@
 <?php
 
+// src/Repository/ArticleRepository.php
+
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,49 +17,53 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère les articles filtrés par catégorie et/ou date
+     * Récupère les articles filtrés par catégorie (nom), date et pagination.
      */
-    public function findFilteredArticles(?int $categorieId, ?string $dateFrom, ?string $dateTo, int $page = 1, int $limit = 16): array
+    public function findFilteredArticles(?int $categorieId, ?string $dateFrom, ?string $dateTo, int $page, int $limit): array
     {
         $qb = $this->createQueryBuilder('a')
+            ->leftJoin('a.categorie', 'c')
+            ->addSelect('c')
             ->orderBy('a.publishedAt', 'DESC');
 
-        // 🔹 Filtre par catégorie
+        // 🔹 Filtre par catégorie (par nom, pas ID)
         if ($categorieId) {
-            $qb->andWhere('a.categorie = :cat')
-                ->setParameter('cat', $categorieId);
+            $em = $this->getEntityManager();
+            $categorie = $em->getRepository(Categorie::class)->find($categorieId);
+
+            if ($categorie) {
+                $qb->andWhere('LOWER(c.name) = LOWER(:catname)')
+                    ->setParameter('catname', $categorie->getName());
+            }
         }
 
-        // 🔹 Filtre date "De"
+        // 🔹 Filtre par date "de"
         if (!empty($dateFrom)) {
-            try {
-                $qb->andWhere('a.publishedAt >= :from')
-                    ->setParameter('from', new \DateTime($dateFrom));
-            } catch (\Exception $e) {
-            }
+            $qb->andWhere('a.publishedAt >= :dateFrom')
+                ->setParameter('dateFrom', new \DateTime($dateFrom));
         }
 
-        // 🔹 Filtre date "À"
+        // 🔹 Filtre par date "à"
         if (!empty($dateTo)) {
-            try {
-                $qb->andWhere('a.publishedAt <= :to')
-                    ->setParameter('to', new \DateTime($dateTo));
-            } catch (\Exception $e) {
-            }
+            $qb->andWhere('a.publishedAt <= :dateTo')
+                ->setParameter('dateTo', (new \DateTime($dateTo))->setTime(23, 59, 59));
         }
 
-        // ✅ Compte total avant pagination
+        // 🔹 Pagination
+        $offset = ($page - 1) * $limit;
+
+        // Total avant pagination
         $countQb = clone $qb;
-        $total = (int) $countQb->select('COUNT(a.id)')->getQuery()->getSingleScalarResult();
+        $total = count($countQb->getQuery()->getResult());
 
-        // 🔹 Pagination ensuite
-        $qb->setFirstResult(($page - 1) * $limit)
-            ->setMaxResults($limit);
-
-        $articles = $qb->getQuery()->getResult();
+        // Résultats paginés
+        $data = $qb->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
 
         return [
-            'data' => $articles,
+            'data' => $data,
             'total' => $total,
         ];
     }

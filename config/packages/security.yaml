@@ -17,11 +17,10 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticators:
-                - App\Security\LoginFormAuthenticator
+                - App\Authenticator\LoginFormAuthenticator
                 - App\Security\GoogleAuthenticator
-            entry_point: App\Security\LoginFormAuthenticator
+            entry_point: App\Authenticator\LoginFormAuthenticator
 
-            # 👇 Bloc essentiel : définit les routes de login utilisées par le firewall
             form_login:
                 login_path: app_login
                 check_path: app_login
@@ -33,7 +32,7 @@ security:
 
             remember_me:
                 secret: "%kernel.secret%"
-                lifetime: 604800 # 7 jours
+                lifetime: 604800
                 path: /
                 always_remember_me: false
                 name: REMEMBERME

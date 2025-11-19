@@ -1,5 +1,4 @@
 <?php
-// src/Controller/ActualitesController.php
 
 namespace App\Controller;
 
@@ -23,16 +22,16 @@ class ActualitesController extends AbstractController
         $limit = 16;
 
         // 🔹 Récupération des filtres depuis la requête
-        $rawCategorie = $request->query->get('categorie'); // string|null
-        $dateFrom = $request->query->get('date_from');     // string|null
-        $dateTo = $request->query->get('date_to');         // string|null
+        $rawCategorie = $request->query->get('categorie');
+        $dateFrom = $request->query->get('date_from');
+        $dateTo = $request->query->get('date_to');
 
-        // 🔹 Conversion sécurisée de la catégorie en entier
+        // 🔹 Conversion sécurisée de la catégorie
         $categorieId = (ctype_digit($rawCategorie ?? '') && $rawCategorie !== '')
             ? (int) $rawCategorie
             : null;
 
-        // 🔹 Récupération des articles filtrés via le repository
+        // 🔹 Récupération des articles filtrés
         $result = $articleRepository->findFilteredArticles(
             $categorieId,
             $dateFrom,
@@ -43,15 +42,26 @@ class ActualitesController extends AbstractController
 
         $articles = $result['data'];
         $totalArticles = $result['total'];
-        $totalPages = max(1, ceil($totalArticles / $limit)); // évite division par zéro
+        $totalPages = max(1, ceil($totalArticles / $limit));
 
-        // 🔹 Récupération de toutes les catégories pour le <select>
+        // 🔹 Récupération et nettoyage des catégories (suppression des doublons)
         $categories = $categorieRepository->findBy([], ['name' => 'ASC']);
+
+        $uniqueCategories = [];
+        $seenNames = [];
+
+        foreach ($categories as $cat) {
+            $name = trim(strtolower($cat->getName())); // normalisation pour éviter "Événement" / "événement"
+            if (!in_array($name, $seenNames)) {
+                $uniqueCategories[] = $cat;
+                $seenNames[] = $name;
+            }
+        }
 
         // 🔹 Rendu du template
         return $this->render('1_accueil/section4/actualites/articles.html.twig', [
             'articles' => $articles,
-            'categories' => $categories,
+            'categories' => $uniqueCategories,
             'page' => $page,
             'totalPages' => $totalPages,
             'filters' => [

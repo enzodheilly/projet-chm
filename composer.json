@@ -13,6 +13,7 @@
         "doctrine/orm": "^3.5",
         "knpuniversity/oauth2-client-bundle": "^2.19",
         "league/oauth2-google": "^4.0",
+        "nelmio/security-bundle": "^3.6",
         "ramsey/uuid": "^4.9",
         "symfony/asset": "7.3.*",
         "symfony/console": "7.3.*",

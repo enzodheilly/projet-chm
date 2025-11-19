@@ -5,19 +5,19 @@
 
 {% block body %}
 	 <script>
-	    // Dès que la page se charge, on envoie un "signal" au parent
-	    window.addEventListener("load", () => {
-	        if (window.opener && !window.opener.closed) {
-	            window.opener.postMessage({
-	                type: "licenseConfirmed",
-	                ok: {{ ok ? 'true' : 'false' }},
-	                reason: "{{ reason|e('js') }}"
-	            }, "*");
-	        }
-	        // Ferme automatiquement la fenêtre au bout de 1 seconde
-	        setTimeout(() => window.close(), 1000);
-	    });
-	</script>
+			    // Dès que la page se charge, on envoie un "signal" au parent
+			    window.addEventListener("load", () => {
+			        if (window.opener && !window.opener.closed) {
+			            window.opener.postMessage({
+			                type: "licenseConfirmed",
+			                ok: {{ ok ? 'true' : 'false' }},
+			                reason: "{{ reason|e('js') }}"
+			            }, "*");
+			        }
+			        // Ferme automatiquement la fenêtre au bout de 1 seconde
+			        setTimeout(() => window.close(), 1000);
+			    });
+			</script>
 
 	<div style="display:flex;justify-content:center;align-items:center;min-height:60vh;">
 		{% if ok %}

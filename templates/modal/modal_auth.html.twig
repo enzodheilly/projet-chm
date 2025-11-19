@@ -1,0 +1,317 @@
+{# templates/partials/_register_modal.html.twig #}
+<div class="modal-overlay" id="registerModal" aria-hidden="true">
+	<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
+
+		<button class="modal-close" type="button" aria-label="Fermer" id="closeRegisterModal">×</button>
+
+		<!-- === ÉTAPE 1 : Choix social/email === -->
+		<div id="modal-step-social">
+			<h3 id="registerModalTitle" class="modal-title">
+				La force se construit. Commence aujourd’hui !
+			</h3>
+
+			<div class="modal-actions">
+				<a class="oauth-btn oauth-google" href="{{ path('oauth_google_start') }}">
+					<img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" width="20" height="20">
+					Continuer avec Google
+				</a>
+				<a class="oauth-btn oauth-apple" href="#">
+					<img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/apple.svg" alt="Apple" width="20" height="20">
+					Continuer avec Apple
+				</a>
+				<a class="oauth-btn oauth-facebook" href="#">
+					<img src="{{ asset('images/facebook-icon.png') }}" alt="Facebook" width="20" height="20">
+					Continuer avec Facebook
+				</a>
+			</div>
+
+			<div class="modal-divider">
+				<span>ou</span>
+			</div>
+
+			<p class="modal-sep">
+				Inscris-toi avec ton
+				<a href="#" id="js-switch-to-email">Adresse e-mail</a>
+			</p>
+
+			<p class="modal-footer">
+				Tu as déjà un compte ?
+				<a href="#" class="js-open-login-modal">Se connecter</a>
+			</p>
+		</div>
+
+		<!-- === ÉTAPE 2 : Inscription par e-mail === -->
+		<div id="modal-step-email" style="display:none; position: relative;">
+			<div class="email-register-card">
+				<h3 class="modal-title">Créer un compte</h3>
+
+
+				<form id="emailRegisterForm" class="email-register-form" action="{{ path('app_register') }}" method="POST" novalidate>
+
+					<div class="form-group">
+						<label for="register-firstname">Prénom</label>
+						<input type="text" id="register-firstname" name="registration_form[firstName]" placeholder="Votre prénom" required>
+					</div>
+
+					<div class="form-group">
+						<label for="register-lastname">Nom</label>
+						<input type="text" id="register-lastname" name="registration_form[lastName]" placeholder="Votre nom" required>
+					</div>
+
+					<div class="form-group">
+						<label for="register-email">Email</label>
+						<input type="email" id="register-email" name="registration_form[email]" placeholder="exemple@email.com" required>
+					</div>
+
+					<div class="form-separator">
+						<span>Informations de connexion</span>
+					</div>
+
+					<!-- === Bloc mot de passe === -->
+					<div
+						class="form-group password-group">
+
+						<!-- ✅ Sous-modale Critères du mot de passe -->
+						<div class="password-criteria-modal" id="passwordRulesModal">
+							<div class="password-criteria-content">
+								<h2>Critères du mot de passe</h2>
+								<p class="password-rules-intro">
+									Conformément aux recommandations RGPD, ton mot de passe doit respecter ces critères
+																																																																																																																																																																																																																																																																																																																																																																																	pour garantir une sécurité optimale de ton compte :
+								</p>
+								<ul>
+									<li id="rule-length">Au moins
+										<strong>12 caractères</strong>
+									</li>
+									<li id="rule-uppercase">Contenir
+										<strong>une majuscule</strong>
+									</li>
+									<li id="rule-lowercase">Contenir
+										<strong>une minuscule</strong>
+									</li>
+									<li id="rule-number">Contenir
+										<strong>un chiffre</strong>
+									</li>
+									<li id="rule-special">Contenir
+										<strong>un caractère spécial</strong>
+									</li>
+								</ul>
+								<button class="btn-close-rules" id="closePasswordRules">Fermer</button>
+							</div>
+						</div>
+
+						<!-- ✅ Label + lien critères -->
+						<div class="password-label-wrapper">
+							<label for="register-password">Mot de passe</label>
+							<span class="password-rules-link" id="openPasswordRules">Voir les critères</span>
+						</div>
+
+						<div class="password-input-wrapper">
+							<input type="password" id="register-password" name="registration_form[password][first]" placeholder="Mot de passe" required>
+							<span class="toggle-password" data-target="register-password">
+								<img src="{{ asset('images/eye/eye-open.png') }}" alt="Afficher" class="eye-open">
+								<img src="{{ asset('images/eye/eye-closed.png') }}" alt="Cacher" class="eye-closed hide">
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group password-group">
+						<label for="register-confirm-password">Confirmer le mot de passe</label>
+						<div class="password-input-wrapper">
+							<input type="password" id="register-confirm-password" name="registration_form[password][second]" placeholder="Confirmez le mot de passe" required>
+							<span class="toggle-password" data-target="register-confirm-password">
+								<img src="{{ asset('images/eye/eye-open.png') }}" alt="Afficher" class="eye-open">
+								<img src="{{ asset('images/eye/eye-closed.png') }}" alt="Cacher" class="eye-closed hide">
+							</span>
+						</div>
+					</div>
+
+					<div class="checkbox-group">
+						<label>
+							<input type="checkbox" name="registration_form[acceptedTerms]" required>
+							En m’inscrivant, j’accepte les
+							<a href="#">Conditions générales</a>
+							et la
+							<a href="#">Politique de confidentialité</a>.
+						</label>
+					</div>
+
+					<div id="form-error-message" class="form-error-message" style="display:none;"></div>
+
+					<div class="form-group text-center mt-3">
+						<div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}" data-theme="light" data-size="normal"></div>
+					</div>
+
+					<button type="submit" class="btn-register">
+						<span class="btn-text">S’inscrire</span>
+						<span class="btn-spinner" style="display:none;">
+							<div class="mini-spinner"></div>
+						</span>
+					</button>
+
+					<p class="modal-footer">
+						<a href="#" id="js-back-to-social">← Retour</a>
+					</p>
+				</form>
+			</div>
+		</div>
+
+		<!-- === ÉTAPE 3 : Vérification code === -->
+		<div id="modal-step-verify" style="display:none;">
+			<h3 class="modal-title">Vérification de votre compte</h3>
+			<p class="modal-subtitle">Entrez le code à 6 chiffres reçu par e-mail.</p>
+
+			<form id="verify-form" action="{{ path('app_verify_code') }}" method="POST">
+				<div class="verify-code-inputs">
+					{% for i in 1..6 %}
+						<input type="text" maxlength="1" inputmode="numeric" class="code-input" name="code_digit_{{ i }}" data-index="{{ i }}" required>
+					{% endfor %}
+				</div>
+
+				<input type="hidden" name="code" id="verify-full-code">
+				<div id="verifyMessage" class="verify-message" style="display:none;"></div>
+
+				<button type="submit" id="verifyButton" class="btn-register">
+					<span class="btn-text">Vérifier mon compte</span>
+					<span class="btn-spinner" style="display:none;">
+						<div class="mini-spinner"></div>
+					</span>
+				</button>
+			</form>
+
+			<p class="resend">
+				Pas reçu ?
+				<a href="{{ path('app_resend_code') }}" id="resendCodeLink">Renvoyer un nouveau code</a>
+			</p>
+
+			<p class="modal-footer">
+				<a href="#" id="js-back-to-email">← Retour à l’inscription</a>
+			</p>
+		</div>
+
+		<!-- === ÉTAPE 4 : Connexion === -->
+		<div id="modal-step-login" style="display:none;">
+			<h3 class="modal-title">Connexion</h3>
+
+			<form id="login-form" action="{{ path('app_login') }}" method="POST" novalidate>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				<div class="form-group">
+					<label for="login-email">Adresse e-mail</label>
+					<input type="email" id="login-email" name="email" placeholder="exemple@email.com" required>
+				</div>
+
+				<div class="form-group password-group">
+					<label for="login-password">Mot de passe</label>
+					<div class="password-input-wrapper">
+						<input type="password" id="login-password" name="password" placeholder="Votre mot de passe" required>
+						<span class="toggle-password" data-target="login-password">
+							<img src="{{ asset('images/eye/eye-open.png') }}" alt="Afficher" class="eye-open">
+							<img src="{{ asset('images/eye/eye-closed.png') }}" alt="Cacher" class="eye-closed hide">
+						</span>
+					</div>
+				</div>
+
+				<div class="checkbox-group remember-me">
+					<label>
+						<input type="checkbox" name="_remember_me">
+						Se souvenir de moi
+					</label>
+				</div>
+
+				<!-- ✅ CAPTCHA Turnstile visible -->
+				<div class="form-group text-center mt-3">
+					<div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}" data-theme="light" data-size="normal"></div>
+				</div>
+
+				<div id="loginError" class="login-error" style="display:none;"></div>
+
+				<button type="submit" id="loginButton" class="btn-register">
+					<span class="btn-text">Se connecter</span>
+					<span class="btn-spinner" style="display:none;">
+						<div class="mini-spinner"></div>
+					</span>
+				</button>
+			</form>
+
+			<p class="forgot-password">
+				<a href="#" id="js-forgot-password" class="js-open-reset-modal">Mot de passe oublié ?</a>
+			</p>
+			<p class="modal-footer">
+				<a href="#" id="js-back-to-social-login">← Retour à l’accueil</a>
+			</p>
+		</div>
+
+		<!-- ✅ Script Turnstile -->
+
+
+		<!-- === ÉTAPE 5 : Mot de passe oublié === -->
+		<div id="modal-step-reset-email" style="display:none; text-align:center;">
+			<h3 class="modal-title">Mot de passe oublié</h3>
+			<p class="modal-subtitle">Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.</p>
+
+			<div id="resetError" class="verify-message" style="display:none;"></div>
+
+			<form id="resetRequestForm" action="{{ path('app_reset_password_request') }}" method="POST" novalidate>
+				<input type="email" name="email" id="resetEmail" placeholder="Votre adresse e-mail" required>
+				<button type="submit" id="resetRequestBtn" class="btn-register">
+					<span class="btn-text">Envoyer</span>
+					<span class="btn-spinner" style="display:none;">
+						<span class="mini-spinner"></span>
+					</span>
+				</button>
+			</form>
+
+			<p class="modal-footer">
+				<a href="#" id="js-back-to-login">← Retour à la connexion</a>
+			</p>
+		</div>
+
+		<!-- === ÉTAPE 6 : Nouveau mot de passe === -->
+		<div id="modal-step-reset-new" style="display:none; text-align:center;">
+			<h3 class="modal-title">Nouveau mot de passe</h3>
+			<p class="modal-subtitle">Saisissez votre nouveau mot de passe.</p>
+
+			<div id="resetNewError" class="verify-message" style="display:none;"></div>
+
+			<form id="resetNewForm" action="{{ path('app_reset_password_final') }}" method="POST" novalidate>
+				<input
+				type="hidden" id="resetToken" name="token" value="">
+
+				<!-- Champ : nouveau mot de passe -->
+				<div class="password-group">
+					<div class="password-input-wrapper">
+						<input type="password" id="newPassword" name="newPassword" placeholder="Nouveau mot de passe" minlength="12" maxlength="64" required>
+						<span class="toggle-password" data-target="newPassword">
+							<img class="eye-open" src="{{ asset('images/eye/eye-open.png') }}" alt="Afficher">
+							<img class="eye-closed hide" src="{{ asset('images/eye/eye-closed.png') }}" alt="Cacher">
+						</span>
+					</div>
+				</div>
+
+				<!-- Champ : confirmation -->
+				<div class="password-group">
+					<div class="password-input-wrapper">
+						<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmer le mot de passe" minlength="12" maxlength="64" required>
+						<span class="toggle-password" data-target="confirmPassword">
+							<img class="eye-open" src="{{ asset('images/eye/eye-open.png') }}" alt="Afficher">
+							<img class="eye-closed hide" src="{{ asset('images/eye/eye-closed.png') }}" alt="Cacher">
+						</span>
+					</div>
+				</div>
+
+				<!-- Bouton -->
+				<button type="submit" id="resetNewBtn" class="btn-register">
+					<span class="btn-text">Changer le mot de passe</span>
+					<span class="btn-spinner" style="display:none;">
+						<span class="mini-spinner"></span>
+					</span>
+				</button>
+			</form>
+
+			<p class="modal-footer">
+				<a href="#" id="js-back-to-login-from-reset">← Retour à la connexion</a>
+			</p>
+		</div>
+	</div>
+</div>

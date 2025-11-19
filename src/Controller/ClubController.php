@@ -27,5 +27,9 @@ class ClubController extends AbstractController
         return $this->render('2_club/nouveautes/nouveautes.html.twig');
     }
 
-    // Ajouter les autres pages de la même façon
+    #[Route('/le-club', name: 'app_club')]
+    public function club(): Response
+    {
+        return $this->render('2_club/club/index.html.twig');
+    }
 }
