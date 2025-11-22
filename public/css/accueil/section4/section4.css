@@ -19,7 +19,7 @@
 }
 
 .news-title span {
-  color: #0f172a;
+  color: #005b94;
 }
 
 .news-subtitle {
@@ -43,7 +43,6 @@
   width: 360px;
   height: 240px;
   border: none;
-  border-radius: 16px;
   overflow: hidden;
   display: block;
   text-decoration: none;
@@ -306,3 +305,4 @@
     margin-top: 30px;
   }
 }
+

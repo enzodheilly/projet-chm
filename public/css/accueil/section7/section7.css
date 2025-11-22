@@ -1,0 +1,175 @@
+/* SECTION AVEC FOND */
+.ambassador-section {
+    background: #005b94;
+    padding: 160px 0 280px 0; /* le bas est très grand exprès */
+    position: relative;
+}
+
+.section-title {
+    font-size: 34px;
+    margin-top: -120px;
+    margin-left: 86px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.section-title span {
+    color: #fff;
+    display: block;
+}
+
+/* SLIDER ENTRE LES 2 SECTIONS */
+.ambassador-slider {
+    position: relative;
+    width: 180%;
+    margin-top: -280px; /* FAIT SORTIR LE SLIDER DE LA SECTION */
+    display: flex;
+    align-items: center;
+    margin-left: 375px;
+    overflow-x: auto;
+    gap: 40px;
+    padding-left: 81px;
+    scroll-snap-type: x mandatory;
+}
+
+.ambassador-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* CARDS DU SLIDER */
+.ambassador-card {
+    background: #FFF;
+    min-width: 1000px;
+    height: 400px;
+    display: none;
+    scroll-snap-align: start;
+    position: relative; /* pour positionner les boutons */
+}
+
+.ambassador-card.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Wrapper autour de l'image pour bloquer le scroll */
+.img-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* empêche le scroll de l'image */
+    position: relative;
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 210%;
+    object-fit: contain;
+    position: absolute;
+    top: -55%; /* ajuste pour montrer la partie centrale de l'image */
+    left: 0;
+}
+
+.img-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35); /* noir avec 25% d'opacité */
+    pointer-events: none; /* laisse les clics passer à l'image ou aux boutons */
+    z-index: 5; /* au-dessus de l'image mais en dessous des boutons */
+}
+
+.ambassador-card:nth-child(3) .img-wrapper img {
+    height: 250%; /* hauteur spécifique pour la 3ᵉ image */
+}
+
+/* BOUTONS */
+.discover-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 25px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.slider-prev,
+.slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: transform 0.2s ease, background 0.2s ease;
+    padding: 0; /* important pour éviter que l'image ne dépasse */
+}
+
+.slider-prev img,
+.slider-next img {
+    width: 60%; /* ajuster la taille de l'icône à l'intérieur du bouton */
+    height: auto;
+    display: block;
+
+}.slider-prev img{
+    margin-left:10px;
+}
+.slider-prev {
+    left: -70px;
+}
+
+.slider-next img{
+    margin-left:10px;
+}
+.slider-next {
+    right: -70px;
+}
+
+
+/* SECTION SUIVANTE */
+.next-section {
+    padding: 400px 0 160px 0;
+    margin-top: -260px;
+    background-color: white;
+}
+
+/* INDICATEURS DE SLIDES */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 55px;
+}
+
+.slider-dot {
+    width: 40px;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    transition: background 0.3s;
+}
+
+.slider-dot.active {
+    background: #ff6600;
+}
+
+.new-section{
+    padding: 250px 0px;
+}
