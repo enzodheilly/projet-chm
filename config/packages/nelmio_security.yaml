@@ -24,6 +24,7 @@ nelmio_security:
 
             script-src:
                 - "'self'"
+                - "'unsafe-inline'"
                 - https://cdnjs.cloudflare.com
                 - https://cdn.jsdelivr.net
                 - https://unpkg.com
@@ -49,11 +50,12 @@ nelmio_security:
             font-src:
                 - "'self'"
                 - "data:"
-                - https://cdnjs.cloudflare.com # ← indispensable pour Font Awesome
+                - https://cdnjs.cloudflare.com
                 - https://fonts.gstatic.com
                 - https://stackpath.bootstrapcdn.com
                 - https://maxcdn.bootstrapcdn.com
                 - https://cdn.jsdelivr.net
+                - https://unpkg.com
 
             img-src:
                 - "'self'"
@@ -66,6 +68,9 @@ nelmio_security:
                 - https://maps.googleapis.com
                 - https://www.google.com
                 - https://*.svgrepo.com
+                - https://cdn-s-www.bienpublic.com
+                - https://www.ffhaltero.fr
+                - https://gazettesports.fr
 
             connect-src:
                 - "'self'"
@@ -78,6 +83,7 @@ nelmio_security:
                 - https://maps.googleapis.com
                 - https://maps.gstatic.com
                 - https://www.google.com
+                - https://unpkg.com
 
             frame-src:
                 - https://challenges.cloudflare.com

@@ -1,0 +1,254 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<style>
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 0;
+		}
+
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 80vh;
+			background: url('/images/2.jpg') center -215px / cover no-repeat;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--text-light);
+			text-align: center;
+			overflow: hidden;
+		}
+
+		.hero-text {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			color: white;
+			max-width: 800px;
+			padding: 20px;
+			animation: fadeInUp 1.2s ease-out;
+		}
+
+		.hero-text h1 {
+			font-size: 4rem;
+			font-weight: 900;
+			margin-bottom: 15px;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+		}
+
+		.hero-text p {
+			font-size: 1.3rem;
+			line-height: 1.6;
+			color: #f1f1f1;
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+		}
+
+		@media(max-width: 768px) {
+			.hero-content h1 {
+				font-size: 3.2rem;
+			}
+			.hero-content p {
+				font-size: 1.1rem;
+			}
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.halter-section {
+			padding: 70px 20px;
+			max-width: 1100px;
+			margin: auto;
+			font-family: "Inter", sans-serif;
+		}
+
+		.section-title {
+			font-size: 3rem;
+			text-align: center;
+			font-weight: 800;
+			margin-bottom: 10px;
+		}
+
+		.section-subtitle {
+			text-align: center;
+			font-size: 1.2rem;
+			max-width: 800px;
+			margin: 0 auto 50px;
+			line-height: 1.7;
+			color: #444;
+		}
+
+		.halter-card {
+			background: #ffffff;
+			padding: 30px;
+			margin-bottom: 40px;
+			border-radius: 12px;
+			box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+			transition: 0.3s ease;
+			border-left: 6px solid #ff7e5f;
+		}
+
+		.halter-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+		}
+
+		.halter-card h3 {
+			font-size: 1.8rem;
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.halter-card ul {
+			padding-left: 20px;
+			line-height: 1.8;
+			font-size: 1.1rem;
+		}
+
+		.halter-card p {
+			font-size: 1.1rem;
+			line-height: 1.7;
+		}
+
+		@media(max-width: 768px) {
+			.section-title {
+				font-size: 2.2rem;
+			}
+
+			.halter-card h3 {
+				font-size: 1.5rem;
+			}
+		}
+
+		.scroll-arrow {
+			position: absolute;
+			bottom: 40px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 2;
+			font-size: 3rem;
+			color: white;
+			text-decoration: none;
+			cursor: pointer;
+			animation: bounce 1.6s infinite;
+			text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+		}
+
+		.scroll-arrow:hover {
+			color: #ff7e5f;
+		}
+
+		@keyframes bounce {
+			0,
+			20%,
+			50%,
+			80%,
+			100% {
+				transform: translate(-50%, 0);
+			}
+			40% {
+				transform: translate(-50%, -10px);
+			}
+			60% {
+				transform: translate(-50%, -5px);
+			}
+		}
+	</style>
+
+	<header class="hero-header">
+		<div class="overlay"></div>
+
+		<div class="hero-text">
+			<h1>Zone Bras</h1>
+			<p>
+				Un espace dédié à la technique, à la puissance et à la progression.  
+																																																																												            Découvrez une zone équipée pour performer en toute sécurité.
+			</p>
+		</div>
+		<a href="#halter-section" class="scroll-arrow">
+			⌄
+		</a>
+
+	</header>
+
+	<section id="halter-section" class="halter-section">
+
+		<h2 class="section-title">Notre Espace Haltérophilie</h2>
+		<p class="section-subtitle">
+			Découvrez une zone entièrement dédiée à la force, à la technique et à la performance, conçue pour offrir les meilleures conditions d’entraînement.
+		</p>
+
+		<!-- ÉQUIPEMENTS -->
+		<div class="halter-card">
+			<h3>
+				<span>🏋️‍♂️</span>
+				Équipements disponibles</h3>
+			<ul>
+				<li>Plateformes officielles d’haltérophilie</li>
+				<li>Barres olympiques homme & femme</li>
+				<li>Disques bumper du 0,5 kg au 25 kg</li>
+				<li>Rack d’haltérophilie + zones sécurisées</li>
+				<li>Ceintures, sangles et matériel de mobilité</li>
+				<li>Équipements d’assistance : élastiques, blocs, PVC…</li>
+			</ul>
+		</div>
+
+		<!-- PUBLIC CIBLE -->
+		<div class="halter-card">
+			<h3>
+				<span>🎯</span>
+				À qui est réservée la zone ?</h3>
+			<p>
+				Cet espace est réservé aux pratiquants ayant les bases techniques nécessaires pour évoluer en sécurité.  
+																																																																																								            Les débutants sont les bienvenus
+				<strong>à condition de suivre un coach</strong>
+				ou de participer aux initiations proposées par le club.
+			</p>
+		</div>
+
+		<!-- REGLES -->
+		<div class="halter-card">
+			<h3>
+				<span>⚠️</span>
+				Règles d'utilisation</h3>
+			<ul>
+				<li>Utilisation obligatoire des bumper plates (disques adaptés)</li>
+				<li>Déposer la barre uniquement dans les zones prévues</li>
+				<li>Port de chaussures stables recommandé</li>
+				<li>Rangement du matériel après chaque utilisation</li>
+				<li>Respect de la priorité sur les plateformes</li>
+			</ul>
+		</div>
+
+		<!-- ENCADREMENT -->
+		<div class="halter-card">
+			<h3>
+				<span>👨‍🏫</span>
+				Encadrement & sécurité</h3>
+			<p>
+				Des coachs diplômés sont disponibles pour vous accompagner sur la technique, vous proposer des cycles d’entraînement et garantir une pratique sécurisée.  
+																																																																																								            N’hésitez pas à les solliciter !
+			</p>
+		</div>
+	</section>
+
+{% endblock %}

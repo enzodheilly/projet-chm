@@ -85,6 +85,10 @@
     height: 250%; /* hauteur spécifique pour la 3ᵉ image */
 }
 
+.ambassador-card:nth-child(4) .img-wrapper img {
+    height: 200%; /* hauteur spécifique pour la 3ᵉ image */
+}
+
 /* BOUTONS */
 .discover-btn {
     position: absolute;
@@ -98,6 +102,7 @@
     border-radius: 25px;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
     font-size: 1rem;
     z-index: 10;
 }
@@ -170,6 +175,53 @@
     background: #ff6600;
 }
 
-.new-section{
-    padding: 250px 0px;
+.new-section.sauna-section {
+    padding: 150px 0;
+    background: #fff;
 }
+
+.sauna-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sauna-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.sauna-text {
+    max-width: 500px;
+}
+
+.sauna-text p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.img-wrapper {
+    position: relative;
+}
+
+.section-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10; /* <- important, au-dessus de l'overlay */
+}
+
+

@@ -1,0 +1,370 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<style>
+		/* ===== HERO SECTION ===== */
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 80vh;
+			background: url('/images/1.jpg') center -217px / cover no-repeat;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			color: #fff;
+			overflow: hidden;
+		}
+
+		.hero-header::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 0;
+		}
+
+		.hero-text {
+			position: relative;
+			z-index: 1;
+			max-width: 800px;
+			padding: 20px;
+			animation: fadeInUp 1.2s ease-out;
+		}
+
+		.hero-text h1 {
+			font-size: 4rem;
+			font-weight: 900;
+			margin-bottom: 15px;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+		}
+
+		.hero-text p {
+			font-size: 1.3rem;
+			line-height: 1.6;
+			text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+		}
+
+		.scroll-arrow {
+			position: absolute;
+			bottom: 40px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: 3rem;
+			color: #fff;
+			z-index: 2;
+			text-decoration: none;
+			cursor: pointer;
+			animation: bounce 1.6s infinite;
+		}
+
+		.scroll-arrow:hover {
+			color: #ff7e5f;
+		}
+
+		/* ===== HALTER SECTION FULL WIDTH ===== */
+		.halter-section {
+			width: 100%;
+			padding: 60px 40px;
+			display: flex;
+			flex-direction: column;
+			gap: 60px;
+		}
+
+		.halter-section h2.section-title {
+			font-size: 2.8rem;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		.halter-section p.section-subtitle {
+			text-align: center;
+			margin-bottom: 30px;
+			font-size: 1.2rem;
+			color: #555;
+		}
+
+		/* ===== SECTION DÉTAIL ZONE ===== */
+		.zone-details {
+			width: 100%;
+			padding: 60px 40px;
+			display: flex;
+			flex-direction: column;
+			gap: 60px;
+		}
+
+		/* TITRES DES BLOCS */
+		.zone-block h2 {
+			font-size: 2.2rem;
+			font-weight: 800;
+			margin-bottom: 15px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		/* PARAGRAPHES */
+		.zone-block p {
+			font-size: 1.1rem;
+			line-height: 1.7;
+			color: #555;
+		}
+
+		/* LISTE OBJETIFS / MUSCLES */
+		.work-list {
+			padding-left: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			font-size: 1.1rem;
+			color: #444;
+		}
+
+		/* GRILLE MATÉRIEL */
+		.material-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 12px;
+			margin-top: 15px;
+		}
+
+		.material-item {
+			padding: 10px 15px;
+			background: #f7f7f7;
+			border-radius: 10px;
+			font-size: 1rem;
+			border-left: 4px solid #ff7e5f;
+		}
+
+		/* GRILLE PHOTOS */
+		.photo-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 20px;
+			margin-top: 20px;
+		}
+
+		.photo-placeholder {
+			width: 100%;
+			height: 220px;
+			background: #eee;
+			border-radius: 14px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #777;
+			font-style: italic;
+			font-size: 1rem;
+		}
+
+		/* RESPONSIVE */
+		@media(max-width: 992px) {
+			.material-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.photo-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+
+		/* ===== SECTION NOS ESPACES ===== */
+		.spaces-section {
+			width: 100%;
+			padding: 60px 40px;
+		}
+
+		.spaces-title {
+			font-size: 2.6rem;
+			font-weight: 800;
+			text-align: left;
+			margin-bottom: 35px;
+			letter-spacing: 1px;
+		}
+
+		/* GRID 3 CARTES */
+		.spaces-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 40px;
+		}
+
+		/* CARTE MODERNE */
+		.space-card {
+			border: none;
+			overflow: hidden;
+			background: #ffffff;
+			border-radius: 22px;
+			transition: all 0.35s ease;
+			cursor: pointer;
+		}
+
+		.space-card img {
+			width: 100%;
+			height: 260px;
+			object-fit: cover;
+			transition: transform 0.4s ease;
+		}
+
+		.space-card h4 {
+			font-size: 1.4rem;
+			margin-top: 18px;
+			font-weight: 800;
+			text-transform: uppercase;
+			font-family: "Anton", sans-serif;
+			letter-spacing: 1px;
+		}
+
+		.space-card p {
+			margin-top: 10px;
+			font-size: 1rem;
+			line-height: 1.55;
+			color: #555;
+		}
+
+		/* Effet hover pro & discret */
+		.space-card:hover img {
+			transform: scale(1.07);
+		}
+
+		.space-card:hover {
+			transform: translateY(-5px);
+		}
+
+		/* RESPONSIVE */
+		@media(max-width: 992px) {
+			.spaces-grid {
+				grid-template-columns: 1fr;
+				gap: 50px;
+			}
+
+			.space-card {
+				max-width: 90%;
+				margin: auto;
+			}
+		}
+
+		@media(max-width: 768px) {
+			.hero-text h1 {
+				font-size: 3rem;
+			}
+			.hero-text p {
+				font-size: 1.1rem;
+			}
+			.gallery-featured {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+
+
+	<header class="hero-header">
+		<div class="hero-text">
+			<h1>Zone Haltérophilie</h1>
+			<p>
+				Un espace dédié à la technique, à la puissance et à la progression. Découvrez une zone équipée pour performer en toute sécurité.
+			</p>
+		</div>
+		<a href="#halter-section" class="scroll-arrow">⌄</a>
+	</header>
+
+	<section
+		id="halter-section" class="halter-section">
+
+		<!-- ===== SECTION DESCRIPTION DÉTAILLÉE DE LA ZONE ===== -->
+		<section
+			class="zone-details">
+
+			<!-- À QUOI SERT LA ZONE ? -->
+			<div class="zone-block">
+				<h2>À quoi sert cette zone ?</h2>
+				<p>
+					La zone haltérophilie est dédiée au renforcement musculaire complet et à l’amélioration de la puissance. 
+					            Elle permet de travailler la force, la technique et l’explosivité grâce à un matériel adapté pour tous niveaux.
+				</p>
+			</div>
+
+			<!-- POUR QUI ? -->
+			<div class="zone-block">
+				<h2>Pour qui est cette zone ?</h2>
+				<p>
+					Cette zone est idéale pour les athlètes confirmés, les pratiquants de musculation, ceux préparant HYROX 
+					            ou tout sportif souhaitant développer sa force et sa technique en toute sécurité.
+				</p>
+			</div>
+
+			<!-- MATÉRIEL DISPONIBLE -->
+			<div class="zone-block">
+				<h2>Matériel à disposition</h2>
+				<div class="material-grid">
+					<div class="material-item">• Poids de 1 kg à 25 kg</div>
+					<div class="material-item">• 8 plateaux de tirage classiques</div>
+					<div class="material-item">• 1 plateau de tirage surélevé</div>
+					<div class="material-item">• 3 racks pour squats</div>
+					<div class="material-item">• 15 barres de 5 kg à 20 kg</div>
+				</div>
+			</div>
+
+			<!-- CE QUE TU PEUX TRAVAILLER -->
+			<div class="zone-block">
+				<h2>Ce que tu peux travailler ici</h2>
+				<ul class="work-list">
+					<li>Renforcement des bras, épaules, dos et jambes</li>
+					<li>Développement de la puissance et de l’explosivité</li>
+					<li>Technique de squat, tirage et développé</li>
+					<li>Préparation physique générale et spécifique</li>
+					<li>Endurance musculaire avec charges modulables</li>
+				</ul>
+			</div>
+
+			<!-- ESPACE POUR PHOTOS -->
+			<div class="zone-block">
+				<h2>Photos de la zone</h2>
+				<div class="photo-grid">
+					<div class="photo-placeholder">Photo du matériel</div>
+					<div class="photo-placeholder">Photo du rack</div>
+					<div class="photo-placeholder">Photo de la zone en action</div>
+				</div>
+			</div>
+
+		</section>
+
+		<section class="spaces-section">
+			<h2 class="spaces-title">Nos Espaces</h2>
+
+			<div class="spaces-grid">
+				<div class="space-card">
+					<img src="/images/2.jpg" alt="Zone Bras">
+					<h4>Zone Bras</h4>
+					<p>Un espace dédié au renforcement des bras pour développer puissance et endurance.</p>
+				</div>
+
+				<div class="space-card">
+					<img src="/images/3.jpg" alt="Zone Cardio">
+					<h4>Zone Cardio</h4>
+					<p>Un espace spécialisé pour améliorer ton endurance grâce à un travail cardio intensif.</p>
+				</div>
+
+				<div class="space-card">
+					<img src="/images/4.jpg" alt="Zone Pecs">
+					<h4>Zone Pecs</h4>
+					<p>Une zone idéale pour cibler et renforcer les muscles pectoraux avec du matériel adapté.</p>
+				</div>
+			</div>
+		</section>
+
+
+	</section>
+
+{% endblock %}
+
+
+{% block javascripts %}
+	 <script src="{{ asset('js/accueil/section7/installations/installations.js') }}"></script>
+{% endblock %}

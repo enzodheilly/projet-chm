@@ -3,212 +3,11 @@
 {% block title %}École d'Haltérophilie
 {% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/halterophilie/ecole/ecole.css') }}">
+{% endblock %}
+
 {% block body %}
-	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700 &display=swap');
-
-		body {
-			font-family: 'Poppins', sans-serif;
-			color: #1a1a1a;
-			scroll-behavior: smooth;
-			background: #fafafa;
-		}
-
-		/* HERO */
-		.hero-header {
-			position: relative;
-			width: 100%;
-			height: 90vh;
-			background: linear-gradient(135deg, rgba(13, 71, 161, 0.85), rgba(25, 118, 210, 0.75)), url('http://img.over-blog-kiwi.com/0/93/30/40/20150812/ob_8d8f6d_11816329-10205062943148547-88821196651.jpg') center/cover no-repeat;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-			color: white;
-		}
-		.hero-content {
-			max-width: 900px;
-			padding: 2rem;
-			animation: fadeInUp 1.2s ease-out;
-		}
-		.hero-content h1 {
-			font-size: 3.5rem;
-			font-weight: 700;
-			margin-bottom: 1.5rem;
-			text-transform: uppercase;
-			text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.4);
-		}
-		.hero-content p {
-			font-size: 1.4rem;
-			margin-bottom: 2rem;
-			color: #f5f5f5;
-		}
-		.cta-button {
-			display: inline-block;
-			padding: 1rem 2.5rem;
-			background: linear-gradient(135deg, #ffca28, #ffa000);
-			color: #1a1a1a;
-			font-weight: 600;
-			font-size: 1.1rem;
-			text-decoration: none;
-			border-radius: 50px;
-			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-			box-shadow: 0 6px 20px rgba(255, 202, 40, 0.4);
-		}
-		.cta-button:hover {
-			transform: translateY(-4px);
-			box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-		}
-
-		@keyframes fadeInUp {
-			from {
-				opacity: 0;
-				transform: translateY(40px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		/* SECTIONS */
-		main {
-			background: linear-gradient(to bottom, #fff, #f7f7f7);
-		}
-		main + #footer {
-			margin-top: 0;
-		}
-
-		.section {
-			padding: 6rem 5%;
-			display: flex;
-			align-items: center;
-			gap: 3rem;
-			max-width: 1300px;
-			margin: 0 auto;
-		}
-		.section:nth-child(even) {
-			flex-direction: row-reverse;
-			background: linear-gradient(135deg, rgba(230,126,34,0.05), rgba(44,62,80,0.05));
-		}
-		.section-content {
-			flex: 1;
-		}
-		.section-content h2 {
-			font-size: 2.5rem;
-			font-weight: 700;
-			background: linear-gradient(135deg, #e67e22, #d35400);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			margin-bottom: 1.2rem;
-		}
-		.section-content p {
-			font-size: 1rem;
-			line-height: 1.7;
-			color: #444;
-			margin-bottom: 1rem;
-		}
-		.section-image {
-			flex: 1;
-		}
-		.section-image img {
-			width: 100%;
-			border-radius: 20px;
-			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-			object-fit: cover;
-		}
-
-		/* TABLE */
-		.table-container {
-			padding: 5rem 5%;
-			text-align: center;
-		}
-		.table-container h2 {
-			font-size: 2.5rem;
-			margin-bottom: 2rem;
-			font-weight: 700;
-			color: #e67e22;
-		}
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			overflow: hidden;
-			border-radius: 15px;
-			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-			background: #fff;
-		}
-		thead {
-			background: #e67e22;
-			color: white;
-		}
-		th,
-		td {
-			padding: 15px;
-			text-align: center;
-		}
-		tbody tr:nth-child(even) {
-			background: #f9f9f9;
-		}
-
-		/* GALLERY */
-		.gallery {
-			padding: 6rem 5%;
-			background: #fff;
-			text-align: center;
-		}
-		.gallery h2 {
-			font-size: 2.5rem;
-			margin-bottom: 2.5rem;
-			color: #e67e22;
-		}
-		.gallery-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 20px;
-		}
-		.gallery-grid img {
-			width: 100%;
-			height: 220px;
-			object-fit: cover;
-			border-radius: 15px;
-			transition: transform 0.3s ease;
-		}
-		.gallery-grid img:hover {
-			transform: scale(1.05);
-		}
-
-		/* CTA */
-		.prices-link {
-			text-align: center;
-			padding: 4rem 2rem;
-			background: linear-gradient(135deg, #e67e22, #d35400);
-			color: white;
-		}
-		.prices-link a {
-			color: #fff;
-			font-weight: bold;
-			text-decoration: underline;
-		}
-		.prices-link a:hover {
-			color: #ffeb99;
-		}
-
-		@media(max-width: 900px) {
-			.section {
-				flex-direction: column;
-				text-align: center;
-			}
-			.section:nth-child(even) {
-				flex-direction: column;
-			}
-			.section-image img {
-				max-width: 100%;
-			}
-			.hero-content h1 {
-				font-size: 2.3rem;
-			}
-		}
-	</style>
 
 	<!-- HERO -->
 	<header class="hero-header">
@@ -223,7 +22,7 @@
 		<!-- SECTION 1 -->
 		<section id="entrainements" class="section">
 			<div class="section-content">
-				<h2>🏆 Licences Compétition</h2>
+				<h2>Licences Compétition</h2>
 				<p>
 					<b>Catégories :</b>
 					U15, U17, U20, Séniors</p>
@@ -240,7 +39,7 @@
 		<!-- SECTION 2 -->
 		<section class="section">
 			<div class="section-content">
-				<h2>👶 U13 / Débutants</h2>
+				<h2>U13 / Débutants</h2>
 				<p>
 					<b>Catégorie :</b>
 					Initiation pour jeunes et débutants</p>
@@ -274,19 +73,19 @@
 		<!-- NOUVELLE SECTION: Nos Coachs -->
 		<section class="section">
 			<div class="section-content">
-				<h2>💪 Nos Coachs</h2>
+				<h2>Nos Coachs</h2>
 				<p>Notre équipe est composée de coachs diplômés et expérimentés, passionnés par la pédagogie et la performance. Chaque coach apporte un suivi personnalisé selon les besoins et les objectifs des élèves.</p>
 				<p>Ils supervisent la progression technique, la sécurité des mouvements et l’encouragement dans la pratique quotidienne.</p>
 			</div>
 			<div class="section-image">
-				<img src="{{ asset('images/club/photo5.jpg') }}" alt="Coach">
+				<img src="{{ asset('images/club/coach.jpg') }}" alt="Coach">
 			</div>
 		</section>
 
 		<!-- NOUVELLE SECTION: Nos Valeurs -->
 		<section class="section">
 			<div class="section-content">
-				<h2>🌟 Nos Valeurs</h2>
+				<h2>Nos Valeurs</h2>
 				<p>Respect, discipline et persévérance sont les piliers de notre école. Nous valorisons le dépassement de soi dans un environnement bienveillant et stimulant.</p>
 				<p>Nous encourageons l’esprit d’équipe, le fair-play et la passion pour l’haltérophilie, quel que soit le niveau de pratique.</p>
 			</div>
@@ -298,66 +97,56 @@
 		<!-- TABLE -->
 		<div class="table-container">
 			<h2>Catégories d’âge</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Catégorie</th>
-						<th>Nom</th>
-						<th>Âge</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>U10</td>
-						<td>Benjamin</td>
-						<td>7 à 10 ans</td>
-					</tr>
-					<tr>
-						<td>U13</td>
-						<td>Minime</td>
-						<td>11 à 13 ans</td>
-					</tr>
-					<tr>
-						<td>U15</td>
-						<td>Cadet 1</td>
-						<td>14 à 15 ans</td>
-					</tr>
-					<tr>
-						<td>U17</td>
-						<td>Cadet 2</td>
-						<td>16 à 17 ans</td>
-					</tr>
-					<tr>
-						<td>U20</td>
-						<td>Junior</td>
-						<td>18 à 20 ans</td>
-					</tr>
-					<tr>
-						<td>Sénior</td>
-						<td>Sénior</td>
-						<td>21 à 34 ans</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 
-		<!-- GALLERY -->
-		<div class="gallery">
-			<h2>Galerie photos</h2>
-			<div class="gallery-grid">
-				<img src="http://chm-saleux.fr/wp-content/uploads/2016/09/photo-salle-enti%C3%A8re.jpg" alt="Salle">
-				<img src="http://img.over-blog-kiwi.com/0/93/30/40/20150812/ob_8d8f6d_11816329-10205062943148547-88821196651.jpg" alt="Entraînement">
-				<img src="https://gazettesports.fr/wp-content/uploads/2021/11/IMG_20211106_190419-scaled.jpg" alt="Compétition">
-				<img src="https://gazettesports.fr/wp-content/uploads/2022/07/5B235F31-BC6C-4E1E-A98B-DB950AD1E063-2048x1277.jpeg" alt="Club">
-				<img src="https://chm-saleux.fr/wp-content/uploads/2021/04/HALTEROPHILIE-3e-Journee-de-Championnat-de-France-des-clubs-Gazette-Sports-Coralie-Sombret-29-768x512.jpg" alt="Coach">
-				<img src="https://tse2.mm.bing.net/th/id/OIP.s-qxLJNEc7GM6bMiKlFsFAHaIh?pid=Api&P=0&h=180" alt="Valeurs">
+			<div class="modern-table">
+				<div class="table-header">
+					<div>Catégorie</div>
+					<div>Nom</div>
+					<div>Âge</div>
+				</div>
+
+				<div class="table-row">
+					<div>U10</div>
+					<div>Benjamin</div>
+					<div>7 à 10 ans</div>
+				</div>
+
+				<div class="table-row">
+					<div>U13</div>
+					<div>Minime</div>
+					<div>11 à 13 ans</div>
+				</div>
+
+				<div class="table-row">
+					<div>U15</div>
+					<div>Cadet 1</div>
+					<div>14 à 15 ans</div>
+				</div>
+
+				<div class="table-row">
+					<div>U17</div>
+					<div>Cadet 2</div>
+					<div>16 à 17 ans</div>
+				</div>
+
+				<div class="table-row">
+					<div>U20</div>
+					<div>Junior</div>
+					<div>18 à 20 ans</div>
+				</div>
+
+				<div class="table-row">
+					<div>Sénior</div>
+					<div>Sénior</div>
+					<div>21 à 34 ans</div>
+				</div>
 			</div>
 		</div>
 
 		<!-- CTA -->
 		<div class="prices-link">
-			<p>👉 Consultez nos
-				<a href="{{ path('home') }}#abonnement">tarifs et abonnements</a>
+			<p>Consultez nos
+				<a href="{{ path('home') }}#abonnements">tarifs et abonnements</a>
 				pour plus d’infos.</p>
 		</div>
 	</main>

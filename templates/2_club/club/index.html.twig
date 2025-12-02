@@ -1,13 +1,13 @@
-{# templates/club/club.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Le club - CHM Saleux
 {% endblock %}
 
-{% block body %}
-
+{% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('css/club/club/club.css') }}">
+{% endblock %}
 
+{% block body %}
 	<main
 		class="club-page">
 
@@ -18,18 +18,11 @@
 					<p class="club-hero-eyebrow">CHM Saleux</p>
 					<h1 class="club-hero-title">Le club</h1>
 					<p class="club-hero-subtitle">
-						Au CHM Saleux, la force se construit jour après jour.  
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											Que tu sois débutant ou confirmé, tu trouveras un endroit pour progresser,
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											être accompagné et t’entraîner dans une ambiance conviviale.
+						Au CHM Saleux, la force se construit jour après jour. Que tu sois débutant ou confirmé, tu trouveras un endroit pour progresser, être accompagné et t’entraîner dans une ambiance conviviale.
 					</p>
-
 					<div class="club-hero-actions">
-						<a href="#" class="btn-primary js-open-register-modal">
-							REJOINDRE LE CLUB
-						</a>
-						<a href="#club-histoire" class="btn-secondary">
-							DÉCOUVRIR NOTRE HISTOIRE
-						</a>
+						<a href="#" class="btn-primary js-open-register-modal">REJOINDRE LE CLUB</a>
+						<a href="#club-histoire" class="btn-secondary">DÉCOUVRIR NOTRE HISTOIRE</a>
 					</div>
 				</div>
 			</div>
@@ -38,34 +31,24 @@
 		{# ========================== HISTOIRE ========================== #}
 		<section id="club-histoire" class="club-section club-section-alt">
 			<div class="container club-section-grid">
+
 				<div class="club-text-block">
 					<h2>Notre histoire</h2>
 					<p>
-						Le CHM Saleux est un club de musculation implanté au cœur de Saleux, 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											né de la volonté de proposer un lieu d’entraînement sérieux, accessible 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											et chaleureux à tous les profils : jeunes, adultes, débutants, 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											compétiteurs, femmes, hommes.
+						Le CHM Saleux est un club de musculation implanté au cœur de Saleux, né de la volonté de proposer un lieu d’entraînement sérieux, accessible et chaleureux à tous les profils : jeunes, adultes, débutants, compétiteurs, femmes, hommes.
 					</p>
 					<p>
-						Au fil des années, le club s’est développé et a vu passer de nombreux 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											adhérents qui ont construit leur progression ici : perte de poids, 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											prise de masse, remise en forme, préparation physique, performances 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											en force…  
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																											Le CHM est devenu un vrai point de repère sportif local.
+						Au fil des années, le club s’est développé et a vu passer de nombreux adhérents qui ont construit leur progression ici : perte de poids, prise de masse, remise en forme, préparation physique, performances en force… Le CHM est devenu un vrai point de repère sportif local.
 					</p>
 				</div>
 
-				<div class="club-highlight-card">
-					<h3>Le CHM en quelques mots</h3>
-					<ul class="club-list">
-						<li>Club à taille humaine, avec une ambiance simple et sans prise de tête.</li>
-						<li>Priorité à la sécurité, à la progression et au respect de chacun.</li>
-						<li>Accompagnement des nouveaux adhérents sur les bases de la musculation.</li>
-						<li>Possibilité de programmes adaptés à tes objectifs (forme, force, esthétique…).</li>
-					</ul>
+				<div class="club-image-block">
+					<img src="images/histoire-club.jpg" alt="Photo du club"/>
 				</div>
+
 			</div>
 		</section>
+
 
 		{# ========================== PRÉSIDENT ========================== #}
 		<section id="club-president" class="club-section">
@@ -73,189 +56,73 @@
 				<div class="club-president-photo">
 					<img src="{{ asset('images/club/president.jpg') }}" alt="Président du CHM Saleux">
 				</div>
-
 				<div class="club-president-text">
 					<h2>Notre président</h2>
 					<h3>Florian ROHAUT</h3>
-					{# 🔁 remplace par le vrai nom du président #}
 					<p>
-						À la tête du CHM Saleux depuis plusieurs années, Florian incarne l’esprit du club : 
-																																																																																																																																																																																																																																																																																																																																														la passion du sport, la rigueur dans l’entraînement et la convivialité entre les membres.  
-																																																																																																																																																																																																																																																																																																																																														Ancien compétiteur en musculation, il met son expérience au service de tous les adhérents 
-																																																																																																																																																																																																																																																																																																																																														pour que chacun progresse à son rythme, dans une ambiance respectueuse et motivante.
+						À la tête du CHM Saleux depuis plusieurs années, Florian incarne l’esprit du club : la passion du sport, la rigueur dans l’entraînement et la convivialité entre les membres. Ancien compétiteur en musculation, il met son expérience au service de tous les adhérents pour que chacun progresse à son rythme, dans une ambiance respectueuse et motivante.
 					</p>
 					<p>
-						Sous sa direction, le club a su se moderniser tout en conservant son identité associative 
-																																																																																																																																																																																																																																																																																																																																														et son esprit d’équipe.  
-																																																																																																																																																																																																																																																																																																																																														Son objectif : que le CHM Saleux reste un lieu où l’on vient s’entraîner avec plaisir, 
-																																																																																																																																																																																																																																																																																																																																														partager, et se dépasser ensemble.
+						Sous sa direction, le club a su se moderniser tout en conservant son identité associative et son esprit d’équipe. Son objectif : que le CHM Saleux reste un lieu où l’on vient s’entraîner avec plaisir, partager, et se dépasser ensemble.
 					</p>
 				</div>
 			</div>
 		</section>
-
 
 		{# ========================== VALEURS ========================== #}
 		<section class="club-section">
 			<div class="container">
 				<h2>Nos valeurs</h2>
-
 				<div class="club-values-grid">
 					<article class="club-value-card">
 						<h3>Dépassement de soi</h3>
-						<p>
-							La musculation est un travail de patience. Au CHM Saleux, on valorise 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													la progression au long terme, la régularité et l’effort intelligent,
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													loin des promesses miracles.
-						</p>
+						<p>La musculation est un travail de patience. Au CHM Saleux, on valorise la progression au long terme, la régularité et l’effort intelligent, loin des promesses miracles.</p>
 					</article>
-
 					<article class="club-value-card">
 						<h3>Respect & convivialité</h3>
-						<p>
-							Chacun vient avec son niveau, ses objectifs, son histoire.  
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													Le respect du matériel, des consignes et des autres adhérents est 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													au cœur de la vie du club.
-						</p>
+						<p>Chacun vient avec son niveau, ses objectifs, son histoire. Le respect du matériel, des consignes et des autres adhérents est au cœur de la vie du club.</p>
 					</article>
-
 					<article class="club-value-card">
 						<h3>Accessibilité</h3>
-						<p>
-							Tu n’as pas besoin “d’être en forme” pour pousser la porte.  
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													C’est justement ici que tu vas te construire, étape par étape, avec 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													des conseils et un cadre rassurant.
-						</p>
+						<p>Tu n’as pas besoin d’être “en forme” pour pousser la porte. C’est ici que tu vas te construire étape par étape, avec des conseils et un cadre rassurant.</p>
 					</article>
-
 					<article class="club-value-card">
 						<h3>Encadrement & sécurité</h3>
-						<p>
-							L’exécution des mouvements, la charge adaptée, l’échauffement et la 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													récupération sont des priorités. On t’aide à t’entraîner intelligemment
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													pour durer.
-						</p>
+						<p>L’exécution des mouvements, la charge adaptée, l’échauffement et la récupération sont des priorités. On t’aide à t’entraîner intelligemment pour durer.</p>
 					</article>
 				</div>
 			</div>
 		</section>
 
-
-		<!-- SECTION SUIVANTE -->
-		<section class="next-section">
+		{# ========================== ALBUM PHOTOS ========================== #}
+		<section class="next-section album-section">
 			<div class="container">
-				<h2>La vie au CHM Saleux</h2>
-				<div class="club-section-grid">
-					<div class="club-text-block">
-						<h3>Pour qui est fait le club ?</h3>
-						<ul class="club-list">
-							<li>Personnes qui veulent se remettre en forme et reprendre une activité.</li>
-							<li>Adhérents qui souhaitent prendre du muscle ou perdre du poids.</li>
-							<li>Sportifs d’autres disciplines venant se renforcer (foot, rugby, combat, etc.).</li>
-							<li>Profils plus avancés qui veulent progresser en force et en charge.</li>
-						</ul>
-					</div>
-					<div class="club-text-block">
-						<h3>Comment se passent les séances ?</h3>
-						<p>
-							Chacun s’entraîne à son rythme, avec son programme. Les encadrants et adhérents expérimentés sont présents pour t’aider sur la technique, le choix des exercices ou la progression des charges.
-						</p>
-						<p>
-							Les nouveaux membres sont accompagnés sur les bases : posture, respiration, sécurité, échauffement, etc.
-						</p>
+				<h2 class="section-title">ALBUM PHOTOS DU CLUB</h2>
+				<div class="album-marquee">
+					<div class="album-track">
+						{% for i in 1..17 %}
+							<div class="album-slide"><img src="{{ asset('images/club' ~ i ~ '.jpg') }}"></div>
+						{% endfor %}
+						{# On répète pour boucle continue #}
+						{% for i in 1..17 %}
+							<div class="album-slide"><img src="{{ asset('images/club' ~ i ~ '.jpg') }}"></div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
 		</section>
-
-
-		{# ========================== INFOS PRATIQUES ========================== #}
-		<section class="club-section" id="club-infos">
-			<div class="container">
-				<h2 class="section-title">Infos pratiques</h2>
-
-				<div
-					class="club-infos-grid">
-
-					<!-- Horaires -->
-					<div class="club-info-card">
-						<div class="card-header">
-							<i class="fas fa-clock"></i>
-							<h3>Horaires</h3>
-						</div>
-						<ul class="club-list">
-							<li>Lundi :
-								<strong>10H – 12H / 16H – 20H</strong>
-							</li>
-							<li>Mardi :
-								<strong>10H – 12H / 16H – 19H30</strong>
-							</li>
-							<li>Mercredi :
-								<strong>10H – 12H / 16H – 20H</strong>
-							</li>
-							<li>Jeudi :
-								<strong>10H – 12H / 16H – 19H30</strong>
-							</li>
-							<li>Vendredi :
-								<strong>10H – 12H / 16H – 20H</strong>
-							</li>
-							<li>Samedi :
-								<strong>Fermé</strong>
-							</li>
-							<li>Dimanche :
-								<strong>Fermé</strong>
-							</li>
-						</ul>
-					</div>
-
-					<!-- Localisation -->
-					<div class="club-info-card">
-						<div class="card-header">
-							<i class="fas fa-map-marker-alt"></i>
-							<h3>Localisation</h3>
-						</div>
-						<p>
-							<strong>CHM Saleux</strong><br>
-							<span>8 rue Marx Dormoy (en face de la mairie)</span><br>
-							<span>80480 – Saleux</span>
-						</p>
-						<div class="club-map">
-							<iframe src="https://www.google.com/maps?q=49.8609999,2.2373333+(Hangar+GERIS+Saleux)&hl=fr&z=18&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-						</div>
-					</div>
-
-					<!-- Adhésion -->
-					<div class="club-info-card">
-						<div class="card-header">
-							<i class="fas fa-id-card"></i>
-							<h3>Adhésion</h3>
-						</div>
-						<ul class="club-list">
-							<li>Inscription annuelle uniquement.</li>
-							<li>Certificat médical ou attestation de non contre-indication.</li>
-							<li>Tarifs adaptés selon l’âge / la formule.</li>
-						</ul>
-					</div>
-
-				</div>
-			</div>
-		</section>
-
 
 		{# ========================== CTA FINAL ========================== #}
 		<section class="club-cta-final">
 			<div class="container">
 				<h2>Prêt à rejoindre le CHM Saleux ?</h2>
-				<p>
-					La meilleure façon de découvrir le club, c’est de venir faire ta première séance.  
-																																																																																																																																																																																																																																																																																																																																																																																																																									Pas besoin d’être “au niveau” : viens comme tu es, on s’occupe du reste.
-				</p>
+				<p>La meilleure façon de découvrir le club, c’est de venir faire ta première séance. Pas besoin d’être “au niveau” : viens comme tu es, on s’occupe du reste.</p>
 				<div class="club-cta-actions">
 					<a href="#" class="btn-primary js-open-register-modal">CRÉER MON COMPTE</a>
 					<a href="#club-infos" class="btn-secondary">VOIR LES INFOS PRATIQUES</a>
 				</div>
 			</div>
 		</section>
-	</main>
 
+	</main>
 {% endblock %}

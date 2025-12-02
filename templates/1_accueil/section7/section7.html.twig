@@ -13,8 +13,9 @@
 	<div class="ambassador-card active">
 		<div class="img-wrapper">
 			<img src="{{ asset('images/1.jpg') }}" srcset="{{ asset('images/1.jpg') }} 1x, {{ asset('images/1@2x.jpg') }} 2x" alt="">
+			<div class="section-label">HALTÉROPHILIE</div>
 		</div>
-		<button class="discover-btn">Découvrir la zone</button>
+		<a href="{{ path('install_halterophilie') }}" class="discover-btn">Découvrir la zone</a>
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -26,8 +27,9 @@
 	<div class="ambassador-card">
 		<div class="img-wrapper">
 			<img src="{{ asset('images/2.jpg') }}" alt="">
+			<div class="section-label">BRAS</div>
 		</div>
-		<button class="discover-btn">Découvrir la zone</button>
+		<a href="{{ path('install_biceps') }}" class="discover-btn">Découvrir la zone</a>
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -39,8 +41,9 @@
 	<div class="ambassador-card">
 		<div class="img-wrapper">
 			<img src="{{ asset('images/3.jpg') }}" alt="">
+			<div class="section-label">CARDIO</div>
 		</div>
-		<button class="discover-btn">Découvrir la zone</button>
+		<a href="{{ path('install_cardio') }}" class="discover-btn">Découvrir la zone</a>
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -52,8 +55,9 @@
 	<div class="ambassador-card">
 		<div class="img-wrapper">
 			<img src="{{ asset('images/4.jpg') }}" alt="">
+			<div class="section-label">PECS</div>
 		</div>
-		<button class="discover-btn">Découvrir la zone</button>
+		<a href="{{ path('install_pecs') }}" class="discover-btn">Découvrir la zone</a>
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -65,8 +69,9 @@
 	<div class="ambassador-card">
 		<div class="img-wrapper">
 			<img src="{{ asset('images/5.jpg') }}" alt="">
+			<div class="section-label">JAMBES</div>
 		</div>
-		<button class="discover-btn">Découvrir la zone</button>
+		<a href="{{ path('install_jambes') }}" class="discover-btn">Découvrir la zone</a>
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -74,4 +79,22 @@
 			<img src="{{ asset('images/arrow-right.png') }}" alt="Suivant">
 		</button>
 	</div>
-</div></div></div><div class="slider-dots"><div class="slider-dot active"></div><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot"></div></div><section class="new-section"></section>{% block javascripts %} <script src="{{ asset('js/accueil/section7/section7.js') }}"></script>{% endblock %}
+</div></div></div><div class="slider-dots"><div class="slider-dot active"></div><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot"></div></div><section class="new-section sauna-section"><div class="container">
+<h2 class="section-title">
+	DÉCOUVREZ NOTRE
+	<span>SAUNA</span>
+</h2>
+<div
+	class="sauna-content">
+	<!-- Image du sauna -->
+	<div class="sauna-image">
+		<img src="{{ asset('images/sauna.jpg') }}" alt="Sauna"/>
+	</div>
+	<!-- Texte descriptif -->
+	<div class="sauna-text">
+		<p>
+			Notre sauna offre un espace de détente idéal après vos séances de sport. 
+																																																															                    Profitez de la chaleur pour relâcher les tensions, revitaliser votre corps et améliorer votre bien-être général.
+		</p>
+	</div>
+</div></div></section>{% block javascripts %} <script src="{{ asset('js/accueil/section7/section7.js') }}"></script>{% endblock %}

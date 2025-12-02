@@ -1,0 +1,260 @@
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700 &display=swap');
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Poppins', sans-serif;
+			color: #1a1a1a;
+			scroll-behavior: smooth;
+			overflow-x: hidden;
+		}
+
+		/* Hero Header */
+		.hero-header {
+			position: relative;
+			width: 100%;
+			height: 90vh;
+			background: linear-gradient(135deg, rgba(13, 71, 161, 0.85), rgba(25, 118, 210, 0.75)), url('https://cdn-s-www.bienpublic.com/images/13568E8A-2815-411C-AA44-5315EAD67B5D/NW_raw/toute-l-emotion-de-vicky-graillot-apres-avoir-valide-une-barre-a-123-kg-mercredi-a-chisinau-photo-ffhm-1744998886.jpg') center/cover no-repeat;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			color: white;
+			overflow: hidden;
+		}
+
+		.hero-content {
+			position: relative;
+			z-index: 1;
+			max-width: 900px;
+			padding: 2rem;
+			animation: fadeInUp 1.2s ease-out;
+		}
+
+		.hero-content h1 {
+			font-size: 4rem;
+			font-weight: 700;
+			margin-bottom: 1.5rem;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+		}
+
+		.hero-content p {
+			font-size: 1.4rem;
+			line-height: 1.9;
+			color: #e0e0e0;
+			font-weight: 300;
+			margin-bottom: 2.5rem;
+			letter-spacing: 0.5px;
+			transition: color 0.3s ease;
+		}
+		.hero-content p:hover {
+			color: #ffca28;
+		}
+
+		.cta-button {
+			display: inline-block;
+			padding: 1rem 2.5rem;
+			background: linear-gradient(135deg, #ffca28, #ffa000);
+			color: #1a1a1a;
+			font-weight: 600;
+			font-size: 1.1rem;
+			text-decoration: none;
+			border-radius: 50px;
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 6px 20px rgba(255, 202, 40, 0.4);
+		}
+		.cta-button:hover {
+			background: linear-gradient(135deg, #ffa000, #ff8f00);
+			transform: translateY(-3px);
+			box-shadow: 0 12px 30px rgba(255, 202, 40, 0.6);
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(40px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		main {
+			background: linear-gradient(to bottom, #ffffff, #f5f7fa);
+		}
+
+		.section {
+			padding: 6rem 5%;
+			display: flex;
+			align-items: center;
+			gap: 4rem;
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		.section:nth-child(even) {
+			background: linear-gradient(135deg, rgba(13, 71, 161, 0.03), rgba(25, 118, 210, 0.03));
+		}
+
+		.section-content {
+			flex: 1;
+			animation: fadeIn 0.8s ease-out;
+			text-align: left;
+		}
+
+		.section-content h2 {
+			font-size: 2.8rem;
+			font-weight: 700;
+			background: linear-gradient(135deg, #0d47a1, #1976d2);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			margin-bottom: 1.5rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		/* Paragraphes améliorés */
+		.section-content p,
+		.video-section p {
+			font-size: 0.95rem; /* plus petit que 1.15rem */
+			line-height: 1.6; /* un peu plus compact */
+			color: #3a3a3a;
+			font-weight: 400;
+			margin-bottom: 1.2rem; /* réduit pour aérer moins */
+			letter-spacing: 0.4px;
+			transition: color 0.3s ease;
+		}
+
+
+		.section-content p: hover,
+		.video-section p: hover, {
+			color: #0d47a1;
+		}
+
+		.section-content p b,
+		.club-card p b {
+			color: #0d47a1;
+			font-weight: 600;
+		}
+
+		.section-content p em,
+		.club-card p em {
+			color: #1976d2;
+			font-style: italic;
+		}
+
+		.section-image {
+			flex: 1;
+			max-width: 550px;
+			padding: 0 1rem;
+		}
+
+		.section-image img {
+			width: 100%;
+			height: auto;
+			margin: 0;
+			display: block;
+			border-radius: 20px;
+			box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			object-fit: cover;
+		}
+
+		.section-image img:hover {
+			transform: scale(1.05) translateY(-10px);
+			box-shadow: 0 25px 60px rgba(13, 71, 161, 0.25);
+		}
+
+		.video-section {
+			padding: 6rem 5%;
+			background: linear-gradient(135deg, #0d47a1, #1976d2);
+			text-align: center;
+			color: white;
+		}
+
+		.video-section h2 {
+			font-size: 2.8rem;
+			font-weight: 700;
+			margin-bottom: 1rem;
+			text-transform: uppercase;
+		}
+
+		.video-container {
+			display: flex;
+			justify-content: center;
+			margin-top: 2rem;
+		}
+
+		.video-container iframe {
+			border-radius: 20px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+			border: 4px solid rgba(255, 255, 255, 0.1);
+		}
+
+		@media(max-width: 1024px) {
+			.section {
+				gap: 3rem;
+			}
+			.hero-content h1 {
+				font-size: 3rem;
+			}
+		}
+
+		@media(max-width: 900px) {
+			.section {
+				flex-direction: column;
+				padding: 4rem 5%;
+			}
+			.section:nth-child(even) {
+				flex-direction: column;
+			}
+			.section-image {
+				max-width: 100%;
+			}
+			.hero-content h1 {
+				font-size: 2.5rem;
+			}
+			.section-content h2 {
+				font-size: 2.2rem;
+			}
+			.video-container iframe {
+				width: 100%;
+				max-width: 560px;
+			}
+		}
+
+		@media(max-width: 600px) {
+			.hero-content h1 {
+				font-size: 2rem;
+				letter-spacing: 1px;
+			}
+			.hero-content p {
+				font-size: 1.1rem;
+			}
+			.section {
+				padding: 3rem 5%;
+			}
+			.section-content h2 {
+				font-size: 1.8rem;
+			}
+			.section-content p {
+				font-size: 1rem;
+			}
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+			}
+			to {
+				opacity: 1;
+			}
+		}

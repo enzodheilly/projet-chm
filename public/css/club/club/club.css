@@ -369,18 +369,6 @@ h3 {
   gap: 1rem;
 }
 
-
-/* ==========================================================
-   🎨 10. CARTES / BLOCS DIVERS
-   ========================================================== */
-
-.club-highlight-card {
-  background: #fff;
-  padding: 2rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
-}
-
-
 /* ==========================================================
    📱 11. RESPONSIVE DESIGN
    ========================================================== */
@@ -413,14 +401,68 @@ h3 {
   }
 }
 
-.club-equip-photo {
-    margin-top: 1rem;
-    width: 100%;
+.album-section {
+    padding: 60px 0;
+    background: #fff;
 }
 
-.club-equip-photo img {
-    width: 100%;
-    height: 180px;
+.album-section .section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color:#005b94;
+  font-size: 2rem;
+  text-align: center;
+}
+
+
+.album-marquee {
+    overflow: hidden;
+    width: 180%;
+    margin-left:-370px;
+}
+
+.album-track {
+    display: flex;
+    gap: 10px;
+    width: max-content; /* IMPORTANT pour que le track ait la largeur exacte de toutes les images */
+    animation: marquee 45s linear infinite; /* durée = vitesse du défilement */
+}
+
+.album-slide img {
+    width: 350px;
+    height: 220px;
     object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Animation continue */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* -50% du track total = boucle continue */
+}
+
+.club-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.club-image-block img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .club-section-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .club-image-block img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
 }

@@ -378,3 +378,7 @@ body {
 .btn-payment .icon {
   font-size: 1.2rem;
 }
+
+#abonnements {
+    scroll-margin-top: 300px; /* ajuste selon la hauteur de ton header */
+}
