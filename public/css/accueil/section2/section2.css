@@ -382,3 +382,18 @@ body {
 #abonnements {
     scroll-margin-top: 300px; /* ajuste selon la hauteur de ton header */
 }
+
+/* --- Ajustement cartes pour PC portable / MacBook --- */
+@media (max-width: 1440px) and (min-width: 1025px) {
+  .pricing-grid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 70%;       /* Les cartes prennent 70% de la largeur de l'écran */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;          /* garde un peu d'espace entre les cartes */
+  }
+
+  .card {
+    min-width: auto;      /* permet à la carte de s'adapter à la grille */
+  }
+}
