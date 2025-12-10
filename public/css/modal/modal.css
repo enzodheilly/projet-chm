@@ -660,7 +660,7 @@
 /* --- Titres --- */
 #modal-step-login .modal-title {
 	font-size: 1.35rem;
-	font-weight: 700;
+	font-weight: 900;
 	color: #003366;
 	margin-bottom: 0.4rem;
 }
@@ -754,7 +754,7 @@
 	color: #fff;
 	padding: 0.7rem 1rem;
 	font-size: 0.9rem;
-	font-weight: 600;
+	font-weight: 800;
 	cursor: pointer;
 	transition: all 0.25s ease;
 	width: 100%;

@@ -7,23 +7,23 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^3",
-        "doctrine/doctrine-bundle": "^2.16",
-        "doctrine/doctrine-migrations-bundle": "^3.4",
-        "doctrine/orm": "^3.5",
-        "knpuniversity/oauth2-client-bundle": "^2.19",
-        "league/oauth2-google": "^4.0",
+        "doctrine/dbal": "^3.10.4",
+        "doctrine/doctrine-bundle": "^2.18.1",
+        "doctrine/doctrine-migrations-bundle": "^3.7",
+        "doctrine/orm": "^3.5.8",
+        "knpuniversity/oauth2-client-bundle": "^2.20",
+        "league/oauth2-google": "^4.0.1",
         "nelmio/security-bundle": "^3.6",
-        "ramsey/uuid": "^4.9",
+        "ramsey/uuid": "^4.9.1",
         "symfony/asset": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
-        "symfony/flex": "^2",
+        "symfony/flex": "^2.10",
         "symfony/form": "7.3.*",
         "symfony/framework-bundle": "7.3.*",
         "symfony/http-client": "7.3.*",
         "symfony/mailer": "7.3.*",
-        "symfony/monolog-bundle": "^3.10",
+        "symfony/monolog-bundle": "^3.11",
         "symfony/rate-limiter": "7.3.*",
         "symfony/runtime": "7.3.*",
         "symfony/security-bundle": "7.3.*",
@@ -33,8 +33,8 @@
         "symfony/uid": "7.3.*",
         "symfony/validator": "7.3.*",
         "symfony/yaml": "7.3.*",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/extra-bundle": "^2.12|^3.22.1",
+        "twig/twig": "^2.12|^3.22.1"
     },
     "config": {
         "allow-plugins": {
@@ -87,7 +87,7 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^4.1",
-        "symfony/maker-bundle": "^1.64"
+        "doctrine/doctrine-fixtures-bundle": "^4.3",
+        "symfony/maker-bundle": "^1.65"
     }
 }

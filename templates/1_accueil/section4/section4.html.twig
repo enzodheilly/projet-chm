@@ -19,7 +19,14 @@
 			<p>Aucune actualité pour le moment.</p>
 		{% endfor %}
 	</div>
-	<a href="actualites" class="btn-news">VOIR PLUS D'ACTUALITÉS</a>
+
+	<div class="button-wrap">
+  <a href="actualites" class="btn-club">
+    <span style="color:black;">VOIR PLUS D'ACTUALITÉS</span>
+  </a>
+  <div class="button-shadow"></div>
+</div> 
+
 </section>
 <section class="faq-section">
 	<div class="faq-header">
@@ -65,13 +72,19 @@
 				</div>
 			</div>
 
-			<a href="{{ path('faq') }}" class="faq-more">Voir toutes les FAQ ➜</a>
+			<a href="{{ path('faq') }}" class="faq-more">VOIR TOUTES LES FAQ ➜</a>
 		</div>
 
 		<div class="faq-contact">
 			<h3>Vous ne trouvez pas votre réponse ?</h3>
 			<p>Contactez-nous pour toute question spécifique, notre équipe se fera un plaisir de vous répondre.</p>
-			<a href="{{ path('contact') }}" class="btn-faq">Nous contacter</a>
+
+			<div class="button-wrap">
+  <a href="{{ path('contact') }}" class="btn-club">
+    <span style="color:black;">NOUS CONTACTER</span>
+  </a>
+  <div class="button-shadow"></div>
+</div>
 		</div>
 	</div>
 </section>

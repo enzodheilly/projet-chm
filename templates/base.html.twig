@@ -60,6 +60,7 @@
 			{% block navbar %}
 				{% include '/navbar/navigation.html.twig' %}
 			{% endblock %}
+		
 
 			<main style="margin:0; padding:0; width:100%;"> {% block body %}{% endblock %}
 				</main>
@@ -79,8 +80,6 @@
 				{% if app.request.attributes.get('_route') not in ['app_login', 'admin_dashboard'] %}
 					{% include 'assistant/assistant.html.twig' %}
 				{% endif %}
-
-				{# Scripts globaux #}
 				 <script src="{{ asset('js/app.js') }}"
 																																																																				            nonce="{{ csp_nonce('script') }}"></script>
 

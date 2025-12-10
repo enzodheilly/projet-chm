@@ -1,8 +1,8 @@
 <section class="ambassador-section">
 	<div class="container">
 		<h2 class="section-title">
-			DÉCOUVREZ NOS DIFFÉRENTES
-			<span>INSTALLATIONS
+			DÉCOUVREZ NOS DEUX
+			<span>PRATIQUES
 			</span>
 		</h2>
 	</div>
@@ -12,10 +12,17 @@
 <div class="ambassador-slider">
 	<div class="ambassador-card active">
 		<div class="img-wrapper">
-			<img src="{{ asset('images/1.jpg') }}" srcset="{{ asset('images/1.jpg') }} 1x, {{ asset('images/1@2x.jpg') }} 2x" alt="">
+			<img src="{{ asset('images/1.jpg') }}" alt="">
 			<div class="section-label">HALTÉROPHILIE</div>
 		</div>
-		<a href="{{ path('install_halterophilie') }}" class="discover-btn">Découvrir la zone</a>
+		<div class="button-wrap">
+    <a href="{{ path('section_halterophilie') }}" class="btn-club">
+        <span>DÉCOUVRIR LA ZONE</span>
+    </a>
+    <div class="button-shadow"></div>
+</div>
+
+		
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -26,10 +33,17 @@
 
 	<div class="ambassador-card">
 		<div class="img-wrapper">
-			<img src="{{ asset('images/2.jpg') }}" alt="">
-			<div class="section-label">BRAS</div>
+			<img src="{{ asset('images/histoire-club.jpg') }}" alt="">
+			<div class="section-label">MUSCULATION</div>
 		</div>
-		<a href="{{ path('install_biceps') }}" class="discover-btn">Découvrir la zone</a>
+		<div class="button-wrap">
+    <a href="{{ path('section_musculation') }}" class="btn-club">
+        <span>DÉCOUVRIR LA ZONE</span>
+    </a>
+    <div class="button-shadow"></div>
+</div>
+
+		
 		<button class="slider-prev">
 			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
 		</button>
@@ -38,51 +52,9 @@
 		</button>
 	</div>
 
-	<div class="ambassador-card">
-		<div class="img-wrapper">
-			<img src="{{ asset('images/3.jpg') }}" alt="">
-			<div class="section-label">CARDIO</div>
-		</div>
-		<a href="{{ path('install_cardio') }}" class="discover-btn">Découvrir la zone</a>
-		<button class="slider-prev">
-			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
-		</button>
-		<button class="slider-next">
-			<img src="{{ asset('images/arrow-right.png') }}" alt="Suivant">
-		</button>
-	</div>
-
-	<div class="ambassador-card">
-		<div class="img-wrapper">
-			<img src="{{ asset('images/4.jpg') }}" alt="">
-			<div class="section-label">PECS</div>
-		</div>
-		<a href="{{ path('install_pecs') }}" class="discover-btn">Découvrir la zone</a>
-		<button class="slider-prev">
-			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
-		</button>
-		<button class="slider-next">
-			<img src="{{ asset('images/arrow-right.png') }}" alt="Suivant">
-		</button>
-	</div>
-
-	<div class="ambassador-card">
-		<div class="img-wrapper">
-			<img src="{{ asset('images/5.jpg') }}" alt="">
-			<div class="section-label">JAMBES</div>
-		</div>
-		<a href="{{ path('install_jambes') }}" class="discover-btn">Découvrir la zone</a>
-		<button class="slider-prev">
-			<img src="{{ asset('images/arrow-left.png') }}" alt="Précédent">
-		</button>
-		<button class="slider-next">
-			<img src="{{ asset('images/arrow-right.png') }}" alt="Suivant">
-		</button>
-	</div>
-</div></div></div><div class="slider-dots"><div class="slider-dot active"></div><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot"></div><div class="slider-dot"></div></div><section class="new-section sauna-section"><div class="container">
-<h2 class="section-title">
-	DÉCOUVREZ NOTRE
-	<span>SAUNA</span>
+</div></div></div><div class="slider-dots"><div class="slider-dot"></div><div class="slider-dot"></div></div><section class="new-section sauna-section"><div class="container">
+<h2 class="section-title2">
+	DÉCOUVREZ NOTRE SAUNA
 </h2>
 <div
 	class="sauna-content">

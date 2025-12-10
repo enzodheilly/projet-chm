@@ -43,7 +43,7 @@
 		<!-- === ÉTAPE 2 : Inscription par e-mail === -->
 		<div id="modal-step-email" style="display:none; position: relative;">
 			<div class="email-register-card">
-				<h3 class="modal-title">Créer un compte</h3>
+				<h3 class="modal-title">CRÉER UN COMPTE</h3>
 
 
 				<form id="emailRegisterForm" class="email-register-form" action="{{ path('app_register') }}" method="POST" novalidate>
@@ -143,7 +143,7 @@
 					</div>
 
 					<button type="submit" class="btn-register">
-						<span class="btn-text">S’inscrire</span>
+						<span class="btn-text">S'INSCRIRE</span>
 						<span class="btn-spinner" style="display:none;">
 							<div class="mini-spinner"></div>
 						</span>
@@ -191,7 +191,7 @@
 
 		<!-- === ÉTAPE 4 : Connexion === -->
 		<div id="modal-step-login" style="display:none;">
-			<h3 class="modal-title">Connexion</h3>
+			<h3 class="modal-title">CONNEXION</h3>
 
 			<form id="login-form" action="{{ path('app_login') }}" method="POST" novalidate>
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -227,7 +227,7 @@
 				<div id="loginError" class="login-error" style="display:none;"></div>
 
 				<button type="submit" id="loginButton" class="btn-register">
-					<span class="btn-text">Se connecter</span>
+					<span class="btn-text">SE CONNECTER</span>
 					<span class="btn-spinner" style="display:none;">
 						<div class="mini-spinner"></div>
 					</span>
@@ -247,7 +247,7 @@
 
 		<!-- === ÉTAPE 5 : Mot de passe oublié === -->
 		<div id="modal-step-reset-email" style="display:none; text-align:center;">
-			<h3 class="modal-title">Mot de passe oublié</h3>
+			<h3 class="modal-title">MOT DE PASSE OUBLIÉ</h3>
 			<p class="modal-subtitle">Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.</p>
 
 			<div id="resetError" class="verify-message" style="display:none;"></div>
@@ -255,7 +255,7 @@
 			<form id="resetRequestForm" action="{{ path('app_reset_password_request') }}" method="POST" novalidate>
 				<input type="email" name="email" id="resetEmail" placeholder="Votre adresse e-mail" required>
 				<button type="submit" id="resetRequestBtn" class="btn-register">
-					<span class="btn-text">Envoyer</span>
+					<span class="btn-text">ENVOYER</span>
 					<span class="btn-spinner" style="display:none;">
 						<span class="mini-spinner"></span>
 					</span>

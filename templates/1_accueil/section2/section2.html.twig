@@ -2,13 +2,13 @@
 	<div class="pricing-head" role="region" aria-label="Introduction abonnements">
 		<div class="pricing-left">
 			<h1 id="abonnement-title" class="pricing-title">
-				<span style="white-space: nowrap;">
-					Choisis ton abonnement —
-					<span style="color: var(--orange);">Rejoins le Club</span>
+				<span>
+					SELECTIONNE L’ABONNEMENT QUI TE CORRESPOND
+					<span style="color: var(--orange);"></span>
 				</span>
 			</h1>
 			<p class="pricing-sub">
-				Rejoins le CHM Saleux pour un coaching pro, un encadrement en haltérophilie, accès aux compétitions et séances libres.
+Avec plus de 800 m² d’espace d’entraînement, retrouve tout ce qu’il te faut pour progresser : Cardio, Musculation, Haltérophilie, et même des cours collectifs chaque semaine pour te dépasser dans une super ambiance ! Découvre nos 4 forfaits annuels, adaptés à tous les niveaux à partir de 4,17 €/semaine 🔥
 			</p>
 		</div>
 	</div>
@@ -17,72 +17,119 @@
 		id="abonnements" class="pricing-grid" aria-label="Liste des abonnements">
 
 		<!-- Compétition -->
-		<article
-			class="card">
-			<!--<div class="badge">+21 ans</div>-->
-			<h3 class="card-title">Compétition</h3>
-			<div class="price-row">
-				<div class="price">90€<sup>00</sup>
-				</div>
-				<div class="period">/ an</div>
-			</div>
-			<div class="subprice">Soit 7,50€/mois</div>
-			<ul class="features">
-				<li>Licence compétition officielle</li>
-				<li>Accès complet à la salle</li>
-				<li>Encadrement par coachs diplômés</li>
-				<li>Participation aux compétitions</li>
-			</ul>
-			<div class="text-center mt-3">
-				<a href="{{ path('paiement_type', { type: 'competition' }) }}" class="btn-payment">
-					CHOISIR CETTE FORMULE
-				</a>
-			</div>
-		</article>
+		<article class="card">
+    <!--<div class="badge">+21 ans</div>-->
+    <h3 class="card-title">COMPÉTITION</h3>
+    <div class="price-row">
+        <div class="price">90€<sup>00</sup></div>
+        <div class="period">/ an</div>
+    </div>
+    <div class="subprice">Soit 7,50€/mois</div>
+ <ul class="features">
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Licence compétition officielle
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Accès complet à la salle
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Encadrement par coachs diplômés
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Participation aux compétitions
+    </li>
+</ul>
+
+    <div class="text-center mt-3">
+        <div class="button-wrap-payment">
+            <a href="{{ path('paiement_type', { type: 'competition' }) }}" class="btn-payment">
+                <span style="color:black;">CHOISIR COMPÉTITION</span>
+            </a>
+            <div class="button-shadow"></div>
+        </div>
+    </div>
+</article>
+
 
 		<!-- Jeunes -->
 		<article
 			class="card">
 			<!--<div class="badge">Jeunes</div>-->
-			<h3 class="card-title">Compétition Jeunes</h3>
+			<h3 class="card-title">JEUNES</h3>
 			<div class="price-row">
 				<div class="price">70€<sup>00</sup>
 				</div>
 				<div class="period">/ an</div>
 			</div>
 			<div class="subprice">Soit 5,83€/mois</div>
-			<ul class="features">
-				<li>Licence adaptée</li>
-				<li>Encadrement spécialisé</li>
-				<li>Accès aux entraînements dédiés</li>
-				<li>Accompagnement en compétition</li>
-			</ul>
+		<ul class="features">
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Licence adaptée
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Encadrement spécialisé
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Accès aux entraînements dédiés
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Accompagnement en compétition
+    </li>
+</ul>
+
 			<div class="text-center mt-3">
-				<a href="{{ path('paiement_type', { type: 'jeunes' }) }}" class="btn-payment">
-					CHOISIR CETTE FORMULE
-				</a>
+				<div class="button-wrap-payment">
+            <a href="{{ path('paiement_type', { type: 'jeunes' }) }}" class="btn-payment">
+                <span style="color:black;">CHOISIR JEUNES</span>
+            </a>
+            <div class="button-shadow"></div>
+        </div>
 			</div>
 		</article>
 
 		<!-- Loisir -->
 		<article class="card">
-			<h3 class="card-title">Loisir & Musculation</h3>
-			<div class="price-row">
-				<div class="price">200€<sup>00</sup>
-				</div>
-				<div class="period">/ an</div>
-			</div>
+			<h3 class="card-title">LOISIR & MUSCU</h3>
+	<div class="price-row">
+    <div class="price price-large">200€<sup>00</sup></div>
+    <div class="period">/ an</div>
+</div>
+
 			<div class="subprice">Soit 16,66€/mois</div>
-			<ul class="features">
-				<li>Accès libre salle musculation</li>
-				<li>Haltérophilie loisir encadrée</li>
-				<li>Cardio & cours collectifs</li>
-				<li>Ambiance conviviale</li>
-			</ul>
+		<ul class="features">
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Accès libre salle musculation
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Haltérophilie loisir encadrée
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Cardio & cours collectifs
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Ambiance conviviale
+    </li>
+</ul>
+
 			<div class="text-center mt-3">
-				<a href="{{ path('paiement_type', { type: 'loisir' }) }}" class="btn-payment">
-					CHOISIR CETTE FORMULE
-				</a>
+				<div class="button-wrap-payment">
+            <a href="{{ path('paiement_type', { type: 'loisir' }) }}" class="btn-payment">
+                <span style="color:black;">CHOISIR MUSCU</span>
+            </a>
+            <div class="button-shadow"></div>
+        </div>
 			</div>
 		</article>
 
@@ -90,7 +137,7 @@
 		<article
 			class="card">
 			<!--<div class="badge">Enfant</div>-->
-			<h3 class="card-title">Initiation Enfants</h3>
+			<h3 class="card-title">ENFANTS</h3>
 			<div class="price-row">
 				<div class="price">50€<sup>00</sup>
 				</div>
@@ -98,15 +145,31 @@
 			</div>
 			<div class="subprice">Soit 4,17€/mois</div>
 			<ul class="features">
-				<li>Initiation sécurisée</li>
-				<li>Encadrement par coachs</li>
-				<li>Ateliers ludiques</li>
-				<li>Participation aux événements jeunes</li>
-			</ul>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Initiation sécurisée
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Encadrement par coachs
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Ateliers ludiques
+    </li>
+    <li>
+        <img src="images/avantages.png" alt="" class="feature-icon">
+        Participation aux événements jeunes
+    </li>
+</ul>
+
 			<div class="text-center mt-3">
-				<a href="{{ path('paiement_type', { type: 'enfants' }) }}" class="btn-payment">
-					CHOISIR CETTE FORMULE
-				</a>
+				<div class="button-wrap-payment">
+            <a href="{{ path('paiement_type', { type: 'enfants' }) }}" class="btn-payment">
+                <span style="color:black;">CHOISIR ENFANTS</span>
+            </a>
+            <div class="button-shadow"></div>
+        </div>
 			</div>
 		</article>
 	</section>

@@ -9,9 +9,8 @@
 		/* Banner info */
 		.info-banner {
 			width: 100%;
-			background: #005b94;
-			color: white;
-			font-weight: 600;
+			background: linear-gradient(90deg, #005b94 0%, #003d66 100%);
+			font-weight: 700;
 			font-size: 1.6rem;
 			padding: 0.72rem 0; /* tu peux ajuster pour changer la hauteur */
 			position: relative; /* important pour que le contenu reste bien placé */
@@ -31,22 +30,24 @@
 			position: relative;
 			align-items: center;
 			gap: 1rem; /* espace entre chaque jour */
-			color: white;
-			font-size: 0.85rem;
-			font-weight: 500;
+			color: #005b94;
+			font-size: 1rem;
+			font-weight: 700;
 			left: 17.8rem; /* décale un peu à gauche */
 		}
 
 		.info-banner-horaire p {
 			display: flex;
+			color:#fff;
 			align-items: center;
 			margin: 0;
+			font-weight: 700;
 			gap: 0.25rem; /* espace entre icône et texte */
 		}
 
 		.info-banner-horaire i {
-			font-size: 0.9rem;
-			color: white;
+			font-size: 1rem;
+			color: #fff;
 		}
 
 		.info-banner-links {
@@ -57,16 +58,16 @@
 		}
 
 		.info-link {
-			color: white;
+			color: #fff;
 			text-decoration: none;
-			font-weight: 600;
-			font-size: 0.9rem;
+			font-weight: 700;
+			font-size: 1rem;
 			transition: 0.3s;
 		}
 		.info-link i {
 			margin-right: 0.4rem;
 			font-size: 1rem;
-			color: white;
+			color: #fff;
 		}
 		.info-link:hover i {
 			color: #f97316;
@@ -101,14 +102,19 @@
 		.nav-fixed {
 			position: fixed;
 			top: 0;
-			left: 0;
 			width: 100vw;
-			background: rgba(10, 15, 20, 0.95);
+			background: transparent;
 			backdrop-filter: blur(12px);
+			box-shadow: none;
 			z-index: 1000;
 			overflow-x: hidden;
 			box-sizing: border-box;
+			transition: background 0.3s ease, color 0.3s ease;
 		}
+
+		nav.scrolled {
+    background: #000000; /* ou couleur de ton choix */
+}
 
 		/* Nav content */
 		.nav-content {
@@ -135,8 +141,6 @@
 			border-radius: 0.5rem;
 			width: 3.5rem;
 			height: 3.5rem;
-			background: rgba(10, 15, 20, 0.95);
-			backdrop-filter: blur(12px);
 		}
 		.logo-rectangle img {
 			max-height: 100%;
@@ -188,10 +192,11 @@
 		/* Bouton inscription */
 		.btn-inscription {
 			padding: 0.4rem 1.6rem;
-			background: #005b94;
+			background: linear-gradient(90deg, #005b94 0%, #003d66 100%);
 			color: white;
+			font-size: 1.1rem;
 			border-radius: 0;
-			font-weight: 600;
+			font-weight: 800;
 			text-decoration: none;
 			transition: 0.3s;
 			margin-left: 1.2rem;
@@ -295,3 +300,43 @@
 				display: none;
 			}
 		}
+		
+		/* Réduction de l’espace entre liens pour PC/laptop */
+@media (max-width: 2560px) {
+/* === Info Banner placement ajustable === */
+.info-banner-content {
+    display: flex;
+    justify-content: space-between; /* par défaut : gauche / droite */
+    align-items: center;
+    width: 98%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* --- Horaire --- */
+.info-banner-horaire {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* espace entre chaque jour */
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    /* Placement ajustable */
+    left: var(--horaire-left, 17.8rem);  /* tu peux changer la valeur ici */
+}
+
+/* --- Liens --- */
+.info-banner-links {
+    display: flex;
+    align-items: center;
+    gap: var(--links-gap, 1rem); /* espace ajustable entre les liens */
+    margin-right: var(--links-right, 18.7rem); /* décalage ajustable */
+}
+
+/* --- Exemples d’utilisation des variables CSS --- */
+:root {
+    --horaire-left: 7.5rem;      /* Décalage horaire horizontal */
+    --links-gap: 0.8rem;        /* Espacement entre les liens */
+    --links-right: 8.3rem;       /* Décalage des liens à droite */
+}
+}

@@ -1,37 +1,34 @@
 /* ✅ Style global */
 		body {
-			color: #0f172a;
 			margin: 0;
 			padding: 0;
-			font-family: 'Inter', sans-serif;
 			overflow-x: hidden;
 		}
 
 		/* ✅ Section principale */
 		.slider-section {
-			background-color: #161b20;
+			background-color: #EBEBEB;
 			padding: 3rem 5%;
 		}
 
 		/* ✅ Titre */
 		.slider-title {
-			font-family: "Oswald", sans-serif;
-			font-weight: 700;
+			font-weight: 900;
 			font-size: 2.2rem;
-			color: #f97316;
+			color: #005b94 !important;
 			margin-bottom: 0.5rem;
 			text-align: center;
-			letter-spacing: 1px;
 			text-transform: uppercase;
+			margin-left: 4px !important;
 		}
 
 		/* ✅ Sous-titre */
 		.slider-subtitle {
-			font-size: 1rem;
-			color: white;
-			margin-bottom: 2rem;
-			font-weight: 400;
-			max-width: 600px;
+			font-size: 1.1rem !important;
+			color: #4b5563;
+			margin-bottom: 50px;
+			font-weight: 500;
+			max-width: 800px;
 			text-align: center;
 			margin-inline: auto;
 		}
@@ -76,8 +73,9 @@
 
 		.slide p {
 			margin-top: 10px;
-			font-size: 1rem;
-			color: white;
+			font-size: 1.1rem;
+			color: #005b94;
+			font-weight: 700;
 			text-transform: uppercase;
 		}
 
@@ -92,6 +90,7 @@
 			cursor: pointer;
 			padding: 0.6rem 1.3rem;
 			font-size: 1.6rem;
+			font-weight: 800;
 			z-index: 10;
 			border-radius: 50%;
 			transition: all 0.3s ease;
@@ -162,3 +161,41 @@
 				display: none; /* flèches cachées sur mobile */
 			}
 		}
+
+		/* === Ajustement pour PC portable === */
+@media (max-width: 2560px) {
+
+  /* Réduction du titre et sous-titre */
+  .slider-title {
+      font-size: 34px;
+    margin-left: 86px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .slider-subtitle {
+    font-size: 0.9rem; /* réduit de 10% */
+  }
+
+  /* Réduction des slides */
+  .slide {
+    flex: 0 0 30%; /* un peu plus petit que 33.33% */
+    padding: 0 15px; /* ajoute un écart horizontal entre les slides */
+  }
+
+  /* Réduction des images */
+  .slide img {
+    max-height: 360px; /* réduit légèrement la hauteur */
+  }
+
+  /* Réduction des paragraphes dans les slides */
+  .slide p {
+    font-size: 0.9rem;
+  }
+
+  /* Flèches */
+  .nav-button {
+    font-size: 1.4rem; /* réduit légèrement */
+    padding: 0.5rem 1.1rem;
+  }
+
+}
